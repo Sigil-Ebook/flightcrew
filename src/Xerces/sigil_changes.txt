@@ -1,0 +1,3 @@
+There are two "autoconf" config files: one for Unix systems (Xerces_autoconf_config.hpp),
+and one for MSVC (Xerces_autoconf_config.msvc.hpp). The one for Unix systems is created by running
+"./configure", but we're CMake-based so we use a sensible, configure generated file that we then tweak by hand.
