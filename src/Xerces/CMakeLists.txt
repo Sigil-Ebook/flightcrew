@@ -63,13 +63,9 @@ else()
     list( REMOVE_ITEM SOURCES xercesc/util/Xerces_autoconf_config.msvc.hpp )
 endif()
 
-#list( APPEND SOURCES 
-#        xercesc/util/NetAccessors/BinHTTPInputStreamCommon.cpp
-#        xercesc/util/NetAccessors/BinHTTPInputStreamCommon.hpp )
 
 if( MSVC )
     add_to_sources( xercesc/util/Transcoders/Win32 )
-    #add_to_sources( xercesc/util/NetAccessors/WinSock )
     
     list( APPEND SOURCES
         xercesc/util/FileManagers/WindowsFileMgr.hpp
@@ -77,9 +73,7 @@ if( MSVC )
         xercesc/util/MutexManagers/WindowsMutexMgr.hpp
         xercesc/util/MutexManagers/WindowsMutexMgr.cpp )
 else()
-    #add_to_sources( xercesc/util/Transcoders/Iconv )
     add_to_sources( xercesc/util/Transcoders/IconvGNU )
-    #add_to_sources( xercesc/util/NetAccessors/Socket )
     
     list( APPEND SOURCES
         xercesc/util/FileManagers/PosixFileMgr.hpp
@@ -95,8 +89,6 @@ add_library( Xerces ${SOURCES} )
 add_definitions( -DXERCES_STATIC_LIBRARY
                  -DXERCES_BUILDING_LIBRARY
                  -DXERCES_USE_MSGLOADER_INMEMORY
-                 #-DHAVE_STRICMP
-                 #-DHAVE_STRNICMP
                  -DHAVE_LIMITS_H
                  -DHAVE_SYS_TIMEB_H
                  -DHAVE_FTIME
@@ -112,7 +104,6 @@ if( MSVC )
                      -DXERCES_USE_TRANSCODER_WINDOWS
                      -DXERCES_USE_FILEMGR_WINDOWS   
                      -DXERCES_USE_MUTEXMGR_WINDOWS
-                     #-DXERCES_USE_NETACCESSOR_WINSOCK 
                    )
                      
     # xerces wants to disable these warnings
@@ -124,10 +115,8 @@ if( MSVC )
     
 else()
     add_definitions( -DXERCES_USE_FILEMGR_POSIX
-                     #-DXERCES_USE_TRANSCODER_ICONV
                      -DXERCES_USE_TRANSCODER_GNUICONV
                      -DXERCES_USE_MUTEXMGR_POSIX 
-                     #-DXERCES_USE_NETACCESSOR_SOCKET 
                    )                     
 endif()
 
