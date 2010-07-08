@@ -73,7 +73,11 @@ if( MSVC )
         xercesc/util/MutexManagers/WindowsMutexMgr.hpp
         xercesc/util/MutexManagers/WindowsMutexMgr.cpp )
 else()
-    add_to_sources( xercesc/util/Transcoders/IconvGNU )
+    if( APPLE )
+        add_to_sources( xercesc/util/Transcoders/MacOSUnicodeConverter )
+    else()
+        add_to_sources( xercesc/util/Transcoders/IconvGNU )
+    endif()    
     
     list( APPEND SOURCES
         xercesc/util/FileManagers/PosixFileMgr.hpp
