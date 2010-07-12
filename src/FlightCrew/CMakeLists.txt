@@ -12,7 +12,8 @@ cmake_minimum_required( VERSION 2.8 )
 project( FlightCrew ) 
 
 set( SOURCES
-     )
+     flightcrew.cpp
+     Result.cpp )
 
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries
@@ -24,12 +25,8 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
-target_link_libraries( ${PROJECT_NAME} ZipArchive BoostParts Xerces )
-
 add_library( FlightCrew ${SOURCES} )
 
-add_subdirectory( tests )
+target_link_libraries( ${PROJECT_NAME} ZipArchive BoostParts Xerces )
 
-
-
-
+#add_subdirectory( tests )

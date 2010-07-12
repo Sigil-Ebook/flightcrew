@@ -13,7 +13,7 @@ cmake_minimum_required( VERSION 2.8 )
 project( fc_tests ) 
 
 set( SOURCES
-     ../../googlemock/src/gmock_main.cc
+     #../../googlemock/src/gmock_main.cc
      )
      
 # We need to pick up the stdafx.h file
@@ -27,6 +27,6 @@ include_directories( ../../ZipArchive
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
-target_link_libraries( ${PROJECT_NAME} FlightCrew )
-
 add_executable( ${PROJECT_NAME} ${SOURCES} )
+
+target_link_libraries( ${PROJECT_NAME} FlightCrew gmock_main )
