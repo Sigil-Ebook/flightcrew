@@ -21,36 +21,66 @@
 
 #include "flightcrew.h"
 
-std::vector< Result > ValidateEpub()
+std::vector< Result > ValidateEpub( const std::string &absolute_path )
 {
     // TODO
     return std::vector< Result >();
 }
 
+std::vector< Result > ValidateEpub( const char *absolute_path )
+{
+    std::string temp( absolute_path );
+    return ValidateEpub( temp );
+}
 
-std::vector< Result > ValidateOpf()
+
+std::vector< Result > ValidateOpf( const std::string &absolute_path )
 {
     // TODO
     return std::vector< Result >();
 }
 
+std::vector< Result > ValidateOpf( const char *absolute_path )
+{
+    std::string temp( absolute_path );
+    return ValidateOpf( temp );
+}
 
-std::vector< Result > ValidateNcx()
+
+std::vector< Result > ValidateNcx( const std::string &absolute_path )
 {
     // TODO
     return std::vector< Result >();
 }
 
+std::vector< Result > ValidateNcx( const char *absolute_path )
+{
+    std::string temp( absolute_path );
+    return ValidateNcx( temp );
+}
 
-std::vector< Result > ValidateXhtml()
+
+std::vector< Result > ValidateXhtml( const std::string &absolute_path )
 {
     // TODO
     return std::vector< Result >();
 }
 
+std::vector< Result > ValidateXhtml( const char *absolute_path )
+{
+    std::string temp( absolute_path );
+    return ValidateXhtml( temp );
+}
 
-std::vector< Result > ValidateCss()
+
+std::vector< Result > ValidateCss( const std::string &absolute_path )
 {
     // TODO
     return std::vector< Result >();
+}
+
+std::vector< Result > ValidateCss( const char *absolute_path )
+{
+    std::string temp( absolute_path );
+    return ValidateCss( temp );
 }

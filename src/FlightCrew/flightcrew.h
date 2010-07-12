@@ -20,14 +20,25 @@
 *************************************************************************/
 
 #include <vector>
+#include <string>
 #include "Result.h"
 
-std::vector< Result > ValidateEpub();
+std::vector< Result > ValidateEpub(  const std::string &absolute_path );
 
-std::vector< Result > ValidateOpf();
+std::vector< Result > ValidateEpub(  const char *absolute_path );
 
-std::vector< Result > ValidateNcx();
+std::vector< Result > ValidateOpf(   const std::string &absolute_path );
 
-std::vector< Result > ValidateXhtml();
+std::vector< Result > ValidateOpf(   const char *absolute_path );
 
-std::vector< Result > ValidateCss();
+std::vector< Result > ValidateNcx(   const std::string &absolute_path );
+
+std::vector< Result > ValidateNcx(   const char *absolute_path );
+
+std::vector< Result > ValidateXhtml( const std::string &absolute_path );
+
+std::vector< Result > ValidateXhtml( const char *absolute_path );
+
+std::vector< Result > ValidateCss(   const std::string &absolute_path );
+
+std::vector< Result > ValidateCss(   const char *absolute_path );
