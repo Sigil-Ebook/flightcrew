@@ -26,15 +26,15 @@
 TEST( PackageIsRootTest, FailsWithPackageNotRoot )
 {
     PackageIsRoot validator;
-    Result result = validator.ValidateFile( "test_data/PackageIsRoot_PackageNotRoot.xml" );
+    std::vector<Result> results = validator.ValidateFile( "test_data/opf_tests/PackageIsRoot_PackageNotRoot.xml" );
 
-    EXPECT_EQ( result.ErrorId, ERROR_OPF_PACKAGE_NOT_ROOT );
+    EXPECT_EQ( results[ 0 ].ErrorId, ERROR_OPF_PACKAGE_NOT_ROOT );
 }
 
 TEST( PackageIsRootTest, SucceedsWithPackageRoot )
 {
     PackageIsRoot validator;
-    Result result = validator.ValidateFile( "test_data/PackageIsRoot_PackageRoot.xml" );
+    std::vector<Result> results = validator.ValidateFile( "test_data/opf_tests/PackageIsRoot_PackageRoot.xml" );
 
-    EXPECT_EQ( result.ErrorId, ALL_OK );
+    EXPECT_EQ( results[ 0 ].ErrorId, ALL_OK );
 }

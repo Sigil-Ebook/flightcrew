@@ -28,9 +28,9 @@ class XmlValidator : public IValidator
 {
 public:
 
-    virtual Result ValidateFile( const path &filepath );
+    virtual std::vector<Result> ValidateFile( const path &filepath );
 
-    virtual Result ValidateXml( const DOMDocument &document ) = 0;
+    virtual std::vector<Result> ValidateXml( const DOMDocument &document ) = 0;
 
     virtual ~XmlValidator() {}
 };

@@ -24,7 +24,7 @@
 
 XERCES_CPP_NAMESPACE_USE
 
-Result XmlValidator::ValidateFile( const path &filepath )
+std::vector<Result> XmlValidator::ValidateFile( const path &filepath )
 {
     XercesDOMParser parser;
     parser.setDoNamespaces( true );
