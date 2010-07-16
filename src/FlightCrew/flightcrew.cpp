@@ -18,7 +18,7 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-
+#include <stdafx.h>
 #include "flightcrew.h"
 
 std::vector< Result > ValidateEpub( const std::string &absolute_path )

@@ -18,7 +18,7 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-
+#include <stdafx.h>
 #include "ToXercesStringConverter.h"
 
 ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )

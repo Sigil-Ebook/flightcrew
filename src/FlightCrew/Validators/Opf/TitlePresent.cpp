@@ -19,10 +19,7 @@
 **
 *************************************************************************/
 
-#include <xercesc/util/PlatformUtils.hpp>
-#include <xercesc/dom/DOMNodeList.hpp>
-#include <xercesc/dom/DOMElement.hpp>
-
+#include <stdafx.h>
 #include "TitlePresent.h"
 #include "Result.h"
 #include "Misc/ToXercesStringConverter.h"

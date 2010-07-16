@@ -18,33 +18,12 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-
-#include <xercesc/util/PlatformUtils.hpp>
-#include <xercesc/parsers/XercesDOMParser.hpp>
-//#include <xercesc/parsers/AbstractDOMParser.hpp>
-//#include <xercesc/dom/DOMImplementation.hpp>
-//#include <xercesc/dom/DOMImplementationLS.hpp>
-//#include <xercesc/dom/DOMImplementationRegistry.hpp>
-//#include <xercesc/dom/DOMLSParser.hpp>
-//#include <xercesc/dom/DOMException.hpp>
-#include <xercesc/dom/DOMDocument.hpp>
-
+#include <stdafx.h>
 #include "XmlValidator.h"
 #include "Result.h"
 
-//#include <boost/filesystem.hpp>
-//using namespace boost::filesystem;
-
-
 Result XmlValidator::ValidateFile( const path &filepath )
 {
-    // Instantiate the DOM parser.
-//    static const XMLCh gLS[] = { chLatin_L, chLatin_S, chNull };
-//    DOMImplementation *dom_implementation = DOMImplementationRegistry::getDOMImplementation( gLS );
-//    DOMLSParser       *parser = ( ( DOMImplementationLS * ) dom_implementation )
-//                                ->createLSParser( DOMImplementationLS::MODE_SYNCHRONOUS, 0 );
-    //DOMConfiguration  *config = parser->getDomConfig();
-
     XercesDOMParser parser;
     parser.setDoNamespaces( true );
     parser.parse( filepath.string().c_str() );
