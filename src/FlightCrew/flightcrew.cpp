@@ -12,7 +12,7 @@
 **  FlightCrew is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**  GNU General Public License for more details.
+**  GNU Lesser General Public License for more details.
 **
 **  You should have received a copy of the GNU Lesser General Public License
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
@@ -27,6 +27,7 @@ std::vector< Result > ValidateEpub( const std::string &absolute_path )
     return std::vector< Result >();
 }
 
+
 std::vector< Result > ValidateEpub( const char *absolute_path )
 {
     std::string temp( absolute_path );
@@ -39,6 +40,7 @@ std::vector< Result > ValidateOpf( const std::string &absolute_path )
     // TODO
     return std::vector< Result >();
 }
+
 
 std::vector< Result > ValidateOpf( const char *absolute_path )
 {
@@ -53,6 +55,7 @@ std::vector< Result > ValidateNcx( const std::string &absolute_path )
     return std::vector< Result >();
 }
 
+
 std::vector< Result > ValidateNcx( const char *absolute_path )
 {
     std::string temp( absolute_path );
@@ -66,6 +69,7 @@ std::vector< Result > ValidateXhtml( const std::string &absolute_path )
     return std::vector< Result >();
 }
 
+
 std::vector< Result > ValidateXhtml( const char *absolute_path )
 {
     std::string temp( absolute_path );
@@ -78,6 +82,7 @@ std::vector< Result > ValidateCss( const std::string &absolute_path )
     // TODO
     return std::vector< Result >();
 }
+
 
 std::vector< Result > ValidateCss( const char *absolute_path )
 {

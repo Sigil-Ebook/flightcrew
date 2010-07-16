@@ -13,10 +13,11 @@ project( Xerces )
 
 set( SOURCES )
 
+# TODO: move both macros to special file
 # Using the provided folder_path, recursively adds
 # all the CPP, HPP and H source files to the SOURCES list.
 macro( add_to_sources folder_path )
-    file( GLOB_RECURSE TEMP ${folder_path}/*.cpp ${folder_path}/*.h ${folder_path}/*.hpp )   
+    file( GLOB_RECURSE TEMP ${folder_path}/*.cpp ${folder_path}/*.c )   
     list( LENGTH SOURCES len )    
     
     if ( ${len} EQUAL 0 )
@@ -30,7 +31,7 @@ endmacro()
 # all the CPP, HPP and H source files to the SOURCES list.
 # Only the folder_path is looked at, not the child folders. 
 macro( add_to_sources_no_rec folder_path )
-    file( GLOB TEMP ${folder_path}/*.cpp ${folder_path}/*.h ${folder_path}/*.hpp )   
+    file( GLOB TEMP ${folder_path}/*.cpp ${folder_path}/*.c )  
     list( LENGTH SOURCES len )    
     
     if ( ${len} EQUAL 0 )
@@ -50,19 +51,38 @@ add_to_sources( xercesc/validators )
 add_to_sources( xercesc/xinclude )
 
 add_to_sources( xercesc/util/MsgLoaders/InMemory )
+add_to_sources( xercesc/util/regx )
 
 add_to_sources_no_rec( xercesc/util )
+add_to_sources_no_rec( . )
 
-# There are two "autoconf" config files: one for Unix systems,
-# and one for MSVC. The one for Unix systems is created by running
-# "./configure", but we're CMake based so we use a sensible,
-# configure generated file that we then tweak by hand.
-if( MSVC )
-    list( REMOVE_ITEM SOURCES xercesc/util/Xerces_autoconf_config.hpp )
-else()
-    list( REMOVE_ITEM SOURCES xercesc/util/Xerces_autoconf_config.msvc.hpp )
-endif()
-
+# These files are included by hpp files and should not be directly compiled
+file(GLOB to_remove xercesc/dom/impl/DOMDeepNodeListPool.c 
+                    xercesc/framework/psvi/XSNamedMap.c 
+                    xercesc/util/BaseRefVectorOf.c 
+                    xercesc/util/CountedPointer.c 
+                    xercesc/util/FlagJanitor.c 
+                    xercesc/util/Hash2KeysSetOf.c 
+                    xercesc/util/Janitor.c 
+                    xercesc/util/KeyRefPair.c 
+                    xercesc/util/KeyValuePair.c 
+                    xercesc/util/LogicalPath.c 
+                    xercesc/util/NameIdPool.c 
+                    xercesc/util/RefArrayOf.c 
+                    xercesc/util/RefArrayVectorOf.c 
+                    xercesc/util/RefHash2KeysTableOf.c 
+                    xercesc/util/RefHash3KeysIdPool.c 
+                    xercesc/util/RefHashTableOf.c 
+                    xercesc/util/RefStackOf.c 
+                    xercesc/util/RefVectorOf.c 
+                    xercesc/util/TransENameMap.c 
+                    xercesc/util/ValueArrayOf.c 
+                    xercesc/util/ValueHashTableOf.c 
+                    xercesc/util/ValueStackOf.c 
+                    xercesc/util/ValueVectorOf.c
+                    )
+                    
+list(REMOVE_ITEM SOURCES ${to_remove} )
 
 if( MSVC )
     add_to_sources( xercesc/util/Transcoders/Win32 )
@@ -99,7 +119,10 @@ add_definitions( -DXERCES_STATIC_LIBRARY
                  -DHAVE_WCSUPR
                  -DHAVE_WCSLWR
                  -DHAVE_WCSICMP
-                 -DHAVE_WCSNICMP )
+                 -DHAVE_WCSNICMP
+                 -DHAVE_STRING_H
+                 -DHAVE_STRCASECMP
+                 -DHAVE_STRNCASECMP )
 
 if( MSVC )
 	add_definitions( -DUNICODE -D_UNICODE )

@@ -19,3 +19,23 @@
 **
 *************************************************************************/
 
+#include <xercesc/util/PlatformUtils.hpp>
+#include <xercesc/dom/DOMNodeList.hpp>
+#include <xercesc/dom/DOMElement.hpp>
+
+#include "TitlePresent.h"
+#include "Result.h"
+#include "Misc/ToXercesStringConverter.h"
+
+Result TitlePresent::ValidateXml( const DOMDocument &document )
+{
+    DOMElement *root_element = document.getDocumentElement();
+    DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
+                                    X( "*" ),  X( "title" ) );
+
+    if ( title_elements->getLength() < 1 )
+
+        return Result( Result::ERROR_OPF_NO_TITLE );
+
+    return Result();
+}

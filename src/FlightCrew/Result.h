@@ -12,14 +12,28 @@
 **  FlightCrew is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**  GNU General Public License for more details.
+**  GNU Lesser General Public License for more details.
 **
 **  You should have received a copy of the GNU Lesser General Public License
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
 
-class Result
+struct Result
 {
+    enum ErrorIds
+    {
+        ALL_OK = 100,
+        ERROR_GENERIC,
+        ERROR_XML,
+        ERROR_OPF_NO_TITLE
+    };
 
+    Result() : ErrorId( ALL_OK ), ErrorLine( -1 ), ErrorColumn( -1 )  {}
+
+    Result( int error_id ) : ErrorId( error_id ), ErrorLine( -1 ), ErrorColumn( -1 )  {}
+
+    int ErrorId;
+    int ErrorLine;
+    int ErrorColumn;
 };

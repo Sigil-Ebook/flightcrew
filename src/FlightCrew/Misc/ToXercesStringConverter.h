@@ -19,3 +19,25 @@
 **
 *************************************************************************/
 
+//TODO: include guards!
+
+#include <xercesc/util/XMLString.hpp>
+
+XERCES_CPP_NAMESPACE_USE
+
+class ToXercesStringConverter
+{
+public:
+
+    ToXercesStringConverter( const char* const ascii_string );
+
+    ~ToXercesStringConverter();
+
+    const XMLCh* XercesString() const;
+
+private:
+
+    XMLCh* m_XercesString;
+};
+
+#define X( str ) ToXercesStringConverter( (str) ).XercesString()

@@ -19,3 +19,13 @@
 **
 *************************************************************************/
 
+#include "../XmlValidator.h"
+
+class TitlePresent : public XmlValidator
+{
+public:
+
+    virtual Result ValidateXml( const DOMDocument &document );
+
+    virtual ~TitlePresent() {}
+};

@@ -19,3 +19,16 @@
 **
 *************************************************************************/
 
+#include <boost/filesystem.hpp>
+using namespace boost::filesystem;
+
+class Result;
+
+class IValidator
+{
+public:
+
+    virtual Result ValidateFile( const path &filepath ) = 0;
+
+    virtual ~IValidator() {}
+};

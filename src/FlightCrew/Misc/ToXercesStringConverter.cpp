@@ -19,3 +19,21 @@
 **
 *************************************************************************/
 
+#include "ToXercesStringConverter.h"
+
+ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )
+{
+    m_XercesString = XMLString::transcode( ascii_string );
+}
+
+
+ToXercesStringConverter::~ToXercesStringConverter()
+{
+    XMLString::release( &m_XercesString );
+}
+
+
+const XMLCh* ToXercesStringConverter::XercesString() const
+{
+    return m_XercesString;
+}
