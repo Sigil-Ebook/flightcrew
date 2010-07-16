@@ -19,16 +19,10 @@
 **
 *************************************************************************/
 
+#include "ErrorIDs.h"
+
 struct Result
 {
-    enum ErrorIds
-    {
-        ALL_OK = 100,
-        ERROR_GENERIC,
-        ERROR_XML,
-        ERROR_OPF_NO_TITLE
-    };
-
     Result() : ErrorId( ALL_OK ), ErrorLine( -1 ), ErrorColumn( -1 )  {}
 
     Result( int error_id ) : ErrorId( error_id ), ErrorLine( -1 ), ErrorColumn( -1 )  {}

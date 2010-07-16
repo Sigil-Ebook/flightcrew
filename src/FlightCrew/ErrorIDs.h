@@ -19,20 +19,12 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "TitlePresent.h"
-#include "Result.h"
-#include "Misc/ToXercesStringConverter.h"
-
-Result TitlePresent::ValidateXml( const DOMDocument &document )
+enum ErrorIds
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "title" ) );
-
-    if ( title_elements->getLength() < 1 )
-
-        return Result( ERROR_OPF_NO_TITLE );
-
-    return Result();
-}
+    ALL_OK = 100,
+    ERROR_GENERIC,
+    ERROR_XML,
+    ERROR_OPF_PACKAGE_NOT_ROOT,
+    ERROR_OPF_NO_TITLE,
+    ERROR_OPF_NO_METADATA,
+};

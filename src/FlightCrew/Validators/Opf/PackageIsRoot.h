@@ -19,20 +19,19 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "TitlePresent.h"
-#include "Result.h"
-#include "Misc/ToXercesStringConverter.h"
+#pragma once
+#ifndef PACKAGEISROOT_H
+#define PACKAGEISROOT_H
 
-Result TitlePresent::ValidateXml( const DOMDocument &document )
+#include "../XmlValidator.h"
+
+class PackageIsRoot : public XmlValidator
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "title" ) );
+public:
 
-    if ( title_elements->getLength() < 1 )
+    virtual Result ValidateXml( const DOMDocument &document );
 
-        return Result( ERROR_OPF_NO_TITLE );
+    virtual ~PackageIsRoot() {}
+};
 
-    return Result();
-}
+#endif // PACKAGEISROOT_H

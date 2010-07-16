@@ -19,20 +19,22 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "TitlePresent.h"
+#include <gtest/gtest.h>
+#include "Validators/Opf/PackageIsRoot.h"
 #include "Result.h"
-#include "Misc/ToXercesStringConverter.h"
 
-Result TitlePresent::ValidateXml( const DOMDocument &document )
+TEST( PackageIsRootTest, FailsWithPackageNotRoot )
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "title" ) );
+    PackageIsRoot validator;
+    Result result = validator.ValidateFile( "test_data/PackageIsRoot_PackageNotRoot.xml" );
 
-    if ( title_elements->getLength() < 1 )
+    EXPECT_EQ( result.ErrorId, ERROR_OPF_PACKAGE_NOT_ROOT );
+}
 
-        return Result( ERROR_OPF_NO_TITLE );
+TEST( PackageIsRootTest, SucceedsWithPackageRoot )
+{
+    PackageIsRoot validator;
+    Result result = validator.ValidateFile( "test_data/PackageIsRoot_PackageRoot.xml" );
 
-    return Result();
+    EXPECT_EQ( result.ErrorId, ALL_OK );
 }

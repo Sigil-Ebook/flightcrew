@@ -20,19 +20,19 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "TitlePresent.h"
+#include "PackageIsRoot.h"
 #include "Result.h"
 #include "Misc/ToXercesStringConverter.h"
 
-Result TitlePresent::ValidateXml( const DOMDocument &document )
+Result PackageIsRoot::ValidateXml( const DOMDocument &document )
 {
     DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "title" ) );
+//    DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
+//                                    X( "*" ),  X( "title" ) );
 
-    if ( title_elements->getLength() < 1 )
+    if ( !XMLString::equals( root_element->getTagName(), X( "package" ) )  )
 
-        return Result( ERROR_OPF_NO_TITLE );
+        return Result( ERROR_OPF_PACKAGE_NOT_ROOT );
 
     return Result();
 }

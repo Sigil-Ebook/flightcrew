@@ -28,7 +28,7 @@ TEST( TitlePresentTest, FailsWithNoTitle )
     TitlePresent validator;
     Result result = validator.ValidateFile( "test_data/TitlePresent_NoTitle.xml" );
 
-    EXPECT_EQ( result.ErrorId, Result::ERROR_OPF_NO_TITLE );
+    EXPECT_EQ( result.ErrorId, ERROR_OPF_NO_TITLE );
 }
 
 TEST( TitlePresentTest, SucceedsWithTitle )
@@ -36,5 +36,5 @@ TEST( TitlePresentTest, SucceedsWithTitle )
     TitlePresent validator;
     Result result = validator.ValidateFile( "test_data/TitlePresent_HasTitle.xml" );
 
-    EXPECT_EQ( result.ErrorId, Result::ALL_OK );
+    EXPECT_EQ( result.ErrorId, ALL_OK );
 }
