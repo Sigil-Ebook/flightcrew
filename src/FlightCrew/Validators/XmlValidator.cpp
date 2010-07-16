@@ -22,6 +22,8 @@
 #include "XmlValidator.h"
 #include "Result.h"
 
+XERCES_CPP_NAMESPACE_USE
+
 Result XmlValidator::ValidateFile( const path &filepath )
 {
     XercesDOMParser parser;

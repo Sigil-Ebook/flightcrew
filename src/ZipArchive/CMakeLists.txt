@@ -16,18 +16,26 @@ file( GLOB SOURCES *.cpp *.h )
 file( GLOB SOURCES_ZLIB zlib/*.c zlib/*.h )
 file( GLOB SOURCES_BZIP2 bzip2/*.c bzip2/*.h )
 
+#############################################################################
+
 # Adds folders for Visual Studio solution explorer
 SOURCE_GROUP( zlib FILES ${SOURCES_ZLIB} )
 SOURCE_GROUP( bzip2 FILES ${SOURCES_BZIP2} )
 
 list( APPEND SOURCES ${SOURCES_ZLIB} ${SOURCES_BZIP2} )
 
+#############################################################################
+
 # Adding resource (RC) files for windows
 if (MSVC)
 	list( APPEND SOURCES ZipArchive.rc)
 endif()
 
+#############################################################################
+
 add_library( ZipArchive ${SOURCES} ) 
+
+#############################################################################
 
 # Special compiler and linker flags for MSVC
 if( MSVC )
@@ -36,8 +44,10 @@ if( MSVC )
     # because the RC compiler picks it up too and it provokes a name clash
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-")
 	set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
-	set_target_properties( ZipArchive PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
+	set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
 endif()
+
+#############################################################################
 
 # Special compiler and linker flags for GCC
 if( UNIX )

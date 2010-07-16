@@ -22,7 +22,6 @@
 #include <xercesc/dom/DOMDocument.hpp>
 #include "IValidator.h"
 
-//class DOMDocument;
 XERCES_CPP_NAMESPACE_USE
 
 class XmlValidator : public IValidator
