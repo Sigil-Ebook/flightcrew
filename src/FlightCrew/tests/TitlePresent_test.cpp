@@ -26,7 +26,8 @@
 TEST( TitlePresentTest, FailsWithNoTitle )
 {
     TitlePresent validator;
-    std::vector<Result> results = validator.ValidateFile( "test_data/opf_tests/TitlePresent_NoTitle.xml" );
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/TitlePresent_NoTitle.xml" );
 
     EXPECT_EQ( results[ 0 ].ErrorId, ERROR_OPF_NO_TITLE );
 }
@@ -34,7 +35,8 @@ TEST( TitlePresentTest, FailsWithNoTitle )
 TEST( TitlePresentTest, SucceedsWithTitle )
 {
     TitlePresent validator;
-    std::vector<Result> results = validator.ValidateFile( "test_data/opf_tests/TitlePresent_HasTitle.xml" );
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/TitlePresent_HasTitle.xml" );
 
     EXPECT_EQ( results[ 0 ].ErrorId, ALL_OK );
 }

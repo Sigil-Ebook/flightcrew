@@ -26,6 +26,4 @@ class TitlePresent : public XmlValidator
 public:
 
     virtual std::vector<Result> ValidateXml( const DOMDocument &document );
-
-    virtual ~TitlePresent() {}
 };

@@ -26,7 +26,8 @@
 TEST( PackageIsRootTest, FailsWithPackageNotRoot )
 {
     PackageIsRoot validator;
-    std::vector<Result> results = validator.ValidateFile( "test_data/opf_tests/PackageIsRoot_PackageNotRoot.xml" );
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/PackageIsRoot_PackageNotRoot.xml" );
 
     EXPECT_EQ( results[ 0 ].ErrorId, ERROR_OPF_PACKAGE_NOT_ROOT );
 }
@@ -34,7 +35,8 @@ TEST( PackageIsRootTest, FailsWithPackageNotRoot )
 TEST( PackageIsRootTest, SucceedsWithPackageRoot )
 {
     PackageIsRoot validator;
-    std::vector<Result> results = validator.ValidateFile( "test_data/opf_tests/PackageIsRoot_PackageRoot.xml" );
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/PackageIsRoot_PackageRoot.xml" );
 
     EXPECT_EQ( results[ 0 ].ErrorId, ALL_OK );
 }

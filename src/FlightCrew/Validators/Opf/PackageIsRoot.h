@@ -30,8 +30,6 @@ class PackageIsRoot : public XmlValidator
 public:
 
     virtual std::vector<Result> ValidateXml( const DOMDocument &document );
-
-    virtual ~PackageIsRoot() {}
 };
 
 #endif // PACKAGEISROOT_H
