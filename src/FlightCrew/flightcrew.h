@@ -29,22 +29,12 @@
 
 std::vector< Result > ValidateEpub(  const std::string &absolute_path );
 
-std::vector< Result > ValidateEpub(  const char *absolute_path );
-
 std::vector< Result > ValidateOpf(   const std::string &absolute_path );
-
-std::vector< Result > ValidateOpf(   const char *absolute_path );
 
 std::vector< Result > ValidateNcx(   const std::string &absolute_path );
 
-std::vector< Result > ValidateNcx(   const char *absolute_path );
-
 std::vector< Result > ValidateXhtml( const std::string &absolute_path );
 
-std::vector< Result > ValidateXhtml( const char *absolute_path );
-
 std::vector< Result > ValidateCss(   const std::string &absolute_path );
-
-std::vector< Result > ValidateCss(   const char *absolute_path );
 
 #endif // FLIGHTCREW_H
