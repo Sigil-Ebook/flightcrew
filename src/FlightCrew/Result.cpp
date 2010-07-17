@@ -19,3 +19,58 @@
 **
 *************************************************************************/
 
+#include "Result.h"
+
+Result::Result()
+    :
+    m_ErrorId( ALL_OK ),
+    m_ErrorLine( -1 ),
+    m_ErrorColumn( -1 )
+{
+
+}
+
+Result::Result( int error_id )
+    :
+    m_ErrorId( error_id ),
+    m_ErrorLine( -1 ),
+    m_ErrorColumn( -1 )
+{
+
+}
+
+
+int Result::GetErrorId()
+{
+    return m_ErrorId;
+}
+
+
+void Result::SetErrorId( int error_id )
+{
+    m_ErrorId = error_id;
+}
+
+
+int Result::GetErrorLine()
+{
+    return m_ErrorLine;
+}
+
+
+void Result::SetErrorLine( int error_line )
+{
+    m_ErrorLine = error_line;
+}
+
+
+int Result::GetErrorColumn()
+{
+    return m_ErrorColumn;
+}
+
+
+void Result::SetErrorColumn( int error_line )
+{
+    m_ErrorColumn = error_line;
+}

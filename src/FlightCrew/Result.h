@@ -19,15 +19,37 @@
 **
 *************************************************************************/
 
+#pragma once
+#ifndef RESULT_H
+#define RESULT_H
+
 #include "ErrorIDs.h"
 
-struct Result
+class Result
 {
-    Result() : ErrorId( ALL_OK ), ErrorLine( -1 ), ErrorColumn( -1 )  {}
+public:
 
-    Result( int error_id ) : ErrorId( error_id ), ErrorLine( -1 ), ErrorColumn( -1 )  {}
+    Result();
 
-    int ErrorId;
-    int ErrorLine;
-    int ErrorColumn;
+    Result( int error_id );
+
+    int GetErrorId();
+
+    void SetErrorId( int error_id );
+
+    int GetErrorLine();
+
+    void SetErrorLine( int error_line );
+
+    int GetErrorColumn();
+
+    void SetErrorColumn( int error_column );
+
+private:
+
+    int m_ErrorId;
+    int m_ErrorLine;
+    int m_ErrorColumn;
 };
+
+#endif // RESULT_H
