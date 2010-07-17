@@ -19,17 +19,27 @@
 **
 *************************************************************************/
 
-#pragma once
-#ifndef MANIFESTPRESENT_H
-#define MANIFESTPRESENT_H
+#include <stdafx.h>
+#include "OneSpine.h"
+#include "Result.h"
+#include "Misc/ToXercesStringConverter.h"
 
-#include "../XmlValidator.h"
-
-class ManifestPresent : public XmlValidator
+std::vector<Result> OneSpine::ValidateXml( const DOMDocument &document )
 {
-public:
+    DOMElement *root_element = document.getDocumentElement();
+    DOMNodeList *spine_elements = root_element->getElementsByTagNameNS(
+                                    X( "*" ),  X( "spine" ) );
 
-    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
-};
+    std::vector<Result> results;
 
-#endif // MANIFESTPRESENT_H
+    if ( spine_elements->getLength() != 1 )
+
+        results.push_back( Result( ERROR_OPF_WRONG_SPINE_COUNT ) );
+
+    else
+
+        results.push_back( Result() );
+
+    return results;
+}
+

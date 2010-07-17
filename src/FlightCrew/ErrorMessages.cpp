@@ -73,10 +73,10 @@ void ErrorMessages::LoadMessages()
         "The <package> element is not the root element of the OPF";
     m_Messages[ ERROR_OPF_NO_TITLE ] =
         "There is no <title> element in the OPF";
-    m_Messages[ ERROR_OPF_NO_MANIFEST ] =
-        "There is no <manifest> element in the OPF";
-    m_Messages[ ERROR_OPF_NO_METADATA ] =
-        "There is no <metadata> element in the OPF";
-    m_Messages[ ERROR_OPF_NO_SPINE ] =
-        "There is no <spine> element in the OPF";
+    m_Messages[ ERROR_OPF_WRONG_MANIFEST_COUNT ] =
+        "There needs to be one and only one <manifest> element in the OPF";
+    m_Messages[ ERROR_OPF_WRONG_METADATA_COUNT ] =
+        "There needs to be one and only one <metadata> element in the OPF";
+    m_Messages[ ERROR_OPF_WRONG_SPINE_COUNT ] =
+        "There needs to be one and only one <spine> element in the OPF";
 }

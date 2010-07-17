@@ -19,17 +19,34 @@
 **
 *************************************************************************/
 
-#pragma once
-#ifndef SPINEPRESENT_H
-#define SPINEPRESENT_H
+#include <gtest/gtest.h>
+#include "Validators/Opf/OneSpine.h"
+#include "Result.h"
 
-#include "../XmlValidator.h"
-
-class SpinePresent : public XmlValidator
+TEST( OneSpineTest, NoSpine_Error )
 {
-public:
+    OneSpine validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/OneSpine_NoSpine.xml" );
 
-    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
-};
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_SPINE_COUNT );
+}
 
-#endif // SPINEPRESENT_H
+TEST( OneSpineTest, TwoSpines_Error )
+{
+    OneSpine validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/OneSpine_TwoSpines.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_SPINE_COUNT );
+}
+
+TEST( OneSpineTest, OneSpine_OK )
+{
+    OneSpine validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/OneSpine_OneSpine.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+}
+

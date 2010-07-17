@@ -19,17 +19,27 @@
 **
 *************************************************************************/
 
-#pragma once
-#ifndef METADATAPRESENT_H
-#define METADATAPRESENT_H
+#include <stdafx.h>
+#include "OneMetadata.h"
+#include "Result.h"
+#include "Misc/ToXercesStringConverter.h"
 
-#include "../XmlValidator.h"
-
-class MetadataPresent : public XmlValidator
+std::vector<Result> OneMetadata::ValidateXml( const DOMDocument &document )
 {
-public:
+    DOMElement *root_element = document.getDocumentElement();
+    DOMNodeList *metadata_elements = root_element->getElementsByTagNameNS(
+                                    X( "*" ),  X( "metadata" ) );
 
-    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
-};
+    std::vector<Result> results;
 
-#endif // METADATAPRESENT_H
+    if ( metadata_elements->getLength() != 1 )
+
+        results.push_back( Result( ERROR_OPF_WRONG_METADATA_COUNT ) );
+
+    else
+
+        results.push_back( Result() );
+
+    return results;
+}
+

@@ -19,27 +19,34 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "MetadataPresent.h"
+#include <gtest/gtest.h>
+#include "Validators/Opf/OneManifest.h"
 #include "Result.h"
-#include "Misc/ToXercesStringConverter.h"
 
-std::vector<Result> MetadataPresent::ValidateXml( const DOMDocument &document )
+TEST( OneManifestTest, NoManifest_Error )
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *metadata_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "metadata" ) );
+    OneManifest validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/OneManifest_NoManifest.xml" );
 
-    std::vector<Result> results;
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_MANIFEST_COUNT );
+}
 
-    if ( metadata_elements->getLength() < 1 )
+TEST( OneManifestTest, TwoManifests_Error )
+{
+    OneManifest validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/OneManifest_TwoManifests.xml" );
 
-        results.push_back( Result( ERROR_OPF_NO_METADATA ) );
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_MANIFEST_COUNT );
+}
 
-    else
+TEST( OneManifestTest, OneManifest_OK )
+{
+    OneManifest validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/OneManifest_OneManifest.xml" );
 
-        results.push_back( Result() );
-
-    return results;
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }
 

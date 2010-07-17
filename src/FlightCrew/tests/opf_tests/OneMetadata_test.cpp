@@ -20,23 +20,32 @@
 *************************************************************************/
 
 #include <gtest/gtest.h>
-#include "Validators/Opf/SpinePresent.h"
+#include "Validators/Opf/OneMetadata.h"
 #include "Result.h"
 
-TEST( SpinePresentTest, NoSpine_Error )
+TEST( OneMetadataTest, NoMetadata_Error )
 {
-    SpinePresent validator;
+    OneMetadata validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/SpinePresent_NoSpine.xml" );
+            "test_data/opf_tests/OneMetadata_NoMetadata.xml" );
 
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_SPINE );
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_METADATA_COUNT );
 }
 
-TEST( SpinePresentTest, HasSpine_OK )
+TEST( OneMetadataTest, TwoMetadatas_Error )
 {
-    SpinePresent validator;
+    OneMetadata validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/SpinePresent_HasSpine.xml" );
+            "test_data/opf_tests/OneMetadata_TwoMetadatas.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_METADATA_COUNT );
+}
+
+TEST( OneMetadataTest, OneMetadata_OK )
+{
+    OneMetadata validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/OneMetadata_OneMetadata.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }

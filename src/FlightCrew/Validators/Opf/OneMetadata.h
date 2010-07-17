@@ -19,25 +19,17 @@
 **
 *************************************************************************/
 
-#include <gtest/gtest.h>
-#include "Validators/Opf/MetadataPresent.h"
-#include "Result.h"
+#pragma once
+#ifndef OneMetadata_H
+#define OneMetadata_H
 
-TEST( MetadataPresentTest, NoMetadata_Error )
+#include "../XmlValidator.h"
+
+class OneMetadata : public XmlValidator
 {
-    MetadataPresent validator;
-    std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/MetadataPresent_NoMetadata.xml" );
+public:
 
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_METADATA );
-}
+    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
+};
 
-TEST( MetadataPresentTest, HasMetadata_OK )
-{
-    MetadataPresent validator;
-    std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/MetadataPresent_HasMetadata.xml" );
-
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
-}
-
+#endif // OneMetadata_H

@@ -19,25 +19,27 @@
 **
 *************************************************************************/
 
-#include <gtest/gtest.h>
-#include "Validators/Opf/ManifestPresent.h"
+#include <stdafx.h>
+#include "OneManifest.h"
 #include "Result.h"
+#include "Misc/ToXercesStringConverter.h"
 
-TEST( ManifestPresentTest, NoManifest_Error )
+std::vector<Result> OneManifest::ValidateXml( const DOMDocument &document )
 {
-    ManifestPresent validator;
-    std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ManifestPresent_NoManifest.xml" );
+    DOMElement *root_element = document.getDocumentElement();
+    DOMNodeList *manifests = root_element->getElementsByTagNameNS(
+                                    X( "*" ),  X( "manifest" ) );
 
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_MANIFEST );
-}
+    std::vector<Result> results;
 
-TEST( ManifestPresentTest, HasManifest_OK )
-{
-    ManifestPresent validator;
-    std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ManifestPresent_HasManifest.xml" );
+    if ( manifests->getLength() != 1 )
 
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+        results.push_back( Result( ERROR_OPF_WRONG_MANIFEST_COUNT ) );
+
+    else
+
+        results.push_back( Result() );
+
+    return results;
 }
 

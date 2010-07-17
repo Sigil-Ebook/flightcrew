@@ -19,27 +19,17 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "SpinePresent.h"
-#include "Result.h"
-#include "Misc/ToXercesStringConverter.h"
+#pragma once
+#ifndef OneSpine_H
+#define OneSpine_H
 
-std::vector<Result> SpinePresent::ValidateXml( const DOMDocument &document )
+#include "../XmlValidator.h"
+
+class OneSpine : public XmlValidator
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *spine_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "spine" ) );
+public:
 
-    std::vector<Result> results;
+    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
+};
 
-    if ( spine_elements->getLength() < 1 )
-
-        results.push_back( Result( ERROR_OPF_NO_SPINE ) );
-
-    else
-
-        results.push_back( Result() );
-
-    return results;
-}
-
+#endif // OneSpine_H

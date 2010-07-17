@@ -19,27 +19,17 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "ManifestPresent.h"
-#include "Result.h"
-#include "Misc/ToXercesStringConverter.h"
+#pragma once
+#ifndef OneManifest_H
+#define OneManifest_H
 
-std::vector<Result> ManifestPresent::ValidateXml( const DOMDocument &document )
+#include "../XmlValidator.h"
+
+class OneManifest : public XmlValidator
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *manifests = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "manifest" ) );
+public:
 
-    std::vector<Result> results;
+    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
+};
 
-    if ( manifests->getLength() < 1 )
-
-        results.push_back( Result( ERROR_OPF_NO_MANIFEST ) );
-
-    else
-
-        results.push_back( Result() );
-
-    return results;
-}
-
+#endif // OneManifest_H
