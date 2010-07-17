@@ -19,6 +19,10 @@
 **
 *************************************************************************/
 
+#pragma once
+#ifndef FLIGHTCREW_H
+#define FLIGHTCREW_H
+
 #include <vector>
 #include <string>
 #include "Result.h"
@@ -42,3 +46,5 @@ std::vector< Result > ValidateXhtml( const char *absolute_path );
 std::vector< Result > ValidateCss(   const std::string &absolute_path );
 
 std::vector< Result > ValidateCss(   const char *absolute_path );
+
+#endif // FLIGHTCREW_H

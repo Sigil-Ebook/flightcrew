@@ -19,6 +19,10 @@
 **
 *************************************************************************/
 
+#pragma once
+#ifndef IVALIDATOR_H
+#define IVALIDATOR_H
+
 #include <vector>
 #include <boost/filesystem.hpp>
 using namespace boost::filesystem;
@@ -33,3 +37,5 @@ public:
 
     virtual ~IValidator() {}
 };
+
+#endif // IVALIDATOR_H

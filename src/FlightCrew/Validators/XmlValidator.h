@@ -19,6 +19,10 @@
 **
 *************************************************************************/
 
+#pragma once
+#ifndef XMLVALIDATOR_H
+#define XMLVALIDATOR_H
+
 #include <xercesc/dom/DOMDocument.hpp>
 #include "IValidator.h"
 
@@ -34,3 +38,5 @@ public:
 
     virtual ~XmlValidator() {}
 };
+
+#endif // XMLVALIDATOR_H

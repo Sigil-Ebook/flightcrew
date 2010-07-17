@@ -19,6 +19,10 @@
 **
 *************************************************************************/
 
+#pragma once
+#ifndef TITLEPRESENT_H
+#define TITLEPRESENT_H
+
 #include "../XmlValidator.h"
 
 class TitlePresent : public XmlValidator
@@ -27,3 +31,5 @@ public:
 
     virtual std::vector<Result> ValidateXml( const DOMDocument &document );
 };
+
+#endif // TITLEPRESENT_H
