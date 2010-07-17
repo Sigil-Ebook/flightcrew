@@ -23,7 +23,7 @@
 #include "Validators/Opf/TitlePresent.h"
 #include "Result.h"
 
-TEST( TitlePresentTest, FailsWithNoTitle )
+TEST( TitlePresentTest, NoTitle_Error )
 {
     TitlePresent validator;
     std::vector<Result> results = validator.ValidateFile(
@@ -32,7 +32,7 @@ TEST( TitlePresentTest, FailsWithNoTitle )
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_TITLE );
 }
 
-TEST( TitlePresentTest, SucceedsWithTitle )
+TEST( TitlePresentTest, HasTitle_OK )
 {
     TitlePresent validator;
     std::vector<Result> results = validator.ValidateFile(

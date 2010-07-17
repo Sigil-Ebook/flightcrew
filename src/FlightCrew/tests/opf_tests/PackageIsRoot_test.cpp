@@ -23,7 +23,7 @@
 #include "Validators/Opf/PackageIsRoot.h"
 #include "Result.h"
 
-TEST( PackageIsRootTest, FailsWithPackageNotRoot )
+TEST( PackageIsRootTest, PackageNotRoot_Error )
 {
     PackageIsRoot validator;
     std::vector<Result> results = validator.ValidateFile(
@@ -32,7 +32,7 @@ TEST( PackageIsRootTest, FailsWithPackageNotRoot )
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_PACKAGE_NOT_ROOT );
 }
 
-TEST( PackageIsRootTest, SucceedsWithPackageRoot )
+TEST( PackageIsRootTest, PackageIsRoot_OK )
 {
     PackageIsRoot validator;
     std::vector<Result> results = validator.ValidateFile(

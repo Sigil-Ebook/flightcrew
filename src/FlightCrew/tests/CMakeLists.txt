@@ -38,3 +38,5 @@ target_link_libraries( ${PROJECT_NAME} FlightCrew gmock )
 add_custom_target(  copy_test_data ALL 
                     COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
                                                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_data )
+
+
