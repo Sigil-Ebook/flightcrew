@@ -29,7 +29,7 @@
 #include <boost/lambda/lambda.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
-//#include <boost/unordered_map.hpp>
+#include <boost/unordered_map.hpp>
 //#include "constants.h"
 //#include "exception.h"
 

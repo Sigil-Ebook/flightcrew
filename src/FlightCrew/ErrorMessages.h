@@ -25,6 +25,7 @@
 
 #include <string>
 #include <boost/thread/mutex.hpp>
+#include <boost/unordered_map.hpp>
 #include "ErrorIDs.h"
 
 class ErrorMessages
@@ -39,6 +40,8 @@ private:
 
     ErrorMessages();
 
+    void LoadMessages();
+
     ///////////////////////////////
     // PRIVATE MEMBER VARIABLES
     ///////////////////////////////
@@ -46,6 +49,8 @@ private:
     static boost::mutex s_AccessMutex;
 
     static ErrorMessages *s_Instance;
+
+    boost::unordered_map< ErrorId, std::string > m_Messages;
 };
 
 #endif // ERRORMESSAGES_H

@@ -45,11 +45,32 @@ ErrorMessages& ErrorMessages::Instance()
 
 const std::string ErrorMessages::MessageForId( ErrorId error_id )
 {
-    return std::string();
+    return m_Messages[ error_id ];
 }
 
 
 ErrorMessages::ErrorMessages()
 {
+    LoadMessages();
+}
 
+
+void ErrorMessages::LoadMessages()
+{
+    // It would be great if these could be read from an external file,
+    // but we don't want a runtime dependency. So we hard-code them.
+    // This would be bad for translations, but since we can't translate the
+    // error messages coming from the schema checkers, wo won't be translating
+    // these either. So it's not a problem.
+
+    m_Messages[ ALL_OK ] =
+        "All OK";
+    m_Messages[ ERROR_GENERIC ] =
+        "Error";
+    m_Messages[ ERROR_XML_SYNTAX ] =
+        "XML syntax error";
+    m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
+        "The <package> element is not the root element of the OPF";
+    m_Messages[ ERROR_OPF_NO_TITLE ] =
+        "There is no <title> element in the OPF";
 }
