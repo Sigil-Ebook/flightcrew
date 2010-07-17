@@ -19,14 +19,25 @@
 **
 *************************************************************************/
 
-enum ErrorId
+#include <gtest/gtest.h>
+#include "Validators/Opf/ManifestPresent.h"
+#include "Result.h"
+
+TEST( ManifestPresentTest, NoManifest_Error )
 {
-    ALL_OK = 100,
-    ERROR_GENERIC,
-    ERROR_XML_SYNTAX,
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_NO_TITLE,
-    ERROR_OPF_NO_MANIFEST,
-    ERROR_OPF_NO_METADATA,
-    ERROR_OPF_NO_SPINE,
-};
+    ManifestPresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/ManifestPresent_NoManifest.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_MANIFEST );
+}
+
+TEST( ManifestPresentTest, HasManifest_OK )
+{
+    ManifestPresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/ManifestPresent_HasManifest.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+}
+

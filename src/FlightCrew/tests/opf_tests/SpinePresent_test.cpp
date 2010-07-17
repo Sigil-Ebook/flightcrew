@@ -19,14 +19,25 @@
 **
 *************************************************************************/
 
-enum ErrorId
+#include <gtest/gtest.h>
+#include "Validators/Opf/SpinePresent.h"
+#include "Result.h"
+
+TEST( SpinePresentTest, NoSpine_Error )
 {
-    ALL_OK = 100,
-    ERROR_GENERIC,
-    ERROR_XML_SYNTAX,
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_NO_TITLE,
-    ERROR_OPF_NO_MANIFEST,
-    ERROR_OPF_NO_METADATA,
-    ERROR_OPF_NO_SPINE,
-};
+    SpinePresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/SpinePresent_NoSpine.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_SPINE );
+}
+
+TEST( SpinePresentTest, HasSpine_OK )
+{
+    SpinePresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/SpinePresent_HasSpine.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+}
+

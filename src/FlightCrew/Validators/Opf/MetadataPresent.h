@@ -19,14 +19,17 @@
 **
 *************************************************************************/
 
-enum ErrorId
+#pragma once
+#ifndef METADATAPRESENT_H
+#define METADATAPRESENT_H
+
+#include "../XmlValidator.h"
+
+class MetadataPresent : public XmlValidator
 {
-    ALL_OK = 100,
-    ERROR_GENERIC,
-    ERROR_XML_SYNTAX,
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_NO_TITLE,
-    ERROR_OPF_NO_MANIFEST,
-    ERROR_OPF_NO_METADATA,
-    ERROR_OPF_NO_SPINE,
+public:
+
+    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
 };
+
+#endif // METADATAPRESENT_H

@@ -19,14 +19,27 @@
 **
 *************************************************************************/
 
-enum ErrorId
+#include <stdafx.h>
+#include "SpinePresent.h"
+#include "Result.h"
+#include "Misc/ToXercesStringConverter.h"
+
+std::vector<Result> SpinePresent::ValidateXml( const DOMDocument &document )
 {
-    ALL_OK = 100,
-    ERROR_GENERIC,
-    ERROR_XML_SYNTAX,
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_NO_TITLE,
-    ERROR_OPF_NO_MANIFEST,
-    ERROR_OPF_NO_METADATA,
-    ERROR_OPF_NO_SPINE,
-};
+    DOMElement *root_element = document.getDocumentElement();
+    DOMNodeList *spine_elements = root_element->getElementsByTagNameNS(
+                                    X( "*" ),  X( "spine" ) );
+
+    std::vector<Result> results;
+
+    if ( spine_elements->getLength() < 1 )
+
+        results.push_back( Result( ERROR_OPF_NO_SPINE ) );
+
+    else
+
+        results.push_back( Result() );
+
+    return results;
+}
+

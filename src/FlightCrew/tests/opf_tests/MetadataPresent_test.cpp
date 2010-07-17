@@ -19,14 +19,25 @@
 **
 *************************************************************************/
 
-enum ErrorId
+#include <gtest/gtest.h>
+#include "Validators/Opf/MetadataPresent.h"
+#include "Result.h"
+
+TEST( MetadataPresentTest, NoMetadata_Error )
 {
-    ALL_OK = 100,
-    ERROR_GENERIC,
-    ERROR_XML_SYNTAX,
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_NO_TITLE,
-    ERROR_OPF_NO_MANIFEST,
-    ERROR_OPF_NO_METADATA,
-    ERROR_OPF_NO_SPINE,
-};
+    MetadataPresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/MetadataPresent_NoMetadata.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_METADATA );
+}
+
+TEST( MetadataPresentTest, HasMetadata_OK )
+{
+    MetadataPresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/MetadataPresent_HasMetadata.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+}
+
