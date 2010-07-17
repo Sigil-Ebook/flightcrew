@@ -30,7 +30,7 @@ Result::Result()
 
 }
 
-Result::Result( int error_id )
+Result::Result( ErrorId error_id )
     :
     m_ErrorId( error_id ),
     m_ErrorLine( -1 ),
@@ -40,13 +40,13 @@ Result::Result( int error_id )
 }
 
 
-int Result::GetErrorId()
+ErrorId Result::GetErrorId()
 {
     return m_ErrorId;
 }
 
 
-void Result::SetErrorId( int error_id )
+void Result::SetErrorId( ErrorId error_id )
 {
     m_ErrorId = error_id;
 }

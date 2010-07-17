@@ -11,19 +11,21 @@ cmake_minimum_required( VERSION 2.8 )
 
 project( FlightCrew )
 
-set( SOURCES
-     flightcrew.cpp
-     Result.cpp
-   )
-     
+file( GLOB SOURCES *.cpp )
 file( GLOB_RECURSE TEMP Validators/*.cpp Misc/*.cpp )
-list( APPEND SOURCES ${TEMP} ) 
+list( APPEND SOURCES ${TEMP} )
+
+# stdafx.cpp is compiled separately as a PCH
+file( GLOB to_remove stdafx.cpp )
+list( REMOVE_ITEM SOURCES ${to_remove} )
 
 #############################################################################
 
 # creating PCH's for MSVC and GCC on Linux
 include( ${CMAKE_SOURCE_DIR}/CustomPCH.cmake )
-set( ALL_INCLUDES ${BoostParts_SOURCE_DIR} ${Xerces_SOURCE_DIR} ${ZipArchive_SOURCE_DIR} )
+set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
+                  ${Xerces_SOURCE_DIR}
+                  ${ZipArchive_SOURCE_DIR} )
 
 precompiled_header( SOURCES ALL_INCLUDES "gccPCH" )
 

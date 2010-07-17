@@ -18,17 +18,38 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
+
 #include <stdafx.h>
-#include "XmlValidator.h"
-#include "Result.h"
+#include "ErrorMessages.h"
 
-XERCES_CPP_NAMESPACE_USE
+boost::mutex ErrorMessages::s_AccessMutex;
+ErrorMessages* ErrorMessages::s_Instance = NULL;
 
-std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
+ErrorMessages& ErrorMessages::Instance()
 {
-    XercesDOMParser parser;
-    parser.setDoNamespaces( true );
-    parser.parse( filepath.string().c_str() );
+    // We use a static local variable
+    // to hold our singleton instance; using a pointer member
+    // variable creates problems with object destruction;
 
-    return ValidateXml( *parser.getDocument() );
+    boost::lock_guard< boost::mutex > locker( s_AccessMutex );
+
+    if ( !s_Instance )
+    {
+        static ErrorMessages messages;
+        s_Instance = &messages;
+    }
+
+    return *s_Instance;
+}
+
+
+const std::string ErrorMessages::MessageForId( ErrorId error_id )
+{
+    return std::string();
+}
+
+
+ErrorMessages::ErrorMessages()
+{
+
 }

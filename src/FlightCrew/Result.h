@@ -31,11 +31,11 @@ public:
 
     Result();
 
-    Result( int error_id );
+    Result( ErrorId error_id );
 
-    int GetErrorId();
+    ErrorId GetErrorId();
 
-    void SetErrorId( int error_id );
+    void SetErrorId( ErrorId error_id );
 
     int GetErrorLine();
 
@@ -47,7 +47,11 @@ public:
 
 private:
 
-    int m_ErrorId;
+    ///////////////////////////////
+    // PRIVATE MEMBER VARIABLES
+    ///////////////////////////////
+
+    ErrorId m_ErrorId;
     int m_ErrorLine;
     int m_ErrorColumn;
 };

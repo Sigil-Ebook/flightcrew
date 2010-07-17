@@ -28,6 +28,8 @@
 #include <boost/bind/bind.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/thread.hpp>
+//#include <boost/unordered_map.hpp>
 //#include "constants.h"
 //#include "exception.h"
 
@@ -36,4 +38,4 @@
 using boost::tuple;
 using boost::make_tuple;
 using boost::tie;
-using namespace boost::filesystem;
+namespace fs = boost::filesystem;

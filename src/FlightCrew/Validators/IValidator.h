@@ -25,7 +25,7 @@
 
 #include <vector>
 #include <boost/filesystem.hpp>
-using namespace boost::filesystem;
+namespace fs = boost::filesystem;
 
 class Result;
 
@@ -33,7 +33,7 @@ class IValidator
 {
 public:
 
-    virtual std::vector<Result> ValidateFile( const path &filepath ) = 0;
+    virtual std::vector<Result> ValidateFile( const fs::path &filepath ) = 0;
 
     virtual ~IValidator() {}
 };
