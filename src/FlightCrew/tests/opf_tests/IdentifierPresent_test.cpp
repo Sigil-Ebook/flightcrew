@@ -19,15 +19,25 @@
 **
 *************************************************************************/
 
-enum ErrorId
+#include <gtest/gtest.h>
+#include "Validators/Opf/IdentifierPresent.h"
+#include "Result.h"
+
+TEST( IdentifierPresentTest, NoIdentifier_Error )
 {
-    ALL_OK = 100,
-    ERROR_GENERIC,
-    ERROR_XML_SYNTAX,
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_NO_TITLE,
-    ERROR_OPF_WRONG_MANIFEST_COUNT,
-    ERROR_OPF_WRONG_METADATA_COUNT,
-    ERROR_OPF_WRONG_SPINE_COUNT,
-    ERROR_OPF_NO_IDENTIFIER,
-};
+    IdentifierPresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/IdentifierPresent_NoIdentifier.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_IDENTIFIER );
+}
+
+TEST( IdentifierPresentTest, HasIdentifier_OK )
+{
+    IdentifierPresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/IdentifierPresent_HasIdentifier.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+}
+

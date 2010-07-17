@@ -19,15 +19,27 @@
 **
 *************************************************************************/
 
-enum ErrorId
+#include <stdafx.h>
+#include "IdentifierPresent.h"
+#include "Result.h"
+#include "Misc/ToXercesStringConverter.h"
+
+std::vector<Result> IdentifierPresent::ValidateXml( const DOMDocument &document )
 {
-    ALL_OK = 100,
-    ERROR_GENERIC,
-    ERROR_XML_SYNTAX,
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_NO_TITLE,
-    ERROR_OPF_WRONG_MANIFEST_COUNT,
-    ERROR_OPF_WRONG_METADATA_COUNT,
-    ERROR_OPF_WRONG_SPINE_COUNT,
-    ERROR_OPF_NO_IDENTIFIER,
-};
+    DOMElement *root_element = document.getDocumentElement();
+    DOMNodeList *identifier_elements = root_element->getElementsByTagNameNS(
+                                    X( "*" ),  X( "identifier" ) );
+
+    std::vector<Result> results;
+
+    if ( identifier_elements->getLength() < 1 )
+
+        results.push_back( Result( ERROR_OPF_NO_IDENTIFIER ) );
+
+    else
+
+        results.push_back( Result() );
+
+    return results;
+}
+

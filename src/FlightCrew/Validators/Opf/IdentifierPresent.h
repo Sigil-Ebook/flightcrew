@@ -19,15 +19,17 @@
 **
 *************************************************************************/
 
-enum ErrorId
+#pragma once
+#ifndef IDENTIFIERPRESENT_H
+#define IDENTIFIERPRESENT_H
+
+#include "../XmlValidator.h"
+
+class IdentifierPresent : public XmlValidator
 {
-    ALL_OK = 100,
-    ERROR_GENERIC,
-    ERROR_XML_SYNTAX,
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_NO_TITLE,
-    ERROR_OPF_WRONG_MANIFEST_COUNT,
-    ERROR_OPF_WRONG_METADATA_COUNT,
-    ERROR_OPF_WRONG_SPINE_COUNT,
-    ERROR_OPF_NO_IDENTIFIER,
+public:
+
+    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
 };
+
+#endif // IDENTIFIERPRESENT_H

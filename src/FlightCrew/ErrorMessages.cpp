@@ -64,19 +64,21 @@ void ErrorMessages::LoadMessages()
     // these either. So it's not a problem.
 
     m_Messages[ ALL_OK ] =
-        "All OK";
+        "All OK.";
     m_Messages[ ERROR_GENERIC ] =
-        "Error";
+        "Error.";
     m_Messages[ ERROR_XML_SYNTAX ] =
-        "XML syntax error";
+        "XML syntax error.";
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
-        "The <package> element is not the root element of the OPF";
+        "The <package> element is not the root element of the OPF.";
     m_Messages[ ERROR_OPF_NO_TITLE ] =
-        "There is no <title> element in the OPF";
+        "There is no <title> element in the OPF.";
     m_Messages[ ERROR_OPF_WRONG_MANIFEST_COUNT ] =
-        "There needs to be one and only one <manifest> element in the OPF";
+        "There needs to be one and only one <manifest> element in the OPF.";
     m_Messages[ ERROR_OPF_WRONG_METADATA_COUNT ] =
-        "There needs to be one and only one <metadata> element in the OPF";
+        "There needs to be one and only one <metadata> element in the OPF.";
     m_Messages[ ERROR_OPF_WRONG_SPINE_COUNT ] =
-        "There needs to be one and only one <spine> element in the OPF";
+        "There needs to be one and only one <spine> element in the OPF.";
+    m_Messages[ ERROR_OPF_NO_IDENTIFIER ] =
+        "There is no <identifier> element in the OPF.";
 }
