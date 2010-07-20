@@ -23,13 +23,13 @@
 
 ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )
 {
-    m_XercesString = XMLString::transcode( ascii_string );
+    m_XercesString = xc::XMLString::transcode( ascii_string );
 }
 
 
 ToXercesStringConverter::~ToXercesStringConverter()
 {
-    XMLString::release( &m_XercesString );
+    xc::XMLString::release( &m_XercesString );
 }
 
 

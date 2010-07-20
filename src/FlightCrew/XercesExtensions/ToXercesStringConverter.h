@@ -23,8 +23,6 @@
 
 #include <xercesc/util/XMLString.hpp>
 
-XERCES_CPP_NAMESPACE_USE
-
 class ToXercesStringConverter
 {
 public:

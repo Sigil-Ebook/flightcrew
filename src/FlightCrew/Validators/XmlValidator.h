@@ -24,9 +24,8 @@
 #define XMLVALIDATOR_H
 
 #include <xercesc/dom/DOMDocument.hpp>
+namespace xc = XERCES_CPP_NAMESPACE;
 #include "IValidator.h"
-
-XERCES_CPP_NAMESPACE_USE
 
 class XmlValidator : public IValidator
 {
@@ -34,7 +33,7 @@ public:
 
     virtual std::vector<Result> ValidateFile( const fs::path &filepath );
 
-    virtual std::vector<Result> ValidateXml( const DOMDocument &document ) = 0;
+    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document ) = 0;
 
     virtual ~XmlValidator() {}
 };

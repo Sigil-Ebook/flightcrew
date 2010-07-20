@@ -39,3 +39,5 @@ using boost::tuple;
 using boost::make_tuple;
 using boost::tie;
 namespace fs = boost::filesystem;
+
+namespace xc = XERCES_CPP_NAMESPACE;

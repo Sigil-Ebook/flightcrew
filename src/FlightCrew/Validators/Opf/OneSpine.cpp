@@ -24,10 +24,10 @@
 #include "Result.h"
 #include "XercesExtensions/ToXercesStringConverter.h"
 
-std::vector<Result> OneSpine::ValidateXml( const DOMDocument &document )
+std::vector<Result> OneSpine::ValidateXml( const xc::DOMDocument &document )
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *spine_elements = root_element->getElementsByTagNameNS(
+    xc::DOMElement *root_element = document.getDocumentElement();
+    xc::DOMNodeList *spine_elements = root_element->getElementsByTagNameNS(
                                     X( "*" ),  X( "spine" ) );
 
     std::vector<Result> results;

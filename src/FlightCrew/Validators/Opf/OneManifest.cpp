@@ -24,10 +24,10 @@
 #include "Result.h"
 #include "XercesExtensions/ToXercesStringConverter.h"
 
-std::vector<Result> OneManifest::ValidateXml( const DOMDocument &document )
+std::vector<Result> OneManifest::ValidateXml( const xc::DOMDocument &document )
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *manifests = root_element->getElementsByTagNameNS(
+    xc::DOMElement *root_element = document.getDocumentElement();
+    xc::DOMNodeList *manifests = root_element->getElementsByTagNameNS(
                                     X( "*" ),  X( "manifest" ) );
 
     std::vector<Result> results;

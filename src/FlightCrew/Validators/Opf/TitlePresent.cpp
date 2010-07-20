@@ -24,10 +24,10 @@
 #include "Result.h"
 #include "XercesExtensions/ToXercesStringConverter.h"
 
-std::vector<Result> TitlePresent::ValidateXml( const DOMDocument &document )
+std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
+    xc::DOMElement *root_element = document.getDocumentElement();
+    xc::DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
                                     X( "*" ),  X( "title" ) );
 
     std::vector<Result> results;

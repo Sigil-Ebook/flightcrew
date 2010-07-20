@@ -24,13 +24,13 @@
 #include "Result.h"
 #include "XercesExtensions/ToXercesStringConverter.h"
 
-std::vector<Result> PackageIsRoot::ValidateXml( const DOMDocument &document )
+std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document )
 {
-    DOMElement *root_element = document.getDocumentElement();
+    xc::DOMElement *root_element = document.getDocumentElement();
 
     std::vector<Result> results;
 
-    if ( !XMLString::equals( root_element->getTagName(), X( "package" ) )  )
+    if ( !xc::XMLString::equals( root_element->getTagName(), X( "package" ) )  )
 
         results.push_back( Result( ERROR_OPF_PACKAGE_NOT_ROOT ) );
 

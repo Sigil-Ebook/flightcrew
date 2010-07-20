@@ -29,7 +29,7 @@ class OneSpine : public XmlValidator
 {
 public:
 
-    virtual std::vector<Result> ValidateXml( const DOMDocument &document );
+    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
 
 #endif // OneSpine_H

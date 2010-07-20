@@ -24,10 +24,10 @@
 #include "Result.h"
 #include "XercesExtensions/ToXercesStringConverter.h"
 
-std::vector<Result> OneMetadata::ValidateXml( const DOMDocument &document )
+std::vector<Result> OneMetadata::ValidateXml( const xc::DOMDocument &document )
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *metadata_elements = root_element->getElementsByTagNameNS(
+    xc::DOMElement *root_element = document.getDocumentElement();
+    xc::DOMNodeList *metadata_elements = root_element->getElementsByTagNameNS(
                                     X( "*" ),  X( "metadata" ) );
 
     std::vector<Result> results;

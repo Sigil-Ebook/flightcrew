@@ -24,10 +24,10 @@
 #include "Result.h"
 #include "XercesExtensions/ToXercesStringConverter.h"
 
-std::vector<Result> IdentifierPresent::ValidateXml( const DOMDocument &document )
+std::vector<Result> IdentifierPresent::ValidateXml( const xc::DOMDocument &document )
 {
-    DOMElement *root_element = document.getDocumentElement();
-    DOMNodeList *identifier_elements = root_element->getElementsByTagNameNS(
+    xc::DOMElement *root_element = document.getDocumentElement();
+    xc::DOMNodeList *identifier_elements = root_element->getElementsByTagNameNS(
                                     X( "*" ),  X( "identifier" ) );
 
     std::vector<Result> results;
