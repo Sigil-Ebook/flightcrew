@@ -48,5 +48,6 @@ add_subdirectory( src/FlightCrew )
 #add_subdirectory( src/FlightCrew-gui )
 add_subdirectory( src/googlemock )
 add_subdirectory( src/Xerces )
+add_subdirectory( src/XercesExtensions )
 
 

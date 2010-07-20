@@ -23,8 +23,9 @@
 #ifndef RESULT_H
 #define RESULT_H
 
+#include <NodeLocationInfo.h>
 #include "ErrorIDs.h"
-#include "XercesExtensions/NodeLocationInfo.h"
+
 
 class Result
 {

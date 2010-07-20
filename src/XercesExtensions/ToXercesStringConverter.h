@@ -18,22 +18,30 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-#include <stdafx.h>
-#include "ToXercesStringConverter.h"
 
-ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )
+#pragma once
+#ifndef TOXERCESSTRINGCONVERTER_H
+#define TOXERCESSTRINGCONVERTER_H
+
+#include <xercesc/util/XMLString.hpp>
+
+namespace xc = XERCES_CPP_NAMESPACE;
+
+class ToXercesStringConverter
 {
-    m_XercesString = xc::XMLString::transcode( ascii_string );
-}
+public:
 
+    ToXercesStringConverter( const char* const ascii_string );
 
-ToXercesStringConverter::~ToXercesStringConverter()
-{
-    xc::XMLString::release( &m_XercesString );
-}
+    ~ToXercesStringConverter();
 
+    const XMLCh* XercesString() const;
 
-const XMLCh* ToXercesStringConverter::XercesString() const
-{
-    return m_XercesString;
-}
+private:
+
+    XMLCh* m_XercesString;
+};
+
+#define X( str ) ToXercesStringConverter( (str) ).XercesString()
+
+#endif // TOXERCESSTRINGCONVERTER_H

@@ -22,7 +22,7 @@
 #include <stdafx.h>
 #include "TitlePresent.h"
 #include "Result.h"
-#include "XercesExtensions/ToXercesStringConverter.h"
+#include <ToXercesStringConverter.h>
 
 std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
 {

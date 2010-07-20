@@ -19,27 +19,23 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "LocationInfoDataHandler.h"
-#include "NodeLocationInfo.h"
+#pragma once
+#ifndef LOCATIONINFODATAHANDLER_H
+#define LOCATIONINFODATAHANDLER_H
 
-void LocationInfoDataHandler::handle( DOMOperationType operation,
-                                      const XMLCh *const key,
-                                      void *data,
-                                      const xc::DOMNode *src,
-                                      xc::DOMNode *dst )
+#include <xercesc/dom/DOMUserDataHandler.hpp>
+namespace xc = XERCES_CPP_NAMESPACE;
+
+class LocationInfoDataHandler :
+        public xc::DOMUserDataHandler
 {
-    NodeLocationInfo* location_info = static_cast< NodeLocationInfo* >( data );
+public:
 
-    switch ( operation )
-    {
-        case NODE_DELETED:
-            delete location_info;
-            break;
+    void handle( DOMOperationType operation,
+                         const XMLCh *const key,
+                         void *data,
+                         const xc::DOMNode *src,
+                         xc::DOMNode *dst );
+};
 
-        // Node deletion is the only thing we care about,
-        // we won't be cloning nodes.
-        default:
-            break;
-    }
-}
+#endif // LOCATIONINFODATAHANDLER_H

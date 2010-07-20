@@ -9,42 +9,18 @@
 
 cmake_minimum_required( VERSION 2.8 ) 
 
-project( FlightCrew )
+project( XercesExtensions )
 
 file( GLOB SOURCES *.cpp )
-file( GLOB_RECURSE TEMP Validators/*.cpp Misc/*.cpp )
-list( APPEND SOURCES ${TEMP} )
-
-# stdafx.cpp is compiled separately as a PCH
-file( GLOB to_remove stdafx.cpp ) 
-list( REMOVE_ITEM SOURCES ${to_remove} )
-
-#############################################################################
-
-# creating PCH's for MSVC and GCC on Linux
-include( ${CMAKE_SOURCE_DIR}/CustomPCH.cmake )
-set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
-                  ${Xerces_SOURCE_DIR}
-                  ${ZipArchive_SOURCE_DIR} )
-
-precompiled_header( SOURCES ALL_INCLUDES "gccPCH" )
-
-#############################################################################
 
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR} 
-                     ../ZipArchive 
-                     ../BoostParts 
-                     ../Xerces
-                     ../XercesExtensions
-                   )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
+                     ../Xerces )
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
-add_library( FlightCrew ${SOURCES} )
-
-target_link_libraries( ${PROJECT_NAME} ZipArchive BoostParts Xerces XercesExtensions )
+add_library( ${PROJECT_NAME} ${SOURCES} )
 
 #############################################################################
 
@@ -66,6 +42,3 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_dependencies( ${PROJECT_NAME} gccPCH )
 endif()
 
-#############################################################################
-
-add_subdirectory( tests )

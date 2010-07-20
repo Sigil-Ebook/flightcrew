@@ -22,7 +22,7 @@
 #include <stdafx.h>
 #include "XmlValidator.h"
 #include "Result.h"
-#include "XercesExtensions/LocationAwareDOMParser.h"
+#include <LocationAwareDOMParser.h>
 
 std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 {

@@ -22,7 +22,7 @@
 #include <stdafx.h>
 #include "OneManifest.h"
 #include "Result.h"
-#include "XercesExtensions/ToXercesStringConverter.h"
+#include <ToXercesStringConverter.h>
 
 std::vector<Result> OneManifest::ValidateXml( const xc::DOMDocument &document )
 {

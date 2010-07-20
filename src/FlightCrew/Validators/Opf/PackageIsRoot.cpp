@@ -22,7 +22,7 @@
 #include <stdafx.h>
 #include "PackageIsRoot.h"
 #include "Result.h"
-#include "XercesExtensions/ToXercesStringConverter.h"
+#include <ToXercesStringConverter.h>
 
 std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document )
 {

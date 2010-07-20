@@ -19,10 +19,16 @@
 **
 *************************************************************************/
 
+#pragma once
+#ifndef LOCATIONAWAREDOMPARSER_H
+#define LOCATIONAWAREDOMPARSER_H
+
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include "LocationInfoDataHandler.h"
 #include "NodeLocationInfo.h"
+
+namespace xc = XERCES_CPP_NAMESPACE;
 
 class LocationAwareDOMParser : public xc::XercesDOMParser
 {
@@ -52,3 +58,5 @@ private:
     LocationInfoDataHandler m_LocationDataHandler;
     XMLCh *m_LocationInfoKey;
 };
+
+#endif // LOCATIONAWAREDOMPARSER_H

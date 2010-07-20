@@ -19,16 +19,22 @@
 **
 *************************************************************************/
 
-#include <xercesc/dom/DOMUserDataHandler.hpp>
+#include <xercesc/util/XMLString.hpp>
+#include "ToXercesStringConverter.h"
 
-class LocationInfoDataHandler :
-        public xc::DOMUserDataHandler
+ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )
 {
-public:
+    m_XercesString = xc::XMLString::transcode( ascii_string );
+}
 
-    void handle( DOMOperationType operation,
-                         const XMLCh *const key,
-                         void *data,
-                         const xc::DOMNode *src,
-                         xc::DOMNode *dst );
-};
+
+ToXercesStringConverter::~ToXercesStringConverter()
+{
+    xc::XMLString::release( &m_XercesString );
+}
+
+
+const XMLCh* ToXercesStringConverter::XercesString() const
+{
+    return m_XercesString;
+}

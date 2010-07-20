@@ -19,23 +19,26 @@
 **
 *************************************************************************/
 
-//TODO: include guards!
+#include "LocationInfoDataHandler.h"
+#include "NodeLocationInfo.h"
 
-#include <xercesc/util/XMLString.hpp>
-
-class ToXercesStringConverter
+void LocationInfoDataHandler::handle( DOMOperationType operation,
+                                      const XMLCh *const key,
+                                      void *data,
+                                      const xc::DOMNode *src,
+                                      xc::DOMNode *dst )
 {
-public:
+    NodeLocationInfo* location_info = static_cast< NodeLocationInfo* >( data );
 
-    ToXercesStringConverter( const char* const ascii_string );
+    switch ( operation )
+    {
+        case NODE_DELETED:
+            delete location_info;
+            break;
 
-    ~ToXercesStringConverter();
-
-    const XMLCh* XercesString() const;
-
-private:
-
-    XMLCh* m_XercesString;
-};
-
-#define X( str ) ToXercesStringConverter( (str) ).XercesString()
+        // Node deletion is the only thing we care about,
+        // we won't be cloning nodes.
+        default:
+            break;
+    }
+}
