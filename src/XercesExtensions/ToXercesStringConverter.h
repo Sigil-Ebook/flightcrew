@@ -27,6 +27,9 @@
 
 namespace xc = XERCES_CPP_NAMESPACE;
 
+namespace XercesExt
+{
+
 class ToXercesStringConverter
 {
 public:
@@ -42,6 +45,8 @@ private:
     XMLCh* m_XercesString;
 };
 
-#define X( str ) ToXercesStringConverter( (str) ).XercesString()
+#define X( str ) XercesExt::ToXercesStringConverter( (str) ).XercesString()
+
+}
 
 #endif // TOXERCESSTRINGCONVERTER_H

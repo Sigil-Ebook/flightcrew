@@ -22,6 +22,9 @@
 #include <xercesc/util/XMLString.hpp>
 #include "ToXercesStringConverter.h"
 
+namespace XercesExt
+{
+
 ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )
 {
     m_XercesString = xc::XMLString::transcode( ascii_string );
@@ -37,4 +40,6 @@ ToXercesStringConverter::~ToXercesStringConverter()
 const XMLCh* ToXercesStringConverter::XercesString() const
 {
     return m_XercesString;
+}
+
 }

@@ -22,6 +22,9 @@
 #include "LocationInfoDataHandler.h"
 #include "NodeLocationInfo.h"
 
+namespace XercesExt
+{
+
 void LocationInfoDataHandler::handle( DOMOperationType operation,
                                       const XMLCh *const key,
                                       void *data,
@@ -41,4 +44,6 @@ void LocationInfoDataHandler::handle( DOMOperationType operation,
         default:
             break;
     }
+}
+
 }

@@ -30,6 +30,9 @@
 
 namespace xc = XERCES_CPP_NAMESPACE;
 
+namespace XercesExt
+{
+
 class LocationAwareDOMParser : public xc::XercesDOMParser
 {
 public:
@@ -56,5 +59,7 @@ private:
     LocationInfoDataHandler m_LocationDataHandler;
     XMLCh *m_LocationInfoKey;
 };
+
+}
 
 #endif // LOCATIONAWAREDOMPARSER_H

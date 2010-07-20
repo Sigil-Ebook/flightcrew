@@ -26,6 +26,9 @@
 #include <xercesc/dom/DOMUserDataHandler.hpp>
 namespace xc = XERCES_CPP_NAMESPACE;
 
+namespace XercesExt
+{
+
 class LocationInfoDataHandler :
         public xc::DOMUserDataHandler
 {
@@ -37,5 +40,7 @@ public:
                          const xc::DOMNode *src,
                          xc::DOMNode *dst );
 };
+
+}
 
 #endif // LOCATIONINFODATAHANDLER_H

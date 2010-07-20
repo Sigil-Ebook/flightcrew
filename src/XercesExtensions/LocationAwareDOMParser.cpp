@@ -24,6 +24,9 @@
 
 const char *LOCATION_INFO_KEY = "LocationInfoKey";
 
+namespace XercesExt
+{
+
 LocationAwareDOMParser::LocationAwareDOMParser( xc::XMLValidator   *const valToAdopt,
                                                 xc::MemoryManager  *const manager,
                                                 xc::XMLGrammarPool *const gramPool )
@@ -61,3 +64,4 @@ void LocationAwareDOMParser::startElement( const xc::XMLElementDecl &elemDecl,
 
 }
 
+}
