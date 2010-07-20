@@ -30,9 +30,6 @@ macro( precompiled_header sources includes target_name )
             list( APPEND compile_flags "-I${item}" )
         endforeach()
 
-        # Include the BoostParts directory
-        #list( APPEND compile_flags "-I${BoostParts_SOURCE_DIR}" )
-
         # Get the list of all build-independent preprocessor definitions
         get_directory_property( defines_global COMPILE_DEFINITIONS )
         list( APPEND defines ${defines_global} )
@@ -52,9 +49,18 @@ macro( precompiled_header sources includes target_name )
         # Prepare the compile flags var for passing to GCC
         separate_arguments( compile_flags )
         
-        # Finally, build the precompiled header
-        add_custom_target(  ${target_name} ALL 
+        # Finally, build the precompiled header.
+        # We don't add the buil command to add_custom_target
+        # because that would force a PCH rebuild even when
+        # the stdafx.h file hasn't changed. We add it to
+        # a special add_custom_command to work around this problem.        
+        add_custom_target( ${target_name} ALL
+                           DEPENDS stdafx.h.gch
+                         )
+        
+        add_custom_command( OUTPUT stdafx.h.gch 
                             COMMAND ${CMAKE_CXX_COMPILER} ${compile_flags} ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h -o stdafx.h.gch
+                            MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h
                             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                             VERBATIM )
     endif() 
