@@ -52,8 +52,6 @@ public:
                                const bool isEmpty,
                                const bool isRoot );
 
-    const NodeLocationInfo& GetLocationInfo( const xc::DOMNode &node );
-
 private:
     LocationInfoDataHandler m_LocationDataHandler;
     XMLCh *m_LocationInfoKey;

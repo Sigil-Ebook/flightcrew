@@ -16,7 +16,7 @@ file( GLOB_RECURSE TEMP Validators/*.cpp Misc/*.cpp )
 list( APPEND SOURCES ${TEMP} )
 
 # stdafx.cpp is compiled separately as a PCH
-file( GLOB to_remove stdafx.cpp ) 
+file( GLOB to_remove stdafx.cpp )
 list( REMOVE_ITEM SOURCES ${to_remove} )
 
 #############################################################################

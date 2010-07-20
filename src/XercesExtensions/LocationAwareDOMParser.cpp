@@ -22,7 +22,7 @@
 #include <xercesc/internal/XMLScanner.hpp>
 #include "LocationAwareDOMParser.h"
 
-static const char *LOCATION_INFO_KEY = "LocationInfoKey";
+const char *LOCATION_INFO_KEY = "LocationInfoKey";
 
 LocationAwareDOMParser::LocationAwareDOMParser( xc::XMLValidator   *const valToAdopt,
                                                 xc::MemoryManager  *const manager,
@@ -61,8 +61,3 @@ void LocationAwareDOMParser::startElement( const xc::XMLElementDecl &elemDecl,
 
 }
 
-
-const NodeLocationInfo& LocationAwareDOMParser::GetLocationInfo( const xc::DOMNode &node )
-{
-    return *static_cast< NodeLocationInfo* >( node.getUserData( m_LocationInfoKey ) );
-}
