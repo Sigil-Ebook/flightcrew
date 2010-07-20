@@ -24,14 +24,14 @@
 #define RESULT_H
 
 #include "ErrorIDs.h"
+#include "XercesExtensions/NodeLocationInfo.h"
 
 class Result
 {
 public:
 
-    Result();
-
-    Result( ErrorId error_id );
+    Result( ErrorId error_id = ALL_OK,
+            NodeLocationInfo node_location = NodeLocationInfo() );
 
     ErrorId GetErrorId();
 

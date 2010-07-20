@@ -21,20 +21,11 @@
 
 #include "Result.h"
 
-Result::Result()
-    :
-    m_ErrorId( ALL_OK ),
-    m_ErrorLine( -1 ),
-    m_ErrorColumn( -1 )
-{
-
-}
-
-Result::Result( ErrorId error_id )
+Result::Result( ErrorId error_id, NodeLocationInfo node_location )
     :
     m_ErrorId( error_id ),
-    m_ErrorLine( -1 ),
-    m_ErrorColumn( -1 )
+    m_ErrorLine( node_location.LineNumber ),
+    m_ErrorColumn( node_location.ColumnNumber )
 {
 
 }
