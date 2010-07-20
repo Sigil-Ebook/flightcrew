@@ -57,13 +57,13 @@ void LocationAwareDOMParser::startElement( const xc::XMLElementDecl &elemDecl,
     int column_number = (int) locator->getColumnNumber();
 
     xc::XercesDOMParser::fCurrentNode->setUserData( m_LocationInfoKey,
-                                                    new LocationInfo( line_number, column_number ),
+                                                    new NodeLocationInfo( line_number, column_number ),
                                                     &m_LocationDataHandler );
 
 }
 
 
-const LocationInfo& LocationAwareDOMParser::GetLocationInfo( const xc::DOMNode &node )
+const NodeLocationInfo& LocationAwareDOMParser::GetLocationInfo( const xc::DOMNode &node )
 {
-    return *static_cast< LocationInfo* >( node.getUserData( m_LocationInfoKey ) );
+    return *static_cast< NodeLocationInfo* >( node.getUserData( m_LocationInfoKey ) );
 }

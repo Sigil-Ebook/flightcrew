@@ -21,7 +21,7 @@
 
 #include <stdafx.h>
 #include "LocationInfoDataHandler.h"
-#include "LocationInfo.h"
+#include "NodeLocationInfo.h"
 
 void LocationInfoDataHandler::handle( DOMOperationType operation,
                                       const XMLCh *const key,
@@ -29,7 +29,7 @@ void LocationInfoDataHandler::handle( DOMOperationType operation,
                                       const xc::DOMNode *src,
                                       xc::DOMNode *dst )
 {
-    LocationInfo* location_info = static_cast< LocationInfo* >( data );
+    NodeLocationInfo* location_info = static_cast< NodeLocationInfo* >( data );
 
     switch ( operation )
     {

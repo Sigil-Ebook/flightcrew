@@ -18,6 +18,7 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
+
 #include <stdafx.h>
 #include "XmlValidator.h"
 #include "Result.h"

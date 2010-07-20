@@ -24,11 +24,11 @@
  * The numbers realte to the location where the node was
  * encountered when its parent document was parsed.
  */
-struct LocationInfo
+struct NodeLocationInfo
 {
-    LocationInfo()
+    NodeLocationInfo()
         : LineNumber( -1 ), ColumnNumber( -1 ) {}
-    LocationInfo( int line_number, int column_number )
+    NodeLocationInfo( int line_number, int column_number )
         : LineNumber( line_number ), ColumnNumber( column_number ) {}
 
     int LineNumber;

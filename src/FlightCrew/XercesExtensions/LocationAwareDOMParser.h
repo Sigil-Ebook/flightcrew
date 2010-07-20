@@ -22,7 +22,7 @@
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include "LocationInfoDataHandler.h"
-#include "LocationInfo.h"
+#include "NodeLocationInfo.h"
 
 class LocationAwareDOMParser : public xc::XercesDOMParser
 {
@@ -46,7 +46,7 @@ public:
                                const bool isEmpty,
                                const bool isRoot );
 
-    const LocationInfo& GetLocationInfo( const xc::DOMNode &node );
+    const NodeLocationInfo& GetLocationInfo( const xc::DOMNode &node );
 
 private:
     LocationInfoDataHandler m_LocationDataHandler;
