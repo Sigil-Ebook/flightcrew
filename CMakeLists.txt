@@ -43,11 +43,12 @@ set( CMAKE_OSX_ARCHITECTURES "ppc;i386" )
 
 add_subdirectory( src/ZipArchive )
 add_subdirectory( src/BoostParts )
+add_subdirectory( src/Xerces )
+add_subdirectory( src/XercesExtensions )
 add_subdirectory( src/FlightCrew )
 #add_subdirectory( src/FlightCrew-cli )
 #add_subdirectory( src/FlightCrew-gui )
 add_subdirectory( src/googlemock )
-add_subdirectory( src/Xerces )
-add_subdirectory( src/XercesExtensions )
+
 
 
