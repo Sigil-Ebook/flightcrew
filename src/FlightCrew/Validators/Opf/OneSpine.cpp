@@ -22,7 +22,7 @@
 #include <stdafx.h>
 #include "OneSpine.h"
 #include "Result.h"
-#include "Misc/ToXercesStringConverter.h"
+#include "XercesExtensions/ToXercesStringConverter.h"
 
 std::vector<Result> OneSpine::ValidateXml( const DOMDocument &document )
 {

@@ -22,7 +22,7 @@
 #include <stdafx.h>
 #include "IdentifierPresent.h"
 #include "Result.h"
-#include "Misc/ToXercesStringConverter.h"
+#include "XercesExtensions/ToXercesStringConverter.h"
 
 std::vector<Result> IdentifierPresent::ValidateXml( const DOMDocument &document )
 {

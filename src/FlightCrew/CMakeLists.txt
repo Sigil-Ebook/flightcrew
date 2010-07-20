@@ -12,7 +12,7 @@ cmake_minimum_required( VERSION 2.8 )
 project( FlightCrew )
 
 file( GLOB SOURCES *.cpp )
-file( GLOB_RECURSE TEMP Validators/*.cpp Misc/*.cpp )
+file( GLOB_RECURSE TEMP Validators/*.cpp Misc/*.cpp XercesExtensions/*.cpp )
 list( APPEND SOURCES ${TEMP} )
 
 # stdafx.cpp is compiled separately as a PCH
