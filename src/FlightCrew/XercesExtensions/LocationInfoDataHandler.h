@@ -18,16 +18,17 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-#include <stdafx.h>
-#include "XmlValidator.h"
-#include "Result.h"
-#include "XercesExtensions/LocationAwareDOMParser.h"
 
-std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
+#include <xercesc/dom/DOMUserDataHandler.hpp>
+
+class LocationInfoDataHandler :
+        public xc::DOMUserDataHandler
 {
-    LocationAwareDOMParser parser;
-    parser.setDoNamespaces( true );
-    parser.parse( filepath.string().c_str() );
+public:
 
-    return ValidateXml( *parser.getDocument() );
-}
+    void handle( DOMOperationType operation,
+                         const XMLCh *const key,
+                         void *data,
+                         const xc::DOMNode *src,
+                         xc::DOMNode *dst );
+};

@@ -18,16 +18,19 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-#include <stdafx.h>
-#include "XmlValidator.h"
-#include "Result.h"
-#include "XercesExtensions/LocationAwareDOMParser.h"
 
-std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
+/**
+ * Stores line/column number information for DOM nodes.
+ * The numbers realte to the location where the node was
+ * encountered when its parent document was parsed.
+ */
+struct LocationInfo
 {
-    LocationAwareDOMParser parser;
-    parser.setDoNamespaces( true );
-    parser.parse( filepath.string().c_str() );
+    LocationInfo()
+        : LineNumber( -1 ), ColumnNumber( -1 ) {}
+    LocationInfo( int line_number, int column_number )
+        : LineNumber( line_number ), ColumnNumber( column_number ) {}
 
-    return ValidateXml( *parser.getDocument() );
-}
+    int LineNumber;
+    int ColumnNumber;
+};

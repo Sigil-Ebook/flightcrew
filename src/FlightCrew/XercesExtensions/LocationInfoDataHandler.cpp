@@ -18,16 +18,28 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
+
 #include <stdafx.h>
-#include "XmlValidator.h"
-#include "Result.h"
-#include "XercesExtensions/LocationAwareDOMParser.h"
+#include "LocationInfoDataHandler.h"
+#include "LocationInfo.h"
 
-std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
+void LocationInfoDataHandler::handle( DOMOperationType operation,
+                                      const XMLCh *const key,
+                                      void *data,
+                                      const xc::DOMNode *src,
+                                      xc::DOMNode *dst )
 {
-    LocationAwareDOMParser parser;
-    parser.setDoNamespaces( true );
-    parser.parse( filepath.string().c_str() );
+    LocationInfo* location_info = static_cast< LocationInfo* >( data );
 
-    return ValidateXml( *parser.getDocument() );
+    switch ( operation )
+    {
+        case NODE_DELETED:
+            delete location_info;
+            break;
+
+        // Node deletion is the only thing we care about,
+        // we won't be cloning nodes.
+        default:
+            break;
+    }
 }
