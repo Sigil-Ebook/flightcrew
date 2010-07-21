@@ -41,3 +41,6 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_definitions( -Wall )
 endif()
 
+# needed for correct Xerces header inclusion
+add_definitions( -DXERCES_STATIC_LIBRARY )
+

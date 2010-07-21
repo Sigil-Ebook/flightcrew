@@ -66,6 +66,9 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_dependencies( ${PROJECT_NAME} gccPCH )
 endif()
 
+# needed for correct Xerces header inclusion
+add_definitions( -DXERCES_STATIC_LIBRARY )
+
 #############################################################################
 
 add_subdirectory( tests )

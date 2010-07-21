@@ -44,6 +44,9 @@ if( MSVC )
 	set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
 endif()
 
+# needed for correct Xerces header inclusion
+add_definitions( -DXERCES_STATIC_LIBRARY )
+
 #############################################################################
 
 # The test executable expects a "test_data" dir in its working directory
