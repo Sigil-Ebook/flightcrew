@@ -42,9 +42,9 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
-add_library( FlightCrew ${SOURCES} )
+add_library( ${PROJECT_NAME} ${SOURCES} )
 
-target_link_libraries( ${PROJECT_NAME} ZipArchive BoostParts Xerces XercesExtensions )
+target_link_libraries( ${PROJECT_NAME} ZipArchive BoostParts XercesExtensions Xerces )
 
 #############################################################################
 

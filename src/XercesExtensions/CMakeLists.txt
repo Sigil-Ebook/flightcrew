@@ -11,7 +11,7 @@ cmake_minimum_required( VERSION 2.8 )
 
 project( XercesExtensions )
 
-file( GLOB SOURCES *.cpp )
+file( GLOB SOURCES *.cpp ) 
 
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries
@@ -21,6 +21,8 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
 add_library( ${PROJECT_NAME} ${SOURCES} )
+
+target_link_libraries( ${PROJECT_NAME} Xerces )
 
 #############################################################################
 
@@ -37,8 +39,5 @@ if( MSVC )
 # "Print all warnings" flag for GCC
 elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_definitions( -Wall )
-
-    # Make sure the PCH is built for GCC
-    add_dependencies( ${PROJECT_NAME} gccPCH )
 endif()
 

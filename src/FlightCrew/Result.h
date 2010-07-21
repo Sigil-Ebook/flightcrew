@@ -32,7 +32,7 @@ class Result
 public:
 
     Result( ErrorId error_id = ALL_OK,
-            NodeLocationInfo node_location = NodeLocationInfo() );
+            XercesExt::NodeLocationInfo node_location = XercesExt::NodeLocationInfo() );
 
     ErrorId GetErrorId();
 

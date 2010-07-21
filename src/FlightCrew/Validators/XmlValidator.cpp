@@ -26,7 +26,7 @@
 
 std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 {
-    XercesExt::LocationAwareDOMParser parser;
+    xe::LocationAwareDOMParser parser;
     parser.setDoNamespaces( true );
     parser.parse( filepath.string().c_str() );
 

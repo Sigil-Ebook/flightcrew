@@ -33,7 +33,7 @@ LocationAwareDOMParser::LocationAwareDOMParser( xc::XMLValidator   *const valToA
     :
     xc::XercesDOMParser( valToAdopt, manager, gramPool )
 {
-     m_LocationInfoKey = xc::XMLString::transcode( LOCATION_INFO_KEY );
+    m_LocationInfoKey = xc::XMLString::transcode( LOCATION_INFO_KEY );
 }
 
 

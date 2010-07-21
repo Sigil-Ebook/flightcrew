@@ -19,9 +19,10 @@
 **
 *************************************************************************/
 
+#include <stdafx.h>
 #include "Result.h"
 
-Result::Result( ErrorId error_id, NodeLocationInfo node_location )
+Result::Result( ErrorId error_id, xe::NodeLocationInfo node_location )
     :
     m_ErrorId( error_id ),
     m_ErrorLine( node_location.LineNumber ),

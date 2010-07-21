@@ -41,3 +41,5 @@ using boost::tie;
 namespace fs = boost::filesystem;
 
 namespace xc = XERCES_CPP_NAMESPACE;
+namespace XercesExt {};
+namespace xe = XercesExt;

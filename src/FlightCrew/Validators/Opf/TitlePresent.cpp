@@ -23,6 +23,9 @@
 #include "TitlePresent.h"
 #include "Result.h"
 #include <ToXercesStringConverter.h>
+#include <XmlUtils.h>
+
+namespace xe = XercesExt;
 
 std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
 {
@@ -33,12 +36,28 @@ std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
     std::vector<Result> results;
 
     if ( title_elements->getLength() < 1 )
+    {
+        xc::DOMNodeList *metadata_elements = root_element->getElementsByTagNameNS(
+                                        X( "*" ),  X( "metadata" ) );
 
-        results.push_back( Result( ERROR_OPF_NO_TITLE ) );
+        if ( metadata_elements->getLength() == 1 )
+        {
+            xe::NodeLocationInfo node_location =
+                    xe::GetNodeLocationInfo( *metadata_elements->item( 0 ) );
+
+            results.push_back( Result( ERROR_OPF_NO_TITLE, node_location ) );
+        }
+
+        else
+        {
+            results.push_back( Result( ERROR_OPF_NO_TITLE ) );
+        }
+    }
 
     else
-
+    {
         results.push_back( Result() );
+    }
 
     return results;
 }

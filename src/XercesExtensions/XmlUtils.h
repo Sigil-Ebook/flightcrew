@@ -30,7 +30,7 @@ namespace xc = XERCES_CPP_NAMESPACE;
 
 namespace XercesExt
 {
-    const NodeLocationInfo& GetLocationInfo( const xc::DOMNode &node );
+    NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node );
 }
 
 #endif // XMLUTILS_H

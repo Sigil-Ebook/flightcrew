@@ -20,6 +20,7 @@ file( GLOB_RECURSE SOURCES *.cpp )
 include_directories( ../../ZipArchive 
                      ../../BoostParts 
                      ../../Xerces 
+                     ../../XercesExtensions 
                      ../../googlemock/include
                      ../../googlemock/gtest/include
                    )

@@ -23,6 +23,9 @@
 #ifndef NODELOCATIONINFO_H
 #define NODELOCATIONINFO_H
 
+namespace XercesExt
+{
+
 /**
  * Stores line/column number information for DOM nodes.
  * The numbers realte to the location where the node was
@@ -38,5 +41,7 @@ struct NodeLocationInfo
     int LineNumber;
     int ColumnNumber;
 };
+
+}
 
 #endif // NODELOCATIONINFO_H

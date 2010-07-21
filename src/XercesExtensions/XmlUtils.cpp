@@ -27,7 +27,7 @@ extern const char *LOCATION_INFO_KEY;
 namespace XercesExt
 {
 
-const NodeLocationInfo& GetLocationInfo( const xc::DOMNode &node )
+NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node )
 {
     return *static_cast< NodeLocationInfo* >( node.getUserData( X( LOCATION_INFO_KEY ) ) );
 }
