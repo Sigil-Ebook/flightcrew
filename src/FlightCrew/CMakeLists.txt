@@ -44,7 +44,7 @@ link_directories ( ${PROJECT_BINARY_DIR}/lib )
 
 add_library( ${PROJECT_NAME} ${SOURCES} )
 
-target_link_libraries( ${PROJECT_NAME} ZipArchive BoostParts XercesExtensions Xerces )
+target_link_libraries( ${PROJECT_NAME} ZipArchive BoostParts XercesExtensions )
 
 #############################################################################
 

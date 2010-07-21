@@ -110,7 +110,7 @@ endif()
         
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
-add_library( Xerces ${SOURCES} ) 
+add_library( ${PROJECT_NAME} ${SOURCES} ) 
 
 add_definitions( -DXERCES_STATIC_LIBRARY
                  -DXERCES_BUILDING_LIBRARY
@@ -142,7 +142,7 @@ if( MSVC )
     add_definitions( /wd4355 )
     
     set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
-	set_target_properties( Xerces PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
+	set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
     
 else()
     add_definitions( -DXERCES_USE_FILEMGR_POSIX
@@ -150,8 +150,3 @@ else()
                      -DXERCES_USE_MUTEXMGR_POSIX 
                    )                     
 endif()
-
- 
-
-
-
