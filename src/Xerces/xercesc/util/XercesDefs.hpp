@@ -43,7 +43,11 @@
 // platform that the specific makefile should copy over.
 //
 //  If the next line generates an error then you haven't run ./configure
-#include	<xercesc/util/Xerces_autoconf_config.hpp>
+#if defined(_MSC_VER)
+#   include	<xercesc/util/Xerces_autoconf_config.msvc.hpp>
+#else
+#   include	<xercesc/util/Xerces_autoconf_config.hpp>
+#endif
 
 // ---------------------------------------------------------------------------
 //  Include the Xerces version information; this is kept in a separate file to

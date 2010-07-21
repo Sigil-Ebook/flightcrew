@@ -88,10 +88,14 @@ if( MSVC )
     add_to_sources( xercesc/util/Transcoders/Win32 )
     
     list( APPEND SOURCES
-        xercesc/util/FileManagers/WindowsFileMgr.hpp
         xercesc/util/FileManagers/WindowsFileMgr.cpp
-        xercesc/util/MutexManagers/WindowsMutexMgr.hpp
         xercesc/util/MutexManagers/WindowsMutexMgr.cpp )
+        
+    file( GLOB to_remove ./stricmp.c
+                         ./strnicmp.c
+                         )
+    
+    list( REMOVE_ITEM SOURCES ${to_remove} )
 else()
     if( APPLE )
         add_to_sources( xercesc/util/Transcoders/MacOSUnicodeConverter )
@@ -100,9 +104,7 @@ else()
     endif()    
     
     list( APPEND SOURCES
-        xercesc/util/FileManagers/PosixFileMgr.hpp
         xercesc/util/FileManagers/PosixFileMgr.cpp
-        xercesc/util/MutexManagers/PosixMutexMgr.hpp
         xercesc/util/MutexManagers/PosixMutexMgr.cpp  )
 endif()
         
@@ -131,6 +133,8 @@ if( MSVC )
                      -DXERCES_USE_TRANSCODER_WINDOWS
                      -DXERCES_USE_FILEMGR_WINDOWS   
                      -DXERCES_USE_MUTEXMGR_WINDOWS
+                     -DHAVE_STRICMP
+                     -DHAVE_STRNICMP
                    )
                      
     # xerces wants to disable these warnings
