@@ -25,7 +25,6 @@
 
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
-#include "LocationInfoDataHandler.h"
 #include "NodeLocationInfo.h"
 
 namespace xc = XERCES_CPP_NAMESPACE;
@@ -47,16 +46,15 @@ public:
     ~LocationAwareDOMParser();
 
     // override
-    virtual void startElement( const xc::XMLElementDecl &elemDecl,
-                               const unsigned int uriId,
-                               const XMLCh *const prefixName,
-                               const xc::RefVectorOf< xc::XMLAttr > &attrList,
-                               const unsigned int attrCount,
-                               const bool isEmpty,
-                               const bool isRoot );
+    void startElement( const xc::XMLElementDecl &elemDecl,
+                       const unsigned int uriId,
+                       const XMLCh *const prefixName,
+                       const xc::RefVectorOf< xc::XMLAttr > &attrList,
+                       const XMLSize_t attrCount,
+                       const bool isEmpty,
+                       const bool isRoot );
 
 private:
-    LocationInfoDataHandler m_LocationDataHandler;
     XMLCh *m_LocationInfoKey;
 };
 

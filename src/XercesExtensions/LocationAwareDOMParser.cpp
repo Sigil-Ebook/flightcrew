@@ -21,6 +21,14 @@
 
 #include <xercesc/internal/XMLScanner.hpp>
 #include "LocationAwareDOMParser.h"
+#include "LocationInfoDataHandler.h"
+
+// This can't be a member variable of the parser since it needs to be around
+// even after the parser is destroyed. The cleanup methods of the parser's
+// super class call the handle() method of the handler.
+// We only ever need a single handler and a const one at that... this could
+// also easily go into a singleton, but this approach is simpler.
+static const XercesExt::LocationInfoDataHandler LOCATION_DATA_HANDLER;
 
 const char *LOCATION_INFO_KEY = "LocationInfoKey";
 
@@ -47,7 +55,7 @@ void LocationAwareDOMParser::startElement( const xc::XMLElementDecl &elemDecl,
                                            const unsigned int uriId,
                                            const XMLCh *const prefixName,
                                            const xc::RefVectorOf< xc::XMLAttr > &attrList,
-                                           const unsigned int attrCount,
+                                           const XMLSize_t attrCount,
                                            const bool isEmpty,
                                            const bool isRoot )
 {
@@ -58,9 +66,14 @@ void LocationAwareDOMParser::startElement( const xc::XMLElementDecl &elemDecl,
     int line_number   = (int) locator->getLineNumber();
     int column_number = (int) locator->getColumnNumber();
 
-    xc::XercesDOMParser::fCurrentNode->setUserData( m_LocationInfoKey,
-                                                    new NodeLocationInfo( line_number, column_number ),
-                                                    &m_LocationDataHandler );
+    // It's OK to const_cast the handler since the parser will only ever
+    // call the handler's handle() method, which doesn't mutate the handler.
+    // In fact, this function not accepting a const handler is probably a design
+    // error on the part of Xerces developers.
+    xc::XercesDOMParser::fCurrentNode->setUserData( 
+        m_LocationInfoKey,
+        new NodeLocationInfo( line_number, column_number ),
+        const_cast< XercesExt::LocationInfoDataHandler* >( &LOCATION_DATA_HANDLER ) );
 
 }
 

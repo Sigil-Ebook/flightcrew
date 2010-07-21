@@ -35,10 +35,10 @@ class LocationInfoDataHandler :
 public:
 
     void handle( DOMOperationType operation,
-                         const XMLCh *const key,
-                         void *data,
-                         const xc::DOMNode *src,
-                         xc::DOMNode *dst );
+                 const XMLCh *const key,
+                 void *data,
+                 const xc::DOMNode *src,
+                 xc::DOMNode *dst );
 };
 
 }
