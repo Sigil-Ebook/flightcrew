@@ -3,7 +3,6 @@ macro( precompiled_header sources includes target_name )
     # MSVC precompiled headers cmake code
     if ( MSVC )
         set_source_files_properties( stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h" )
-        set_source_files_properties( stdafx.h   PROPERTIES COMPILE_FLAGS "/Yustdafx.h" )
             
         foreach( src_file ${${sources}} )
             if( ${src_file} MATCHES ".*cpp$" )
