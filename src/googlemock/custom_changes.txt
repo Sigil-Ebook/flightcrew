@@ -1,0 +1,8 @@
+In /googlemock/gtest/cmake/internal_utils.cmake, this line:
+
+string(REPLACE "/MD" "-MT" ${flag_var} "${${flag_var}}")
+
+has been changed to this:
+
+# S.M.: Commenting out since we always use the DLL CRT 
+#string(REPLACE "/MD" "-MT" ${flag_var} "${${flag_var}}")
