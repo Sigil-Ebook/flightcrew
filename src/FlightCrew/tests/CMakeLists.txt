@@ -9,7 +9,7 @@
 
 cmake_minimum_required( VERSION 2.8 ) 
 
-project( fc_tests ) 
+project( fc_tests )
      
 file( GLOB_RECURSE SOURCES *.cpp )
 

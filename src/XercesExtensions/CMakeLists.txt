@@ -11,7 +11,7 @@ cmake_minimum_required( VERSION 2.8 )
 
 project( XercesExtensions )
 
-file( GLOB SOURCES *.cpp ) 
+file( GLOB SOURCES *.cpp *.h ) 
 
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries

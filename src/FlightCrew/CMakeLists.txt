@@ -11,9 +11,19 @@ cmake_minimum_required( VERSION 2.8 )
 
 project( FlightCrew )
 
-file( GLOB SOURCES *.cpp )
-file( GLOB_RECURSE TEMP Validators/*.cpp Misc/*.cpp )
-list( APPEND SOURCES ${TEMP} )
+file( GLOB_RECURSE SOURCES *.h *.cpp )
+
+# The test source are a part of a different target, so we remove them
+file( GLOB_RECURSE to_remove tests/*.h tests/*.cpp )
+list( REMOVE_ITEM SOURCES ${to_remove} )
+
+#############################################################################
+
+# Creating source groups for VS, Xcode
+include( ${CMAKE_SOURCE_DIR}/FileSystemSourceGroups.cmake )
+create_source_groups( SOURCES )
+
+#############################################################################
 
 # stdafx.cpp is compiled separately as a PCH
 file( GLOB to_remove stdafx.cpp )
