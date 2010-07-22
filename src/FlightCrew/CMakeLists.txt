@@ -20,7 +20,7 @@ list( REMOVE_ITEM SOURCES ${to_remove} )
 #############################################################################
 
 # Creating source groups for VS, Xcode
-include( ${CMAKE_SOURCE_DIR}/FileSystemSourceGroups.cmake )
+include( ${CMAKE_SOURCE_DIR}/cmake_extras/FileSystemSourceGroups.cmake )
 create_source_groups( SOURCES )
 
 #############################################################################
@@ -32,7 +32,7 @@ list( REMOVE_ITEM SOURCES ${to_remove} )
 #############################################################################
 
 # creating PCH's for MSVC and GCC on Linux
-include( ${CMAKE_SOURCE_DIR}/CustomPCH.cmake )
+include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
 set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
                   ${Xerces_SOURCE_DIR}
                   ${ZipArchive_SOURCE_DIR} )
