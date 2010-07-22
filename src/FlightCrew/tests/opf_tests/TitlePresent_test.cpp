@@ -30,6 +30,8 @@ TEST( TitlePresentTest, NoTitle_Error )
             "test_data/opf_tests/TitlePresent_NoTitle.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_TITLE );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 98 );
 }
 
 TEST( TitlePresentTest, HasTitle_OK )

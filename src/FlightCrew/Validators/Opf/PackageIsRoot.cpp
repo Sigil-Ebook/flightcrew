@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include "PackageIsRoot.h"
-#include "Result.h"
 #include <ToXercesStringConverter.h>
 
 std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document )
@@ -31,12 +30,15 @@ std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document 
     std::vector<Result> results;
 
     if ( !xc::XMLString::equals( root_element->getTagName(), X( "package" ) )  )
-
-        results.push_back( Result( ERROR_OPF_PACKAGE_NOT_ROOT ) );
+    {
+        results.push_back( ResultWithNodeLocation( 
+            ERROR_OPF_PACKAGE_NOT_ROOT, *root_element ) );
+    }
 
     else
-
+    {
         results.push_back( Result() );
+    }
 
     return results;
 }

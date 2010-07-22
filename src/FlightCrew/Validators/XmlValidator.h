@@ -26,6 +26,7 @@
 #include <xercesc/dom/DOMDocument.hpp>
 namespace xc = XERCES_CPP_NAMESPACE;
 #include "IValidator.h"
+#include "Result.h"
 
 class XmlValidator : public IValidator
 {
@@ -36,6 +37,15 @@ public:
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document ) = 0;
 
     virtual ~XmlValidator() {}
+
+protected:
+
+    Result ResultWithNodeLocation( ErrorId error_id, 
+                                   const char *element_name,
+                                   const xc::DOMDocument &document );
+
+    Result ResultWithNodeLocation( ErrorId error_id, 
+                                   const xc::DOMNode &node );
 };
 
 #endif // XMLVALIDATOR_H

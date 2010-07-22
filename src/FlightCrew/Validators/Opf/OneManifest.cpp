@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include "OneManifest.h"
-#include "Result.h"
 #include <ToXercesStringConverter.h>
 
 std::vector<Result> OneManifest::ValidateXml( const xc::DOMDocument &document )
@@ -33,12 +32,24 @@ std::vector<Result> OneManifest::ValidateXml( const xc::DOMDocument &document )
     std::vector<Result> results;
 
     if ( manifests->getLength() != 1 )
+    {
+        if ( manifests->getLength() < 1 )
+        {
+            results.push_back( ResultWithNodeLocation( 
+                ERROR_OPF_WRONG_MANIFEST_COUNT, *root_element ) );
+        }
 
-        results.push_back( Result( ERROR_OPF_WRONG_MANIFEST_COUNT ) );
+        else
+        {
+            results.push_back( ResultWithNodeLocation( 
+                ERROR_OPF_WRONG_MANIFEST_COUNT, *manifests->item( 1 ) ) );
+        }
+    }
 
     else
-
+    {
         results.push_back( Result() );
+    }
 
     return results;
 }

@@ -30,6 +30,8 @@ TEST( OneSpineTest, NoSpine_Error )
             "test_data/opf_tests/OneSpine_NoSpine.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_SPINE_COUNT );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 88 );
 }
 
 TEST( OneSpineTest, TwoSpines_Error )
@@ -39,6 +41,8 @@ TEST( OneSpineTest, TwoSpines_Error )
             "test_data/opf_tests/OneSpine_TwoSpines.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_SPINE_COUNT );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 5 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 8 );
 }
 
 TEST( OneSpineTest, OneSpine_OK )

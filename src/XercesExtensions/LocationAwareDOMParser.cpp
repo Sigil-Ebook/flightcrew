@@ -70,7 +70,7 @@ void LocationAwareDOMParser::startElement( const xc::XMLElementDecl &elemDecl,
     // call the handler's handle() method, which doesn't mutate the handler.
     // In fact, this function not accepting a const handler is probably a design
     // error on the part of Xerces developers.
-    xc::XercesDOMParser::fCurrentNode->setUserData( 
+    getCurrentNode()->setUserData( 
         m_LocationInfoKey,
         new NodeLocationInfo( line_number, column_number ),
         const_cast< XercesExt::LocationInfoDataHandler* >( &LOCATION_DATA_HANDLER ) );

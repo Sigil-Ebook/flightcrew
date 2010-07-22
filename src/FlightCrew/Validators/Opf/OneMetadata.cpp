@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include "OneMetadata.h"
-#include "Result.h"
 #include <ToXercesStringConverter.h>
 
 std::vector<Result> OneMetadata::ValidateXml( const xc::DOMDocument &document )
@@ -33,12 +32,24 @@ std::vector<Result> OneMetadata::ValidateXml( const xc::DOMDocument &document )
     std::vector<Result> results;
 
     if ( metadata_elements->getLength() != 1 )
+    {
+        if ( metadata_elements->getLength() < 1 )
+        {
+            results.push_back( ResultWithNodeLocation( 
+                ERROR_OPF_WRONG_METADATA_COUNT, *root_element ) );
+        }
 
-        results.push_back( Result( ERROR_OPF_WRONG_METADATA_COUNT ) );
+        else
+        {
+            results.push_back( ResultWithNodeLocation( 
+                ERROR_OPF_WRONG_METADATA_COUNT, *metadata_elements->item( 1 ) ) );
+        }
+    }
 
     else
-
+    {
         results.push_back( Result() );
+    }
 
     return results;
 }

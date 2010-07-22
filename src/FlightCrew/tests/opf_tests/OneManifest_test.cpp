@@ -30,6 +30,8 @@ TEST( OneManifestTest, NoManifest_Error )
             "test_data/opf_tests/OneManifest_NoManifest.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_MANIFEST_COUNT );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 88 );
 }
 
 TEST( OneManifestTest, TwoManifests_Error )
@@ -39,6 +41,8 @@ TEST( OneManifestTest, TwoManifests_Error )
             "test_data/opf_tests/OneManifest_TwoManifests.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_MANIFEST_COUNT );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 5 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 11 );
 }
 
 TEST( OneManifestTest, OneManifest_OK )

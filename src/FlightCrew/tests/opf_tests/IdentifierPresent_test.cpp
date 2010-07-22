@@ -30,6 +30,8 @@ TEST( IdentifierPresentTest, NoIdentifier_Error )
             "test_data/opf_tests/IdentifierPresent_NoIdentifier.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_IDENTIFIER );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 98 );
 }
 
 TEST( IdentifierPresentTest, HasIdentifier_OK )

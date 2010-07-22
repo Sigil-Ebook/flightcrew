@@ -21,8 +21,9 @@
 
 #include <stdafx.h>
 #include "XmlValidator.h"
-#include "Result.h"
+#include <ToXercesStringConverter.h>
 #include <LocationAwareDOMParser.h>
+#include <XmlUtils.h>
 
 std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 {
@@ -31,4 +32,26 @@ std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
     parser.parse( filepath.string().c_str() );
 
     return ValidateXml( *parser.getDocument() );
+}
+
+
+Result XmlValidator::ResultWithNodeLocation( ErrorId error_id, 
+                                             const char *element_name,
+                                             const xc::DOMDocument &document )
+{
+    xc::DOMNodeList *matching_elements = document.getDocumentElement()->
+        getElementsByTagNameNS( X( "*" ),  X( element_name ) );
+
+    if ( matching_elements->getLength() == 1 )
+    
+        return ResultWithNodeLocation( error_id, *matching_elements->item( 0 ) );
+
+    return Result( error_id );
+}
+
+
+Result XmlValidator::ResultWithNodeLocation( ErrorId error_id, 
+                                             const xc::DOMNode &node )
+{
+    return Result( error_id, xe::GetNodeLocationInfo( node ) );
 }

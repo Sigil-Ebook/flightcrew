@@ -30,6 +30,8 @@ TEST( PackageIsRootTest, PackageNotRoot_Error )
             "test_data/opf_tests/PackageIsRoot_PackageNotRoot.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_PACKAGE_NOT_ROOT );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 90 );
 }
 
 TEST( PackageIsRootTest, PackageIsRoot_OK )

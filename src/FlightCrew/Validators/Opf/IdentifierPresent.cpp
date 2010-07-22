@@ -21,8 +21,8 @@
 
 #include <stdafx.h>
 #include "IdentifierPresent.h"
-#include "Result.h"
 #include <ToXercesStringConverter.h>
+#include <XmlUtils.h>
 
 std::vector<Result> IdentifierPresent::ValidateXml( const xc::DOMDocument &document )
 {
@@ -34,11 +34,11 @@ std::vector<Result> IdentifierPresent::ValidateXml( const xc::DOMDocument &docum
 
     if ( identifier_elements->getLength() < 1 )
 
-        results.push_back( Result( ERROR_OPF_NO_IDENTIFIER ) );
+        results.push_back( ResultWithNodeLocation( ERROR_OPF_NO_IDENTIFIER, "metadata", document ) );
 
     else
-
-        results.push_back( Result() );
+    
+        results.push_back( Result() );  
 
     return results;
 }
