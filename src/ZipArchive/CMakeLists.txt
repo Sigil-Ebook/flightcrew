@@ -26,14 +26,7 @@ list( APPEND SOURCES ${SOURCES_ZLIB} ${SOURCES_BZIP2} )
 
 #############################################################################
 
-# Adding resource (RC) files for windows
-if (MSVC)
-	list( APPEND SOURCES ZipArchive.rc)
-endif()
-
-#############################################################################
-
-add_library( ZipArchive ${SOURCES} ) 
+add_library( ZipArchive ${SOURCES} )
 
 #############################################################################
 
