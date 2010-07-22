@@ -32,4 +32,31 @@ NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node )
     return *static_cast< NodeLocationInfo* >( node.getUserData( X( LOCATION_INFO_KEY ) ) );
 }
 
+
+std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element )
+{
+    xc::DOMElement *child = element.getFirstElementChild();
+
+    std::vector< xc::DOMElement* > children;
+
+    if ( !child )
+
+        return children;
+
+    children.push_back( child );
+
+    while (true)
+    {
+         child = child->getNextElementSibling();
+
+         if ( !child )
+
+             return children;
+         
+         children.push_back( child );
+    }
+
+    return children;
+}
+
 }

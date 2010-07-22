@@ -45,8 +45,8 @@ private:
     XMLCh* m_XercesString;
 };
 
-#define X( str ) XercesExt::ToXercesStringConverter( (str) ).XercesString()
-
 }
+
+#define X( str ) XercesExt::ToXercesStringConverter( (str) ).XercesString()
 
 #endif // TOXERCESSTRINGCONVERTER_H

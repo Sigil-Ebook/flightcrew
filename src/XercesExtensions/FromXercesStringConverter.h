@@ -20,21 +20,32 @@
 *************************************************************************/
 
 #pragma once
-#ifndef XMLUTILS_H
-#define XMLUTILS_H
+#ifndef FROMXERCESSTRINGCONVERTER_H
+#define FROMXERCESSTRINGCONVERTER_H
 
-#include <vector>
-#include <xercesc/dom/DOMNode.hpp>
-#include <xercesc/dom/DOMElement.hpp>
-#include "NodeLocationInfo.h"
+#include <xercesc/util/XMLString.hpp>
+#include <string>
 
 namespace xc = XERCES_CPP_NAMESPACE;
 
 namespace XercesExt
 {
-    NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node );
+    class FromXercesStringConverter
+    {
+    public:
 
-    std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element );
+        FromXercesStringConverter( const XMLCh* const xerces_string );
+
+        ~FromXercesStringConverter();
+
+        const char* LocalString() const;
+
+    private:
+
+        char* m_LocalString;
+    };
 }
 
-#endif // XMLUTILS_H
+#define fromX( str ) std::string( XercesExt::FromXercesStringConverter( (str) ).LocalString() )
+
+#endif // FROMXERCESSTRINGCONVERTER_H
