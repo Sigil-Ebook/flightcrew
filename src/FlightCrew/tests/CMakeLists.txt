@@ -11,7 +11,17 @@ cmake_minimum_required( VERSION 2.8 )
 
 project( fc_tests )
      
-file( GLOB_RECURSE SOURCES *.cpp )
+# Normally we wouldn't include the xml files in the SOURCES just
+# to get nice source groups from the create_source_groups() macro,
+# but a CMake bug is forcing us to do so. It refuses to work if we 
+# glob for xml files separately and then run create_source_groups()
+# again... putting them in the SOURCES fixes this, and they're not
+# doing any realy harm. CMake is smart enough to not forward them to the compiler.
+file( GLOB_RECURSE SOURCES *.cpp *.xml )
+
+# Creating source groups for VS, Xcode
+include( ${CMAKE_SOURCE_DIR}/cmake_extras/FileSystemSourceGroups.cmake )
+create_source_groups( SOURCES )
 
 #############################################################################
 
