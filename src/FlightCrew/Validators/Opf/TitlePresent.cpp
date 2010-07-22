@@ -28,7 +28,7 @@ std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
 {
     xc::DOMElement *root_element = document.getDocumentElement();
     xc::DOMNodeList *title_elements = root_element->getElementsByTagNameNS(
-        X( "*" ),  X( "title" ) );
+        toX( "*" ),  toX( "title" ) );
 
     std::vector<Result> results;
 

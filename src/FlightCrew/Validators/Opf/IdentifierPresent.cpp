@@ -28,7 +28,7 @@ std::vector<Result> IdentifierPresent::ValidateXml( const xc::DOMDocument &docum
 {
     xc::DOMElement *root_element = document.getDocumentElement();
     xc::DOMNodeList *identifier_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "identifier" ) );
+                                    toX( "*" ),  toX( "identifier" ) );
 
     std::vector<Result> results;
 

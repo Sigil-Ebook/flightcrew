@@ -47,6 +47,6 @@ private:
 
 }
 
-#define X( str ) XercesExt::ToXercesStringConverter( (str) ).XercesString()
+#define toX( str ) XercesExt::ToXercesStringConverter( (str) ).XercesString()
 
 #endif // TOXERCESSTRINGCONVERTER_H

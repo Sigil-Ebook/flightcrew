@@ -29,7 +29,7 @@ namespace XercesExt
 
 NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node )
 {
-    return *static_cast< NodeLocationInfo* >( node.getUserData( X( LOCATION_INFO_KEY ) ) );
+    return *static_cast< NodeLocationInfo* >( node.getUserData( toX( LOCATION_INFO_KEY ) ) );
 }
 
 

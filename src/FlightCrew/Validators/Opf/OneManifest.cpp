@@ -27,7 +27,7 @@ std::vector<Result> OneManifest::ValidateXml( const xc::DOMDocument &document )
 {
     xc::DOMElement *root_element = document.getDocumentElement();
     xc::DOMNodeList *manifests = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "manifest" ) );
+                                    toX( "*" ),  toX( "manifest" ) );
 
     std::vector<Result> results;
 

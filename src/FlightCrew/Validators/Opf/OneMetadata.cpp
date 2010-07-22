@@ -27,7 +27,7 @@ std::vector<Result> OneMetadata::ValidateXml( const xc::DOMDocument &document )
 {
     xc::DOMElement *root_element = document.getDocumentElement();
     xc::DOMNodeList *metadata_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "metadata" ) );
+                                    toX( "*" ),  toX( "metadata" ) );
 
     std::vector<Result> results;
 

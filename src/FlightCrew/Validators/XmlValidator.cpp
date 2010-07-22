@@ -40,7 +40,7 @@ Result XmlValidator::ResultWithNodeLocation( ErrorId error_id,
                                              const xc::DOMDocument &document )
 {
     xc::DOMNodeList *matching_elements = document.getDocumentElement()->
-        getElementsByTagNameNS( X( "*" ),  X( element_name ) );
+        getElementsByTagNameNS( toX( "*" ),  toX( element_name ) );
 
     if ( matching_elements->getLength() == 1 )
     

@@ -27,7 +27,7 @@ std::vector<Result> OneSpine::ValidateXml( const xc::DOMDocument &document )
 {
     xc::DOMElement *root_element = document.getDocumentElement();
     xc::DOMNodeList *spine_elements = root_element->getElementsByTagNameNS(
-                                    X( "*" ),  X( "spine" ) );
+                                    toX( "*" ),  toX( "spine" ) );
 
     std::vector<Result> results;
 
