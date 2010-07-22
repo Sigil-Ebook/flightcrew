@@ -41,14 +41,16 @@ set( CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk" )
 # Universal builds for mac
 set( CMAKE_OSX_ARCHITECTURES "ppc;i386" )
 
+# The parsing order is significant!
 add_subdirectory( src/ZipArchive )
 add_subdirectory( src/BoostParts )
 add_subdirectory( src/Xerces )
 add_subdirectory( src/XercesExtensions )
+add_subdirectory( src/googlemock )
 add_subdirectory( src/FlightCrew )
 #add_subdirectory( src/FlightCrew-cli )
 #add_subdirectory( src/FlightCrew-gui )
-add_subdirectory( src/googlemock )
+
 
 
 

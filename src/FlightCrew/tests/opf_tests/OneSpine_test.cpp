@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <gtest/gtest.h>
+#include <stdafx.h>
 #include "Validators/Opf/OneSpine.h"
 #include "Result.h"
 

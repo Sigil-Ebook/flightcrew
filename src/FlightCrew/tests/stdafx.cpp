@@ -19,27 +19,4 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "Validators/Opf/IdentifierPresent.h"
-#include "Result.h"
-
-TEST( IdentifierPresentTest, NoIdentifier_Error )
-{
-    IdentifierPresent validator;
-    std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/IdentifierPresent_NoIdentifier.xml" );
-
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_IDENTIFIER );
-    EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
-    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 98 );
-}
-
-TEST( IdentifierPresentTest, HasIdentifier_OK )
-{
-    IdentifierPresent validator;
-    std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/IdentifierPresent_HasIdentifier.xml" );
-
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
-}
-
+#include "stdafx.h"

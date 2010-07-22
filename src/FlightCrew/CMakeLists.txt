@@ -36,8 +36,10 @@ include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
 set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
                   ${Xerces_SOURCE_DIR}
                   ${ZipArchive_SOURCE_DIR} )
+				 
+set( GCC_PCH_TARGET gccPCH_fc )
 
-precompiled_header( SOURCES ALL_INCLUDES "gccPCH" )
+precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} )
 
 #############################################################################
 
@@ -73,7 +75,7 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_definitions( -Wall )
 
     # Make sure the PCH is built for GCC
-    add_dependencies( ${PROJECT_NAME} gccPCH )
+    add_dependencies( ${PROJECT_NAME} ${GCC_PCH_TARGET} )
 endif()
 
 # needed for correct Xerces header inclusion

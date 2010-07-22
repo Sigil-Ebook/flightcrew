@@ -25,6 +25,12 @@ create_source_groups( SOURCES )
 
 #############################################################################
 
+# stdafx.cpp is compiled separately as a PCH
+file( GLOB to_remove stdafx.cpp )
+list( REMOVE_ITEM SOURCES ${to_remove} )
+
+#############################################################################
+
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries
 include_directories( ../../ZipArchive 
@@ -36,6 +42,16 @@ include_directories( ../../ZipArchive
                    )
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
+
+#############################################################################
+
+# creating PCH's for MSVC and GCC on Linux
+include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
+set( ALL_INCLUDES ${gtest_SOURCE_DIR} )
+
+set( GCC_PCH_TARGET gccPCH_tests )
+
+precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} )
 
 #############################################################################
 
@@ -52,6 +68,10 @@ if( MSVC )
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-")
 	set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
 	set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
+	
+elseif( CMAKE_COMPILER_IS_GNUCXX )
+	# Make sure the PCH is built for GCC
+    add_dependencies( ${PROJECT_NAME} ${GCC_PCH_TARGET} )
 endif()
 
 # needed for correct Xerces header inclusion

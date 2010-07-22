@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <gtest/gtest.h>
+#include <stdafx.h>
 #include "Validators/Opf/TitlePresent.h"
 #include "Result.h"
 
