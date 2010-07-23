@@ -49,3 +49,5 @@ namespace fs = boost::filesystem;
 namespace xc = XERCES_CPP_NAMESPACE;
 namespace XercesExt {};
 namespace xe = XercesExt;
+
+typedef unsigned int uint;

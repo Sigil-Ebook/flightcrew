@@ -32,7 +32,7 @@ std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &
 
     std::vector<Result> results;
 
-    for ( unsigned int i = 0; i < children.size(); ++i )
+    for ( uint i = 0; i < children.size(); ++i )
     {
         std::string tag_name = fromX( children[ i ]->getTagName() );
 
@@ -43,7 +43,7 @@ std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &
              tag_name != "guide"
             )
         {
-            Result result =  ResultWithNodeLocation( 
+            Result result = ResultWithNodeLocation( 
                 ERROR_XML_CHILD_NOT_RECOGNIZED, *children[ i ] );
 
             result.AddMessageArgument( tag_name );
