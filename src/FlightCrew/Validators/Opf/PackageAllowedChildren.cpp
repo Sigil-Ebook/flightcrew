@@ -32,7 +32,7 @@ std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &
 
     std::vector<Result> results;
 
-    for ( int i = 0; i < children.size(); ++i )
+    for ( uint i = 0; i < children.size(); ++i )
     {
         std::string tag_name = fromX( children[ i ]->getTagName() );
 
