@@ -36,6 +36,10 @@ list( REMOVE_ITEM TEST_SOURCES ${to_remove} )
 # We need to pick up the stdafx.h file (current source dir),
 # the stdafx.h.gch file (current binary dir)
 # and the headers for the linked-to libraries
+
+# Include_directories is ADDITIVE on folder recursion!
+# That means that subdirs inherit the include_directories of their parents.
+# So techincally we don't need to include Xerces etc.
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} 
                      ${CMAKE_CURRENT_SOURCE_DIR}
                      ../../ZipArchive 
