@@ -11,7 +11,7 @@
 # the BCP tool:
 #   http://www.boost.org/doc/libs/1_43_0/tools/bcp/doc/html/index.html
 #    
-# bcp call: bcp boost/bind.hpp boost/lambda/lambda.hpp boost/exception/all.hpp boost/tuple/tuple_io.hpp boost/tuple/tuple_comparison.hpp boost/filesystem.hpp boost/regex.hpp boost/foreach.hpp boost/program_options.hpp boost/smart_ptr.hpp boost/algorithm/string_regex.hpp boost/thread.hpp boost/unordered_map.hpp boost/unordered_set.hpp ../BoostParts
+# bcp call: bcp boost/bind.hpp boost/lambda/lambda.hpp boost/exception/all.hpp boost/tuple/tuple_io.hpp boost/tuple/tuple_comparison.hpp boost/filesystem.hpp boost/regex.hpp boost/foreach.hpp boost/program_options.hpp boost/smart_ptr.hpp boost/algorithm/string_regex.hpp boost/thread.hpp boost/unordered_map.hpp boost/unordered_set.hpp boost/format.hpp ../BoostParts
 
 # WARNING: When doing this from fresh boost sources, note that
 # in the file /boost/config/user.hpp the BOOST_ALL_NO_LIB
@@ -29,7 +29,6 @@ set( SOURCES
     libs/date_time/src/gregorian/greg_names.hpp
     libs/date_time/src/gregorian/greg_weekday.cpp
     libs/date_time/src/posix_time/posix_time_types.cpp
-    #libs/detail/utf8_codecvt_facet.cpp
     libs/thread/src/tss_null.cpp
     libs/filesystem/src/operations.cpp
     libs/filesystem/src/path.cpp
