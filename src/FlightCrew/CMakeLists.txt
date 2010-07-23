@@ -25,8 +25,10 @@ create_source_groups( SOURCES )
 
 #############################################################################
 
+set( PCH_NAME stdafx )
+
 # stdafx.cpp is compiled separately as a PCH
-file( GLOB to_remove stdafx.cpp )
+file( GLOB to_remove ${PCH_NAME}.cpp )
 list( REMOVE_ITEM SOURCES ${to_remove} )
 
 #############################################################################
@@ -39,13 +41,15 @@ set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
 				 
 set( GCC_PCH_TARGET gccPCH_fc )
 
-precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} )
+precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
 
 #############################################################################
 
-# We need to pick up the stdafx.h file
+# We need to pick up the stdafx.h file (current source dir),
+# the stdafx.h.gch file (current binary dir)
 # and the headers for the linked-to libraries
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR} 
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
+                     ${CMAKE_CURRENT_BINARY_DIR} 
                      ../ZipArchive 
                      ../BoostParts 
                      ../Xerces

@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
+#include <stdafx_tests.h>
 #include "Validators/Opf/IdentifierPresent.h"
 #include "Result.h"
 

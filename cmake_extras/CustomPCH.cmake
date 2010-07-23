@@ -1,19 +1,28 @@
-macro( precompiled_header sources includes target_name )
+
+# DON'T FORGET to include ${CMAKE_CURRENT_SOURCE_DIR} in include_directories for the compiler
+# to see the header, and ${CMAKE_CURRENT_BINARY_DIR} for the compiler to see the GCC PCH 
+
+# "sources" - unexpanded cmake variable holding all the source files
+# "includes" - unexpanded cmake variable holding all include paths the PCH needs to know about
+# "target_name" - the name of the a special target used to build the PCH for GCC
+# "header_name" - the name of the PCH header, without the extension; "stdafx" or something similar;
+# note that the source file compiling the header needs to have the same name 
+macro( precompiled_header sources includes target_name header_name )
 
     # MSVC precompiled headers cmake code
     if ( MSVC )
-        set_source_files_properties( stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h" )
+        set_source_files_properties( ${header_name}.cpp PROPERTIES COMPILE_FLAGS "/Yc${header_name}.h" )
             
         foreach( src_file ${${sources}} )
             if( ${src_file} MATCHES ".*cpp$" )
-                set_source_files_properties( ${src_file} PROPERTIES COMPILE_FLAGS "/Yustdafx.h" )
+                set_source_files_properties( ${src_file} PROPERTIES COMPILE_FLAGS "/Yu${header_name}.h" )
             endif()
         endforeach()
 
-        # stdafx.cpp has to come before stdafx.h, 
+        # ${header_name}.cpp has to come before ${header_name}.h, 
         # otherwise we get a linker error...
-        list( INSERT ${sources} 0 stdafx.h )
-        list( INSERT ${sources} 0 stdafx.cpp )
+        list( INSERT ${sources} 0 ${header_name}.h )
+        list( INSERT ${sources} 0 ${header_name}.cpp )
 
     # GCC precompiled headers cmake code
     # We don't do this on Macs since GCC there goes haywire
@@ -51,15 +60,15 @@ macro( precompiled_header sources includes target_name )
         # Finally, build the precompiled header.
         # We don't add the buil command to add_custom_target
         # because that would force a PCH rebuild even when
-        # the stdafx.h file hasn't changed. We add it to
+        # the ${header_name}.h file hasn't changed. We add it to
         # a special add_custom_command to work around this problem.        
         add_custom_target( ${target_name} ALL
-                           DEPENDS stdafx.h.gch
+                           DEPENDS ${header_name}.h.gch
                          )
         
-        add_custom_command( OUTPUT stdafx.h.gch 
-                            COMMAND ${CMAKE_CXX_COMPILER} ${compile_flags} ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h -o stdafx.h.gch
-                            MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h
+        add_custom_command( OUTPUT ${header_name}.h.gch 
+                            COMMAND ${CMAKE_CXX_COMPILER} ${compile_flags} ${CMAKE_CURRENT_SOURCE_DIR}/${header_name}.h -o ${header_name}.h.gch
+                            MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/${header_name}.h
                             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                             VERBATIM )
     endif() 

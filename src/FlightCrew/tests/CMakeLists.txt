@@ -17,23 +17,28 @@ project( fc_tests )
 # glob for xml files separately and then run create_source_groups()
 # again... putting them in the SOURCES fixes this, and they're not
 # doing any realy harm. CMake is smart enough to not forward them to the compiler.
-file( GLOB_RECURSE SOURCES *.cpp *.xml )
+file( GLOB_RECURSE TEST_SOURCES *.cpp *.xml )
 
 # Creating source groups for VS, Xcode
 include( ${CMAKE_SOURCE_DIR}/cmake_extras/FileSystemSourceGroups.cmake )
-create_source_groups( SOURCES )
+create_source_groups( TEST_SOURCES )
 
 #############################################################################
+
+set( PCH_NAME stdafx_tests )
 
 # stdafx.cpp is compiled separately as a PCH
-file( GLOB to_remove stdafx.cpp )
-list( REMOVE_ITEM SOURCES ${to_remove} )
+file( GLOB to_remove ${PCH_NAME}.cpp )
+list( REMOVE_ITEM TEST_SOURCES ${to_remove} )
 
 #############################################################################
 
-# We need to pick up the stdafx.h file
+# We need to pick up the stdafx.h file (current source dir),
+# the stdafx.h.gch file (current binary dir)
 # and the headers for the linked-to libraries
-include_directories( ../../ZipArchive 
+include_directories( ${CMAKE_CURRENT_BINARY_DIR} 
+                     ${CMAKE_CURRENT_SOURCE_DIR}
+                     ../../ZipArchive 
                      ../../BoostParts 
                      ../../Xerces 
                      ../../XercesExtensions 
@@ -51,11 +56,11 @@ set( ALL_INCLUDES ${gtest_SOURCE_DIR}/include )
 
 set( GCC_PCH_TARGET gccPCH_tests )
 
-precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} )
+precompiled_header( TEST_SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
 
 #############################################################################
 
-add_executable( ${PROJECT_NAME} ${SOURCES} )
+add_executable( ${PROJECT_NAME} ${TEST_SOURCES} )
 
 target_link_libraries( ${PROJECT_NAME} FlightCrew gmock )
 
