@@ -47,7 +47,7 @@ link_directories ( ${PROJECT_BINARY_DIR}/lib )
 
 # creating PCH's for MSVC and GCC on Linux
 include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
-set( ALL_INCLUDES ${gtest_SOURCE_DIR} )
+set( ALL_INCLUDES ${gtest_SOURCE_DIR}/include )
 
 set( GCC_PCH_TARGET gccPCH_tests )
 
