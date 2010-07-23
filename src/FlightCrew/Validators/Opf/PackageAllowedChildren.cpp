@@ -43,9 +43,13 @@ std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &
              tag_name != "guide"
             )
         {
-            // TODO: add replacement text for message to Result
-            results.push_back( ResultWithNodeLocation( 
-                ERROR_XML_CHILD_NOT_RECOGNIZED, *children[ i ] ) );
+            Result result =  ResultWithNodeLocation( 
+                ERROR_XML_CHILD_NOT_RECOGNIZED, *children[ i ] );
+
+            result.AddMessageArgument( tag_name );
+            result.AddMessageArgument( fromX( package_element->getTagName() ) );
+
+            results.push_back( result );
         }
     } 
 

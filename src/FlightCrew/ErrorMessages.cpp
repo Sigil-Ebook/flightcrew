@@ -84,5 +84,5 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_NO_IDENTIFIER ] =
         "There is no <identifier> element.";
     m_Messages[ ERROR_XML_CHILD_NOT_RECOGNIZED ] =
-        "The <{0}> element is not an allowed child of the <{1}> element.";
+        "The <%1%> element is not an allowed child of the <%2%> element.";
 }

@@ -23,9 +23,10 @@
 #ifndef RESULT_H
 #define RESULT_H
 
+#include <string>
+#include <vector>
 #include <NodeLocationInfo.h>
 #include "ErrorIDs.h"
-
 
 class Result
 {
@@ -46,6 +47,14 @@ public:
 
     void SetErrorColumn( int error_column );
 
+    void AddMessageArgument( const std::string &message_argument );
+
+    void SetMessageArguments( const std::vector< std::string > &message_arguments );
+
+    const std::vector< std::string > &GetMessageArguments();
+
+    std::string GetErrorMessage();
+
 private:
 
     ///////////////////////////////
@@ -55,6 +64,7 @@ private:
     ErrorId m_ErrorId;
     int m_ErrorLine;
     int m_ErrorColumn;
+    std::vector< std::string > m_MessageArguments;
 };
 
 #endif // RESULT_H

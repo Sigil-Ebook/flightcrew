@@ -30,8 +30,14 @@
 #include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
 #include <boost/unordered_map.hpp>
+#include <boost/format.hpp> 
+#include <boost/foreach.hpp> 
 //#include "constants.h"
 //#include "exception.h"
+
+// We're most definitely not going to use
+// it as BOOST_FOREACH.
+#define foreach BOOST_FOREACH
 
 // We will be using these everywhere,
 // so let's make life a bit easier.

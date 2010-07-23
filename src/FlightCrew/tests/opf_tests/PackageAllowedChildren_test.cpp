@@ -32,6 +32,10 @@ TEST( PackageAllowedChildrenTest, WrongChildren )
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 14 );
+
+    std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
+    EXPECT_EQ( message_arguments[ 0 ], "ssspine" );
+    EXPECT_EQ( message_arguments[ 1 ], "package" );
 }
 
 TEST( PackageAllowedChildrenTest, ChildrenOK )

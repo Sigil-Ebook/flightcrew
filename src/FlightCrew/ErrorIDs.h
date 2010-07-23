@@ -19,6 +19,10 @@
 **
 *************************************************************************/
 
+#pragma once
+#ifndef ERRORID_H
+#define ERRORID_H
+
 enum ErrorId
 {
     ALL_OK = 100,
@@ -32,3 +36,5 @@ enum ErrorId
     ERROR_OPF_NO_IDENTIFIER,
     ERROR_XML_CHILD_NOT_RECOGNIZED,
 };
+
+#endif // ERRORID_H
