@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include "TourAllowedChildren.h"
-#include <XmlUtils.h>
 
 std::vector<Result> TourAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {

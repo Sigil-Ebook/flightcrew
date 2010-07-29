@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include "SpineAllowedChildren.h"
-#include <XmlUtils.h>
 
 std::vector<Result> SpineAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {

@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include "PackageAllowedChildren.h"
-#include <XmlUtils.h>
 
 std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
