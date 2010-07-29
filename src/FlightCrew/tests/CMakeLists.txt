@@ -89,25 +89,22 @@ add_definitions( -DXERCES_STATIC_LIBRARY )
 #############################################################################
 
 # The test executable expects a "test_data" dir in its working directory.
-# MSVC creates the test executable in a Release or Debug subdir (depending
-# on the build configuration) so we copy the data there in this case.
-add_custom_target( copy_test_data ALL )
-
 if ( NOT MSVC )
-	add_custom_command( TARGET copy_test_data POST_BUILD 
-						COMMAND cmake -E copy_directory 
-						${CMAKE_CURRENT_SOURCE_DIR}/test_data 
-					 	${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_data )
+	add_custom_target( copy_test_data 
+					   COMMAND cmake -E copy_directory 
+					   ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
+					   ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_data )
 else()
-	add_custom_command( TARGET copy_test_data POST_BUILD 
-						COMMAND cmake -E copy_directory 
-						${CMAKE_CURRENT_SOURCE_DIR}/test_data 
-					 	${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/test_data )
-						
-	add_custom_command( TARGET copy_test_data POST_BUILD
-						COMMAND cmake -E copy_directory 
-						${CMAKE_CURRENT_SOURCE_DIR}/test_data 
-					 	${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/test_data )
+    # MSVC creates the test executable in a Release or Debug subdir (depending
+    # on the build configuration) so we copy the data there in this case.
+	add_custom_target( copy_test_data 
+					   COMMAND cmake -E copy_directory 
+					   ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
+					   ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/test_data                       
+                       COMMAND cmake -E copy_directory 
+					   ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
+					   ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/test_data )
 endif()
 
+add_dependencies( ${PROJECT_NAME} copy_test_data )
 
