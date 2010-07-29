@@ -19,20 +19,17 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "PackageAllowedChildren.h"
-#include <XmlUtils.h>
+#pragma once
+#ifndef SPINEALLOWEDCHILDREN_H
+#define SPINEALLOWEDCHILDREN_H
 
-std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &document )
+#include "../AllowedChildrenValidator.h"
+
+class SpineAllowedChildren : public AllowedChildrenValidator
 {
-    std::vector< std::string > allowed_children;
+public:
 
-    allowed_children.push_back( "manifest" );
-    allowed_children.push_back( "metadata" );
-    allowed_children.push_back( "spine"    );
-    allowed_children.push_back( "tours"    );
-    allowed_children.push_back( "guide"    );
+    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
+};
 
-    return ValidateAllowedChildren( "package", allowed_children, document );
-}
-
+#endif // SPINEALLOWEDCHILDREN_H

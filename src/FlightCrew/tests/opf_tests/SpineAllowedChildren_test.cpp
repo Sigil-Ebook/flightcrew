@@ -19,20 +19,27 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "PackageAllowedChildren.h"
-#include <XmlUtils.h>
+#include <stdafx_tests.h>
+#include "Validators/Opf/SpineAllowedChildren.h"
+#include "Result.h"
 
-std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &document )
+TEST( SpineAllowedChildrenTest, WrongChildren )
 {
-    std::vector< std::string > allowed_children;
+    SpineAllowedChildren validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/SpineAllowedChildren_WrongChildren.xml" );
 
-    allowed_children.push_back( "manifest" );
-    allowed_children.push_back( "metadata" );
-    allowed_children.push_back( "spine"    );
-    allowed_children.push_back( "tours"    );
-    allowed_children.push_back( "guide"    );
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 21 );
+}
 
-    return ValidateAllowedChildren( "package", allowed_children, document );
+TEST( SpineAllowedChildrenTest, ChildrenOK )
+{
+    SpineAllowedChildren validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/SpineAllowedChildren_ChildrenOK.xml" );
+
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }
 
