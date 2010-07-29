@@ -24,6 +24,7 @@
 #define XMLUTILS_H
 
 #include <vector>
+#include <string>
 #include <xercesc/dom/DOMNode.hpp>
 #include <xercesc/dom/DOMElement.hpp>
 #include "NodeLocationInfo.h"
@@ -35,6 +36,9 @@ namespace XercesExt
     NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node );
 
     std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element );
+
+    bool ElementListContains( std::vector< xc::DOMElement* > element_list,
+                              const std::string &tag_name );
 }
 
 #endif // XMLUTILS_H

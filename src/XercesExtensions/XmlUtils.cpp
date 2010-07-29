@@ -21,8 +21,11 @@
 
 #include "XmlUtils.h"
 #include "ToXercesStringConverter.h"
+#include "FromXercesStringConverter.h"
 
 extern const char *LOCATION_INFO_KEY;
+
+typedef unsigned int uint;
 
 namespace XercesExt
 {
@@ -57,6 +60,22 @@ std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element
     }
 
     return children;
+}
+
+
+bool ElementListContains( std::vector< xc::DOMElement* > element_list,
+                          const std::string &tag_name )
+{
+    for ( uint i = 0; i < element_list.size(); ++i )
+    {
+        std::string current_tag = fromX( element_list[ i ]->getTagName() );
+
+        if ( current_tag == tag_name )
+        
+            return true;
+    } 
+
+    return false;
 }
 
 }
