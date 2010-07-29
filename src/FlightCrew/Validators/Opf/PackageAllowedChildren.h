@@ -23,9 +23,9 @@
 #ifndef PACKAGEALLOWEDCHILDREN_H
 #define PACKAGEALLOWEDCHILDREN_H
 
-#include "../XmlValidator.h"
+#include "../AllowedChildrenValidator.h"
 
-class PackageAllowedChildren : public XmlValidator
+class PackageAllowedChildren : public AllowedChildrenValidator
 {
 public:
 

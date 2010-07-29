@@ -27,30 +27,14 @@
 
 std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
-    xc::DOMElement *package_element = document.getDocumentElement();
-    std::vector< xc::DOMElement* > children = xe::GetElementChildren( *package_element );
+    std::vector< std::string > allowed_children;
 
-    std::vector<Result> results;
+    allowed_children.push_back( "manifest" );
+    allowed_children.push_back( "metadata" );
+    allowed_children.push_back( "spine"    );
+    allowed_children.push_back( "tours"    );
+    allowed_children.push_back( "guide"    );
 
-    for ( uint i = 0; i < children.size(); ++i )
-    {
-        std::string tag_name = fromX( children[ i ]->getTagName() );
-
-        if ( tag_name != "manifest" &&
-             tag_name != "metadata" &&
-             tag_name != "spine"    &&
-             tag_name != "tours"    &&
-             tag_name != "guide"
-            )
-        {
-            results.push_back( NotAllowedChildResult( *children[ i ] ) );
-        }
-    } 
-
-    if ( results.empty() )
-
-        results.push_back( Result() );
-
-    return results;
+    return ValidateAllowedChildren( "package", allowed_children, document );
 }
 

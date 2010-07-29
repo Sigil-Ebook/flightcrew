@@ -56,18 +56,3 @@ Result XmlValidator::ResultWithNodeLocation( ErrorId error_id,
 {
     return Result( error_id, xe::GetNodeLocationInfo( node ) );
 }
-
-
-Result XmlValidator::NotAllowedChildResult( const xc::DOMNode &child )
-{
-    Result result = ResultWithNodeLocation( 
-        ERROR_XML_CHILD_NOT_RECOGNIZED, child );
-
-    const xc::DOMElement* element = static_cast< const xc::DOMElement* >( &child );
-    const xc::DOMElement* parent  = static_cast< const xc::DOMElement* >( child.getParentNode() );
-
-    result.AddMessageArgument( fromX( element->getTagName() ) );
-    result.AddMessageArgument( fromX( parent->getTagName() ) );
-
-    return result;
-}

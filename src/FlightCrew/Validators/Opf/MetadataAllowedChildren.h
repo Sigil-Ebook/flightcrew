@@ -23,12 +23,12 @@
 #ifndef METADATAALLOWEDCHILDREN_H
 #define METADATAALLOWEDCHILDREN_H
 
-#include "../XmlValidator.h"
+#include "../AllowedChildrenValidator.h"
 
 /**
  * Checks that the <metadata> has only allowed children.
  */
-class MetadataAllowedChildren : public XmlValidator
+class MetadataAllowedChildren : public AllowedChildrenValidator
 {
 public:
 

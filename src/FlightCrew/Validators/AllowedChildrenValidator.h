@@ -20,32 +20,21 @@
 *************************************************************************/
 
 #pragma once
-#ifndef XMLVALIDATOR_H
-#define XMLVALIDATOR_H
+#ifndef ALLOWEDCHILDRENVALIDATOR_H
+#define ALLOWEDCHILDRENVALIDATOR_H
 
-#include <xercesc/dom/DOMDocument.hpp>
-namespace xc = XERCES_CPP_NAMESPACE;
-#include "IValidator.h"
-#include "Result.h"
+#include "XmlValidator.h"
 
-class XmlValidator : public IValidator
+class AllowedChildrenValidator : public XmlValidator
 {
-public:
-
-    virtual std::vector<Result> ValidateFile( const fs::path &filepath );
-
-    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document ) = 0;
-
-    virtual ~XmlValidator() {}
 
 protected:
 
-    Result ResultWithNodeLocation( ErrorId error_id, 
-                                   const char *element_name,
-                                   const xc::DOMDocument &document );
+    std::vector<Result> ValidateAllowedChildren( const std::string &parent_name,
+                                                 const std::vector< std::string > &allowed_children,
+                                                 const xc::DOMDocument &document );
 
-    Result ResultWithNodeLocation( ErrorId error_id, 
-                                   const xc::DOMNode &node );
+    Result NotAllowedChildResult( const xc::DOMNode &child );
 };
 
-#endif // XMLVALIDATOR_H
+#endif // ALLOWEDCHILDRENVALIDATOR_H
