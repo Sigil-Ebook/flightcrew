@@ -22,6 +22,7 @@
 #include <stdafx.h>
 #include "XmlValidator.h"
 #include <ToXercesStringConverter.h>
+#include <FromXercesStringConverter.h>
 #include <LocationAwareDOMParser.h>
 #include <XmlUtils.h>
 
@@ -54,4 +55,19 @@ Result XmlValidator::ResultWithNodeLocation( ErrorId error_id,
                                              const xc::DOMNode &node )
 {
     return Result( error_id, xe::GetNodeLocationInfo( node ) );
+}
+
+
+Result XmlValidator::NotAllowedChildResult( const xc::DOMNode &child )
+{
+    Result result = ResultWithNodeLocation( 
+        ERROR_XML_CHILD_NOT_RECOGNIZED, child );
+
+    const xc::DOMElement* element = static_cast< const xc::DOMElement* >( &child );
+    const xc::DOMElement* parent  = static_cast< const xc::DOMElement* >( child.getParentNode() );
+
+    result.AddMessageArgument( fromX( element->getTagName() ) );
+    result.AddMessageArgument( fromX( parent->getTagName() ) );
+
+    return result;
 }

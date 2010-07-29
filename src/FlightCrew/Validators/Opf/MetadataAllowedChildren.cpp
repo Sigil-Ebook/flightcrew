@@ -81,13 +81,7 @@ std::vector<Result> MetadataAllowedChildren::ValidateDCXChildrenSubset( xc::DOME
              tag_name != "x-metadata" 
             )
         {
-            Result result = ResultWithNodeLocation( 
-                ERROR_XML_CHILD_NOT_RECOGNIZED, *children[ i ] );
-
-            result.AddMessageArgument( tag_name );
-            result.AddMessageArgument( fromX( metadata->getTagName() ) );
-
-            results.push_back( result );
+            results.push_back( NotAllowedChildResult( *children[ i ] ) );
         }
     } 
 
@@ -128,13 +122,7 @@ std::vector<Result> MetadataAllowedChildren::ValidateStandardChildren( xc::DOMEl
                  namespace_name == "http://purl.org/dc/elements/1.1/"
                 )
             {
-                Result result = ResultWithNodeLocation( 
-                    ERROR_XML_CHILD_NOT_RECOGNIZED, *children[ i ] );
-
-                result.AddMessageArgument( local_name );
-                result.AddMessageArgument( fromX( metadata->getTagName() ) );
-
-                results.push_back( result );
+                results.push_back( NotAllowedChildResult( *children[ i ] ) );
             }
         }
     } 

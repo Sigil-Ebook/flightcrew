@@ -46,6 +46,8 @@ protected:
 
     Result ResultWithNodeLocation( ErrorId error_id, 
                                    const xc::DOMNode &node );
+
+    Result NotAllowedChildResult( const xc::DOMNode &child );
 };
 
 #endif // XMLVALIDATOR_H

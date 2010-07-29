@@ -43,13 +43,7 @@ std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &
              tag_name != "guide"
             )
         {
-            Result result = ResultWithNodeLocation( 
-                ERROR_XML_CHILD_NOT_RECOGNIZED, *children[ i ] );
-
-            result.AddMessageArgument( tag_name );
-            result.AddMessageArgument( fromX( package_element->getTagName() ) );
-
-            results.push_back( result );
+            results.push_back( NotAllowedChildResult( *children[ i ] ) );
         }
     } 
 
