@@ -21,6 +21,7 @@
 
 #include <stdafx.h>
 #include "AllowedChildrenValidator.h"
+#include "Misc/Utilities.h"
 #include <FromXercesStringConverter.h>
 #include <ToXercesStringConverter.h>
 #include <XmlUtils.h>
@@ -49,11 +50,7 @@ std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren(
     {
         std::string tag_name = fromX( children[ i ]->getTagName() );
 
-        std::vector< std::string >::const_iterator result;
-        result = std::find( allowed_children.begin(), allowed_children.end(), tag_name );
-
-        // Not found in allowed children
-        if ( result == allowed_children.end() )
+        if ( !Util::VectorContains< std::string >( allowed_children, tag_name ) )
 
             results.push_back( NotAllowedChildResult( *children[ i ] ) );
     } 
