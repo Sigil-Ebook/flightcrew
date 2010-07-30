@@ -67,13 +67,16 @@ void ErrorMessages::LoadMessages()
         "All OK.";
     m_Messages[ ERROR_GENERIC ] =
         "Error.";
+
     m_Messages[ ERROR_XML_SYNTAX ] =
         "XML syntax error.";
+    m_Messages[ ERROR_XML_ELEMENT_NOT_PRESENT ] =
+        "The <%1%> element is missing.";
+    m_Messages[ ERROR_XML_CHILD_NOT_RECOGNIZED ] =
+        "The <%1%> element is not an allowed child of the <%2%> element.";
+
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
-    m_Messages[ ERROR_OPF_NO_TITLE ] =
-        "There is no <title> element in the OPF.";
-
     // TODO: ERROR_XML_SINGLE_ITEM_CONSTRAINT?
     m_Messages[ ERROR_OPF_WRONG_MANIFEST_COUNT ] =
         "There needs to be one and only one <manifest> element.";
@@ -81,8 +84,4 @@ void ErrorMessages::LoadMessages()
         "There needs to be one and only one <metadata> element.";
     m_Messages[ ERROR_OPF_WRONG_SPINE_COUNT ] =
         "There needs to be one and only one <spine> element.";
-    m_Messages[ ERROR_OPF_NO_IDENTIFIER ] =
-        "There is no <identifier> element.";
-    m_Messages[ ERROR_XML_CHILD_NOT_RECOGNIZED ] =
-        "The <%1%> element is not an allowed child of the <%2%> element.";
 }

@@ -23,9 +23,9 @@
 #ifndef IDENTIFIERPRESENT_H
 #define IDENTIFIERPRESENT_H
 
-#include "../XmlValidator.h"
+#include "../ElementPresentValidator.h"
 
-class IdentifierPresent : public XmlValidator
+class IdentifierPresent : public ElementPresentValidator
 {
 public:
 

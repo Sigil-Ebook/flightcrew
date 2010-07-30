@@ -21,25 +21,13 @@
 
 #include <stdafx.h>
 #include "IdentifierPresent.h"
-#include <ToXercesStringConverter.h>
-#include <XmlUtils.h>
 
 std::vector<Result> IdentifierPresent::ValidateXml( const xc::DOMDocument &document )
 {
-    xc::DOMElement *root_element = document.getDocumentElement();
-    xc::DOMNodeList *identifier_elements = root_element->getElementsByTagNameNS(
-                                    toX( "*" ),  toX( "identifier" ) );
+    std::vector< std::string > possible_parents;
+    possible_parents.push_back( "metadata" );
+    possible_parents.push_back( "dc-metadata" );
 
-    std::vector<Result> results;
-
-    if ( identifier_elements->getLength() < 1 )
-
-        results.push_back( ResultWithNodeLocation( ERROR_OPF_NO_IDENTIFIER, "metadata", document ) );
-
-    else
-    
-        results.push_back( Result() );  
-
-    return results;
+    return VerifyElementPresent( "identifier", possible_parents, document );
 }
 

@@ -30,9 +30,12 @@ TEST( TitlePresentTest, NoTitle_Error )
             "test_data/opf_tests/TitlePresent_NoTitle.xml" );
 
     EXPECT_EQ( results.size(), 1 );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_TITLE );
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_ELEMENT_NOT_PRESENT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 98 );
+
+    std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
+    EXPECT_EQ( message_arguments[ 0 ], "title" );
 }
 
 TEST( TitlePresentTest, HasTitle_OK )

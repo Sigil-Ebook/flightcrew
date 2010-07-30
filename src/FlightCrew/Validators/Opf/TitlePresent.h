@@ -23,9 +23,9 @@
 #ifndef TITLEPRESENT_H
 #define TITLEPRESENT_H
 
-#include "../XmlValidator.h"
+#include "../ElementPresentValidator.h"
 
-class TitlePresent : public XmlValidator
+class TitlePresent : public ElementPresentValidator
 {
 public:
 
