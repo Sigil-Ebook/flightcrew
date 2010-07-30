@@ -33,10 +33,6 @@ TEST( PackageAllowedChildrenTest, WrongChildren )
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 14 );
     EXPECT_EQ( results.size(), 1 );
-
-    std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments[ 0 ], "ssspine" );
-    EXPECT_EQ( message_arguments[ 1 ], "package" );
 }
 
 TEST( PackageAllowedChildrenTest, ChildrenOK )
