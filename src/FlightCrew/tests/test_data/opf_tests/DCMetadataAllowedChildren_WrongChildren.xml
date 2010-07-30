@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc-metadata>
+            <breakme/>
+            <dc:title/>
+            <dc:creator/>
+            <dc:contributor/>
+            <dc:language/>
+            <dc:date/>
+            <dc:identifier/>
+            <dc:publisher/>
+            <dc:rights/>
+            <dc:type/>
+            <dc:subject/>
+            <dc:description/>
+            <dc:format/>
+            <dc:source/>
+            <dc:relation/>
+            <dc:coverage/>
+        </dc-metadata>
+    </metadata>
+</package>

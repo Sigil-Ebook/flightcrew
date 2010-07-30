@@ -48,9 +48,9 @@ std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren(
 
     for ( uint i = 0; i < children.size(); ++i )
     {
-        std::string tag_name = fromX( children[ i ]->getTagName() );
+        std::string local_name = fromX( children[ i ]->getLocalName() );
 
-        if ( !Util::VectorContains< std::string >( allowed_children, tag_name ) )
+        if ( !Util::VectorContains< std::string >( allowed_children, local_name ) )
 
             results.push_back( NotAllowedChildResult( *children[ i ] ) );
     } 
