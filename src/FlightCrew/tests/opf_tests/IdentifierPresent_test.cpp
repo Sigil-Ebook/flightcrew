@@ -29,10 +29,10 @@ TEST( IdentifierPresentTest, NoIdentifier_Error )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/IdentifierPresent_NoIdentifier.xml" );
 
+    EXPECT_EQ( results.size(), 1 );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_NO_IDENTIFIER );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 98 );
-    EXPECT_EQ( results.size(), 1 );
 }
 
 TEST( IdentifierPresentTest, HasIdentifier_OK )
@@ -41,7 +41,7 @@ TEST( IdentifierPresentTest, HasIdentifier_OK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/IdentifierPresent_HasIdentifier.xml" );
 
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
     EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }
 
