@@ -32,6 +32,7 @@ TEST( PackageAllowedChildrenTest, WrongChildren )
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 14 );
+    EXPECT_EQ( results.size(), 1 );
 
     std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
     EXPECT_EQ( message_arguments[ 0 ], "ssspine" );
@@ -45,5 +46,6 @@ TEST( PackageAllowedChildrenTest, ChildrenOK )
             "test_data/opf_tests/PackageAllowedChildren_ChildrenOK.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results.size(), 1 );
 }
 

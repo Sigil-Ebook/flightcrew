@@ -32,6 +32,7 @@ TEST( ToursAllowedChildrenTest, WrongChildren )
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 17 );
+    EXPECT_EQ( results.size(), 1 );
 }
 
 TEST( ToursAllowedChildrenTest, ChildrenOK )
@@ -41,5 +42,6 @@ TEST( ToursAllowedChildrenTest, ChildrenOK )
             "test_data/opf_tests/ToursAllowedChildren_ChildrenOK.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results.size(), 1 );
 }
 

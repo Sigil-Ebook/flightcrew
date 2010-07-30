@@ -42,5 +42,6 @@ TEST( DCMetadataAllowedChildrenTest, ChildrenOK )
             "test_data/opf_tests/DCMetadataAllowedChildren_ChildrenOK.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results.size(), 1 );
 }
 

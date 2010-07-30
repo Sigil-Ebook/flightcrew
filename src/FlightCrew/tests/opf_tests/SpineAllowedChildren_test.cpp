@@ -32,6 +32,7 @@ TEST( SpineAllowedChildrenTest, WrongChildren )
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 21 );
+    EXPECT_EQ( results.size(), 1 );
 }
 
 TEST( SpineAllowedChildrenTest, ChildrenOK )
@@ -41,5 +42,6 @@ TEST( SpineAllowedChildrenTest, ChildrenOK )
             "test_data/opf_tests/SpineAllowedChildren_ChildrenOK.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results.size(), 1 );
 }
 

@@ -32,6 +32,7 @@ TEST( OneMetadataTest, NoMetadata_Error )
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_METADATA_COUNT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 88 );
+    EXPECT_EQ( results.size(), 1 );
 }
 
 TEST( OneMetadataTest, TwoMetadatas_Error )
@@ -43,6 +44,7 @@ TEST( OneMetadataTest, TwoMetadatas_Error )
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_METADATA_COUNT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 5 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 11 );
+    EXPECT_EQ( results.size(), 1 );
 }
 
 TEST( OneMetadataTest, OneMetadata_OK )
@@ -52,5 +54,6 @@ TEST( OneMetadataTest, OneMetadata_OK )
             "test_data/opf_tests/OneMetadata_OneMetadata.xml" );
 
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results.size(), 1 );
 }
 
