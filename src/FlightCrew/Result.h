@@ -26,18 +26,18 @@
 #include <string>
 #include <vector>
 #include <NodeLocationInfo.h>
-#include "ErrorIDs.h"
+#include "ResultId.h"
 
 class Result
 {
 public:
 
-    Result( ErrorId error_id = ALL_OK,
+    Result( ResultId result_id = ALL_OK,
             XercesExt::NodeLocationInfo node_location = XercesExt::NodeLocationInfo() );
 
-    ErrorId GetErrorId();
+    ResultId GetResultId();
 
-    void SetErrorId( ErrorId error_id );
+    void SetResultId( ResultId result_id );
 
     int GetErrorLine();
 
@@ -61,7 +61,7 @@ private:
     // PRIVATE MEMBER VARIABLES
     ///////////////////////////////
 
-    ErrorId m_ErrorId;
+    ResultId m_ResultId;
     int m_ErrorLine;
     int m_ErrorColumn;
     std::vector< std::string > m_MessageArguments;

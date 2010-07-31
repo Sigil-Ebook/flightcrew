@@ -30,7 +30,7 @@ TEST( MetadataAllowedChildrenTest, StdChildrenWrong )
             "test_data/opf_tests/MetadataAllowedChildren_StdChildrenWrong.xml" );
 
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 19 );
 }
@@ -42,7 +42,7 @@ TEST( MetadataAllowedChildrenTest, StdChildrenOK )
             "test_data/opf_tests/MetadataAllowedChildren_StdChildrenOK.xml" );
 
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ALL_OK );
 }
 
 TEST( MetadataAllowedChildrenTest, DCXChildrenWrong )
@@ -52,7 +52,7 @@ TEST( MetadataAllowedChildrenTest, DCXChildrenWrong )
         "test_data/opf_tests/MetadataAllowedChildren_DCXChildrenWrong.xml" );
 
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 16 );
 }
@@ -64,6 +64,6 @@ TEST( MetadataAllowedChildrenTest, DCXChildrenOK )
         "test_data/opf_tests/MetadataAllowedChildren_DCXChildrenOK.xml" );
 
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ALL_OK );
 }
 

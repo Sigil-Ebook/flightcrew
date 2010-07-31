@@ -23,9 +23,9 @@
 #include "Result.h"
 #include "ErrorMessages.h"
 
-Result::Result( ErrorId error_id, xe::NodeLocationInfo node_location )
+Result::Result( ResultId result_id, xe::NodeLocationInfo node_location )
     :
-    m_ErrorId( error_id ),
+    m_ResultId( result_id ),
     m_ErrorLine( node_location.LineNumber ),
     m_ErrorColumn( node_location.ColumnNumber )
 {
@@ -33,15 +33,15 @@ Result::Result( ErrorId error_id, xe::NodeLocationInfo node_location )
 }
 
 
-ErrorId Result::GetErrorId()
+ResultId Result::GetResultId()
 {
-    return m_ErrorId;
+    return m_ResultId;
 }
 
 
-void Result::SetErrorId( ErrorId error_id )
+void Result::SetResultId( ResultId result_id )
 {
-    m_ErrorId = error_id;
+    m_ResultId = result_id;
 }
 
 
@@ -89,7 +89,7 @@ const std::vector< std::string > & Result::GetMessageArguments()
 
 std::string Result::GetErrorMessage()
 {
-    boost::format formatter( ErrorMessages::Instance().MessageForId( m_ErrorId ) );
+    boost::format formatter( ErrorMessages::Instance().MessageForId( m_ResultId ) );
 
     foreach( std::string argument, m_MessageArguments )
     {

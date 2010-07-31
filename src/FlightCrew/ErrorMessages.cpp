@@ -43,7 +43,7 @@ ErrorMessages& ErrorMessages::Instance()
 }
 
 
-const std::string ErrorMessages::MessageForId( ErrorId error_id )
+const std::string ErrorMessages::MessageForId( ResultId error_id )
 {
     return m_Messages[ error_id ];
 }

@@ -30,7 +30,7 @@ TEST( XMetadataAllowedChildrenTest, WrongChildren )
             "test_data/opf_tests/XMetadataAllowedChildren_WrongChildren.xml" );
 
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 5 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 23 );    
 }
@@ -42,6 +42,6 @@ TEST( XMetadataAllowedChildrenTest, ChildrenOK )
             "test_data/opf_tests/XMetadataAllowedChildren_ChildrenOK.xml" );
 
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ALL_OK );
 }
 

@@ -30,7 +30,7 @@ TEST( IdentifierPresentTest, NoIdentifier_Error )
             "test_data/opf_tests/IdentifierPresent_NoIdentifier.xml" );
 
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_ELEMENT_NOT_PRESENT );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ELEMENT_NOT_PRESENT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 98 );
 
@@ -45,6 +45,6 @@ TEST( IdentifierPresentTest, HasIdentifier_OK )
             "test_data/opf_tests/IdentifierPresent_HasIdentifier.xml" );
 
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ALL_OK );
 }
 

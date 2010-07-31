@@ -26,7 +26,7 @@
 #include <string>
 #include <boost/thread/mutex.hpp>
 #include <boost/unordered_map.hpp>
-#include "ErrorIDs.h"
+#include "ResultId.h"
 
 class ErrorMessages
 {
@@ -34,7 +34,7 @@ public:
 
     static ErrorMessages& Instance();
 
-    const std::string MessageForId( ErrorId error_id );
+    const std::string MessageForId( ResultId error_id );
 
 private:
 
@@ -50,7 +50,7 @@ private:
 
     static ErrorMessages *s_Instance;
 
-    boost::unordered_map< ErrorId, std::string > m_Messages;
+    boost::unordered_map< ResultId, std::string > m_Messages;
 };
 
 #endif // ERRORMESSAGES_H

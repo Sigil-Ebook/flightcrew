@@ -40,11 +40,11 @@ public:
 
 protected:
 
-    Result ResultWithNodeLocation( ErrorId error_id, 
+    Result ResultWithNodeLocation( ResultId error_id, 
                                    const char *element_name,
                                    const xc::DOMDocument &document );
 
-    Result ResultWithNodeLocation( ErrorId error_id, 
+    Result ResultWithNodeLocation( ResultId error_id, 
                                    const xc::DOMNode &node );
 };
 

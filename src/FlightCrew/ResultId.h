@@ -20,10 +20,10 @@
 *************************************************************************/
 
 #pragma once
-#ifndef ERRORID_H
-#define ERRORID_H
+#ifndef RESULTID_H
+#define RESULTID_H
 
-enum ErrorId
+enum ResultId
 {
     ALL_OK = 100,
     UNABLE_TO_PERFORM_VALIDATION,
@@ -38,4 +38,4 @@ enum ErrorId
     ERROR_OPF_PACKAGE_NOT_ROOT,
 };
 
-#endif // ERRORID_H
+#endif // RESULTID_H

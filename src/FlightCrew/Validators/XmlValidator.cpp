@@ -36,7 +36,7 @@ std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 }
 
 
-Result XmlValidator::ResultWithNodeLocation( ErrorId error_id, 
+Result XmlValidator::ResultWithNodeLocation( ResultId error_id, 
                                              const char *element_name,
                                              const xc::DOMDocument &document )
 {
@@ -51,7 +51,7 @@ Result XmlValidator::ResultWithNodeLocation( ErrorId error_id,
 }
 
 
-Result XmlValidator::ResultWithNodeLocation( ErrorId error_id, 
+Result XmlValidator::ResultWithNodeLocation( ResultId error_id, 
                                              const xc::DOMNode &node )
 {
     return Result( error_id, xe::GetNodeLocationInfo( node ) );
