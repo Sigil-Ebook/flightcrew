@@ -29,7 +29,7 @@ TEST( OneMetadataTest, NoMetadata_Error )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/OneMetadata_NoMetadata.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_METADATA_COUNT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 88 );
@@ -41,7 +41,7 @@ TEST( OneMetadataTest, TwoMetadatas_Error )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/OneMetadata_TwoMetadatas.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_METADATA_COUNT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 5 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 11 );
@@ -53,7 +53,7 @@ TEST( OneMetadataTest, OneMetadata_OK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/OneMetadata_OneMetadata.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }
 

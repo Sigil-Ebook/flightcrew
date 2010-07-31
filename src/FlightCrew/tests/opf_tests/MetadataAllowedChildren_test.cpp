@@ -29,7 +29,7 @@ TEST( MetadataAllowedChildrenTest, StdChildrenWrong )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/MetadataAllowedChildren_StdChildrenWrong.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 19 );
@@ -41,7 +41,7 @@ TEST( MetadataAllowedChildrenTest, StdChildrenOK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/MetadataAllowedChildren_StdChildrenOK.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }
 
@@ -51,7 +51,7 @@ TEST( MetadataAllowedChildrenTest, DCXChildrenWrong )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/opf_tests/MetadataAllowedChildren_DCXChildrenWrong.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 16 );
@@ -63,7 +63,7 @@ TEST( MetadataAllowedChildrenTest, DCXChildrenOK )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/opf_tests/MetadataAllowedChildren_DCXChildrenOK.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }
 

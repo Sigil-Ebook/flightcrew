@@ -29,7 +29,7 @@ TEST( OneManifestTest, NoManifest_Error )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/OneManifest_NoManifest.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_MANIFEST_COUNT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 88 );
@@ -41,7 +41,7 @@ TEST( OneManifestTest, TwoManifests_Error )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/OneManifest_TwoManifests.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_OPF_WRONG_MANIFEST_COUNT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 5 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 11 );
@@ -53,7 +53,7 @@ TEST( OneManifestTest, OneManifest_OK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/OneManifest_OneManifest.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }
 

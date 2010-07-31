@@ -29,7 +29,7 @@ TEST( GuideAllowedChildrenTest, WrongChildren )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/GuideAllowedChildren_WrongChildren.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 19 );
@@ -41,7 +41,7 @@ TEST( GuideAllowedChildrenTest, ChildrenOK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/GuideAllowedChildren_ChildrenOK.xml" );
 
-    EXPECT_EQ( results.size(), 1 );
+    EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetErrorId(), ALL_OK );
 }
 
