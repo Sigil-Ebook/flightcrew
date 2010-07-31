@@ -22,6 +22,11 @@
 #include "XmlUtils.h"
 #include "ToXercesStringConverter.h"
 #include "FromXercesStringConverter.h"
+#include <xercesc/dom/DOMElement.hpp>
+#include <xercesc/dom/DOMDocument.hpp>
+#include <xercesc/dom/DOMNodeList.hpp>
+#include <boost/foreach.hpp> 
+#define foreach BOOST_FOREACH
 
 extern const char *LOCATION_INFO_KEY;
 
@@ -78,4 +83,29 @@ bool ElementListContains( std::vector< xc::DOMElement* > element_list,
     return false;
 }
 
+xc::DOMNode* GetFirstAvailableElement( const std::vector< std::string > &element_names,
+                                       const xc::DOMDocument &document )
+{
+    foreach( std::string element_name, element_names )
+    {
+        xc::DOMNodeList *matching_nodes = document.getElementsByTagNameNS(
+                                            toX( "*" ),  toX( element_name.c_str() ) );
+
+        if ( matching_nodes->getLength() > 0 )
+
+            return matching_nodes->item( 0 );
+    }
+
+    return NULL;
 }
+
+xc::DOMNode* GetFirstAvailableElement( const std::string &element_name, 
+                                       const xc::DOMDocument &document )
+{
+    std::vector< std::string > element_names;
+    element_names.push_back( element_name );
+
+    return GetFirstAvailableElement( element_names, document );
+}
+
+} // namespace XercesExt

@@ -21,36 +21,9 @@
 
 #include <stdafx.h>
 #include "OneMetadata.h"
-#include <ToXercesStringConverter.h>
 
 std::vector<Result> OneMetadata::ValidateXml( const xc::DOMDocument &document )
 {
-    xc::DOMElement *root_element = document.getDocumentElement();
-    xc::DOMNodeList *metadata_elements = root_element->getElementsByTagNameNS(
-                                    toX( "*" ),  toX( "metadata" ) );
-
-    std::vector<Result> results;
-
-    if ( metadata_elements->getLength() != 1 )
-    {
-        if ( metadata_elements->getLength() < 1 )
-        {
-            results.push_back( ResultWithNodeLocation( 
-                ERROR_OPF_WRONG_METADATA_COUNT, *root_element ) );
-        }
-
-        else
-        {
-            results.push_back( ResultWithNodeLocation( 
-                ERROR_OPF_WRONG_METADATA_COUNT, *metadata_elements->item( 1 ) ) );
-        }
-    }
-
-    else
-    {
-        results.push_back( Result() );
-    }
-
-    return results;
+    return VerifyElementCount( "metadata", 1, "package", document );
 }
 

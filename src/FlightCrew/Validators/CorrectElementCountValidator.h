@@ -20,32 +20,30 @@
 *************************************************************************/
 
 #pragma once
-#ifndef ELEMENTPRESENTVALIDATOR_H
-#define ELEMENTPRESENTVALIDATOR_H
+#ifndef CORRECTELEMENTCOUNTVALIDATOR_H
+#define CORRECTELEMENTCOUNTVALIDATOR_H
 
 #include "XmlValidator.h"
 
-class ElementPresentValidator : public XmlValidator
+class CorrectElementCountValidator : public XmlValidator
 {
 
 protected:
     
     /**
-     * Verifies the presence of the element in the document.
+     * Verifies the correct count of the element in the document.
      * We try to report the location of the error as the location
      * of a parent element that is supposed to contain the required element.
-     * Since it's possible that the element can be a child of several
-     * different parent types, a list is provided. The first parent 
-     * present is reported as the location of the error.
      *
-     * @param element_name The name of the element whose presence we want to check.
-     * @param possible_parents A list of possible parent names.
+     * @param element_name The name of the element whose correct count we want to check.
+     * @param correct_count The correct count of these elements.
      * @param document The document being validated.
      * @return A list of validation results.
      */
-    std::vector<Result> VerifyElementPresent( const std::string &element_name,
-                                              const std::vector< std::string > &possible_parents,
-                                              const xc::DOMDocument &document );
+    std::vector<Result> VerifyElementCount( const std::string &element_name,
+                                            int correct_count,
+                                            const std::string &parent_name,
+                                            const xc::DOMDocument &document );
 };
 
-#endif // ELEMENTPRESENTVALIDATOR_H
+#endif // CORRECTELEMENTCOUNTVALIDATOR_H

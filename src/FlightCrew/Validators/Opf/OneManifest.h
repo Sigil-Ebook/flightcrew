@@ -20,16 +20,16 @@
 *************************************************************************/
 
 #pragma once
-#ifndef OneManifest_H
-#define OneManifest_H
+#ifndef ONEMANIFEST_H
+#define ONEMANIFEST_H
 
-#include "../XmlValidator.h"
+#include "../CorrectElementCountValidator.h"
 
-class OneManifest : public XmlValidator
+class OneManifest : public CorrectElementCountValidator
 {
 public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
 
-#endif // OneManifest_H
+#endif // ONEMANIFEST_H

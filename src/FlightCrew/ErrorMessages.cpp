@@ -72,16 +72,11 @@ void ErrorMessages::LoadMessages()
         "XML syntax error.";
     m_Messages[ ERROR_XML_ELEMENT_NOT_PRESENT ] =
         "The <%1%> element is missing.";
+    m_Messages[ ERROR_XML_WRONG_ELEMENT_COUNT ] =
+        "There needs to be one and only one <%1%> element.";
     m_Messages[ ERROR_XML_CHILD_NOT_RECOGNIZED ] =
         "The <%1%> element is not an allowed child of the <%2%> element.";
 
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
-    // TODO: ERROR_XML_SINGLE_ITEM_CONSTRAINT?
-    m_Messages[ ERROR_OPF_WRONG_MANIFEST_COUNT ] =
-        "There needs to be one and only one <manifest> element.";
-    m_Messages[ ERROR_OPF_WRONG_METADATA_COUNT ] =
-        "There needs to be one and only one <metadata> element.";
-    m_Messages[ ERROR_OPF_WRONG_SPINE_COUNT ] =
-        "There needs to be one and only one <spine> element.";
 }

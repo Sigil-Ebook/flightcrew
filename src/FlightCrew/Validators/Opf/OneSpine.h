@@ -20,16 +20,16 @@
 *************************************************************************/
 
 #pragma once
-#ifndef OneSpine_H
-#define OneSpine_H
+#ifndef ONESPINE_H
+#define ONESPINE_H
 
-#include "../XmlValidator.h"
+#include "../CorrectElementCountValidator.h"
 
-class OneSpine : public XmlValidator
+class OneSpine : public CorrectElementCountValidator
 {
 public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
 
-#endif // OneSpine_H
+#endif // ONESPINE_H

@@ -25,32 +25,6 @@
 
 std::vector<Result> OneSpine::ValidateXml( const xc::DOMDocument &document )
 {
-    xc::DOMElement *root_element = document.getDocumentElement();
-    xc::DOMNodeList *spine_elements = root_element->getElementsByTagNameNS(
-                                    toX( "*" ),  toX( "spine" ) );
-
-    std::vector<Result> results;
-
-    if ( spine_elements->getLength() != 1 )
-    {
-        if ( spine_elements->getLength() < 1 )
-        {
-            results.push_back( ResultWithNodeLocation( 
-                ERROR_OPF_WRONG_SPINE_COUNT, *root_element ) );
-        }
-
-        else
-        {
-            results.push_back( ResultWithNodeLocation( 
-                ERROR_OPF_WRONG_SPINE_COUNT, *spine_elements->item( 1 ) ) );
-        }
-    }
-    
-    else
-    {
-        results.push_back( Result() );
-    }
-
-    return results;
+    return VerifyElementCount( "spine", 1, "package", document );
 }
 

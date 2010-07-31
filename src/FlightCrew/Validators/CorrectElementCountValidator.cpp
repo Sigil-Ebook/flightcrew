@@ -20,35 +20,47 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "ElementPresentValidator.h"
-#include <ToXercesStringConverter.h>
+#include "CorrectElementCountValidator.h"
+#include "ToXercesStringConverter.h"
 #include <XmlUtils.h>
 
-std::vector<Result> ElementPresentValidator::VerifyElementPresent( 
+std::vector<Result> CorrectElementCountValidator::VerifyElementCount( 
     const std::string &element_name, 
-    const std::vector< std::string > &possible_parents,
+    int correct_count, 
+    const std::string &parent_name, 
     const xc::DOMDocument &document )
 {
-    xc::DOMNodeList *matching_elements = document.getElementsByTagNameNS(
-                                        toX( "*" ),  toX( element_name.c_str() ) );
+    xc::DOMNodeList *elements = document.getElementsByTagNameNS(
+                                            toX( "*" ),  toX( element_name.c_str() ) );
 
     std::vector<Result> results;
 
-    if ( matching_elements->getLength() < 1 )
+    if ( elements->getLength() != 1 )
     {
-        xc::DOMNode* parent = xe::GetFirstAvailableElement( possible_parents, document );
+        Result result;
 
-        Result result = parent != NULL                                                   ?
-                        ResultWithNodeLocation( ERROR_XML_ELEMENT_NOT_PRESENT, *parent ) :
-                        Result( ERROR_XML_ELEMENT_NOT_PRESENT );
-                        
+        if ( elements->getLength() < 1 )
+        {
+            xc::DOMNode *parent = xe::GetFirstAvailableElement( parent_name, document );
+
+            result = parent != NULL                                                   ?
+                     ResultWithNodeLocation( ERROR_XML_WRONG_ELEMENT_COUNT, *parent ) :
+                     Result( ERROR_XML_WRONG_ELEMENT_COUNT ); 
+        }
+
+        else
+        {
+            result = ResultWithNodeLocation( 
+                ERROR_XML_WRONG_ELEMENT_COUNT, *elements->item( 1 ) );
+        }
+
         result.AddMessageArgument( element_name );
         results.push_back( result );
     }
 
     else
     {
-        results.push_back( Result() );    
+        results.push_back( Result() );
     }
 
     return results;

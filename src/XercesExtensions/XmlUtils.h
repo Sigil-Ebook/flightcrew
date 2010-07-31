@@ -26,9 +26,9 @@
 #include <vector>
 #include <string>
 #include <xercesc/dom/DOMNode.hpp>
-#include <xercesc/dom/DOMElement.hpp>
 #include "NodeLocationInfo.h"
 
+namespace XERCES_CPP_NAMESPACE { class DOMElement; class DOMDocument; }
 namespace xc = XERCES_CPP_NAMESPACE;
 
 namespace XercesExt
@@ -39,6 +39,30 @@ namespace XercesExt
 
     bool ElementListContains( std::vector< xc::DOMElement* > element_list,
                               const std::string &tag_name );
+
+   /**
+     * From the provided list of element names, returns the first element
+     * present in the document.
+     *
+     * @param element_names The list of element names to search for.
+     * @param document The parent DOM document.
+     * @return The first element matching one of the provided names
+     *         or NULL if none were found.
+     */
+    xc::DOMNode* GetFirstAvailableElement( const std::vector< std::string > &element_names,
+                                           const xc::DOMDocument &document );
+
+   /**
+     * Returns the first element present in the document that matches
+     * the provided name.
+     *
+     * @param element_name The element name to search for.
+     * @param document The parent DOM document.
+     * @return The first element matching the provided name
+     *         or NULL if none were found.
+     */
+    xc::DOMNode* GetFirstAvailableElement( const std::string &element_name,
+                                           const xc::DOMDocument &document );
 }
 
 #endif // XMLUTILS_H

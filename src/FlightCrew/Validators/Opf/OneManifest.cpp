@@ -21,36 +21,9 @@
 
 #include <stdafx.h>
 #include "OneManifest.h"
-#include <ToXercesStringConverter.h>
 
 std::vector<Result> OneManifest::ValidateXml( const xc::DOMDocument &document )
 {
-    xc::DOMElement *root_element = document.getDocumentElement();
-    xc::DOMNodeList *manifests = root_element->getElementsByTagNameNS(
-                                    toX( "*" ),  toX( "manifest" ) );
-
-    std::vector<Result> results;
-
-    if ( manifests->getLength() != 1 )
-    {
-        if ( manifests->getLength() < 1 )
-        {
-            results.push_back( ResultWithNodeLocation( 
-                ERROR_OPF_WRONG_MANIFEST_COUNT, *root_element ) );
-        }
-
-        else
-        {
-            results.push_back( ResultWithNodeLocation( 
-                ERROR_OPF_WRONG_MANIFEST_COUNT, *manifests->item( 1 ) ) );
-        }
-    }
-
-    else
-    {
-        results.push_back( Result() );
-    }
-
-    return results;
+    return VerifyElementCount( "manifest", 1, "package", document );
 }
 

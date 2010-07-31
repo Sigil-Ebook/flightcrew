@@ -20,16 +20,16 @@
 *************************************************************************/
 
 #pragma once
-#ifndef OneMetadata_H
-#define OneMetadata_H
+#ifndef ONEMETADATA_H
+#define ONEMETADATA_H
 
-#include "../XmlValidator.h"
+#include "../CorrectElementCountValidator.h"
 
-class OneMetadata : public XmlValidator
+class OneMetadata : public CorrectElementCountValidator
 {
 public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
 
-#endif // OneMetadata_H
+#endif // ONEMETADATA_H
