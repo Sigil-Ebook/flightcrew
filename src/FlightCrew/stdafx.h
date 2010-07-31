@@ -35,6 +35,8 @@
 //#include "constants.h"
 //#include "exception.h"
 
+#include "Misc/CustomAssert.h"
+
 // We're most definitely not going to use
 // it as BOOST_FOREACH.
 #define foreach BOOST_FOREACH

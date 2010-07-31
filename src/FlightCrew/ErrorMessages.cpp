@@ -76,6 +76,11 @@ void ErrorMessages::LoadMessages()
         "There needs to be one and only one <%1%> element.";
     m_Messages[ ERROR_XML_CHILD_NOT_RECOGNIZED ] =
         "The <%1%> element is not an allowed child of the <%2%> element.";
+    m_Messages[ ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED ] =
+        "The \"%1%\" attribute is not an allowed attribute of the <%2%> element.";  
+    m_Messages[ ERROR_XML_REQUIRED_ATTRIBUTE_MISSING ] =
+        "The required attribute \"%1%\" is missing from the <%2%> element.";  
+    
 
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
