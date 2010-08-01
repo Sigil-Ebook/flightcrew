@@ -19,37 +19,11 @@
 **
 *************************************************************************/
 
-#include <xercesc/dom/DOM.hpp>
-#include <xercesc/util/XMLString.hpp>
-#include <xercesc/util/PlatformUtils.hpp>
-#include <xercesc/parsers/XercesDOMParser.hpp>
+#pragma once
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
-#include <boost/tuple/tuple.hpp>
-#include <boost/bind/bind.hpp>
-#include <boost/lambda/lambda.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/thread.hpp>
-#include <boost/unordered_map.hpp>
-#include <boost/format.hpp> 
-#include <boost/foreach.hpp> 
-#include "constants.h"
-//#include "exception.h"
+extern const std::string OPF_XML_NAMESPACE;
+extern const std::string DC_XML_NAMESPACE;
 
-#include "Misc/CustomAssert.h"
-
-// We're most definitely not going to use
-// it as BOOST_FOREACH.
-#define foreach BOOST_FOREACH
-
-// We will be using these everywhere,
-// so let's make life a bit easier.
-using boost::tuple;
-using boost::make_tuple;
-using boost::tie;
-namespace fs = boost::filesystem;
-
-namespace xc = XERCES_CPP_NAMESPACE;
-namespace XercesExt {};
-namespace xe = XercesExt;
-
-typedef unsigned int uint;
+#endif // CONSTANTS_H

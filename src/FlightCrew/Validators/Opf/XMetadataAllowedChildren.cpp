@@ -49,8 +49,8 @@ std::vector<Result> XMetadataAllowedChildren::ValidateXml( const xc::DOMDocument
         {
             std::string namespace_name = fromX( children[ i ]->getNamespaceURI() );
 
-            if ( namespace_name == "http://www.idpf.org/2007/opf" ||
-                 namespace_name == "http://purl.org/dc/elements/1.1/"
+            if ( namespace_name == OPF_XML_NAMESPACE ||
+                 namespace_name == DC_XML_NAMESPACE
                 )
             {
                 results.push_back( NotAllowedChildResult( *children[ i ] ) );

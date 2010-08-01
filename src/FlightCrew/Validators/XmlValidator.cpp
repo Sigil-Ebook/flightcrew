@@ -22,9 +22,12 @@
 #include <stdafx.h>
 #include "XmlValidator.h"
 #include <ToXercesStringConverter.h>
-#include <FromXercesStringConverter.h>
 #include <LocationAwareDOMParser.h>
 #include <XmlUtils.h>
+
+const std::string OPF_XML_NAMESPACE = "http://www.idpf.org/2007/opf"; 
+const std::string DC_XML_NAMESPACE  = "http://purl.org/dc/elements/1.1/";
+
 
 std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 {
