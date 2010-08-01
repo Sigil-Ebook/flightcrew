@@ -28,8 +28,6 @@
 #ifndef CUSTOM_ASSERT_H
 #define CUSTOM_ASSERT_H
 
-#define ASSERTS_ENABLED
-
 namespace assert_ns { namespace Assert
 {
 	enum FailBehavior
@@ -52,10 +50,16 @@ namespace assert_ns { namespace Assert
 							   const char* msg, ...);
 }}
 
-#define X_HALT() __debugbreak()
+#if defined(_MSC_VER)
+#   define X_HALT() __debugbreak()
+#elif defined(__GNUC__)
+#   define X_HALT() __builtin_trap()
+#else define X_HALT() exit(__LINE__)
+#endif
+
 #define X_UNUSED(x) do { (void)sizeof(x); } while(0)
 
-#ifdef ASSERTS_ENABLED
+#ifndef NDEBUG
 	#define X_ASSERT(cond) \
 		do \
 		{ \
