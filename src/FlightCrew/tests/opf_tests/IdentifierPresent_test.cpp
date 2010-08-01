@@ -23,7 +23,7 @@
 #include "Validators/Opf/IdentifierPresent.h"
 #include "Result.h"
 
-TEST( IdentifierPresentTest, NoIdentifier_Error )
+TEST( IdentifierPresentTest, NoIdentifier )
 {
     IdentifierPresent validator;
     std::vector<Result> results = validator.ValidateFile(
@@ -38,7 +38,7 @@ TEST( IdentifierPresentTest, NoIdentifier_Error )
     EXPECT_EQ( message_arguments[ 0 ], "identifier" );
 }
 
-TEST( IdentifierPresentTest, HasIdentifier_OK )
+TEST( IdentifierPresentTest, HasIdentifier )
 {
     IdentifierPresent validator;
     std::vector<Result> results = validator.ValidateFile(

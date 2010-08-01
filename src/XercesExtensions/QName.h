@@ -1,0 +1,63 @@
+/************************************************************************
+**
+**  Copyright (C) 2010  Strahinja Markovic
+**
+**  This file is part of FlightCrew.
+**
+**  FlightCrew is free software: you can redistribute it and/or modify
+**  it under the terms of the GNU Lesser General Public License as published
+**  by the Free Software Foundation, either version 3 of the License, or
+**  (at your option) any later version.
+**
+**  FlightCrew is distributed in the hope that it will be useful,
+**  but WITHOUT ANY WARRANTY; without even the implied warranty of
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**  GNU Lesser General Public License for more details.
+**
+**  You should have received a copy of the GNU Lesser General Public License
+**  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
+**
+*************************************************************************/
+
+#pragma once
+#ifndef QNAME_H
+#define QNAME_H
+
+#include <string>
+
+/**
+ * A qualified name of a node/element/attribute in XML.
+ */
+struct QName
+{
+    /**
+     * Constructor.
+     *
+     * @param new_local_name The local name.
+     * @param new_namespace_name The namespace of the local name.
+     */
+    QName( const std::string &new_local_name, const std::string &new_namespace_name )
+        : local_name( new_local_name ), namespace_name ( new_namespace_name ) {};
+    
+    inline bool operator== ( const QName& other ) const 
+    { 
+        return local_name == other.local_name && namespace_name == other.namespace_name;
+    };
+
+    inline bool operator!= ( const QName& other ) const 
+    { 
+        return local_name != other.local_name || namespace_name != other.namespace_name;
+    };
+
+    /**
+     * The local name of the node.
+     */
+    std::string local_name;
+
+    /**
+     * The namespace name the local name is located in.
+     */
+    std::string namespace_name;
+};
+
+#endif // QNAME_H

@@ -24,6 +24,9 @@
 
 std::vector<Result> OneMetadata::ValidateXml( const xc::DOMDocument &document )
 {
-    return VerifyElementCount( "metadata", 1, "package", document );
+    return VerifyElementCount( QName( "metadata", OPF_XML_NAMESPACE ),
+                               1,
+                               QName( "package", OPF_XML_NAMESPACE ),
+                               document );
 }
 

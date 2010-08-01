@@ -24,10 +24,11 @@
 
 std::vector<Result> TourAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< std::string > allowed_children;
+    std::vector< QName > allowed_children;
 
-    allowed_children.push_back( "site" );
+    allowed_children.push_back( QName( "site", OPF_XML_NAMESPACE ) );
 
-    return ValidateAllowedChildren( "tour", allowed_children, document );
+    return ValidateAllowedChildren( 
+        QName( "tour", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 

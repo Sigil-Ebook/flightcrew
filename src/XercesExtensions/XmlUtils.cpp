@@ -69,13 +69,15 @@ std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element
 
 
 bool ElementListContains( std::vector< xc::DOMElement* > element_list,
-                          const std::string &tag_name )
+                          const QName &element_qname )
 {
     for ( uint i = 0; i < element_list.size(); ++i )
     {
-        std::string current_tag = fromX( element_list[ i ]->getTagName() );
+        xc::DOMElement *element = element_list[ i ];
+        QName current_qname( fromX( element->getLocalName() ), 
+                             fromX( element->getNamespaceURI() ) );
 
-        if ( current_tag == tag_name )
+        if ( current_qname == element_qname )
         
             return true;
     } 
@@ -83,13 +85,13 @@ bool ElementListContains( std::vector< xc::DOMElement* > element_list,
     return false;
 }
 
-xc::DOMNode* GetFirstAvailableElement( const std::vector< std::string > &element_names,
+xc::DOMNode* GetFirstAvailableElement( const std::vector< QName > &element_qnames,
                                        const xc::DOMDocument &document )
 {
-    foreach( std::string element_name, element_names )
+    foreach( QName element_qname, element_qnames )
     {
         xc::DOMNodeList *matching_nodes = document.getElementsByTagNameNS(
-                                            toX( "*" ),  toX( element_name ) );
+               toX( element_qname.namespace_name ),  toX( element_qname.local_name ) );
 
         if ( matching_nodes->getLength() > 0 )
 
@@ -99,13 +101,13 @@ xc::DOMNode* GetFirstAvailableElement( const std::vector< std::string > &element
     return NULL;
 }
 
-xc::DOMNode* GetFirstAvailableElement( const std::string &element_name, 
+xc::DOMNode* GetFirstAvailableElement( const QName &element_qname, 
                                        const xc::DOMDocument &document )
 {
-    std::vector< std::string > element_names;
-    element_names.push_back( element_name );
+    std::vector< QName > element_qnames;
+    element_qnames.push_back( element_qname );
 
-    return GetFirstAvailableElement( element_names, document );
+    return GetFirstAvailableElement( element_qnames, document );
 }
 
 } // namespace XercesExt

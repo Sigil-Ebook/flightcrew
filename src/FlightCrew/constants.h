@@ -23,7 +23,28 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+struct QName;
+
 extern const std::string OPF_XML_NAMESPACE;
 extern const std::string DC_XML_NAMESPACE;
+
+extern const QName DC_METADATA_QNAME;
+extern const QName X_METADATA_QNAME; 
+extern const QName TITLE_QNAME;      
+extern const QName LANGUAGE_QNAME;   
+extern const QName IDENTIFIER_QNAME; 
+extern const QName CREATOR_QNAME;    
+extern const QName SUBJECT_QNAME;    
+extern const QName DESCRIPTION_QNAME;
+extern const QName PUBLISHER_QNAME;  
+extern const QName CONTRIBUTOR_QNAME;
+extern const QName DATE_QNAME;       
+extern const QName TYPE_QNAME;       
+extern const QName FORMAT_QNAME;     
+extern const QName SOURCE_QNAME;     
+extern const QName RELATION_QNAME;   
+extern const QName COVERAGE_QNAME;   
+extern const QName RIGHTS_QNAME;   
+extern const QName META_QNAME;   
 
 #endif // CONSTANTS_H

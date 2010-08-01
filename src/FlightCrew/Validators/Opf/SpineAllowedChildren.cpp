@@ -24,10 +24,11 @@
 
 std::vector<Result> SpineAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< std::string > allowed_children;
+    std::vector< QName > allowed_children;
 
-    allowed_children.push_back( "itemref" );
+    allowed_children.push_back( QName( "itemref", OPF_XML_NAMESPACE ) );
 
-    return ValidateAllowedChildren( "spine", allowed_children, document );
+    return ValidateAllowedChildren( 
+        QName( "spine", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 

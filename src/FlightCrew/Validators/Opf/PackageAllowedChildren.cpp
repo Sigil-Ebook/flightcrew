@@ -24,14 +24,15 @@
 
 std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< std::string > allowed_children;
+    std::vector< QName > allowed_children;
 
-    allowed_children.push_back( "manifest" );
-    allowed_children.push_back( "metadata" );
-    allowed_children.push_back( "spine"    );
-    allowed_children.push_back( "tours"    );
-    allowed_children.push_back( "guide"    );
+    allowed_children.push_back( QName( "manifest", OPF_XML_NAMESPACE ) );
+    allowed_children.push_back( QName( "metadata", OPF_XML_NAMESPACE ) );
+    allowed_children.push_back( QName( "spine",    OPF_XML_NAMESPACE ) );
+    allowed_children.push_back( QName( "tours",    OPF_XML_NAMESPACE ) );
+    allowed_children.push_back( QName( "guide",    OPF_XML_NAMESPACE ) );
 
-    return ValidateAllowedChildren( "package", allowed_children, document );
+    return ValidateAllowedChildren( 
+        QName( "package", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 

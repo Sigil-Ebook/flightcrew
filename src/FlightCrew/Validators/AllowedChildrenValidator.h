@@ -24,14 +24,15 @@
 #define ALLOWEDCHILDRENVALIDATOR_H
 
 #include "XmlValidator.h"
+#include <QName.h>
 
 class AllowedChildrenValidator : public XmlValidator
 {
 
 protected:
 
-    std::vector<Result> ValidateAllowedChildren( const std::string &parent_name,
-                                                 const std::vector< std::string > &allowed_children,
+    std::vector<Result> ValidateAllowedChildren( const QName &parent_qname,
+                                                 const std::vector< QName > &allowed_children,
                                                  const xc::DOMDocument &document );
 
     Result NotAllowedChildResult( const xc::DOMNode &child );

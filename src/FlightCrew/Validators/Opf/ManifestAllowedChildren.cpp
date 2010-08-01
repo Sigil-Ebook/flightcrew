@@ -24,10 +24,11 @@
 
 std::vector<Result> ManifestAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< std::string > allowed_children;
+    std::vector< QName > allowed_children;
 
-    allowed_children.push_back( "item" );
+    allowed_children.push_back( QName( "item", OPF_XML_NAMESPACE ) );
 
-    return ValidateAllowedChildren( "manifest", allowed_children, document );
+    return ValidateAllowedChildren( 
+        QName( "manifest", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 

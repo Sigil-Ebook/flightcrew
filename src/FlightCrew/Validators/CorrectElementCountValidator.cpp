@@ -25,13 +25,13 @@
 #include <XmlUtils.h>
 
 std::vector<Result> CorrectElementCountValidator::VerifyElementCount( 
-    const std::string &element_name, 
+    const QName &element_qname, 
     int correct_count, 
-    const std::string &parent_name, 
+    const QName &parent_qname, 
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *elements = document.getElementsByTagNameNS(
-                                            toX( "*" ),  toX( element_name ) );
+        toX( element_qname.namespace_name ),  toX( element_qname.local_name ) );
 
     std::vector<Result> results;
 
@@ -41,7 +41,7 @@ std::vector<Result> CorrectElementCountValidator::VerifyElementCount(
 
         if ( elements->getLength() < 1 )
         {
-            xc::DOMNode *parent = xe::GetFirstAvailableElement( parent_name, document );
+            xc::DOMNode *parent = xe::GetFirstAvailableElement( parent_qname, document );
 
             result = parent != NULL                                                   ?
                      ResultWithNodeLocation( ERROR_XML_WRONG_ELEMENT_COUNT, *parent ) :
@@ -54,7 +54,7 @@ std::vector<Result> CorrectElementCountValidator::VerifyElementCount(
                 ERROR_XML_WRONG_ELEMENT_COUNT, *elements->item( 1 ) );
         }
 
-        result.AddMessageArgument( element_name );
+        result.AddMessageArgument( element_qname.local_name );
         results.push_back( result );
     }
 

@@ -24,6 +24,7 @@
 #define ELEMENTPRESENTVALIDATOR_H
 
 #include "XmlValidator.h"
+#include <QName.h>
 
 class ElementPresentValidator : public XmlValidator
 {
@@ -38,13 +39,13 @@ protected:
      * different parent types, a list is provided. The first parent 
      * present is reported as the location of the error.
      *
-     * @param element_name The name of the element whose presence we want to check.
+     * @param element_qname The name of the element whose presence we want to check.
      * @param possible_parents A list of possible parent names.
      * @param document The document being validated.
      * @return A list of validation results.
      */
-    std::vector<Result> VerifyElementPresent( const std::string &element_name,
-                                              const std::vector< std::string > &possible_parents,
+    std::vector<Result> VerifyElementPresent( const QName &element_qname,
+                                              const std::vector< QName > &possible_parents,
                                               const xc::DOMDocument &document );
 };
 

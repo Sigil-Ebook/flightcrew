@@ -25,12 +25,12 @@
 #include <XmlUtils.h>
 
 std::vector<Result> ElementPresentValidator::VerifyElementPresent( 
-    const std::string &element_name, 
-    const std::vector< std::string > &possible_parents,
+    const QName &element_qname, 
+    const std::vector< QName > &possible_parents,
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *matching_elements = document.getElementsByTagNameNS(
-                                        toX( "*" ),  toX( element_name ) );
+        toX( element_qname.namespace_name ),  toX( element_qname.local_name ) );
 
     std::vector<Result> results;
 
@@ -42,7 +42,7 @@ std::vector<Result> ElementPresentValidator::VerifyElementPresent(
                         ResultWithNodeLocation( ERROR_XML_ELEMENT_NOT_PRESENT, *parent ) :
                         Result( ERROR_XML_ELEMENT_NOT_PRESENT );
                         
-        result.AddMessageArgument( element_name );
+        result.AddMessageArgument( element_qname.local_name );
         results.push_back( result );
     }
 

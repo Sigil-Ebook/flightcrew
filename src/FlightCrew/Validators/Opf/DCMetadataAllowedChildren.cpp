@@ -24,24 +24,25 @@
 
 std::vector<Result> DCMetadataAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< std::string > allowed_children;
+    std::vector< QName > allowed_children;
 
-    allowed_children.push_back( "title"       );
-    allowed_children.push_back( "language"    );
-    allowed_children.push_back( "identifier"  );
-    allowed_children.push_back( "creator"     );
-    allowed_children.push_back( "subject"     );
-    allowed_children.push_back( "description" );
-    allowed_children.push_back( "publisher"   );
-    allowed_children.push_back( "contributor" );
-    allowed_children.push_back( "date"        );
-    allowed_children.push_back( "type"        );
-    allowed_children.push_back( "format"      );
-    allowed_children.push_back( "source"      );
-    allowed_children.push_back( "relation"    );
-    allowed_children.push_back( "coverage"    );
-    allowed_children.push_back( "rights"      );
+    allowed_children.push_back( TITLE_QNAME       );
+    allowed_children.push_back( LANGUAGE_QNAME    );
+    allowed_children.push_back( IDENTIFIER_QNAME  );
+    allowed_children.push_back( CREATOR_QNAME     );
+    allowed_children.push_back( SUBJECT_QNAME     );
+    allowed_children.push_back( DESCRIPTION_QNAME );
+    allowed_children.push_back( PUBLISHER_QNAME   );
+    allowed_children.push_back( CONTRIBUTOR_QNAME );
+    allowed_children.push_back( DATE_QNAME        );
+    allowed_children.push_back( TYPE_QNAME        );
+    allowed_children.push_back( FORMAT_QNAME      );
+    allowed_children.push_back( SOURCE_QNAME      );
+    allowed_children.push_back( RELATION_QNAME    );
+    allowed_children.push_back( COVERAGE_QNAME    );
+    allowed_children.push_back( RIGHTS_QNAME      );
 
-    return ValidateAllowedChildren( "dc-metadata", allowed_children, document );
+    return ValidateAllowedChildren( 
+        QName( "dc-metadata", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 

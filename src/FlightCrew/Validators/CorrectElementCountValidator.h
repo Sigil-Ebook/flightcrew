@@ -24,6 +24,7 @@
 #define CORRECTELEMENTCOUNTVALIDATOR_H
 
 #include "XmlValidator.h"
+#include <QName.h>
 
 class CorrectElementCountValidator : public XmlValidator
 {
@@ -40,9 +41,9 @@ protected:
      * @param document The document being validated.
      * @return A list of validation results.
      */
-    std::vector<Result> VerifyElementCount( const std::string &element_name,
+    std::vector<Result> VerifyElementCount( const QName &element_qname,
                                             int correct_count,
-                                            const std::string &parent_name,
+                                            const QName &parent_qname,
                                             const xc::DOMDocument &document );
 };
 

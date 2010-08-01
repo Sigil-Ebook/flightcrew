@@ -28,12 +28,12 @@
 #include <algorithm>
 
 std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren( 
-    const std::string &parent_name, 
-    const std::vector< std::string > &allowed_children, 
+    const QName &parent_qname, 
+    const std::vector< QName > &allowed_children, 
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *parents_matching = document.getElementsByTagNameNS(
-                                            toX( "*" ),  toX( parent_name ) );
+        toX( parent_qname.namespace_name ),  toX( parent_qname.local_name ) );
 
     std::vector<Result> results;
 
@@ -48,9 +48,10 @@ std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren(
 
     for ( uint i = 0; i < children.size(); ++i )
     {
-        std::string local_name = fromX( children[ i ]->getLocalName() );
+        xc::DOMElement *child = children[ i ];
+        QName child_qname( fromX( child->getLocalName() ), fromX( child->getNamespaceURI() ) );
 
-        if ( !Util::Contains< std::string >( allowed_children, local_name ) )
+        if ( !Util::Contains< QName >( allowed_children, child_qname ) )
 
             results.push_back( NotAllowedChildResult( *children[ i ] ) );
     }

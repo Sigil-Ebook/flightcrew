@@ -28,7 +28,7 @@
 std::vector<Result> XMetadataAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
     xc::DOMNodeList *xmetadatas = document.getElementsByTagNameNS(
-                                    toX( "*" ),  toX( "x-metadata" ) );
+                                    toX( OPF_XML_NAMESPACE ),  toX( "x-metadata" ) );
 
     std::vector<Result> results;
 
@@ -43,12 +43,12 @@ std::vector<Result> XMetadataAllowedChildren::ValidateXml( const xc::DOMDocument
 
     for ( uint i = 0; i < children.size(); ++i )
     {
-        std::string local_name = fromX( children[ i ]->getLocalName() );
+        std::string local_name     = fromX( children[ i ]->getLocalName() );
+        std::string namespace_name = fromX( children[ i ]->getNamespaceURI() );
+        QName child_qname( local_name, namespace_name );
 
-        if ( local_name != "meta" )
+        if ( child_qname != META_QNAME )
         {
-            std::string namespace_name = fromX( children[ i ]->getNamespaceURI() );
-
             if ( namespace_name == OPF_XML_NAMESPACE ||
                  namespace_name == DC_XML_NAMESPACE
                 )

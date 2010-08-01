@@ -27,6 +27,7 @@
 #include <string>
 #include <xercesc/dom/DOMNode.hpp>
 #include "NodeLocationInfo.h"
+#include "QName.h"
 
 namespace XERCES_CPP_NAMESPACE { class DOMElement; class DOMDocument; }
 namespace xc = XERCES_CPP_NAMESPACE;
@@ -38,30 +39,30 @@ namespace XercesExt
     std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element );
 
     bool ElementListContains( std::vector< xc::DOMElement* > element_list,
-                              const std::string &tag_name );
+                              const QName &element_qname );
 
    /**
      * From the provided list of element names, returns the first element
      * present in the document.
      *
-     * @param element_names The list of element names to search for.
+     * @param element_qnames The list of element names to search for.
      * @param document The parent DOM document.
      * @return The first element matching one of the provided names
      *         or NULL if none were found.
      */
-    xc::DOMNode* GetFirstAvailableElement( const std::vector< std::string > &element_names,
+    xc::DOMNode* GetFirstAvailableElement( const std::vector< QName > &element_qnames,
                                            const xc::DOMDocument &document );
 
    /**
      * Returns the first element present in the document that matches
      * the provided name.
      *
-     * @param element_name The element name to search for.
+     * @param element The element to search for.
      * @param document The parent DOM document.
      * @return The first element matching the provided name
      *         or NULL if none were found.
      */
-    xc::DOMNode* GetFirstAvailableElement( const std::string &element_name,
+    xc::DOMNode* GetFirstAvailableElement( const QName &element_qname,
                                            const xc::DOMDocument &document );
 }
 

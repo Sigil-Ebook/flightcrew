@@ -25,17 +25,19 @@
 
 std::vector<Result> PackageAttributesPresent::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< std::string > allowed_attributes;
-    allowed_attributes.push_back( "version" );
-    allowed_attributes.push_back( "unique-identifier" );
-    allowed_attributes.push_back( "id" );
+    std::vector< QName > allowed_attributes;
+    allowed_attributes.push_back( QName( "version",           "" ) );
+    allowed_attributes.push_back( QName( "unique-identifier", "" ) );
+    allowed_attributes.push_back( QName( "id",                "" ) );
 
-    std::vector< std::string > mandatory_attributes;
-    mandatory_attributes.push_back( "version" );
-    mandatory_attributes.push_back( "unique-identifier" );
+    std::vector< QName > mandatory_attributes;
+    mandatory_attributes.push_back( QName( "version",           "" ) );
+    mandatory_attributes.push_back( QName( "unique-identifier", "" ) );
 
     return Util::Extend( 
-        HasOnlyAllowedAttributes( "package", allowed_attributes, document ), 
-        HasMandatoryAttributes( "package", mandatory_attributes, document ) );
+        HasOnlyAllowedAttributes( 
+            QName( "package", OPF_XML_NAMESPACE ), allowed_attributes, document ), 
+        HasMandatoryAttributes(   
+            QName( "package", OPF_XML_NAMESPACE ), mandatory_attributes, document ) );
 }
 

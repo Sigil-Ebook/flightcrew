@@ -24,9 +24,10 @@
 
 std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< std::string > possible_parents;
-    possible_parents.push_back( "metadata" );
-    possible_parents.push_back( "dc-metadata" );
+    std::vector< QName > possible_parents;
+    possible_parents.push_back( QName( "metadata",    OPF_XML_NAMESPACE ) );
+    possible_parents.push_back( QName( "dc-metadata", OPF_XML_NAMESPACE ) );
 
-    return VerifyElementPresent( "title", possible_parents, document );
+    return VerifyElementPresent( 
+        QName( "title", DC_XML_NAMESPACE ), possible_parents, document );
 }

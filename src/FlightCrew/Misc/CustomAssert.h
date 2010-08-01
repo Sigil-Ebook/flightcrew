@@ -105,6 +105,6 @@ namespace assert_ns { namespace Assert
 #endif
 
 #define X_STATIC_ASSERT(x) \
-	typedef char pow2StaticAssert[(x) ? 1 : -1];
+	typedef char StaticAssert[(x) ? 1 : -1];
 
 #endif // CUSTOM_ASSERT_H

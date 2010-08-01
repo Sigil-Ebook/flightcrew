@@ -27,12 +27,12 @@
 
 
 std::vector<Result> AttributesPresentValidator::HasOnlyAllowedAttributes( 
-    const std::string &element_name,
-    const std::vector< std::string > &attribute_names, 
+    const QName &element_qname,
+    const std::vector< QName > &attribute_qnames, 
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *elements = document.getElementsByTagNameNS(
-                                    toX( "*" ),  toX( element_name ) );
+        toX( element_qname.namespace_name ),  toX( element_qname.local_name ) );
 
     std::vector<Result> results;
 
@@ -45,14 +45,14 @@ std::vector<Result> AttributesPresentValidator::HasOnlyAllowedAttributes(
         {
             xc::DOMAttr* attribute = static_cast< xc::DOMAttr* >( attributes->item( j ) );
 
-            if ( !IsAllowedAttribute( *attribute, attribute_names ) )
+            if ( !IsAllowedAttribute( *attribute, attribute_qnames ) )
             {
                 Result result = ResultWithNodeLocation( 
                     ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED, *element );
 
                 std::string attribute_name = fromX( attribute->getName() );
                 result.AddMessageArgument( attribute_name );
-                result.AddMessageArgument( element_name );
+                result.AddMessageArgument( element_qname.local_name );
                 results.push_back( result );
             }
         }
@@ -63,12 +63,12 @@ std::vector<Result> AttributesPresentValidator::HasOnlyAllowedAttributes(
 
 
 std::vector<Result> AttributesPresentValidator::HasMandatoryAttributes( 
-    const std::string &element_name, 
-    const std::vector< std::string > &attribute_names, 
+    const QName &element_qname, 
+    const std::vector< QName > &attribute_qnames, 
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *elements = document.getElementsByTagNameNS(
-                                    toX( "*" ),  toX( element_name ) );
+        toX( element_qname.namespace_name ),  toX( element_qname.local_name ) );
 
     std::vector<Result> results;
 
@@ -76,15 +76,16 @@ std::vector<Result> AttributesPresentValidator::HasMandatoryAttributes(
     {
         xc::DOMElement* element = static_cast< xc::DOMElement* >( elements->item( i ) );
 
-        foreach( std::string attribute_name, attribute_names )
+        foreach( QName attribute_qname, attribute_qnames )
         {
-            if ( !element->hasAttribute( toX( attribute_name ) ) )
+            if ( !element->hasAttributeNS( 
+                    toX( attribute_qname.namespace_name ), toX( attribute_qname.local_name ) ) )
             {
                 Result result = ResultWithNodeLocation( 
                     ERROR_XML_REQUIRED_ATTRIBUTE_MISSING, *element );
 
-                result.AddMessageArgument( attribute_name );
-                result.AddMessageArgument( element_name );
+                result.AddMessageArgument( attribute_qname.local_name );
+                result.AddMessageArgument( element_qname.local_name );
                 results.push_back( result );
             }
         }
@@ -95,13 +96,13 @@ std::vector<Result> AttributesPresentValidator::HasMandatoryAttributes(
 
 bool AttributesPresentValidator::IsAllowedAttribute( 
     const xc::DOMAttr &attribute, 
-    const std::vector< std::string > &allowed_attribute_names )
+    const std::vector< QName > &allowed_attribute_qnames )
 {
-    std::string attribute_name = fromX( attribute.getName() );
+    QName attribute_qname( fromX( attribute.getName() ), fromX( attribute.getNamespaceURI() ) );
 
-    bool allowed_name = Util::Contains< std::string >( 
-                            allowed_attribute_names, attribute_name );
-    bool is_xmlns = attribute_name == "xmlns";
+    bool allowed_name = Util::Contains< QName >( 
+                            allowed_attribute_qnames, attribute_qname );
+    bool is_xmlns = attribute_qname.local_name == "xmlns";
 
     return allowed_name || is_xmlns;
 }

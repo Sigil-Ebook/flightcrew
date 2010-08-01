@@ -24,6 +24,7 @@
 #define ATTRIBUTESPRESENTVALIDATOR_H
 
 #include "XmlValidator.h"
+#include <QName.h>
 
 class AttributesPresentValidator : public XmlValidator
 {
@@ -34,32 +35,32 @@ protected:
      * Checks that the attributes of all the elements matching the given name
      * are allowed.
      *
-     * @param element_name The name of the element whose attributes we want to check.
-     * @param attribute_names A list of allowed attributes.
+     * @param element_qname The name of the element whose attributes we want to check.
+     * @param attribute_qnames A list of allowed attributes.
      * @param document The document being validated.
      * @return A list of validation results, empty if no problem were found.
      */
-    std::vector<Result> HasOnlyAllowedAttributes( const std::string &element_name,
-                                                  const std::vector< std::string > &attribute_names,
+    std::vector<Result> HasOnlyAllowedAttributes( const QName &element_qname,
+                                                  const std::vector< QName > &attribute_qnames,
                                                   const xc::DOMDocument &document );
 
     /**
      * Checks that all the elements matching the given name have all their
      * mandatory attributes.
      *
-     * @param element_name The name of the element whose attributes we want to check.
-     * @param attribute_names A list of mandatory attributes.
+     * @param element_qname The name of the element whose attributes we want to check.
+     * @param attribute_qnames A list of mandatory attributes.
      * @param document The document being validated.
      * @return A list of validation results, empty if no problem were found.
      */
-    std::vector<Result> HasMandatoryAttributes( const std::string &element_name,
-                                                const std::vector< std::string > &attribute_names,
+    std::vector<Result> HasMandatoryAttributes( const QName &element_qname,
+                                                const std::vector< QName > &attribute_qnames,
                                                 const xc::DOMDocument &document );
 
 private:
 
     bool IsAllowedAttribute( const xc::DOMAttr &attribute,
-                             const std::vector< std::string > &allowed_attribute_names );
+                             const std::vector< QName > &allowed_attribute_qnames );
 };
 
 #endif // ATTRIBUTESPRESENTVALIDATOR_H

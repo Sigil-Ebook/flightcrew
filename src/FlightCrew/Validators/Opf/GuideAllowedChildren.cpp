@@ -24,10 +24,11 @@
 
 std::vector<Result> GuideAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< std::string > allowed_children;
+    std::vector< QName > allowed_children;
 
-    allowed_children.push_back( "reference" );
+    allowed_children.push_back( QName( "reference", OPF_XML_NAMESPACE ) );
 
-    return ValidateAllowedChildren( "guide", allowed_children, document );
+    return ValidateAllowedChildren( 
+        QName( "guide", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 

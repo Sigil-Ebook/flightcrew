@@ -40,7 +40,7 @@ std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 
 
 Result XmlValidator::ResultWithNodeLocation( ResultId error_id, 
-                                             const char *element_name,
+                                             const std::string &element_name,
                                              const xc::DOMDocument &document )
 {
     xc::DOMNodeList *matching_elements = document.getDocumentElement()->
