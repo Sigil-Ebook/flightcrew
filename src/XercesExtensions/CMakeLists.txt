@@ -30,7 +30,7 @@ target_link_libraries( ${PROJECT_NAME} Xerces )
 # "Link time code generation" flags for MSVC
 # TODO: split into special cmake file
 if( MSVC )
-    add_definitions( /DUNICODE /D_UNICODE )
+    add_definitions( /DUNICODE /D_UNICODE /W4 )
     # The /Zc:wchar_t- flag can't go into add_definitions
     # because the RC compiler picks it up too and it provokes a name clash
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-")
