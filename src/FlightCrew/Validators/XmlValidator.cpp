@@ -40,21 +40,6 @@ std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 
 
 Result XmlValidator::ResultWithNodeLocation( ResultId error_id, 
-                                             const std::string &element_name,
-                                             const xc::DOMDocument &document )
-{
-    xc::DOMNodeList *matching_elements = document.getDocumentElement()->
-        getElementsByTagNameNS( toX( "*" ),  toX( element_name ) );
-
-    if ( matching_elements->getLength() == 1 )
-    
-        return ResultWithNodeLocation( error_id, *matching_elements->item( 0 ) );
-
-    return Result( error_id );
-}
-
-
-Result XmlValidator::ResultWithNodeLocation( ResultId error_id, 
                                              const xc::DOMNode &node )
 {
     return Result( error_id, xe::GetNodeLocationInfo( node ) );

@@ -41,10 +41,6 @@ public:
 protected:
 
     Result ResultWithNodeLocation( ResultId error_id, 
-                                   const std::string &element_name,
-                                   const xc::DOMDocument &document );
-
-    Result ResultWithNodeLocation( ResultId error_id, 
                                    const xc::DOMNode &node );
 };
 
