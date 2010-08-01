@@ -25,25 +25,25 @@
 #include <FromXercesStringConverter.h>
 #include <XmlUtils.h>
 
-static const QName DC_METADATA_QNAME = QName( "dc-metadata", OPF_XML_NAMESPACE );
-static const QName X_METADATA_QNAME  = QName( "x-metadata",  OPF_XML_NAMESPACE );
+const QName DC_METADATA_QNAME = QName( "dc-metadata", OPF_XML_NAMESPACE );
+const QName X_METADATA_QNAME  = QName( "x-metadata",  OPF_XML_NAMESPACE );
 
-static const QName TITLE_QNAME       = QName( "title",       DC_XML_NAMESPACE  );
-static const QName LANGUAGE_QNAME    = QName( "language",    DC_XML_NAMESPACE  );
-static const QName IDENTIFIER_QNAME  = QName( "identifier",  DC_XML_NAMESPACE  );
-static const QName CREATOR_QNAME     = QName( "creator",     DC_XML_NAMESPACE  );
-static const QName SUBJECT_QNAME     = QName( "subject",     DC_XML_NAMESPACE  );
-static const QName DESCRIPTION_QNAME = QName( "description", DC_XML_NAMESPACE  );
-static const QName PUBLISHER_QNAME   = QName( "publisher",   DC_XML_NAMESPACE  );
-static const QName CONTRIBUTOR_QNAME = QName( "contributor", DC_XML_NAMESPACE  );
-static const QName DATE_QNAME        = QName( "date",        DC_XML_NAMESPACE  );
-static const QName TYPE_QNAME        = QName( "type",        DC_XML_NAMESPACE  );
-static const QName FORMAT_QNAME      = QName( "format",      DC_XML_NAMESPACE  );
-static const QName SOURCE_QNAME      = QName( "source",      DC_XML_NAMESPACE  );
-static const QName RELATION_QNAME    = QName( "relation",    DC_XML_NAMESPACE  );
-static const QName COVERAGE_QNAME    = QName( "coverage",    DC_XML_NAMESPACE  );
-static const QName RIGHTS_QNAME      = QName( "rights",      DC_XML_NAMESPACE  );
-static const QName META_QNAME        = QName( "meta",        OPF_XML_NAMESPACE );
+const QName TITLE_QNAME       = QName( "title",       DC_XML_NAMESPACE  );
+const QName LANGUAGE_QNAME    = QName( "language",    DC_XML_NAMESPACE  );
+const QName IDENTIFIER_QNAME  = QName( "identifier",  DC_XML_NAMESPACE  );
+const QName CREATOR_QNAME     = QName( "creator",     DC_XML_NAMESPACE  );
+const QName SUBJECT_QNAME     = QName( "subject",     DC_XML_NAMESPACE  );
+const QName DESCRIPTION_QNAME = QName( "description", DC_XML_NAMESPACE  );
+const QName PUBLISHER_QNAME   = QName( "publisher",   DC_XML_NAMESPACE  );
+const QName CONTRIBUTOR_QNAME = QName( "contributor", DC_XML_NAMESPACE  );
+const QName DATE_QNAME        = QName( "date",        DC_XML_NAMESPACE  );
+const QName TYPE_QNAME        = QName( "type",        DC_XML_NAMESPACE  );
+const QName FORMAT_QNAME      = QName( "format",      DC_XML_NAMESPACE  );
+const QName SOURCE_QNAME      = QName( "source",      DC_XML_NAMESPACE  );
+const QName RELATION_QNAME    = QName( "relation",    DC_XML_NAMESPACE  );
+const QName COVERAGE_QNAME    = QName( "coverage",    DC_XML_NAMESPACE  );
+const QName RIGHTS_QNAME      = QName( "rights",      DC_XML_NAMESPACE  );
+const QName META_QNAME        = QName( "meta",        OPF_XML_NAMESPACE );
 
 
 std::vector<Result> MetadataAllowedChildren::ValidateXml( const xc::DOMDocument &document )
@@ -71,13 +71,13 @@ std::vector<Result> MetadataAllowedChildren::ValidateXml( const xc::DOMDocument 
     if ( xe::ElementListContains( children, DC_METADATA_QNAME ) ||
          xe::ElementListContains( children, X_METADATA_QNAME  ) )
     {
-        std::vector<Result> subresults = ValidateDCXChildrenSubset( metadata, children );
+        std::vector<Result> subresults = ValidateDCXChildrenSubset( children );
         results.insert( results.end(), subresults.begin(), subresults.end() );
     }
 
     else
     {
-        std::vector<Result> subresults = ValidateStandardChildren( metadata, children );
+        std::vector<Result> subresults = ValidateStandardChildren( children );
         results.insert( results.end(), subresults.begin(), subresults.end() );
     }
 
@@ -85,8 +85,8 @@ std::vector<Result> MetadataAllowedChildren::ValidateXml( const xc::DOMDocument 
 }
 
 
-std::vector<Result> MetadataAllowedChildren::ValidateDCXChildrenSubset( xc::DOMElement* metadata,
-                                                                        std::vector< xc::DOMElement* > children )
+std::vector<Result> MetadataAllowedChildren::ValidateDCXChildrenSubset(
+    std::vector< xc::DOMElement* > children )
 {
     std::vector<Result> results;
 
@@ -108,8 +108,8 @@ std::vector<Result> MetadataAllowedChildren::ValidateDCXChildrenSubset( xc::DOME
 }
 
 
-std::vector<Result> MetadataAllowedChildren::ValidateStandardChildren( xc::DOMElement* metadata,
-                                                                       std::vector< xc::DOMElement* > children )
+std::vector<Result> MetadataAllowedChildren::ValidateStandardChildren( 
+    std::vector< xc::DOMElement* > children )
 {
     std::vector<Result> results;
 

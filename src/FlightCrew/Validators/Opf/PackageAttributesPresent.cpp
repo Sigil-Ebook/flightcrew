@@ -30,14 +30,16 @@ std::vector<Result> PackageAttributesPresent::ValidateXml( const xc::DOMDocument
     allowed_attributes.push_back( QName( "unique-identifier", "" ) );
     allowed_attributes.push_back( QName( "id",                "" ) );
 
+    std::vector< Result > allowed_results = HasOnlyAllowedAttributes( 
+        QName( "package", OPF_XML_NAMESPACE ), allowed_attributes, document );
+
     std::vector< QName > mandatory_attributes;
     mandatory_attributes.push_back( QName( "version",           "" ) );
     mandatory_attributes.push_back( QName( "unique-identifier", "" ) );
 
-    return Util::Extend( 
-        HasOnlyAllowedAttributes( 
-            QName( "package", OPF_XML_NAMESPACE ), allowed_attributes, document ), 
-        HasMandatoryAttributes(   
-            QName( "package", OPF_XML_NAMESPACE ), mandatory_attributes, document ) );
+    std::vector< Result > mandatory_results = HasMandatoryAttributes(   
+        QName( "package", OPF_XML_NAMESPACE ), mandatory_attributes, document );
+
+    return Util::Extend( allowed_results, mandatory_results );
 }
 

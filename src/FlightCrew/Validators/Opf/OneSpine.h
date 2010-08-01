@@ -23,9 +23,9 @@
 #ifndef ONESPINE_H
 #define ONESPINE_H
 
-#include "../CorrectElementCountValidator.h"
+#include "../ElementCountOneValidator.h"
 
-class OneSpine : public CorrectElementCountValidator
+class OneSpine : public ElementCountOneValidator
 {
 public:
 

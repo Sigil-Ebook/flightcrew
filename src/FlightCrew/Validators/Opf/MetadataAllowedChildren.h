@@ -39,20 +39,16 @@ private:
     /**
      * Validates the metadata children when using dc- and x-metadata children.
      *
-     * @param metadata The metadata element.
      * @param children The children of the metadata element.
      */
-    std::vector<Result> ValidateDCXChildrenSubset( xc::DOMElement* metadata,
-                                                   std::vector< xc::DOMElement* > children );
+    std::vector<Result> ValidateDCXChildrenSubset( std::vector< xc::DOMElement* > children );
 
     /**
      * Validates the metadata children when using standard children.
      *
-     * @param metadata The metadata element.
      * @param children The children of the metadata element.
      */
-    std::vector<Result> ValidateStandardChildren( xc::DOMElement* metadata,
-                                                  std::vector< xc::DOMElement* > children );
+    std::vector<Result> ValidateStandardChildren( std::vector< xc::DOMElement* > children );
 };
 
 #endif // METADATAALLOWEDCHILDREN_H

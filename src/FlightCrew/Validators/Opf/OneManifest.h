@@ -23,9 +23,9 @@
 #ifndef ONEMANIFEST_H
 #define ONEMANIFEST_H
 
-#include "../CorrectElementCountValidator.h"
+#include "../ElementCountOneValidator.h"
 
-class OneManifest : public CorrectElementCountValidator
+class OneManifest : public ElementCountOneValidator
 {
 public:
 

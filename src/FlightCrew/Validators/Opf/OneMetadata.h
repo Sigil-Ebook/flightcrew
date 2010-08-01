@@ -23,9 +23,9 @@
 #ifndef ONEMETADATA_H
 #define ONEMETADATA_H
 
-#include "../CorrectElementCountValidator.h"
+#include "../ElementCountOneValidator.h"
 
-class OneMetadata : public CorrectElementCountValidator
+class OneMetadata : public ElementCountOneValidator
 {
 public:
 

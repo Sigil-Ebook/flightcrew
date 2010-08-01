@@ -25,9 +25,8 @@
 
 std::vector<Result> OneSpine::ValidateXml( const xc::DOMDocument &document )
 {
-    return VerifyElementCount( QName( "spine", OPF_XML_NAMESPACE ),
-                               1,
-                               QName( "package", OPF_XML_NAMESPACE ),
-                               document );
+    return VerifyElementCountOne( QName( "spine", OPF_XML_NAMESPACE ),
+                                  QName( "package", OPF_XML_NAMESPACE ),
+                                  document );
 }
 

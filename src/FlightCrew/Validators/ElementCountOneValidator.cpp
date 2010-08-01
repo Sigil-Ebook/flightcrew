@@ -20,13 +20,12 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "CorrectElementCountValidator.h"
+#include "ElementCountOneValidator.h"
 #include "ToXercesStringConverter.h"
 #include <XmlUtils.h>
 
-std::vector<Result> CorrectElementCountValidator::VerifyElementCount( 
+std::vector<Result> ElementCountOneValidator::VerifyElementCountOne( 
     const QName &element_qname, 
-    int correct_count, 
     const QName &parent_qname, 
     const xc::DOMDocument &document )
 {

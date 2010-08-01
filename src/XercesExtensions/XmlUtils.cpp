@@ -63,8 +63,6 @@ std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element
          
          children.push_back( child );
     }
-
-    return children;
 }
 
 

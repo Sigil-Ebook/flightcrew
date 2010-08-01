@@ -19,6 +19,12 @@
 **
 *************************************************************************/
 
+// We set the MSVC warning level down to 3
+// for code that we have no control over
+#if defined(_MSC_VER)
+#   pragma warning( push, 3 )
+#endif
+
 #include <xercesc/dom/DOM.hpp>
 #include <xercesc/util/XMLString.hpp>
 #include <xercesc/util/PlatformUtils.hpp>
@@ -32,9 +38,15 @@
 #include <boost/unordered_map.hpp>
 #include <boost/format.hpp> 
 #include <boost/foreach.hpp> 
+
+// ... and then we reset the warning level
+// back to normal (warning level 4)
+#if defined(_MSC_VER)
+#   pragma warning( pop )
+#endif
+
 #include "constants.h"
 //#include "exception.h"
-
 #include "Misc/CustomAssert.h"
 
 // We're most definitely not going to use

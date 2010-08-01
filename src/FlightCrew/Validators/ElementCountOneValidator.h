@@ -20,31 +20,29 @@
 *************************************************************************/
 
 #pragma once
-#ifndef CORRECTELEMENTCOUNTVALIDATOR_H
-#define CORRECTELEMENTCOUNTVALIDATOR_H
+#ifndef ELEMENTCOUNTONEVALIDATOR_H
+#define ELEMENTCOUNTONEVALIDATOR_H
 
 #include "XmlValidator.h"
 #include <QName.h>
 
-class CorrectElementCountValidator : public XmlValidator
+class ElementCountOneValidator : public XmlValidator
 {
 
 protected:
     
     /**
-     * Verifies the correct count of the element in the document.
+     * Verifies that there is only one element of the specified type in the document.
      * We try to report the location of the error as the location
      * of a parent element that is supposed to contain the required element.
      *
-     * @param element_name The name of the element whose correct count we want to check.
-     * @param correct_count The correct count of these elements.
+     * @param element_qname The name of the element whose correct count we want to check.
      * @param document The document being validated.
      * @return A list of validation results.
      */
-    std::vector<Result> VerifyElementCount( const QName &element_qname,
-                                            int correct_count,
-                                            const QName &parent_qname,
-                                            const xc::DOMDocument &document );
+    std::vector<Result> VerifyElementCountOne( const QName &element_qname,
+                                               const QName &parent_qname,
+                                               const xc::DOMDocument &document );
 };
 
-#endif // CORRECTELEMENTCOUNTVALIDATOR_H
+#endif // ELEMENTCOUNTONEVALIDATOR_H

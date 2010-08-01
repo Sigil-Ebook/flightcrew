@@ -18,8 +18,14 @@
 **  along with FlightCrew.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
+
 #include <stdafx.h>
 #include "flightcrew.h"
+
+// TODO: Remove this when the functions are implemented properly.
+#if defined(_MSC_VER)
+#   pragma warning( disable : 4100 )
+#endif
 
 std::vector< Result > ValidateEpub( const std::string &absolute_path )
 {
