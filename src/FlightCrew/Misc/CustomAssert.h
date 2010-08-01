@@ -54,7 +54,8 @@ namespace assert_ns { namespace Assert
 #   define X_HALT() __debugbreak()
 #elif defined(__GNUC__)
 #   define X_HALT() __builtin_trap()
-#else define X_HALT() exit(__LINE__)
+#else
+#    define X_HALT() exit(__LINE__)
 #endif
 
 #define X_UNUSED(x) do { (void)sizeof(x); } while(0)

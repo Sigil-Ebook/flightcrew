@@ -36,12 +36,12 @@ std::vector<Result> AttributesPresentValidator::HasOnlyAllowedAttributes(
 
     std::vector<Result> results;
 
-    for ( int i = 0; i < elements->getLength(); ++i )
+    for ( uint i = 0; i < elements->getLength(); ++i )
     {
         xc::DOMElement* element         = static_cast< xc::DOMElement* >( elements->item( i ) );
         xc::DOMNamedNodeMap *attributes = element->getAttributes();
 
-        for ( int j = 0; j < attributes->getLength(); ++j )
+        for ( uint j = 0; j < attributes->getLength(); ++j )
         {
             xc::DOMAttr* attribute = static_cast< xc::DOMAttr* >( attributes->item( j ) );
 
@@ -72,7 +72,7 @@ std::vector<Result> AttributesPresentValidator::HasMandatoryAttributes(
 
     std::vector<Result> results;
 
-    for ( int i = 0; i < elements->getLength(); ++i )
+    for ( uint i = 0; i < elements->getLength(); ++i )
     {
         xc::DOMElement* element = static_cast< xc::DOMElement* >( elements->item( i ) );
 

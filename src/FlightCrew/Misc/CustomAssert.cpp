@@ -84,7 +84,13 @@ Assert::FailBehavior Assert::ReportFailure(const char* condition,
 		{
 			va_list args;
 			va_start(args, msg);
+
+            #if defined(_MSC_VER)
 			vsnprintf_s(messageBuffer, 1024, 1024, msg, args);
+            #else
+            vsnprintf(messageBuffer, 1024, msg, args);
+            #endif
+
 			va_end(args);
 		}
 
