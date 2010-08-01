@@ -33,13 +33,15 @@ ToXercesStringConverter::ToXercesStringConverter( const std::string &ascii_strin
 
 ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )
 {
-    m_XercesString = xc::XMLString::transcode( ascii_string );
+    m_XercesString = ascii_string ? xc::XMLString::transcode( ascii_string ) : NULL;
 }
 
 
 ToXercesStringConverter::~ToXercesStringConverter()
 {
-    xc::XMLString::release( &m_XercesString );
+    if ( m_XercesString )
+    
+        xc::XMLString::release( &m_XercesString );
 }
 
 
@@ -48,4 +50,5 @@ const XMLCh* ToXercesStringConverter::XercesString() const
     return m_XercesString;
 }
 
-}
+} // namespace XercesExt
+

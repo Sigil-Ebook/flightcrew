@@ -24,20 +24,30 @@
 
 namespace XercesExt
 {
-    FromXercesStringConverter::FromXercesStringConverter( const XMLCh* const xerces_string )
-    {
-        m_LocalString = xc::XMLString::transcode( xerces_string );
-    }
 
-
-    FromXercesStringConverter::~FromXercesStringConverter()
-    {
-        xc::XMLString::release( &m_LocalString );
-    }
-
-
-    const char* FromXercesStringConverter::LocalString() const
-    {
-        return m_LocalString;
-    }
+FromXercesStringConverter::FromXercesStringConverter( const XMLCh* const xerces_string )
+{
+    m_LocalString = xerces_string ? xc::XMLString::transcode( xerces_string ) : NULL;
 }
+
+
+FromXercesStringConverter::~FromXercesStringConverter()
+{
+    if ( m_LocalString )
+        
+        xc::XMLString::release( &m_LocalString );
+}
+
+
+const char* FromXercesStringConverter::LocalString() const
+{
+    return m_LocalString;
+}
+
+
+std::string FromXercesStringConverter::StandardString() const
+{
+    return m_LocalString ? std::string( m_LocalString ) : std::string();
+}
+
+} // namespace XercesExt

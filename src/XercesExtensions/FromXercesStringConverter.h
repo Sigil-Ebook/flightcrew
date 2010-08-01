@@ -40,12 +40,14 @@ namespace XercesExt
 
         const char* LocalString() const;
 
+        std::string StandardString() const;
+
     private:
 
         char* m_LocalString;
     };
 }
 
-#define fromX( str ) std::string( XercesExt::FromXercesStringConverter( (str) ).LocalString() )
+#define fromX( str ) XercesExt::FromXercesStringConverter( (str) ).StandardString()
 
 #endif // FROMXERCESSTRINGCONVERTER_H
