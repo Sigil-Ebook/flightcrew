@@ -26,10 +26,10 @@ namespace XercesExt
 {
 
 void LocationInfoDataHandler::handle( DOMOperationType operation,
-                                      const XMLCh *const key,
+                                      const XMLCh *const,
                                       void *data,
-                                      const xc::DOMNode *src,
-                                      xc::DOMNode *dst )
+                                      const xc::DOMNode*,
+                                      xc::DOMNode* )
 {
     NodeLocationInfo* location_info = static_cast< NodeLocationInfo* >( data );
 
