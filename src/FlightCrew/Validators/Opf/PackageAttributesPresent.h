@@ -20,27 +20,16 @@
 *************************************************************************/
 
 #pragma once
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#ifndef PACKAGEATTRIBUTESPRESENT_H
+#define PACKAGEATTRIBUTESPRESENT_H
 
-#include <vector>
-#include <algorithm>
+#include "../AttributesPresentValidator.h"
 
-namespace Util
+class PackageAttributesPresent : public AttributesPresentValidator
 {
-    template <typename T>
-    bool Contains( const std::vector<T> &vector, const T &value )
-    {
-        return std::find( vector.begin(), vector.end(), value ) != vector.end(); 
-    }
+public:
 
-    template <typename T>
-    std::vector<T>& Extend( std::vector<T> &base_vector, const std::vector <T> &extension_vector ) 
-    {
-            base_vector.insert( base_vector.end(), extension_vector.begin(), extension_vector.end() );
-            return base_vector;
-    }
+    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
+};
 
-}
-
-#endif // UTILITIES_H
+#endif // PACKAGEATTRIBUTESPRESENT_H

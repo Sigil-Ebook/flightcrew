@@ -41,27 +41,22 @@ std::vector<Result> AttributesPresentValidator::HasOnlyAllowedAttributes(
         xc::DOMElement* element         = static_cast< xc::DOMElement* >( elements->item( i ) );
         xc::DOMNamedNodeMap *attributes = element->getAttributes();
 
-        for ( int j = 0; attributes->getLength(); ++j )
+        for ( int j = 0; j < attributes->getLength(); ++j )
         {
             xc::DOMAttr* attribute = static_cast< xc::DOMAttr* >( attributes->item( j ) );
-            std::string attribute_name = fromX( attribute->getName() );
 
-            if ( !Util::VectorContains< std::string >( attribute_names, attribute_name ) )
+            if ( !IsAllowedAttribute( *attribute, attribute_names ) )
             {
                 Result result = ResultWithNodeLocation( 
-                    ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED, *attribute );
+                    ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED, *element );
 
+                std::string attribute_name = fromX( attribute->getName() );
                 result.AddMessageArgument( attribute_name );
                 result.AddMessageArgument( element_name );
                 results.push_back( result );
             }
         }
     }    
-
-    if ( results.empty() )
-    {
-        results.push_back( Result() );
-    }
 
     return results;
 }
@@ -93,12 +88,20 @@ std::vector<Result> AttributesPresentValidator::HasMandatoryAttributes(
                 results.push_back( result );
             }
         }
-    }    
-
-    if ( results.empty() )
-    {
-        results.push_back( Result() );
     }
 
     return results;
+}
+
+bool AttributesPresentValidator::IsAllowedAttribute( 
+    const xc::DOMAttr &attribute, 
+    const std::vector< std::string > &allowed_attribute_names )
+{
+    std::string attribute_name = fromX( attribute.getName() );
+
+    bool allowed_name = Util::Contains< std::string >( 
+                            allowed_attribute_names, attribute_name );
+    bool is_xmlns = attribute_name == "xmlns";
+
+    return allowed_name || is_xmlns;
 }

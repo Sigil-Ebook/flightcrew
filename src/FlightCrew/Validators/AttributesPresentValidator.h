@@ -37,7 +37,7 @@ protected:
      * @param element_name The name of the element whose attributes we want to check.
      * @param attribute_names A list of allowed attributes.
      * @param document The document being validated.
-     * @return A list of validation results.
+     * @return A list of validation results, empty if no problem were found.
      */
     std::vector<Result> HasOnlyAllowedAttributes( const std::string &element_name,
                                                   const std::vector< std::string > &attribute_names,
@@ -50,11 +50,16 @@ protected:
      * @param element_name The name of the element whose attributes we want to check.
      * @param attribute_names A list of mandatory attributes.
      * @param document The document being validated.
-     * @return A list of validation results.
+     * @return A list of validation results, empty if no problem were found.
      */
     std::vector<Result> HasMandatoryAttributes( const std::string &element_name,
                                                 const std::vector< std::string > &attribute_names,
                                                 const xc::DOMDocument &document );
+
+private:
+
+    bool IsAllowedAttribute( const xc::DOMAttr &attribute,
+                             const std::vector< std::string > &allowed_attribute_names );
 };
 
 #endif // ATTRIBUTESPRESENTVALIDATOR_H

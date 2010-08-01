@@ -19,28 +19,23 @@
 **
 *************************************************************************/
 
-#pragma once
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#include <stdafx.h>
+#include "PackageAttributesPresent.h"
+#include "Misc/Utilities.h"
 
-#include <vector>
-#include <algorithm>
-
-namespace Util
+std::vector<Result> PackageAttributesPresent::ValidateXml( const xc::DOMDocument &document )
 {
-    template <typename T>
-    bool Contains( const std::vector<T> &vector, const T &value )
-    {
-        return std::find( vector.begin(), vector.end(), value ) != vector.end(); 
-    }
+    std::vector< std::string > allowed_attributes;
+    allowed_attributes.push_back( "version" );
+    allowed_attributes.push_back( "unique-identifier" );
+    allowed_attributes.push_back( "id" );
 
-    template <typename T>
-    std::vector<T>& Extend( std::vector<T> &base_vector, const std::vector <T> &extension_vector ) 
-    {
-            base_vector.insert( base_vector.end(), extension_vector.begin(), extension_vector.end() );
-            return base_vector;
-    }
+    std::vector< std::string > mandatory_attributes;
+    mandatory_attributes.push_back( "version" );
+    mandatory_attributes.push_back( "unique-identifier" );
 
+    return Util::Extend( 
+        HasOnlyAllowedAttributes( "package", allowed_attributes, document ), 
+        HasMandatoryAttributes( "package", mandatory_attributes, document ) );
 }
 
-#endif // UTILITIES_H

@@ -50,7 +50,7 @@ std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren(
     {
         std::string local_name = fromX( children[ i ]->getLocalName() );
 
-        if ( !Util::VectorContains< std::string >( allowed_children, local_name ) )
+        if ( !Util::Contains< std::string >( allowed_children, local_name ) )
 
             results.push_back( NotAllowedChildResult( *children[ i ] ) );
     } 
