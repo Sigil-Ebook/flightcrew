@@ -35,10 +35,5 @@ std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document 
             ERROR_OPF_PACKAGE_NOT_ROOT, *root_element ) );
     }
 
-    else
-    {
-        results.push_back( Result() );
-    }
-
     return results;
 }

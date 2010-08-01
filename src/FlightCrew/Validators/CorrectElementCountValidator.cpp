@@ -58,10 +58,5 @@ std::vector<Result> CorrectElementCountValidator::VerifyElementCount(
         results.push_back( result );
     }
 
-    else
-    {
-        results.push_back( Result() );
-    }
-
     return results;
 }

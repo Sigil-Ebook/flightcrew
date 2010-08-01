@@ -60,10 +60,6 @@ std::vector<Result> MetadataAllowedChildren::ValidateXml( const xc::DOMDocument 
         results.insert( results.end(), subresults.begin(), subresults.end() );
     }
 
-    if ( results.empty() )
-
-        results.push_back( Result() );
-
     return results;
 }
 

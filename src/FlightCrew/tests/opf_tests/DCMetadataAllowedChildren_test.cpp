@@ -41,7 +41,6 @@ TEST( DCMetadataAllowedChildrenTest, ChildrenOK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/DCMetadataAllowedChildren_ChildrenOK.xml" );
     
-    EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetResultId(), ALL_OK );
+    EXPECT_EQ( results.size(), 0U );
 }
 

@@ -46,10 +46,5 @@ std::vector<Result> ElementPresentValidator::VerifyElementPresent(
         results.push_back( result );
     }
 
-    else
-    {
-        results.push_back( Result() );    
-    }
-
     return results;
 }

@@ -58,10 +58,6 @@ std::vector<Result> XMetadataAllowedChildren::ValidateXml( const xc::DOMDocument
         }
     }
 
-    if ( results.empty() )
-
-        results.push_back( Result() );
-
     return results;
 }
 

@@ -59,7 +59,6 @@ TEST( OneManifestTest, OneManifest_OK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/OneManifest_OneManifest.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetResultId(), ALL_OK );
+    EXPECT_EQ( results.size(), 0U );
 }
 

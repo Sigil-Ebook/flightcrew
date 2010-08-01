@@ -53,11 +53,7 @@ std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren(
         if ( !Util::Contains< std::string >( allowed_children, local_name ) )
 
             results.push_back( NotAllowedChildResult( *children[ i ] ) );
-    } 
-
-    if ( results.empty() )
-
-        results.push_back( Result() );
+    }
 
     return results;
 }
