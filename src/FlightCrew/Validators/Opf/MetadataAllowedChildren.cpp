@@ -71,7 +71,7 @@ std::vector<Result> MetadataAllowedChildren::ValidateDCXChildrenSubset( xc::DOME
 
     for ( uint i = 0; i < children.size(); ++i )
     {
-        std::string tag_name = fromX( children[ i ]->getTagName() );
+        std::string tag_name = fromX( children[ i ]->getLocalName() );
 
         if ( tag_name != "dc-metadata" &&
              tag_name != "x-metadata" 

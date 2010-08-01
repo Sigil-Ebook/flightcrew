@@ -29,7 +29,7 @@ std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document 
 
     std::vector<Result> results;
 
-    if ( !xc::XMLString::equals( root_element->getTagName(), toX( "package" ) )  )
+    if ( !xc::XMLString::equals( root_element->getLocalName(), toX( "package" ) )  )
     {
         results.push_back( ResultWithNodeLocation( 
             ERROR_OPF_PACKAGE_NOT_ROOT, *root_element ) );

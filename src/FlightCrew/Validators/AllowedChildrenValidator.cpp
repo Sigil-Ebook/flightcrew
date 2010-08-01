@@ -67,8 +67,8 @@ Result AllowedChildrenValidator::NotAllowedChildResult( const xc::DOMNode &child
     const xc::DOMElement* element = static_cast< const xc::DOMElement* >( &child );
     const xc::DOMElement* parent  = static_cast< const xc::DOMElement* >( child.getParentNode() );
 
-    result.AddMessageArgument( fromX( element->getTagName() ) );
-    result.AddMessageArgument( fromX( parent->getTagName() ) );
+    result.AddMessageArgument( fromX( element->getLocalName() ) );
+    result.AddMessageArgument( fromX( parent->getLocalName() ) );
 
     return result;
 }
