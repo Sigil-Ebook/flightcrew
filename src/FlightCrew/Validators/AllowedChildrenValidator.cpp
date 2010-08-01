@@ -33,7 +33,7 @@ std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren(
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *parents_matching = document.getElementsByTagNameNS(
-                                            toX( "*" ),  toX( parent_name.c_str() ) );
+                                            toX( "*" ),  toX( parent_name ) );
 
     std::vector<Result> results;
 

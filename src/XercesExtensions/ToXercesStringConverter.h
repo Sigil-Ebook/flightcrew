@@ -24,6 +24,7 @@
 #define TOXERCESSTRINGCONVERTER_H
 
 #include <xercesc/util/XMLString.hpp>
+#include <string>
 
 namespace xc = XERCES_CPP_NAMESPACE;
 
@@ -33,6 +34,8 @@ namespace XercesExt
 class ToXercesStringConverter
 {
 public:
+
+    ToXercesStringConverter( const std::string &ascii_string );
 
     ToXercesStringConverter( const char* const ascii_string );
 

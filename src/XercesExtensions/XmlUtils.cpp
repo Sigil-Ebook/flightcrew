@@ -89,7 +89,7 @@ xc::DOMNode* GetFirstAvailableElement( const std::vector< std::string > &element
     foreach( std::string element_name, element_names )
     {
         xc::DOMNodeList *matching_nodes = document.getElementsByTagNameNS(
-                                            toX( "*" ),  toX( element_name.c_str() ) );
+                                            toX( "*" ),  toX( element_name ) );
 
         if ( matching_nodes->getLength() > 0 )
 

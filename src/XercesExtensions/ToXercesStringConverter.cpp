@@ -25,6 +25,12 @@
 namespace XercesExt
 {
 
+ToXercesStringConverter::ToXercesStringConverter( const std::string &ascii_string )
+{
+    m_XercesString = xc::XMLString::transcode( ascii_string.c_str() );
+}
+
+
 ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )
 {
     m_XercesString = xc::XMLString::transcode( ascii_string );

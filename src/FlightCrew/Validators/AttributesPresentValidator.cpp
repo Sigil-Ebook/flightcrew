@@ -32,7 +32,7 @@ std::vector<Result> AttributesPresentValidator::HasOnlyAllowedAttributes(
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *elements = document.getElementsByTagNameNS(
-                                    toX( "*" ),  toX( element_name.c_str() ) );
+                                    toX( "*" ),  toX( element_name ) );
 
     std::vector<Result> results;
 
@@ -68,7 +68,7 @@ std::vector<Result> AttributesPresentValidator::HasMandatoryAttributes(
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *elements = document.getElementsByTagNameNS(
-                                    toX( "*" ),  toX( element_name.c_str() ) );
+                                    toX( "*" ),  toX( element_name ) );
 
     std::vector<Result> results;
 
@@ -78,7 +78,7 @@ std::vector<Result> AttributesPresentValidator::HasMandatoryAttributes(
 
         foreach( std::string attribute_name, attribute_names )
         {
-            if ( !element->hasAttribute( toX( attribute_name.c_str() ) ) )
+            if ( !element->hasAttribute( toX( attribute_name ) ) )
             {
                 Result result = ResultWithNodeLocation( 
                     ERROR_XML_REQUIRED_ATTRIBUTE_MISSING, *element );

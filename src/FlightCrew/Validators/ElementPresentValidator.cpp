@@ -30,7 +30,7 @@ std::vector<Result> ElementPresentValidator::VerifyElementPresent(
     const xc::DOMDocument &document )
 {
     xc::DOMNodeList *matching_elements = document.getElementsByTagNameNS(
-                                        toX( "*" ),  toX( element_name.c_str() ) );
+                                        toX( "*" ),  toX( element_name ) );
 
     std::vector<Result> results;
 
