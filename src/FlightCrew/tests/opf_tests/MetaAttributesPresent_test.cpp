@@ -56,9 +56,9 @@ TEST( MetaAttributesPresentTest, MissingAttributes )
     EXPECT_EQ( message_arguments[ 0 ], "name" );
     EXPECT_EQ( message_arguments[ 1 ], "meta" );
 
-    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_REQUIRED_ATTRIBUTE_MISSING );
-    EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
-    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 59 );
+    EXPECT_EQ( results[ 1 ].GetResultId(), ERROR_XML_REQUIRED_ATTRIBUTE_MISSING );
+    EXPECT_EQ( results[ 1 ].GetErrorLine(), 4 );
+    EXPECT_EQ( results[ 1 ].GetErrorColumn(), 59 );
 
     message_arguments = results[ 1 ].GetMessageArguments();
     EXPECT_EQ( message_arguments[ 0 ], "content" );
