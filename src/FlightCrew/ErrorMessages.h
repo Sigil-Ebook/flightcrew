@@ -28,6 +28,9 @@
 #include <boost/unordered_map.hpp>
 #include "ResultId.h"
 
+namespace FlightCrew
+{
+
 class ErrorMessages
 {
 public:
@@ -52,5 +55,7 @@ private:
 
     boost::unordered_map< ResultId, std::string > m_Messages;
 };
+
+} // namespace FlightCrew
 
 #endif // ERRORMESSAGES_H

@@ -28,6 +28,9 @@
 
 namespace xe = XercesExt;
 
+namespace FlightCrew
+{
+
 class ElementCountOneValidator : public XmlValidator
 {
 
@@ -46,5 +49,7 @@ protected:
                                                const xe::QName &parent_qname,
                                                const xc::DOMDocument &document );
 };
+
+} // namespace FlightCrew
 
 #endif // ELEMENTCOUNTONEVALIDATOR_H

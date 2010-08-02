@@ -23,6 +23,9 @@
 #include "PackageAttributesPresent.h"
 #include "Misc/Utilities.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> PackageAttributesPresent::ValidateXml( const xc::DOMDocument &document )
 {
     std::vector< QName > allowed_attributes;
@@ -43,3 +46,4 @@ std::vector<Result> PackageAttributesPresent::ValidateXml( const xc::DOMDocument
     return Util::Extend( allowed_results, mandatory_results );
 }
 
+} //namespace FlightCrew

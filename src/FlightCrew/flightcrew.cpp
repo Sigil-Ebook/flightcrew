@@ -27,6 +27,9 @@
 #   pragma warning( disable : 4100 )
 #endif
 
+namespace FlightCrew
+{
+
 std::vector< Result > ValidateEpub( const std::string &absolute_path )
 {
     // TODO
@@ -58,3 +61,5 @@ std::vector< Result > ValidateCss( const std::string &absolute_path )
     // TODO
     return std::vector< Result >();
 }
+
+} // namespace FlightCrew

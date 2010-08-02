@@ -26,6 +26,9 @@
 #include "Misc/Utilities.h"
 
 
+namespace FlightCrew
+{
+
 std::vector<Result> AttributesPresentValidator::HasOnlyAllowedAttributes( 
     const QName &element_qname,
     const std::vector< QName > &attribute_qnames, 
@@ -106,3 +109,5 @@ bool AttributesPresentValidator::IsAllowedAttribute(
 
     return allowed_name || is_xmlns;
 }
+
+} //namespace FlightCrew

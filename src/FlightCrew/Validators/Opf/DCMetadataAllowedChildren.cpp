@@ -22,6 +22,9 @@
 #include <stdafx.h>
 #include "DCMetadataAllowedChildren.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> DCMetadataAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
     std::vector< QName > allowed_children;
@@ -46,3 +49,4 @@ std::vector<Result> DCMetadataAllowedChildren::ValidateXml( const xc::DOMDocumen
         QName( "dc-metadata", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 
+} //namespace FlightCrew

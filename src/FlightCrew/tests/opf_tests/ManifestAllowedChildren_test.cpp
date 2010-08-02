@@ -23,6 +23,8 @@
 #include "Validators/Opf/ManifestAllowedChildren.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( ManifestAllowedChildrenTest, WrongChildren )
 {
     ManifestAllowedChildren validator;

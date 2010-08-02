@@ -25,11 +25,16 @@
 
 #include "../ElementCountOneValidator.h"
 
+namespace FlightCrew
+{
+
 class OneMetadata : public ElementCountOneValidator
 {
 public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
+
+} // namespace FlightCrew
 
 #endif // ONEMETADATA_H

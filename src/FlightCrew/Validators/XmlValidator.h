@@ -28,6 +28,9 @@ namespace xc = XERCES_CPP_NAMESPACE;
 #include "IValidator.h"
 #include "Result.h"
 
+namespace FlightCrew
+{
+
 class XmlValidator : public IValidator
 {
 public:
@@ -43,5 +46,7 @@ protected:
     Result ResultWithNodeLocation( ResultId error_id, 
                                    const xc::DOMNode &node );
 };
+
+} // namespace FlightCrew
 
 #endif // XMLVALIDATOR_H

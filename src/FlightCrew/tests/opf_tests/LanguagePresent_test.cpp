@@ -23,6 +23,8 @@
 #include "Validators/Opf/LanguagePresent.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( LanguagePresentTest, NoLanguage )
 {
     LanguagePresent validator;

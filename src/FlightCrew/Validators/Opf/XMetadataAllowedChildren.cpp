@@ -25,6 +25,9 @@
 #include <FromXercesStringConverter.h>
 #include <XmlUtils.h>
 
+namespace FlightCrew
+{
+
 std::vector<Result> XMetadataAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
     xc::DOMNodeList *xmetadatas = document.getElementsByTagNameNS(
@@ -61,3 +64,4 @@ std::vector<Result> XMetadataAllowedChildren::ValidateXml( const xc::DOMDocument
     return results;
 }
 
+} //namespace FlightCrew

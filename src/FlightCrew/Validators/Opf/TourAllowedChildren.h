@@ -25,11 +25,16 @@
 
 #include "../AllowedChildrenValidator.h"
 
+namespace FlightCrew
+{
+
 class TourAllowedChildren : public AllowedChildrenValidator
 {
 public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
+
+} // namespace FlightCrew
 
 #endif // TOURALLOWEDCHILDREN_H

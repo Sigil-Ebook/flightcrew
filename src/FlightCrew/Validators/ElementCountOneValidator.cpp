@@ -24,6 +24,9 @@
 #include "ToXercesStringConverter.h"
 #include <XmlUtils.h>
 
+namespace FlightCrew
+{
+
 std::vector<Result> ElementCountOneValidator::VerifyElementCountOne( 
     const QName &element_qname, 
     const QName &parent_qname, 
@@ -59,3 +62,5 @@ std::vector<Result> ElementCountOneValidator::VerifyElementCountOne(
 
     return results;
 }
+
+} //namespace FlightCrew

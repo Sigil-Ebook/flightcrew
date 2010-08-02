@@ -22,6 +22,9 @@
 #include <stdafx.h>
 #include "ErrorMessages.h"
 
+namespace FlightCrew
+{
+
 boost::mutex ErrorMessages::s_AccessMutex;
 ErrorMessages* ErrorMessages::s_Instance = NULL;
 
@@ -85,3 +88,5 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
 }
+
+} // namespace FlightCrew

@@ -23,6 +23,8 @@
 #include "Validators/Opf/OneManifest.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( OneManifestTest, NoManifest_Error )
 {
     OneManifest validator;

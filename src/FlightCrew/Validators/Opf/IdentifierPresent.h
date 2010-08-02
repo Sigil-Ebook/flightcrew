@@ -25,11 +25,16 @@
 
 #include "../ElementPresentValidator.h"
 
+namespace FlightCrew
+{
+
 class IdentifierPresent : public ElementPresentValidator
 {
 public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
+
+} // namespace FlightCrew
 
 #endif // IDENTIFIERPRESENT_H

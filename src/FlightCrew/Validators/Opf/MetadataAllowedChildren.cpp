@@ -25,6 +25,9 @@
 #include <FromXercesStringConverter.h>
 #include <XmlUtils.h>
 
+namespace FlightCrew
+{
+    
 const QName DC_METADATA_QNAME = QName( "dc-metadata", OPF_XML_NAMESPACE );
 const QName X_METADATA_QNAME  = QName( "x-metadata",  OPF_XML_NAMESPACE );
 
@@ -148,3 +151,5 @@ std::vector<Result> MetadataAllowedChildren::ValidateStandardChildren(
 
     return results;
 }
+
+} //namespace FlightCrew

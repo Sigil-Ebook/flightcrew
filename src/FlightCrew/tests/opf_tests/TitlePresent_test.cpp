@@ -23,6 +23,8 @@
 #include "Validators/Opf/TitlePresent.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( TitlePresentTest, NoTitle_Error )
 {
     TitlePresent validator;

@@ -27,6 +27,9 @@
 #include <boost/filesystem.hpp>
 namespace fs = boost::filesystem;
 
+namespace FlightCrew
+{
+    
 class Result;
 
 class IValidator
@@ -37,5 +40,7 @@ public:
 
     virtual ~IValidator() {}
 };
+
+} // namespace FlightCrew
 
 #endif // IVALIDATOR_H

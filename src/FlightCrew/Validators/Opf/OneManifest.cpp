@@ -22,10 +22,15 @@
 #include <stdafx.h>
 #include "OneManifest.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> OneManifest::ValidateXml( const xc::DOMDocument &document )
 {
     return VerifyElementCountOne( QName( "manifest", OPF_XML_NAMESPACE ),
                                   QName( "package", OPF_XML_NAMESPACE ),
                                   document );
 }
+
+} //namespace FlightCrew
 

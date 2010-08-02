@@ -23,6 +23,8 @@
 #include "Validators/Opf/PackageAttributesPresent.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( PackageAttributesPresentTest, NotAllowedAttributes )
 {
     PackageAttributesPresent validator;

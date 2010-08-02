@@ -23,6 +23,8 @@
 #include "Validators/Opf/ToursAllowedChildren.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( ToursAllowedChildrenTest, WrongChildren )
 {
     ToursAllowedChildren validator;

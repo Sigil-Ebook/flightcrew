@@ -23,6 +23,8 @@
 #include "Validators/Opf/PackageIsRoot.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( PackageIsRootTest, PackageNotRoot_Error )
 {
     PackageIsRoot validator;

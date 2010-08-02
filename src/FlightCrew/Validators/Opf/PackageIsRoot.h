@@ -25,11 +25,16 @@
 
 #include "../XmlValidator.h"
 
+namespace FlightCrew
+{
+
 class PackageIsRoot : public XmlValidator
 {
 public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
+
+} // namespace FlightCrew
 
 #endif // PACKAGEISROOT_H

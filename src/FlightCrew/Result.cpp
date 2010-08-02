@@ -23,6 +23,9 @@
 #include "Result.h"
 #include "ErrorMessages.h"
 
+namespace FlightCrew
+{
+
 Result::Result( ResultId result_id, xe::NodeLocationInfo node_location )
     :
     m_ResultId( result_id ),
@@ -98,5 +101,7 @@ std::string Result::GetErrorMessage()
 
     return formatter.str();
 }
+
+} // namespace FlightCrew
 
 

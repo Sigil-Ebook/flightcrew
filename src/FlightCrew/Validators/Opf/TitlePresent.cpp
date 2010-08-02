@@ -22,6 +22,9 @@
 #include <stdafx.h>
 #include "TitlePresent.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
 {
     std::vector< QName > possible_parents;
@@ -31,3 +34,5 @@ std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
     return VerifyElementPresent( 
         QName( "title", DC_XML_NAMESPACE ), possible_parents, document );
 }
+
+} //namespace FlightCrew

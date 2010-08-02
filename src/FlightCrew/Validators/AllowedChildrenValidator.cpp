@@ -27,6 +27,9 @@
 #include <XmlUtils.h>
 #include <algorithm>
 
+namespace FlightCrew
+{
+
 std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren( 
     const QName &parent_qname, 
     const std::vector< QName > &allowed_children, 
@@ -74,3 +77,4 @@ Result AllowedChildrenValidator::NotAllowedChildResult( const xc::DOMNode &child
     return result;
 }
 
+} //namespace FlightCrew

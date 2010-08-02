@@ -25,6 +25,9 @@
 
 #include "../AllowedChildrenValidator.h"
 
+namespace FlightCrew
+{
+    
 /**
  * Checks that the <metadata> has only allowed children.
  */
@@ -50,5 +53,7 @@ private:
      */
     std::vector<Result> ValidateStandardChildren( std::vector< xc::DOMElement* > children );
 };
+
+} // namespace FlightCrew
 
 #endif // METADATAALLOWEDCHILDREN_H

@@ -28,6 +28,9 @@
 
 namespace xe = XercesExt;
 
+namespace FlightCrew
+{
+
 class ElementPresentValidator : public XmlValidator
 {
 
@@ -50,5 +53,7 @@ protected:
                                               const std::vector< xe::QName > &possible_parents,
                                               const xc::DOMDocument &document );
 };
+
+} // namespace FlightCrew
 
 #endif // ELEMENTPRESENTVALIDATOR_H

@@ -23,10 +23,15 @@
 #include "OneSpine.h"
 #include <ToXercesStringConverter.h>
 
+namespace FlightCrew
+{
+
 std::vector<Result> OneSpine::ValidateXml( const xc::DOMDocument &document )
 {
     return VerifyElementCountOne( QName( "spine", OPF_XML_NAMESPACE ),
                                   QName( "package", OPF_XML_NAMESPACE ),
                                   document );
 }
+
+} //namespace FlightCrew
 

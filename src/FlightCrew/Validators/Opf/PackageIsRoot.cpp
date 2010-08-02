@@ -23,6 +23,9 @@
 #include "PackageIsRoot.h"
 #include <FromXercesStringConverter.h>
 
+namespace FlightCrew
+{
+
 std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document )
 {
     xc::DOMElement *root_element = document.getDocumentElement();
@@ -37,3 +40,5 @@ std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document 
 
     return results;
 }
+
+} //namespace FlightCrew

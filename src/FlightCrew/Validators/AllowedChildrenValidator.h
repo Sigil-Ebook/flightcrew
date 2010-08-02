@@ -28,6 +28,9 @@
 
 namespace xe = XercesExt;
 
+namespace FlightCrew
+{
+
 class AllowedChildrenValidator : public XmlValidator
 {
 
@@ -39,5 +42,7 @@ protected:
 
     Result NotAllowedChildResult( const xc::DOMNode &child );
 };
+
+} // namespace FlightCrew
 
 #endif // ALLOWEDCHILDRENVALIDATOR_H

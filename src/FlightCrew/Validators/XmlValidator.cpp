@@ -25,9 +25,11 @@
 #include <LocationAwareDOMParser.h>
 #include <XmlUtils.h>
 
+namespace FlightCrew
+{
+    
 const std::string OPF_XML_NAMESPACE = "http://www.idpf.org/2007/opf"; 
 const std::string DC_XML_NAMESPACE  = "http://purl.org/dc/elements/1.1/";
-
 
 std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 {
@@ -44,3 +46,5 @@ Result XmlValidator::ResultWithNodeLocation( ResultId error_id,
 {
     return Result( error_id, xe::GetNodeLocationInfo( node ) );
 }
+
+} //namespace FlightCrew

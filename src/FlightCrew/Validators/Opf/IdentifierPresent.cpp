@@ -22,6 +22,9 @@
 #include <stdafx.h>
 #include "IdentifierPresent.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> IdentifierPresent::ValidateXml( const xc::DOMDocument &document )
 {
     std::vector< QName > possible_parents;
@@ -32,3 +35,4 @@ std::vector<Result> IdentifierPresent::ValidateXml( const xc::DOMDocument &docum
         QName( "identifier", DC_XML_NAMESPACE ), possible_parents, document );
 }
 
+} //namespace FlightCrew

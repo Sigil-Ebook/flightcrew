@@ -23,6 +23,8 @@
 #include "Validators/Opf/OneSpine.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( OneSpineTest, NoSpine_Error )
 {
     OneSpine validator;

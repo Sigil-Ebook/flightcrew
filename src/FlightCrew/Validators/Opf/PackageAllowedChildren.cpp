@@ -22,6 +22,9 @@
 #include <stdafx.h>
 #include "PackageAllowedChildren.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
     std::vector< QName > allowed_children;
@@ -36,3 +39,4 @@ std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &
         QName( "package", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 
+} //namespace FlightCrew

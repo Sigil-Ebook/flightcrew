@@ -23,6 +23,8 @@
 #include "Validators/Opf/IdentifierPresent.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( IdentifierPresentTest, NoIdentifier )
 {
     IdentifierPresent validator;

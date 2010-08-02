@@ -23,6 +23,8 @@
 #include "Validators/Opf/SpineAllowedChildren.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( SpineAllowedChildrenTest, WrongChildren )
 {
     SpineAllowedChildren validator;

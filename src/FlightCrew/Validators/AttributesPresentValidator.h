@@ -28,6 +28,9 @@
 
 namespace xe = XercesExt;
 
+namespace FlightCrew
+{
+
 class AttributesPresentValidator : public XmlValidator
 {
 
@@ -64,5 +67,7 @@ private:
     bool IsAllowedAttribute( const xc::DOMAttr &attribute,
                              const std::vector< xe::QName > &allowed_attribute_qnames );
 };
+
+} // namespace FlightCrew
 
 #endif // ATTRIBUTESPRESENTVALIDATOR_H

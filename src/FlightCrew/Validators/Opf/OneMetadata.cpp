@@ -22,10 +22,15 @@
 #include <stdafx.h>
 #include "OneMetadata.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> OneMetadata::ValidateXml( const xc::DOMDocument &document )
 {
     return VerifyElementCountOne( QName( "metadata", OPF_XML_NAMESPACE ),
                                   QName( "package", OPF_XML_NAMESPACE ),
                                   document );
 }
+
+} //namespace FlightCrew
 

@@ -23,6 +23,8 @@
 #include "Validators/Opf/DCMetadataAllowedChildren.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( DCMetadataAllowedChildrenTest, WrongChildren )
 {
     DCMetadataAllowedChildren validator;

@@ -21,7 +21,9 @@
 
 #include <stdafx_tests.h>
 #include "Validators/Opf/MetadataAllowedChildren.h"
-#include "Result.h" 
+#include "Result.h"
+
+using namespace FlightCrew; 
 
 TEST( MetadataAllowedChildrenTest, StdChildrenWrong )
 {

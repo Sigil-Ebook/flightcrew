@@ -22,6 +22,9 @@
 #include <stdafx.h>
 #include "LanguagePresent.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> LanguagePresent::ValidateXml( const xc::DOMDocument &document )
 {
     std::vector< QName > possible_parents;
@@ -32,3 +35,4 @@ std::vector<Result> LanguagePresent::ValidateXml( const xc::DOMDocument &documen
         QName( "language", DC_XML_NAMESPACE ), possible_parents, document );
 }
 
+} //namespace FlightCrew

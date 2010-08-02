@@ -23,6 +23,8 @@
 #include "Validators/Opf/OneMetadata.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( OneMetadataTest, NoMetadata_Error )
 {
     OneMetadata validator;

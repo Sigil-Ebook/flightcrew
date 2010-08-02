@@ -24,6 +24,9 @@
 #include <ToXercesStringConverter.h>
 #include <XmlUtils.h>
 
+namespace FlightCrew
+{
+
 std::vector<Result> ElementPresentValidator::VerifyElementPresent( 
     const QName &element_qname, 
     const std::vector< QName > &possible_parents,
@@ -48,3 +51,5 @@ std::vector<Result> ElementPresentValidator::VerifyElementPresent(
 
     return results;
 }
+
+} //namespace FlightCrew

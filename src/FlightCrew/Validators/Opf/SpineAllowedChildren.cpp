@@ -22,6 +22,9 @@
 #include <stdafx.h>
 #include "SpineAllowedChildren.h"
 
+namespace FlightCrew
+{
+
 std::vector<Result> SpineAllowedChildren::ValidateXml( const xc::DOMDocument &document )
 {
     std::vector< QName > allowed_children;
@@ -32,3 +35,4 @@ std::vector<Result> SpineAllowedChildren::ValidateXml( const xc::DOMDocument &do
         QName( "spine", OPF_XML_NAMESPACE ), allowed_children, document );
 }
 
+} //namespace FlightCrew

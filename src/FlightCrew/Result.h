@@ -28,6 +28,9 @@
 #include <NodeLocationInfo.h>
 #include "ResultId.h"
 
+namespace FlightCrew
+{
+
 class Result
 {
 public:
@@ -66,5 +69,7 @@ private:
     int m_ErrorColumn;
     std::vector< std::string > m_MessageArguments;
 };
+
+} // namespace FlightCrew
 
 #endif // RESULT_H

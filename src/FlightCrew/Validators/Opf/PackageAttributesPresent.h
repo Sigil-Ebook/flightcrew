@@ -25,11 +25,16 @@
 
 #include "../AttributesPresentValidator.h"
 
+namespace FlightCrew
+{
+
 class PackageAttributesPresent : public AttributesPresentValidator
 {
 public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
 };
+
+} // namespace FlightCrew
 
 #endif // PACKAGEATTRIBUTESPRESENT_H

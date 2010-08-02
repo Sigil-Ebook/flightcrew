@@ -23,6 +23,9 @@
 #ifndef RESULTID_H
 #define RESULTID_H
 
+namespace FlightCrew
+{
+
 enum ResultId
 {
     ALL_OK = 100,
@@ -39,5 +42,7 @@ enum ResultId
 
     ERROR_OPF_PACKAGE_NOT_ROOT,
 };
+
+} // namespace FlightCrew
 
 #endif // RESULTID_H

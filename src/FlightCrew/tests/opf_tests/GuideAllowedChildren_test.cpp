@@ -23,6 +23,8 @@
 #include "Validators/Opf/GuideAllowedChildren.h"
 #include "Result.h"
 
+using namespace FlightCrew;
+
 TEST( GuideAllowedChildrenTest, WrongChildren )
 {
     GuideAllowedChildren validator;
