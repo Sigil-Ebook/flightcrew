@@ -19,33 +19,23 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "XmlValidator.h"
-#include <ToXercesStringConverter.h>
-#include <LocationAwareDOMParser.h>
-#include <XmlUtils.h>
+#pragma once
+#ifndef TITLEATTRIBUTESPRESENT_H
+#define TITLEATTRIBUTESPRESENT_H
+
+#include "../AttributesPresentValidator.h"
 
 namespace FlightCrew
 {
-   
-const std::string MAIN_XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace"; 
-const std::string OPF_XML_NAMESPACE  = "http://www.idpf.org/2007/opf"; 
-const std::string DC_XML_NAMESPACE   = "http://purl.org/dc/elements/1.1/";
 
-std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
+class TitleAttributesPresent : public AttributesPresentValidator
 {
-    xe::LocationAwareDOMParser parser;
-    parser.setDoNamespaces( true );
-    parser.parse( filepath.string().c_str() );
+public:
 
-    return ValidateXml( *parser.getDocument() );
-}
+    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
+};
 
+} // namespace FlightCrew
 
-Result XmlValidator::ResultWithNodeLocation( ResultId error_id, 
-                                             const xc::DOMNode &node )
-{
-    return Result( error_id, xe::GetNodeLocationInfo( node ) );
-}
+#endif // TITLEATTRIBUTESPRESENT_H
 
-} //namespace FlightCrew

@@ -26,6 +26,7 @@
 namespace FlightCrew
 {
  
+extern const std::string MAIN_XML_NAMESPACE;
 extern const std::string OPF_XML_NAMESPACE;
 extern const std::string DC_XML_NAMESPACE;
 

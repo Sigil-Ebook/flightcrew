@@ -20,32 +20,24 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "XmlValidator.h"
-#include <ToXercesStringConverter.h>
-#include <LocationAwareDOMParser.h>
-#include <XmlUtils.h>
+#include "TitleAttributesPresent.h"
 
 namespace FlightCrew
 {
-   
-const std::string MAIN_XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace"; 
-const std::string OPF_XML_NAMESPACE  = "http://www.idpf.org/2007/opf"; 
-const std::string DC_XML_NAMESPACE   = "http://purl.org/dc/elements/1.1/";
 
-std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
+std::vector<Result> TitleAttributesPresent::ValidateXml( const xc::DOMDocument &document )
 {
-    xe::LocationAwareDOMParser parser;
-    parser.setDoNamespaces( true );
-    parser.parse( filepath.string().c_str() );
+    std::vector< QName > allowed_attributes;
+    allowed_attributes.push_back( QName( "id", "" ) );
+    allowed_attributes.push_back( QName( "lang", MAIN_XML_NAMESPACE ) );
 
-    return ValidateXml( *parser.getDocument() );
+    QName element_qname( "title", DC_XML_NAMESPACE );
+
+    std::vector< Result > allowed_results = HasOnlyAllowedAttributes( 
+        element_qname, allowed_attributes, document );
+
+    return allowed_results;
 }
 
+} // namespace FlightCrew
 
-Result XmlValidator::ResultWithNodeLocation( ResultId error_id, 
-                                             const xc::DOMNode &node )
-{
-    return Result( error_id, xe::GetNodeLocationInfo( node ) );
-}
-
-} //namespace FlightCrew
