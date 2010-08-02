@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+    <manifest>
+        <item id="test" href="test" media-type="test" fallback="test" fallback-style="test" required-namespace="test" required-modules="test" breakme="break" />
+    </manifest>
+</package>
