@@ -26,6 +26,8 @@
 #include "XmlValidator.h"
 #include <QName.h>
 
+namespace xe = XercesExt;
+
 class AttributesPresentValidator : public XmlValidator
 {
 
@@ -40,8 +42,8 @@ protected:
      * @param document The document being validated.
      * @return A list of validation results, empty if no problem were found.
      */
-    std::vector<Result> HasOnlyAllowedAttributes( const QName &element_qname,
-                                                  const std::vector< QName > &attribute_qnames,
+    std::vector<Result> HasOnlyAllowedAttributes( const xe::QName &element_qname,
+                                                  const std::vector< xe::QName > &attribute_qnames,
                                                   const xc::DOMDocument &document );
 
     /**
@@ -53,14 +55,14 @@ protected:
      * @param document The document being validated.
      * @return A list of validation results, empty if no problem were found.
      */
-    std::vector<Result> HasMandatoryAttributes( const QName &element_qname,
-                                                const std::vector< QName > &attribute_qnames,
+    std::vector<Result> HasMandatoryAttributes( const xe::QName &element_qname,
+                                                const std::vector< xe::QName > &attribute_qnames,
                                                 const xc::DOMDocument &document );
 
 private:
 
     bool IsAllowedAttribute( const xc::DOMAttr &attribute,
-                             const std::vector< QName > &allowed_attribute_qnames );
+                             const std::vector< xe::QName > &allowed_attribute_qnames );
 };
 
 #endif // ATTRIBUTESPRESENTVALIDATOR_H

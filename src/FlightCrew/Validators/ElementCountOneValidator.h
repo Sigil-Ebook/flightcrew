@@ -26,6 +26,8 @@
 #include "XmlValidator.h"
 #include <QName.h>
 
+namespace xe = XercesExt;
+
 class ElementCountOneValidator : public XmlValidator
 {
 
@@ -40,8 +42,8 @@ protected:
      * @param document The document being validated.
      * @return A list of validation results.
      */
-    std::vector<Result> VerifyElementCountOne( const QName &element_qname,
-                                               const QName &parent_qname,
+    std::vector<Result> VerifyElementCountOne( const xe::QName &element_qname,
+                                               const xe::QName &parent_qname,
                                                const xc::DOMDocument &document );
 };
 

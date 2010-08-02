@@ -26,6 +26,8 @@
 #include "XmlValidator.h"
 #include <QName.h>
 
+namespace xe = XercesExt;
+
 class ElementPresentValidator : public XmlValidator
 {
 
@@ -44,8 +46,8 @@ protected:
      * @param document The document being validated.
      * @return A list of validation results.
      */
-    std::vector<Result> VerifyElementPresent( const QName &element_qname,
-                                              const std::vector< QName > &possible_parents,
+    std::vector<Result> VerifyElementPresent( const xe::QName &element_qname,
+                                              const std::vector< xe::QName > &possible_parents,
                                               const xc::DOMDocument &document );
 };
 

@@ -23,7 +23,6 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-struct QName;
 
 extern const std::string OPF_XML_NAMESPACE;
 extern const std::string DC_XML_NAMESPACE;

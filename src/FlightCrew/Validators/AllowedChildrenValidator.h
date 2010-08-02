@@ -26,13 +26,15 @@
 #include "XmlValidator.h"
 #include <QName.h>
 
+namespace xe = XercesExt;
+
 class AllowedChildrenValidator : public XmlValidator
 {
 
 protected:
 
-    std::vector<Result> ValidateAllowedChildren( const QName &parent_qname,
-                                                 const std::vector< QName > &allowed_children,
+    std::vector<Result> ValidateAllowedChildren( const xe::QName &parent_qname,
+                                                 const std::vector< xe::QName > &allowed_children,
                                                  const xc::DOMDocument &document );
 
     Result NotAllowedChildResult( const xc::DOMNode &child );

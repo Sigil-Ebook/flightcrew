@@ -45,6 +45,11 @@
 #   pragma warning( pop )
 #endif
 
+namespace XercesExt { struct QName; };
+namespace xe = XercesExt;
+
+using xe::QName;
+
 #include "constants.h"
 //#include "exception.h"
 #include "Misc/CustomAssert.h"
@@ -61,7 +66,5 @@ using boost::tie;
 namespace fs = boost::filesystem;
 
 namespace xc = XERCES_CPP_NAMESPACE;
-namespace XercesExt {};
-namespace xe = XercesExt;
 
 typedef unsigned int uint;

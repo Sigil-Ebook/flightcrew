@@ -25,6 +25,9 @@
 
 #include <string>
 
+namespace XercesExt
+{
+
 /**
  * A qualified name of a node/element/attribute in XML.
  */
@@ -59,5 +62,7 @@ struct QName
      */
     std::string namespace_name;
 };
+
+}
 
 #endif // QNAME_H
