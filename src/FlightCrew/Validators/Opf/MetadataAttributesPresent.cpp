@@ -20,32 +20,23 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "PackageAttributesPresent.h"
-#include "Misc/Utilities.h"
+#include "MetadataAttributesPresent.h"
 
 namespace FlightCrew
 {
 
-std::vector<Result> PackageAttributesPresent::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> MetadataAttributesPresent::ValidateXml( const xc::DOMDocument &document )
 {
     std::vector< QName > allowed_attributes;
-    allowed_attributes.push_back( QName( "version",           "" ) );
-    allowed_attributes.push_back( QName( "unique-identifier", "" ) );
-    allowed_attributes.push_back( QName( "id",                "" ) );
+    allowed_attributes.push_back( QName( "id", "" ) );
 
-    QName element_qname( "package", OPF_XML_NAMESPACE );
+    QName element_qname( "metadata", OPF_XML_NAMESPACE );
 
     std::vector< Result > allowed_results = HasOnlyAllowedAttributes( 
         element_qname, allowed_attributes, document );
 
-    std::vector< QName > mandatory_attributes;
-    mandatory_attributes.push_back( QName( "version",           "" ) );
-    mandatory_attributes.push_back( QName( "unique-identifier", "" ) );
-
-    std::vector< Result > mandatory_results = HasMandatoryAttributes(   
-        element_qname, mandatory_attributes, document );
-
-    return Util::Extend( allowed_results, mandatory_results );
+    return allowed_results;
 }
 
-} //namespace FlightCrew
+} // namespace FlightCrew
+
