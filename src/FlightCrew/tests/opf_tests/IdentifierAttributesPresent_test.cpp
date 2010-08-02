@@ -35,6 +35,10 @@ TEST( IdentifierAttributesPresentTest, NotAllowedAttributes )
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 71 );
+
+    std::vector< std::string > message_arguments1 = results[ 0 ].GetMessageArguments();
+    EXPECT_EQ( message_arguments1[ 0 ], "breakme" );
+    EXPECT_EQ( message_arguments1[ 1 ], "identifier" );
 }
 
 TEST( IdentifierAttributesPresentTest, AllowedAttributes )

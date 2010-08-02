@@ -35,6 +35,10 @@ TEST( DCMetadataAttributesPresentTest, NotAllowedAttributes )
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 46 );
+
+    std::vector< std::string > message_arguments1 = results[ 0 ].GetMessageArguments();
+    EXPECT_EQ( message_arguments1[ 0 ], "breakme" );
+    EXPECT_EQ( message_arguments1[ 1 ], "dc-metadata" );
 }
 
 TEST( DCMetadataAttributesPresentTest, AllowedAttributes )
