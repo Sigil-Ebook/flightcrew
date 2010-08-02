@@ -71,7 +71,7 @@ target_link_libraries( ${PROJECT_NAME} FlightCrew gmock )
 #############################################################################
 
 if( MSVC )
-	add_definitions( /DUNICODE /D_UNICODE /W4 )
+    add_definitions( /DUNICODE /D_UNICODE /W4 )
     
     # This warning is present only at the highest warning level (/W4)
     # and is routinely disabled because it complains about valid 
@@ -81,11 +81,11 @@ if( MSVC )
     # The /Zc:wchar_t- flag can't go into add_definitions
     # because the RC compiler picks it up too and it provokes a name clash
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-")
-	set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
-	set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
-	
+    set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
+    set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
+    
 elseif( CMAKE_COMPILER_IS_GNUCXX )
-	# Make sure the PCH is built for GCC
+    # Make sure the PCH is built for GCC
     add_dependencies( ${PROJECT_NAME} ${GCC_PCH_TARGET} )
 endif()
 
@@ -96,20 +96,20 @@ add_definitions( -DXERCES_STATIC_LIBRARY )
 
 # The test executable expects a "test_data" dir in its working directory.
 if ( NOT MSVC )
-	add_custom_target( copy_test_data 
-					   COMMAND cmake -E copy_directory 
-					   ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
-					   ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_data )
+    add_custom_target( copy_test_data 
+                       COMMAND cmake -E copy_directory 
+                       ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
+                       ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_data )
 else()
     # MSVC creates the test executable in a Release or Debug subdir (depending
     # on the build configuration) so we copy the data there in this case.
-	add_custom_target( copy_test_data 
-					   COMMAND cmake -E copy_directory 
-					   ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
-					   ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/test_data                       
+    add_custom_target( copy_test_data 
                        COMMAND cmake -E copy_directory 
-					   ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
-					   ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/test_data )
+                       ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
+                       ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/test_data                       
+                       COMMAND cmake -E copy_directory 
+                       ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
+                       ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/test_data )
 endif()
 
 add_dependencies( ${PROJECT_NAME} copy_test_data )

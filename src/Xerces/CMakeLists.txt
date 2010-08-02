@@ -127,7 +127,7 @@ add_definitions( -DXERCES_STATIC_LIBRARY
                  -DHAVE_STRNCASECMP )
 
 if( MSVC )
-	add_definitions( -DUNICODE -D_UNICODE )
+    add_definitions( -DUNICODE -D_UNICODE )
     add_definitions( -D_CRT_SECURE_NO_DEPRECATE
                      -DXERCES_PATH_DELIMITER_BACKSLASH
                      -DXERCES_USE_TRANSCODER_WINDOWS
@@ -141,9 +141,9 @@ if( MSVC )
     add_definitions( /wd4996 )
     add_definitions( /wd4355 )
     
-	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-")
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-")
     set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
-	set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
+    set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
     
 else()
     add_definitions( -DXERCES_USE_FILEMGR_POSIX
