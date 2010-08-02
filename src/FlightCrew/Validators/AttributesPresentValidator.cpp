@@ -101,13 +101,18 @@ bool AttributesPresentValidator::IsAllowedAttribute(
     const xc::DOMAttr &attribute, 
     const std::vector< QName > &allowed_attribute_qnames )
 {
-    QName attribute_qname( fromX( attribute.getName() ), fromX( attribute.getNamespaceURI() ) );
-
+    QName attribute_qname( fromX( attribute.getLocalName() ), fromX( attribute.getNamespaceURI() ) );
+ 
     bool allowed_name = Util::Contains< QName >( 
                             allowed_attribute_qnames, attribute_qname );
-    bool is_xmlns = attribute_qname.local_name == "xmlns";
 
-    return allowed_name || is_xmlns;
+    // This includes the namespace prefix,
+    // so e.g. opf:scheme
+    std::string full_attribute_name = fromX( attribute.getName() );
+
+    bool is_xml_reserved = boost::starts_with( full_attribute_name, "xml" );
+
+    return allowed_name || is_xml_reserved;
 }
 
 } //namespace FlightCrew

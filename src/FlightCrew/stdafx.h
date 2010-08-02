@@ -38,6 +38,7 @@
 #include <boost/unordered_map.hpp>
 #include <boost/format.hpp> 
 #include <boost/foreach.hpp> 
+#include <boost/algorithm/string.hpp>
 
 // ... and then we reset the warning level
 // back to normal (warning level 4)
