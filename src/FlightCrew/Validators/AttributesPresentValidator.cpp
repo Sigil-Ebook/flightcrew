@@ -110,9 +110,9 @@ bool AttributesPresentValidator::IsAllowedAttribute(
     // so e.g. opf:scheme
     std::string full_attribute_name = fromX( attribute.getName() );
 
-    bool is_xml_reserved = boost::starts_with( full_attribute_name, "xml" );
+    bool is_xmlns = boost::starts_with( full_attribute_name, "xmlns" );
 
-    return allowed_name || is_xml_reserved;
+    return allowed_name || is_xmlns;
 }
 
 } //namespace FlightCrew
