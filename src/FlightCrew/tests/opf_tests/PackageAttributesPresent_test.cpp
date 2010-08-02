@@ -52,17 +52,17 @@ TEST( PackageAttributesPresentTest, MissingAttributes )
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 58 );
 
-    std::vector< std::string > message_arguments1 = results[ 0 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments1[ 0 ], "version" );
-    EXPECT_EQ( message_arguments1[ 1 ], "package" );
+    std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
+    EXPECT_EQ( message_arguments[ 0 ], "version" );
+    EXPECT_EQ( message_arguments[ 1 ], "package" );
 
     EXPECT_EQ( results[ 1 ].GetResultId(), ERROR_XML_REQUIRED_ATTRIBUTE_MISSING );
     EXPECT_EQ( results[ 1 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 1 ].GetErrorColumn(), 58 );
 
-    std::vector< std::string > message_arguments2 = results[ 1 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments2[ 0 ], "unique-identifier" );
-    EXPECT_EQ( message_arguments2[ 1 ], "package" );
+    message_arguments = results[ 1 ].GetMessageArguments();
+    EXPECT_EQ( message_arguments[ 0 ], "unique-identifier" );
+    EXPECT_EQ( message_arguments[ 1 ], "package" );
 }
 
 TEST( PackageAttributesPresentTest, AllowedAttributes )
