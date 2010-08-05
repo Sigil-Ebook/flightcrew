@@ -90,7 +90,8 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_IDREF_ID_DOES_NOT_EXIST ] =
         "The <itemref>'s idref is pointing to an <item> with id=\"%1%\" which"
         "does not exist in the <manifest>.";
-    
+    m_Messages[ ERROR_OPF_BAD_PACKAGE_VERSION ] =
+        "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";    
 }
 
 } // namespace FlightCrew
