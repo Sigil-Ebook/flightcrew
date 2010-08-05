@@ -29,7 +29,7 @@
 #include "NodeLocationInfo.h"
 #include "QName.h"
 
-namespace XERCES_CPP_NAMESPACE { class DOMElement; class DOMDocument; }
+namespace XERCES_CPP_NAMESPACE { class DOMElement; class DOMDocument; class DOMAttr; }
 namespace xc = XERCES_CPP_NAMESPACE;
 
 namespace XercesExt
@@ -37,6 +37,10 @@ namespace XercesExt
     NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node );
 
     std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element );
+
+    std::vector< xc::DOMAttr* > GetAllAttributes( const QName &element_qname,
+                                                  const QName &attribute_qname,
+                                                  const xc::DOMDocument &document );
 
     bool ElementListContains( std::vector< xc::DOMElement* > element_list,
                               const QName &element_qname );

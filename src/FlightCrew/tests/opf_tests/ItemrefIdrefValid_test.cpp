@@ -20,32 +20,31 @@
 *************************************************************************/
 
 #include <stdafx_tests.h>
-#include "Validators/Opf/MetadataAttributesPresent.h"
+#include "Validators/Opf/ItemrefIdrefValid.h"
 #include "Result.h"
 
 using namespace FlightCrew;
 
-TEST( MetadataAttributesPresentTest, NotAllowedAttributes )
+TEST( ItemrefIdrefValidTest, IdDoesNotExist )
 {
-    MetadataAttributesPresent validator;
+    ItemrefIdrefValid validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/MetadataAttributesPresent_NotAllowedAttributes.xml" );
+            "test_data/opf_tests/ItemrefIdrefValid_IdDoesNotExist.xml" );
             
     EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED );
-    EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
-    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 43 );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_IDREF_ID_DOES_NOT_EXIST );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 7 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 33 );
 
     std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments[ 0 ], "breakme" );
-    EXPECT_EQ( message_arguments[ 1 ], "metadata" );
+    EXPECT_EQ( message_arguments[ 0 ], "test" );
 }
 
-TEST( MetadataAttributesPresentTest, AllowedAttributes )
+TEST( ItemrefIdrefValidTest, IdExists )
 {
-    MetadataAttributesPresent validator;
+    ItemrefIdrefValid validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/MetadataAttributesPresent_AllowedAttributes.xml" );
+            "test_data/opf_tests/ItemrefIdrefValid_IdExists.xml" );
     
     EXPECT_EQ( results.size(), 0U );
 }

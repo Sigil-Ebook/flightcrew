@@ -20,6 +20,7 @@
 *************************************************************************/
 
 #include <xercesc/internal/XMLScanner.hpp>
+#include <xercesc/dom/DOMNamedNodeMap.hpp>
 #include "LocationAwareDOMParser.h"
 #include "LocationInfoDataHandler.h"
 
@@ -29,8 +30,8 @@
 // We only ever need a single handler and a const one at that... this could
 // also easily go into a singleton, but this approach is simpler.
 static const XercesExt::LocationInfoDataHandler LOCATION_DATA_HANDLER;
-
 const char *LOCATION_INFO_KEY = "LocationInfoKey";
+typedef unsigned int uint; 
 
 namespace XercesExt
 {
@@ -66,15 +67,31 @@ void LocationAwareDOMParser::startElement( const xc::XMLElementDecl &elemDecl,
     int line_number   = (int) locator->getLineNumber();
     int column_number = (int) locator->getColumnNumber();
 
+    xc::DOMNode *current_node = getCurrentNode();
+
     // It's OK to const_cast the handler since the parser will only ever
     // call the handler's handle() method, which doesn't mutate the handler.
     // In fact, this function not accepting a const handler is probably a design
     // error on the part of Xerces developers.
-    getCurrentNode()->setUserData( 
+    current_node->setUserData( 
         m_LocationInfoKey,
         new NodeLocationInfo( line_number, column_number ),
         const_cast< XercesExt::LocationInfoDataHandler* >( &LOCATION_DATA_HANDLER ) );
 
+    // Attribute nodes get the same location as the opening tag
+    // of the element they were declared in... it's the best we can do.
+    xc::DOMNamedNodeMap *attribute_map = current_node->getAttributes();
+    if ( !attribute_map )
+
+        return;
+
+    for ( uint i = 0; i < attribute_map->getLength(); ++i )
+    {
+        attribute_map->item( i )->setUserData( 
+            m_LocationInfoKey,
+            new NodeLocationInfo( line_number, column_number ),
+            const_cast< XercesExt::LocationInfoDataHandler* >( &LOCATION_DATA_HANDLER ) );
+    }
 }
 
 }

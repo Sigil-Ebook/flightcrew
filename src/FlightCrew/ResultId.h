@@ -41,6 +41,7 @@ enum ResultId
     ERROR_XML_REQUIRED_ATTRIBUTE_MISSING,
 
     ERROR_OPF_PACKAGE_NOT_ROOT,
+    ERROR_OPF_IDREF_ID_DOES_NOT_EXIST,
 };
 
 } // namespace FlightCrew

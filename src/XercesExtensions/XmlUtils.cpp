@@ -23,8 +23,10 @@
 #include "ToXercesStringConverter.h"
 #include "FromXercesStringConverter.h"
 #include <xercesc/dom/DOMElement.hpp>
+#include <xercesc/dom/DOMAttr.hpp>
 #include <xercesc/dom/DOMDocument.hpp>
 #include <xercesc/dom/DOMNodeList.hpp>
+#include <xercesc/dom/DOMNamedNodeMap.hpp>
 #include <boost/foreach.hpp> 
 #define foreach BOOST_FOREACH
 
@@ -63,6 +65,39 @@ std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element
          
          children.push_back( child );
     }
+}
+
+
+std::vector< xc::DOMAttr* > GetAllAttributes( const QName &element_qname, 
+                                              const QName &attribute_qname,
+                                              const xc::DOMDocument &document )
+{
+    xc::DOMNodeList *elements = document.getElementsByTagNameNS(
+        toX( element_qname.namespace_name ),  toX( element_qname.local_name ) );
+
+    std::vector< xc::DOMAttr* > attributes;
+
+    for ( uint i = 0; i < elements->getLength(); ++i )
+    {
+        xc::DOMNamedNodeMap *attribute_map = elements->item( i )->getAttributes();
+
+        if ( !attribute_map )
+
+            continue;
+
+        for ( uint j = 0; j < attribute_map->getLength(); ++j )
+        {
+            xc::DOMAttr *attribute = static_cast< xc::DOMAttr* >( attribute_map->item( j ) );
+            QName current_attribute_qname( fromX( attribute->getLocalName() ),
+                                           fromX( attribute->getNamespaceURI() ) );
+
+            if ( attribute_qname == current_attribute_qname )
+
+                attributes.push_back( attribute );
+        }
+    }
+
+    return attributes;
 }
 
 
@@ -107,5 +142,6 @@ xc::DOMNode* GetFirstAvailableElement( const QName &element_qname,
 
     return GetFirstAvailableElement( element_qnames, document );
 }
+
 
 } // namespace XercesExt

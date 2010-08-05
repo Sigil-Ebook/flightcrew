@@ -87,6 +87,10 @@ void ErrorMessages::LoadMessages()
 
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
+    m_Messages[ ERROR_OPF_IDREF_ID_DOES_NOT_EXIST ] =
+        "The <itemref>'s idref is pointing to an <item> with id=\"%1%\" which"
+        "does not exist in the <manifest>.";
+    
 }
 
 } // namespace FlightCrew
