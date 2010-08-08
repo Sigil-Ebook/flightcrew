@@ -29,18 +29,43 @@
 #include "NodeLocationInfo.h"
 #include "QName.h"
 
-namespace XERCES_CPP_NAMESPACE { class DOMElement; class DOMDocument; class DOMAttr; }
+namespace XERCES_CPP_NAMESPACE 
+{ class DOMElement; class DOMDocument; class DOMAttr; class DOMNodeList; }
 namespace xc = XERCES_CPP_NAMESPACE;
 
 namespace XercesExt
 {
     NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node );
 
+    /**
+     * Returns a list of elements that are descendants of the provided element
+     * that also match the provided qualified name.
+     *
+     * @param start_element The ancestor element.
+     * @param element_qname The qname to search for.
+     * @return The matching list of descendants.
+     */
+    std::vector< xc::DOMElement* > GetElementsByQName( const xc::DOMElement &start_element, 
+                                                       const QName &element_qname );
+
+    /**
+     * Returns a list of elements that are present in the provided document
+     * that also match the provided qualified name.
+     *
+     * @param start_element The parent DOM document.
+     * @param element_qname The qname to search for.
+     * @return The matching list of descendants.
+     */
+    std::vector< xc::DOMElement* > GetElementsByQName( const xc::DOMDocument &document, 
+                                                       const QName &element_qname );
+
     std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element );
 
     std::vector< xc::DOMAttr* > GetAllAttributes( const QName &element_qname,
                                                   const QName &attribute_qname,
                                                   const xc::DOMDocument &document );
+
+    std::vector< xc::DOMElement* > ExtractElementsFromNodeList( const xc::DOMNodeList &node_list );
 
     bool ElementListContains( std::vector< xc::DOMElement* > element_list,
                               const QName &element_qname );

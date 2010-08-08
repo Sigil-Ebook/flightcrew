@@ -43,6 +43,26 @@ NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node )
 }
 
 
+std::vector< xc::DOMElement* > GetElementsByQName( const xc::DOMElement &start_element, 
+                                                   const QName &element_qname )
+{
+    xc::DOMNodeList *elements = start_element.getElementsByTagNameNS(
+        toX( element_qname.namespace_name ),  toX( element_qname.local_name ) );
+
+    return ExtractElementsFromNodeList( *elements );
+}
+
+
+std::vector< xc::DOMElement* > GetElementsByQName( const xc::DOMDocument &document, 
+                                                   const QName &element_qname )
+{
+    xc::DOMNodeList *elements = document.getElementsByTagNameNS(
+        toX( element_qname.namespace_name ),  toX( element_qname.local_name ) );
+
+    return ExtractElementsFromNodeList( *elements );
+}
+
+
 std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element )
 {
     xc::DOMElement *child = element.getFirstElementChild();
@@ -101,6 +121,23 @@ std::vector< xc::DOMAttr* > GetAllAttributes( const QName &element_qname,
 }
 
 
+std::vector< xc::DOMElement* > ExtractElementsFromNodeList( const xc::DOMNodeList &node_list )
+{
+    std::vector< xc::DOMElement* > element_list;
+
+    for ( uint i = 0; i < node_list.getLength(); ++i )
+    {
+        xc::DOMNode *node = node_list.item( i );
+
+        if ( node->getNodeType() == xc::DOMNode::ELEMENT_NODE )
+
+            element_list.push_back( static_cast< xc::DOMElement* >( node ) );
+    }
+
+    return element_list;
+}
+
+
 bool ElementListContains( std::vector< xc::DOMElement* > element_list,
                           const QName &element_qname )
 {
@@ -142,6 +179,7 @@ xc::DOMNode* GetFirstAvailableElement( const QName &element_qname,
 
     return GetFirstAvailableElement( element_qnames, document );
 }
+
 
 
 } // namespace XercesExt
