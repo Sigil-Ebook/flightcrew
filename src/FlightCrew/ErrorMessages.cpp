@@ -92,7 +92,9 @@ void ErrorMessages::LoadMessages()
         "The <itemref>'s idref is pointing to an <item> with id=\"%1%\" which"
         "does not exist in the <manifest>.";
     m_Messages[ ERROR_OPF_BAD_PACKAGE_VERSION ] =
-        "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";    
+        "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";
+    m_Messages[ ERROR_OPF_BAD_ITEM_LINEAR_VALUE ] =
+        "The \"linear\" attribute of the <item> element can only have a value of \"yes\" or \"no\".";    
 }
 
 } // namespace FlightCrew
