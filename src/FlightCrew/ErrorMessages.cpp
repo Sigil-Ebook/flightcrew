@@ -89,12 +89,16 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
     m_Messages[ ERROR_OPF_IDREF_ID_DOES_NOT_EXIST ] =
-        "The <itemref>'s idref is pointing to an <item> with id=\"%1%\" which"
+        "The <itemref>'s idref is pointing to an <item> with id=\"%1%\" which "
         "does not exist in the <manifest>.";
     m_Messages[ ERROR_OPF_BAD_PACKAGE_VERSION ] =
         "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";
     m_Messages[ ERROR_OPF_BAD_ITEM_LINEAR_VALUE ] =
-        "The \"linear\" attribute of the <item> element can only have a value of \"yes\" or \"no\".";    
+        "The \"linear\" attribute of the <item> element can only have a value of \"yes\" or \"no\".";
+    m_Messages[ ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE ] =
+        "The \"role\" value \"%1%\" is not a registered MARC value. Either use a valid MARC "
+        "relator or start your relator with \"oth.\"";
+    
 }
 
 } // namespace FlightCrew
