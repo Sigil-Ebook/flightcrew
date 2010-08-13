@@ -19,21 +19,53 @@
 **
 *************************************************************************/
 
-#include <xercesc/util/XMLString.hpp>
+#include <xercesc/util/TransService.hpp>
 #include "ToXercesStringConverter.h"
 
 namespace XercesExt
 {
 
-ToXercesStringConverter::ToXercesStringConverter( const std::string &ascii_string )
+ToXercesStringConverter::ToXercesStringConverter( const std::string &utf8_string )
 {
-    m_XercesString = xc::XMLString::transcode( ascii_string.c_str() );
+    if ( utf8_string.length() > 0 )
+    {
+        xc::TranscodeFromStr transcoder( 
+            (const XMLByte*) utf8_string.c_str(), utf8_string.length(), "UTF-8" );
+
+        m_XercesString = transcoder.adopt();
+    }
+
+    else
+    {
+        m_XercesString = NULL;
+    }
 }
 
 
-ToXercesStringConverter::ToXercesStringConverter( const char* const ascii_string )
+ToXercesStringConverter::ToXercesStringConverter( const char* const utf8_string )
 {
-    m_XercesString = ascii_string ? xc::XMLString::transcode( ascii_string ) : NULL;
+    if ( utf8_string )
+    {
+        size_t string_length = strlen( utf8_string );
+
+        if ( string_length > 0 )
+        {
+            xc::TranscodeFromStr transcoder( 
+                (const XMLByte*) utf8_string, string_length, "UTF-8" );
+
+            m_XercesString = transcoder.adopt();
+        }
+
+        else
+        {
+            m_XercesString = NULL;
+        }
+    }
+
+    else
+    {
+        m_XercesString = NULL;
+    }
 }
 
 

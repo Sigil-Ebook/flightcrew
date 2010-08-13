@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <xercesc/util/XMLString.hpp>
+#include <xercesc/util/TransService.hpp>
 #include "FromXercesStringConverter.h"
 
 namespace XercesExt
@@ -27,27 +27,38 @@ namespace XercesExt
 
 FromXercesStringConverter::FromXercesStringConverter( const XMLCh* const xerces_string )
 {
-    m_LocalString = xerces_string ? xc::XMLString::transcode( xerces_string ) : NULL;
+    if ( xerces_string && 
+         xc::XMLString::stringLen( xerces_string ) > 0 )
+    {
+        xc::TranscodeToStr transcoder( xerces_string, "UTF-8" );
+
+        m_Utf8String = (char*) transcoder.adopt();
+    }
+
+    else
+    {
+        m_Utf8String = NULL;
+    }
 }
 
 
 FromXercesStringConverter::~FromXercesStringConverter()
 {
-    if ( m_LocalString )
+    if ( m_Utf8String )
         
-        xc::XMLString::release( &m_LocalString );
+        xc::XMLString::release( &m_Utf8String );
 }
 
 
-const char* FromXercesStringConverter::LocalString() const
+const char* FromXercesStringConverter::Utf8String() const
 {
-    return m_LocalString;
+    return m_Utf8String;
 }
 
 
 std::string FromXercesStringConverter::StandardString() const
 {
-    return m_LocalString ? std::string( m_LocalString ) : std::string();
+    return m_Utf8String ? std::string( m_Utf8String ) : std::string();
 }
 
 } // namespace XercesExt

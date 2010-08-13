@@ -38,13 +38,13 @@ namespace XercesExt
 
         ~FromXercesStringConverter();
 
-        const char* LocalString() const;
+        const char* Utf8String() const;
 
         std::string StandardString() const;
 
     private:
 
-        char* m_LocalString;
+        char* m_Utf8String;
     };
 }
 

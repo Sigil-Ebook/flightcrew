@@ -35,9 +35,9 @@ class ToXercesStringConverter
 {
 public:
 
-    ToXercesStringConverter( const std::string &ascii_string );
+    ToXercesStringConverter( const std::string &utf8_string );
 
-    ToXercesStringConverter( const char* const ascii_string );
+    ToXercesStringConverter( const char* const utf8_string );
 
     ~ToXercesStringConverter();
 
