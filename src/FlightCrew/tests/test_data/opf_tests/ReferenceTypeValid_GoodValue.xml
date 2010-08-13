@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+    <guide>
+        <reference type="cover" />
+        <reference type="title-page" />
+        <reference type="toc" />
+        <reference type="index" />
+        <reference type="glossary" />
+        <reference type="acknowledgements" />
+        <reference type="bibliography" />
+        <reference type="colophon" />
+        <reference type="copyright-page" />
+        <reference type="dedication" />
+        <reference type="epigraph" />
+        <reference type="foreword" />
+        <reference type="loi" />
+        <reference type="lot" />
+        <reference type="notes" />
+        <reference type="preface" />
+        <reference type="text" />
+        <reference type="other.works" />
+        </guide>
+</package>

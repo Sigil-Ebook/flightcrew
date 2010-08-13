@@ -98,7 +98,9 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE ] =
         "The \"role\" value \"%1%\" is not a registered MARC value. Either use a valid MARC "
         "relator or start your relator with \"oth.\"";
-    
+    m_Messages[ ERROR_OPF_BAD_REFERENCE_TYPE_VALUE ] =
+        "The \"type\" value \"%1%\" is not an OPF-specified value. Either use a predefined "
+        "type or start your type with \"other.\"";    
 }
 
 } // namespace FlightCrew
