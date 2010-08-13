@@ -44,7 +44,10 @@ std::vector<Result> CreatorOrContributorRoleValid::ValidateXml( const xc::DOMDoc
     {
         std::string role = fromX( element->getAttributeNS( toX( OPF_XML_NAMESPACE ), toX( "role" ) ) );
         
-        if ( relators.count( role ) == 0 &&
+        // The "role" is not a required attribute and
+        // can thus be empty.
+        if ( !role.empty() &&
+             relators.count( role ) == 0 &&
              !boost::starts_with( role, "oth." ) )
         {
             Result result = ResultWithNodeLocation( 
