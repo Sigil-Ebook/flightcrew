@@ -91,8 +91,11 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
     m_Messages[ ERROR_OPF_IDREF_ID_DOES_NOT_EXIST ] =
-        "The <itemref>'s idref is pointing to an <item> with id=\"%1%\" which "
+        "The <itemref>'s \"idref\" is pointing to an <item> with id=\"%1%\" which "
         "does not exist in the <manifest>.";
+    m_Messages[ ERROR_OPF_PACKAGE_UNIQUE_IDENTIFIER_DOES_NOT_EXIST ] =
+        "The <package>'s \"unique-identifier\" is pointing to an <identifier> with id=\"%1%\" which "
+        "does not exist in the <metadata>.";
     m_Messages[ ERROR_OPF_BAD_PACKAGE_VERSION ] =
         "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";
     m_Messages[ ERROR_OPF_BAD_ITEM_LINEAR_VALUE ] =
@@ -102,7 +105,9 @@ void ErrorMessages::LoadMessages()
         "relator or start your relator with \"oth.\"";
     m_Messages[ ERROR_OPF_BAD_REFERENCE_TYPE_VALUE ] =
         "The \"type\" value \"%1%\" is not an OPF-specified value. Either use a predefined "
-        "type or start your type with \"other.\"";    
+        "type or start your type with \"other.\"";
+
+    
 }
 
 } // namespace FlightCrew
