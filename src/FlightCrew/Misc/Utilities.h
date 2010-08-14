@@ -26,6 +26,9 @@
 #include <vector>
 #include <algorithm>
 
+namespace FlightCrew
+{
+
 namespace Util
 {
     template <typename T>
@@ -41,6 +44,8 @@ namespace Util
             return base_vector;
     }
 
-}
+} // namespace Util
+
+} // namespace FlightCrew
 
 #endif // UTILITIES_H
