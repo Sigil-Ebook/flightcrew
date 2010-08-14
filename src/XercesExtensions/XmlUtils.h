@@ -61,9 +61,9 @@ namespace XercesExt
 
     std::vector< xc::DOMElement* > GetElementChildren( const xc::DOMElement &element );
 
-    std::vector< xc::DOMAttr* > GetAllAttributes( const QName &element_qname,
-                                                  const QName &attribute_qname,
-                                                  const xc::DOMDocument &document );
+    std::vector< xc::DOMAttr* > GetAllAttributesFromElements( const QName &element_qname,
+                                                              const QName &attribute_qname,
+                                                              const xc::DOMDocument &document );
 
     std::vector< xc::DOMElement* > ExtractElementsFromNodeList( const xc::DOMNodeList &node_list );
 

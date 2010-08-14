@@ -29,13 +29,15 @@ namespace FlightCrew
 
 std::vector<Result> ItemrefIdrefValid::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< xc::DOMAttr* > idrefs = xe::GetAllAttributes( QName( "itemref", OPF_XML_NAMESPACE ),
-                                                               QName( "idref", "" ),
-                                                               document );
+    std::vector< xc::DOMAttr* > idrefs = xe::GetAllAttributesFromElements( 
+        QName( "itemref", OPF_XML_NAMESPACE ),
+        QName( "idref", "" ),
+        document );
 
-    std::vector< xc::DOMAttr* > item_ids = xe::GetAllAttributes( QName( "item", OPF_XML_NAMESPACE ),
-                                                                 QName( "id", "" ),
-                                                                 document );
+    std::vector< xc::DOMAttr* > item_ids = xe::GetAllAttributesFromElements(
+        QName( "item", OPF_XML_NAMESPACE ),
+        QName( "id", "" ),
+        document );
 
     std::vector<Result> results;
 

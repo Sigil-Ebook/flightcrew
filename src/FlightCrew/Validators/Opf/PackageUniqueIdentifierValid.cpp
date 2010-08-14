@@ -33,7 +33,7 @@ std::vector<Result> PackageUniqueIdentifierValid::ValidateXml( const xc::DOMDocu
     xc::DOMElement *package_element = document.getDocumentElement();
     std::string unique_id = fromX( package_element->getAttribute( toX( "unique-identifier" ) ) );
 
-    std::vector< xc::DOMAttr* > identifier_ids = xe::GetAllAttributes( 
+    std::vector< xc::DOMAttr* > identifier_ids = xe::GetAllAttributesFromElements( 
         QName( "identifier", DC_XML_NAMESPACE ),
         QName( "id", "" ),
         document );
