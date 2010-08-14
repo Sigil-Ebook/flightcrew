@@ -42,12 +42,21 @@ struct QName
     QName( const std::string &new_local_name, const std::string &new_namespace_name )
         : local_name( new_local_name ), namespace_name ( new_namespace_name ) {};
     
+    /**
+     * Implements the equality operator.
+     * Two QNames are equal if they have the same local and namespace names.
+     * The exceptions are names that equal "*", which match any name.
+     */
     inline bool operator== ( const QName& other ) const 
     { 
         return ( local_name == other.local_name || local_name == "*" || other.local_name == "*" ) && 
                ( namespace_name == other.namespace_name || namespace_name == "*" || other.namespace_name == "*" );
     };
 
+    /**
+     * Implements the inequality operator.
+     * Merely calls the equality operator and returns its inverted result. 
+     */
     inline bool operator!= ( const QName& other ) const 
     { 
         return !operator==( other );
