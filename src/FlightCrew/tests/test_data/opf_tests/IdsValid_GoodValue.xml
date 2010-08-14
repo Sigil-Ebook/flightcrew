@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+    <manifest>
+        <item id="aaa" />
+        <item id="a932541" />
+        <item id="aa-aa" />
+        <item id="aa.aa" />
+    </manifest>
+</package>

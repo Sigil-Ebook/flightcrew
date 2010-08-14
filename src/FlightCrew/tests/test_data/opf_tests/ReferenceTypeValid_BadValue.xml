@@ -2,5 +2,5 @@
 <package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
     <guide>
         <reference type="breakme" />
-        </guide>
+    </guide>
 </package>

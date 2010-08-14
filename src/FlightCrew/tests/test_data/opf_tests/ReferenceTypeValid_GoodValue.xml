@@ -19,5 +19,5 @@
         <reference type="preface" />
         <reference type="text" />
         <reference type="other.works" />
-        </guide>
+    </guide>
 </package>

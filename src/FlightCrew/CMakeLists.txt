@@ -53,6 +53,7 @@ include_directories( ${CMAKE_CURRENT_BINARY_DIR}
                      ../BoostParts 
                      ../Xerces
                      ../XercesExtensions
+                     ../utf8-cpp
                    )
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 

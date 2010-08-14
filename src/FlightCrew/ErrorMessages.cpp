@@ -84,7 +84,9 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_XML_REQUIRED_ATTRIBUTE_MISSING ] =
         "The required attribute \"%1%\" is missing from the <%2%> element.";
     m_Messages[ ERROR_XML_ID_NOT_UNIQUE ] =
-        "An element with ID value \"%1%\" already exists in the document.";    
+        "An element with ID value \"%1%\" already exists in the document.";
+    m_Messages[ ERROR_XML_BAD_ID_VALUE ] =
+        "An ID value of \"%1%\" is not a valid value for an ID.";
 
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
