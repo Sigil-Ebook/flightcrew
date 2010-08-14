@@ -50,8 +50,7 @@ struct QName
 
     inline bool operator!= ( const QName& other ) const 
     { 
-        return ( local_name != other.local_name && local_name != "*" && other.local_name != "*" ) || 
-               ( namespace_name != other.namespace_name && namespace_name != "*" && other.namespace_name != "*" );
+        return !operator==( other );
     };
 
     /**
