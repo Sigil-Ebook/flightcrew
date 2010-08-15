@@ -40,6 +40,7 @@
 #include <boost/foreach.hpp> 
 #include <boost/algorithm/string.hpp>
 #include <boost/regex.hpp>
+#include <boost/unordered_set.hpp>
 
 // ... and then we reset the warning level
 // back to normal (warning level 4)

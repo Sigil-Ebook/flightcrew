@@ -114,9 +114,9 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_ITEM_HREF_HAS_FRAGMENT ] =
         "The <item> element's \"href\" attribute value is \"%1%\", which contains "
         "a fragment identifier.";
-
-    
-        
+    m_Messages[ ERROR_OPF_ITEM_HREF_NOT_UNIQUE ] =
+        "The <item> element's \"href\" attribute value is \"%1%\", "
+        "which is already in use in a previous <item>.";
     
 }
 

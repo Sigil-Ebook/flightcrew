@@ -20,7 +20,7 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "IdsUnique.h"
+#include "ItemHrefUnique.h"
 #include <ToXercesStringConverter.h>
 #include <FromXercesStringConverter.h>
 #include <XmlUtils.h>
@@ -29,32 +29,29 @@
 namespace FlightCrew
 {
 
-std::vector<Result> IdsUnique::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> ItemHrefUnique::ValidateXml( const xc::DOMDocument &document )
 {
-    xc::DOMNodeList *elements = document.getElementsByTagName( toX( "*" ) );
+    std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
+        document, QName( "item", OPF_XML_NAMESPACE ) );
 
-    boost::unordered_set< std::string > ids;
+    boost::unordered_set< std::string > hrefs;
     std::vector<Result> results;
 
-    for ( uint i = 0; i < elements->getLength(); ++i )
+    foreach( xc::DOMElement* item, items )
     {
-        xc::DOMElement *element = static_cast< xc::DOMElement* >( elements->item( i ) );
-        std::string id = fromX( element->getAttribute( toX( "id" ) ) );
+        std::string href = fromX( item->getAttribute( toX( "href" ) ) );
 
-        if ( !id.empty() )
+        if ( hrefs.count( href ) == 0 )
         {
-            if ( ids.count( id ) == 0 )
-            {
-                ids.insert( id );
-            }
+            hrefs.insert( href );
+        }
 
-            else
-            {
-                results.push_back( 
-                    ResultWithNodeLocation( ERROR_XML_ID_NOT_UNIQUE, *element )
-                    .AddMessageArgument( id ) 
-                    );
-            }
+        else
+        {
+            results.push_back( 
+                ResultWithNodeLocation( ERROR_OPF_ITEM_HREF_NOT_UNIQUE, *item )
+                .AddMessageArgument( href ) 
+                );
         }
     }
 
