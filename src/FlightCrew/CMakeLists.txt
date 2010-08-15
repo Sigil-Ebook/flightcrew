@@ -74,8 +74,8 @@ if( MSVC )
     set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
     set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
 
-# "Print all warnings" flag for GCC
 elseif( CMAKE_COMPILER_IS_GNUCXX )
+    # "Print all warnings" flag for GCC
     add_definitions( -Wall )
 
     # Make sure the PCH is built for GCC
