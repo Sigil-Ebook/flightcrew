@@ -91,23 +91,31 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
     m_Messages[ ERROR_OPF_IDREF_ID_DOES_NOT_EXIST ] =
-        "The <itemref>'s \"idref\" is pointing to an <item> with id=\"%1%\" which "
+        "The <itemref> element's \"idref\" is pointing to an <item> with id=\"%1%\" which "
         "does not exist in the <manifest>.";
     m_Messages[ ERROR_OPF_PACKAGE_UNIQUE_IDENTIFIER_DOES_NOT_EXIST ] =
-        "The <package>'s \"unique-identifier\" is pointing to an <identifier> with id=\"%1%\" which "
-        "does not exist in the <metadata>.";
+        "The <package> element's \"unique-identifier\" is pointing to an <identifier> "
+        "with id=\"%1%\" which does not exist in the <metadata>.";
     m_Messages[ ERROR_OPF_BAD_PACKAGE_VERSION ] =
         "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";
     m_Messages[ ERROR_OPF_BAD_ITEM_LINEAR_VALUE ] =
-        "The \"linear\" attribute of the <item> element can only have a value of \"yes\" or \"no\".";
+        "The <item> element's \"linear\" attribute can only have a value of \"yes\" or \"no\".";
     m_Messages[ ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE ] =
         "The \"role\" value \"%1%\" is not a registered MARC value. Either use a valid MARC "
         "relator or start your relator with \"oth.\"";
     m_Messages[ ERROR_OPF_BAD_REFERENCE_TYPE_VALUE ] =
-        "The \"type\" value \"%1%\" is not an OPF-specified value. Either use a predefined "
-        "type or start your type with \"other.\"";
+        "The <reference> element's \"type\" attribute has value \"%1%\" which is not an "
+        "OPF-specified value. Either use a predefined type or start your type with \"other.\"";
     m_Messages[ ERROR_OPF_BAD_DATE_VALUE ] =
-        "The <date> element's value of \"%1%\" is not a valid date format.";
+        "The <date> element's value is \"%1%\", which is not a valid date format.";
+    m_Messages[ ERROR_OPF_ITEM_HREF_INVALID_URI ] =
+        "The <item> element's \"href\" attribute value is \"%1%\", which is not a valid URI.";
+    m_Messages[ ERROR_OPF_ITEM_HREF_HAS_FRAGMENT ] =
+        "The <item> element's \"href\" attribute value is \"%1%\", which contains "
+        "a fragment identifier.";
+
+    
+        
     
 }
 

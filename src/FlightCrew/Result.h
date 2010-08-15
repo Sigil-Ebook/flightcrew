@@ -40,17 +40,17 @@ public:
 
     ResultId GetResultId();
 
-    void SetResultId( ResultId result_id );
+    Result& SetResultId( ResultId result_id );
 
     int GetErrorLine();
 
-    void SetErrorLine( int error_line );
+    Result& SetErrorLine( int error_line );
 
     int GetErrorColumn();
 
     void SetErrorColumn( int error_column );
 
-    void AddMessageArgument( const std::string &message_argument );
+    Result& AddMessageArgument( const std::string &message_argument );
 
     void SetMessageArguments( const std::vector< std::string > &message_arguments );
 

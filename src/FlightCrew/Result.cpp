@@ -42,9 +42,10 @@ ResultId Result::GetResultId()
 }
 
 
-void Result::SetResultId( ResultId result_id )
+Result& Result::SetResultId( ResultId result_id )
 {
     m_ResultId = result_id;
+    return *this;
 }
 
 
@@ -54,9 +55,10 @@ int Result::GetErrorLine()
 }
 
 
-void Result::SetErrorLine( int error_line )
+Result& Result::SetErrorLine( int error_line )
 {
     m_ErrorLine = error_line;
+    return *this;
 }
 
 
@@ -72,9 +74,10 @@ void Result::SetErrorColumn( int error_line )
 }
 
 
-void Result::AddMessageArgument( const std::string &message_argument )
+Result& Result::AddMessageArgument( const std::string &message_argument )
 {
     m_MessageArguments.push_back( message_argument );
+    return *this;
 }
 
 

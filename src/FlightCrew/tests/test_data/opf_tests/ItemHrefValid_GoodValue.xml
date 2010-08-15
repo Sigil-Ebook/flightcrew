@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+    <manifest>
+        <item href="toc.ncx" />
+        <item href="dir1/dir2/dir3/a.xhtml" />
+        <item href="./a.xhtml" />
+        <item href="../a.xhtml" />
+        <item href="a" />
+        <item href="file://localhost/etc/fstab" />
+        <item href="file://hostname/path/to/the%20file.txt" />
+        <item href="file:///c:/path/to/the%20file.txt" />
+        <item href="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm" />
+    </manifest>
+</package>
