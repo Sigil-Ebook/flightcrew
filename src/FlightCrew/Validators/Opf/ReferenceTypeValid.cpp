@@ -44,11 +44,10 @@ std::vector<Result> ReferenceTypeValid::ValidateXml( const xc::DOMDocument &docu
         if ( types.count( type ) == 0 &&
              !boost::starts_with( type, "other." ) )
         {
-            Result result = ResultWithNodeLocation( 
-                ERROR_OPF_BAD_REFERENCE_TYPE_VALUE, *element );
-
-            result.AddMessageArgument( type );
-            results.push_back( result );
+            results.push_back( 
+                ResultWithNodeLocation( ERROR_OPF_BAD_REFERENCE_TYPE_VALUE, *element )
+                .AddMessageArgument( type )
+                );
         }     
     }
 

@@ -65,16 +65,12 @@ std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren(
 
 Result AllowedChildrenValidator::NotAllowedChildResult( const xc::DOMNode &child )
 {
-    Result result = ResultWithNodeLocation( 
-        ERROR_XML_CHILD_NOT_RECOGNIZED, child );
-
     const xc::DOMElement* element = static_cast< const xc::DOMElement* >( &child );
     const xc::DOMElement* parent  = static_cast< const xc::DOMElement* >( child.getParentNode() );
 
-    result.AddMessageArgument( fromX( element->getLocalName() ) );
-    result.AddMessageArgument( fromX( parent->getLocalName() ) );
-
-    return result;
+    return ResultWithNodeLocation( ERROR_XML_CHILD_NOT_RECOGNIZED, child )
+           .AddMessageArgument( fromX( element->getLocalName() ) )
+           .AddMessageArgument( fromX( parent->getLocalName() ) );
 }
 
 } //namespace FlightCrew

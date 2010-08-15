@@ -51,9 +51,10 @@ std::vector<Result> IdsUnique::ValidateXml( const xc::DOMDocument &document )
 
             else
             {
-                Result result = ResultWithNodeLocation( ERROR_XML_ID_NOT_UNIQUE, *element );
-                result.AddMessageArgument( id );
-                results.push_back( result );
+                results.push_back( 
+                    ResultWithNodeLocation( ERROR_XML_ID_NOT_UNIQUE, *element )
+                    .AddMessageArgument( id ) 
+                    );
             }
         }
     }

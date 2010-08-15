@@ -53,11 +53,11 @@ std::vector<Result> PackageUniqueIdentifierValid::ValidateXml( const xc::DOMDocu
 
     if ( !id_found )
     {
-        Result result = ResultWithNodeLocation( 
-            ERROR_OPF_PACKAGE_UNIQUE_IDENTIFIER_DOES_NOT_EXIST, *package_element );
-
-        result.AddMessageArgument( unique_id );
-        results.push_back( result );
+        results.push_back( 
+            ResultWithNodeLocation( 
+                ERROR_OPF_PACKAGE_UNIQUE_IDENTIFIER_DOES_NOT_EXIST, *package_element )
+            .AddMessageArgument( unique_id )
+            );
     }   
 
     return results;

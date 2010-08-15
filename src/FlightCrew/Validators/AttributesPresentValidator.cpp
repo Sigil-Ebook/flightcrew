@@ -50,13 +50,11 @@ std::vector<Result> AttributesPresentValidator::HasOnlyAllowedAttributes(
 
             if ( !IsAllowedAttribute( *attribute, attribute_qnames ) )
             {
-                Result result = ResultWithNodeLocation( 
-                    ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED, *element );
-
-                std::string attribute_name = fromX( attribute->getName() );
-                result.AddMessageArgument( attribute_name );
-                result.AddMessageArgument( element_qname.local_name );
-                results.push_back( result );
+                results.push_back( 
+                    ResultWithNodeLocation( ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED, *element )
+                    .AddMessageArgument( fromX( attribute->getName() ) )
+                    .AddMessageArgument( element_qname.local_name )
+                    );
             }
         }
     }    
@@ -84,12 +82,11 @@ std::vector<Result> AttributesPresentValidator::HasMandatoryAttributes(
             if ( !element->hasAttributeNS( 
                     toX( attribute_qname.namespace_name ), toX( attribute_qname.local_name ) ) )
             {
-                Result result = ResultWithNodeLocation( 
-                    ERROR_XML_REQUIRED_ATTRIBUTE_MISSING, *element );
-
-                result.AddMessageArgument( attribute_qname.local_name );
-                result.AddMessageArgument( element_qname.local_name );
-                results.push_back( result );
+                results.push_back( 
+                    ResultWithNodeLocation( ERROR_XML_REQUIRED_ATTRIBUTE_MISSING, *element )
+                    .AddMessageArgument( attribute_qname.local_name )
+                    .AddMessageArgument( element_qname.local_name )
+                    );
             }
         }
     }

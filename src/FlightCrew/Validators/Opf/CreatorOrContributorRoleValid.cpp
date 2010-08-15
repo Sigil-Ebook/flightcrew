@@ -50,11 +50,10 @@ std::vector<Result> CreatorOrContributorRoleValid::ValidateXml( const xc::DOMDoc
              relators.count( role ) == 0 &&
              !boost::starts_with( role, "oth." ) )
         {
-            Result result = ResultWithNodeLocation( 
-                ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE, *element );
-
-            result.AddMessageArgument( role );
-            results.push_back( result );
+            results.push_back( 
+                ResultWithNodeLocation( ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE, *element )
+                .AddMessageArgument( role )
+                );
         }
     }
 

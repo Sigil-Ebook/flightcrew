@@ -39,10 +39,11 @@ std::vector<Result> PackageVersionCorrect::ValidateXml( const xc::DOMDocument &d
 
     if ( version != VALID_PACKAGE_VERSION )
     {
-        Result result = ResultWithNodeLocation( ERROR_OPF_BAD_PACKAGE_VERSION, *package_element );
-        result.AddMessageArgument( VALID_PACKAGE_VERSION );
-        result.AddMessageArgument( version );
-        results.push_back( result );    
+        results.push_back( 
+            ResultWithNodeLocation( ERROR_OPF_BAD_PACKAGE_VERSION, *package_element )
+            .AddMessageArgument( VALID_PACKAGE_VERSION )
+            .AddMessageArgument( version )            
+            );    
     }
 
     return results;

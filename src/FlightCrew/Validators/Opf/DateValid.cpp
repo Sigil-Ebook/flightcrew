@@ -64,11 +64,10 @@ std::vector<Result> DateValid::ValidateXml( const xc::DOMDocument &document )
 
         if ( date_string.empty() || !ValidDateString( date_string ) )
         {
-            Result result = ResultWithNodeLocation( 
-                ERROR_OPF_BAD_DATE_VALUE, *date );
-
-            result.AddMessageArgument( date_string );
-            results.push_back( result );
+            results.push_back(  
+                ResultWithNodeLocation( ERROR_OPF_BAD_DATE_VALUE, *date )
+                .AddMessageArgument( date_string )
+                );
         }
     }
 

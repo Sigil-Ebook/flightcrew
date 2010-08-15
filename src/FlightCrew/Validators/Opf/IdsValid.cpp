@@ -45,11 +45,10 @@ std::vector<Result> IdsValid::ValidateXml( const xc::DOMDocument &document )
 
         if ( !ValidId( id ) )
         {
-            Result result = ResultWithNodeLocation( 
-                ERROR_XML_BAD_ID_VALUE, *element );
-
-            result.AddMessageArgument( id );
-            results.push_back( result );
+            results.push_back( 
+                ResultWithNodeLocation( ERROR_XML_BAD_ID_VALUE, *element )
+                .AddMessageArgument( id )
+                );
         }       
     }
 

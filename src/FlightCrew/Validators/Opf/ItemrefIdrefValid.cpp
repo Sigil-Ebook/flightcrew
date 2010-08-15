@@ -59,9 +59,10 @@ std::vector<Result> ItemrefIdrefValid::ValidateXml( const xc::DOMDocument &docum
 
         if ( !item_exists )
         {
-            Result result = ResultWithNodeLocation( ERROR_OPF_IDREF_ID_DOES_NOT_EXIST, *idref );
-            result.AddMessageArgument( idref_value );
-            results.push_back( result );    
+            results.push_back( 
+                ResultWithNodeLocation( ERROR_OPF_IDREF_ID_DOES_NOT_EXIST, *idref )
+                .AddMessageArgument( idref_value ) 
+                );    
         }
     }
 
