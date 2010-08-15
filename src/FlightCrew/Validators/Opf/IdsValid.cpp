@@ -65,12 +65,12 @@ bool IdsValid::ValidId( const std::string &id )
 
         return false;
 
-    std::string::const_iterator iter = id.cbegin();
+    std::string::const_iterator iter = id.begin();
     bool first_code_point = true;
 
-    while ( iter != id.cend() )
+    while ( iter != id.end() )
     {
-        utf8::uint32_t code_point = utf8::next( iter, id.cend() );
+        utf8::uint32_t code_point = utf8::next( iter, id.end() );
 
         if ( first_code_point )
         {
