@@ -42,13 +42,15 @@ std::vector<Result> CreatorOrContributorRoleValid::ValidateXml( const xc::DOMDoc
 
     foreach( xc::DOMElement* element, elements )
     {
+        if ( !element->hasAttributeNS( toX( OPF_XML_NAMESPACE ), toX( "role" ) ) )
+
+            continue;
+
         std::string role = fromX( element->getAttributeNS( toX( OPF_XML_NAMESPACE ), toX( "role" ) ) );
         
-        // The "role" is not a required attribute and
-        // can thus be empty.
-        if ( !role.empty() &&
-             relators.count( role ) == 0 &&
-             !boost::starts_with( role, "oth." ) )
+        if ( role.empty() ||
+             ( relators.count( role ) == 0 &&
+               !boost::starts_with( role, "oth." ) ) )
         {
             Result result = ResultWithNodeLocation( 
                 ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE, *element );

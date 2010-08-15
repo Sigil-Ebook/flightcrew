@@ -3,5 +3,6 @@
     <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
         <dc:creator opf:role="XXX" />        
         <dc:contributor opf:role="YYY" />
+        <dc:contributor opf:role="" />
     </metadata>
 </package>

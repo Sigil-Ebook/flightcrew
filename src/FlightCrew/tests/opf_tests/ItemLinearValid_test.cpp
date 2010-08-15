@@ -31,10 +31,14 @@ TEST( ItemLinearValidTest, BadValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemLinearValid_BadValue.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    EXPECT_EQ( results.size(), 2U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_BAD_ITEM_LINEAR_VALUE );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 6 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 32 );
+
+    EXPECT_EQ( results[ 1 ].GetResultId(), ERROR_OPF_BAD_ITEM_LINEAR_VALUE );
+    EXPECT_EQ( results[ 1 ].GetErrorLine(), 7 );
+    EXPECT_EQ( results[ 1 ].GetErrorColumn(), 27 );
 }
 
 TEST( ItemLinearValidTest, GoodValue )
