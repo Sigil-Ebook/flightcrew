@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:date>19997</dc:date>
+        <dc:date>197</dc:date>
+        <dc:date>1997-007</dc:date>
+        <dc:date>19970716</dc:date>
+        <dc:date>1997-07-16T19-20+01:00</dc:date>
+        <dc:date>1997-07-1619:20-01:00</dc:date>
+        <dc:date>1997-07-16T19:2001:00</dc:date>
+        <dc:date>1997-07-16T19:20:30,45+01:00</dc:date>
+    </metadata>
+</package>

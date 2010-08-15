@@ -39,6 +39,7 @@
 #include <boost/format.hpp> 
 #include <boost/foreach.hpp> 
 #include <boost/algorithm/string.hpp>
+#include <boost/regex.hpp>
 
 // ... and then we reset the warning level
 // back to normal (warning level 4)

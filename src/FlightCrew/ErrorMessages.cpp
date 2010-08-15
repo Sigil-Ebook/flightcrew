@@ -106,7 +106,8 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_BAD_REFERENCE_TYPE_VALUE ] =
         "The \"type\" value \"%1%\" is not an OPF-specified value. Either use a predefined "
         "type or start your type with \"other.\"";
-
+    m_Messages[ ERROR_OPF_BAD_DATE_VALUE ] =
+        "The <date> element's value of \"%1%\" is not a valid date format.";
     
 }
 
