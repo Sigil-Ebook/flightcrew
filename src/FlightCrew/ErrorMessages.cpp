@@ -99,7 +99,8 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_BAD_PACKAGE_VERSION ] =
         "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";
     m_Messages[ ERROR_OPF_BAD_ITEM_LINEAR_VALUE ] =
-        "The <item> element's \"linear\" attribute can only have a value of \"yes\" or \"no\".";
+        "The <item> element's \"linear\" attribute has value \"%1%\", but only \"yes\" and \"no\" "
+        "are allowed.";
     m_Messages[ ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE ] =
         "The \"role\" value \"%1%\" is not a registered MARC value. Either use a valid MARC "
         "relator or start your relator with \"oth.\"";

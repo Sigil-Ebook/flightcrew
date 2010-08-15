@@ -42,7 +42,8 @@ std::vector<Result> ItemLinearValid::ValidateXml( const xc::DOMDocument &documen
         if ( !linear.empty() && linear != "yes" && linear != "no" )
         {
             results.push_back( 
-                ResultWithNodeLocation( ERROR_OPF_BAD_ITEM_LINEAR_VALUE, *item ) );
+                ResultWithNodeLocation( ERROR_OPF_BAD_ITEM_LINEAR_VALUE, *item )
+                .AddMessageArgument( linear )  );
         }       
     }
 

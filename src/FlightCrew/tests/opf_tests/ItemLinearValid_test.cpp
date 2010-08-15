@@ -35,6 +35,9 @@ TEST( ItemLinearValidTest, BadValue )
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_BAD_ITEM_LINEAR_VALUE );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 6 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 32 );
+
+    std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
+    EXPECT_EQ( message_arguments[ 0 ], "break" );
 }
 
 TEST( ItemLinearValidTest, GoodValue )
