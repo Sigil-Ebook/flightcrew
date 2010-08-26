@@ -9,7 +9,7 @@
 
 # The interesting parts of Boost have been extracted using 
 # the BCP tool:
-#   http://www.boost.org/doc/libs/1_43_0/tools/bcp/doc/html/index.html
+#   http://www.boost.org/doc/libs/1_44_0/tools/bcp/doc/html/index.html
 #    
 # bcp call: bcp boost/bind.hpp boost/lambda/lambda.hpp boost/exception/all.hpp boost/tuple/tuple_io.hpp boost/tuple/tuple_comparison.hpp boost/filesystem.hpp boost/regex.hpp boost/foreach.hpp boost/program_options.hpp boost/smart_ptr.hpp boost/algorithm/string_regex.hpp boost/thread.hpp boost/unordered_map.hpp boost/unordered_set.hpp boost/format.hpp ../BoostParts
 
@@ -17,6 +17,9 @@
 # in the file /boost/config/user.hpp the BOOST_ALL_NO_LIB
 # define has been uncommented. Otherwise, we will get linker 
 # errors on MSVC because of boost auto-linking.
+
+# NOTE: boost/filesystem.hpp was also changed to force the use
+# of the v3 lib
 
 cmake_minimum_required( VERSION 2.8 ) 
 
@@ -30,11 +33,14 @@ set( SOURCES
     libs/date_time/src/gregorian/greg_weekday.cpp
     libs/date_time/src/posix_time/posix_time_types.cpp
     libs/thread/src/tss_null.cpp
-    libs/filesystem/src/operations.cpp
-    libs/filesystem/src/path.cpp
-    libs/filesystem/src/portability.cpp
-    libs/filesystem/src/utf8_codecvt_facet.cpp
-    libs/filesystem/src/utf8_codecvt_facet.hpp
+    libs/filesystem/v3/src/operations.cpp
+    libs/filesystem/v3/src/path.cpp
+    libs/filesystem/v3/src/portability.cpp
+    libs/filesystem/v3/src/utf8_codecvt_facet.cpp
+    libs/filesystem/v3/src/windows_file_codecvt.cpp
+    libs/filesystem/v3/src/path_traits.cpp
+    libs/filesystem/v3/src/unique_path.cpp
+    libs/filesystem/v3/src/codecvt_error_category.cpp
     libs/program_options/src/cmdline.cpp
     libs/program_options/src/convert.cpp
     libs/program_options/src/parsers.cpp

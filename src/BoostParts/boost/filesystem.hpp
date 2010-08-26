@@ -1,20 +1,20 @@
-//  boost/filesystem/filesystem.hpp  -----------------------------------------//
+//  boost/filesystem.hpp  --------------------------------------------------------------//
 
-//  Copyright Beman Dawes 2005
+//  Copyright Beman Dawes 2010
 
-//  Use, modification, and distribution is subject to the Boost Software
-//  License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
-//  http://www.boost.org/LICENSE_1_0.txt)
+//  Distributed under the Boost Software License, Version 1.0.
+//  See http://www.boost.org/LICENSE_1_0.txt
 
-//  See library home page at http://www.boost.org/libs/filesystem
+//  Library home page: http://www.boost.org/libs/filesystem
 
-//----------------------------------------------------------------------------// 
+//--------------------------------------------------------------------------------------// 
 
 #ifndef BOOST_FILESYSTEM_FILESYSTEM_HPP
 #define BOOST_FILESYSTEM_FILESYSTEM_HPP
 
-#include <boost/filesystem/operations.hpp>   // includes path.hpp
-#include <boost/filesystem/convenience.hpp>
+#  include <boost/filesystem/v3/config.hpp>
+#  include <boost/filesystem/v3/path.hpp>
+#  include <boost/filesystem/v3/operations.hpp>
+#  include <boost/filesystem/v3/convenience.hpp>
 
-#endif
-
+#endif  // BOOST_FILESYSTEM_FILESYSTEM_HPP 

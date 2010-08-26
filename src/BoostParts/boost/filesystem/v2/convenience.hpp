@@ -10,8 +10,8 @@
 
 //----------------------------------------------------------------------------// 
 
-#ifndef BOOST_FILESYSTEM_CONVENIENCE_HPP
-#define BOOST_FILESYSTEM_CONVENIENCE_HPP
+#ifndef BOOST_FILESYSTEM2_CONVENIENCE_HPP
+#define BOOST_FILESYSTEM2_CONVENIENCE_HPP
 
 #include <boost/filesystem/operations.hpp>
 #include <boost/system/error_code.hpp>
@@ -20,7 +20,7 @@
 
 #include <boost/config/abi_prefix.hpp> // must be the last #include
 
-# ifndef BOOST_FILESYSTEM_NARROW_ONLY
+# ifndef BOOST_FILESYSTEM2_NARROW_ONLY
 #   define BOOST_FS_FUNC(BOOST_FS_TYPE) \
       template<class Path> typename boost::enable_if<is_basic_path<Path>, \
       BOOST_FS_TYPE>::type
@@ -35,7 +35,7 @@
 
 namespace boost
 {
-  namespace filesystem
+  namespace filesystem2
   {
 
     BOOST_FS_FUNC(bool) create_directories(const Path& ph)
@@ -45,7 +45,7 @@ namespace boost
            if ( !ph.empty() && !is_directory(ph) )
                boost::throw_exception( basic_filesystem_error<Path>(
                  "boost::filesystem::create_directories", ph,
-                 make_error_code( boost::system::posix::file_exists ) ) );
+                 make_error_code( boost::system::errc::file_exists ) ) );
            return false;
          }
 
@@ -81,11 +81,18 @@ namespace boost
 
     BOOST_FS_FUNC(Path) change_extension( const Path & ph,
       const BOOST_FS_TYPENAME Path::string_type & new_extension )
-      { return ph.parent_path() / (basename(ph) + new_extension); }
-
+    {
+#   if !defined(_STLPORT_VERSION)
+      return ph.parent_path() / (basename(ph) + new_extension); 
+#   else
+	    typedef BOOST_FS_TYPENAME Path::string_type string_type; 
+	    string_type filename = basename(ph) + new_extension; 
+	    return ph.parent_path() / filename;
+#   endif
+	  } 
 # endif
 
-# ifndef BOOST_FILESYSTEM_NARROW_ONLY
+# ifndef BOOST_FILESYSTEM2_NARROW_ONLY
 
     // "do-the-right-thing" overloads  ---------------------------------------//
 
@@ -199,7 +206,7 @@ namespace boost
     };
 
     typedef basic_recursive_directory_iterator<path> recursive_directory_iterator;
-# ifndef BOOST_FILESYSTEM_NARROW_ONLY
+# ifndef BOOST_FILESYSTEM2_NARROW_ONLY
     typedef basic_recursive_directory_iterator<wpath> wrecursive_directory_iterator;
 # endif
 
@@ -296,11 +303,36 @@ namespace boost
       if ( m_imp->m_stack.empty() ) m_imp.reset(); // done, so make end iterator
     }
 
-  } // namespace filesystem
+  } // namespace filesystem2
 } // namespace boost
 
 #undef BOOST_FS_FUNC_STRING
 #undef BOOST_FS_FUNC
 
+//----------------------------------------------------------------------------//
+
+namespace boost
+{
+  namespace filesystem
+  {
+    using filesystem2::create_directories;
+    using filesystem2::basic_recursive_directory_iterator;
+    using filesystem2::recursive_directory_iterator;
+
+# ifndef BOOST_FILESYSTEM_NO_DEPRECATED
+    using filesystem2::extension;
+    using filesystem2::basename;
+    using filesystem2::change_extension;
+# endif
+
+# ifndef BOOST_FILESYSTEM2_NARROW_ONLY
+    using filesystem2::wrecursive_directory_iterator;
+# endif
+
+  }
+}
+
+//----------------------------------------------------------------------------//
+
 #include <boost/config/abi_suffix.hpp> // pops abi_prefix.hpp pragmas
-#endif // BOOST_FILESYSTEM_CONVENIENCE_HPP
+#endif // BOOST_FILESYSTEM2_CONVENIENCE_HPP
