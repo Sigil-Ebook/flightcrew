@@ -117,7 +117,9 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_ITEM_HREF_NOT_UNIQUE ] =
         "The <item> element's \"href\" attribute value is \"%1%\", "
         "which is already in use in a previous <item>.";
-    
+    m_Messages[ ERROR_OPF_ITEM_REQMOD_WITHOUT_REQNS ] =
+        "The <item> element has a \"required-modules\" attribute but doesn't have a "
+        "\"required-namespace\" attribute.";
 }
 
 } // namespace FlightCrew
