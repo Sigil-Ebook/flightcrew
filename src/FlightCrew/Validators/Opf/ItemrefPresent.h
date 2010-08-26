@@ -19,33 +19,23 @@
 **
 *************************************************************************/
 
-#include <stdafx_tests.h>
-#include "Validators/Opf/ItemPresent.h"
-#include "Result.h"
+#pragma once
+#ifndef ITEMREFPRESENT_H
+#define ITEMREFPRESENT_H
 
-using namespace FlightCrew;
+#include "../ElementPresentValidator.h"
 
-TEST( ItemPresentTest, NoItem )
+namespace FlightCrew
 {
-    ItemPresent validator;
-    std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ItemPresent_NoItem.xml" );
-            
-    EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ELEMENT_NOT_PRESENT );
-    EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
-    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 15 );
 
-    std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments[ 0 ], "item" );
-}
-
-TEST( ItemPresentTest, HasItem )
+class ItemrefPresent : public ElementPresentValidator
 {
-    ItemPresent validator;
-    std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ItemPresent_HasItem.xml" );
-    
-    EXPECT_EQ( results.size(), 0U );
-}
+public:
+
+    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
+};
+
+} // namespace FlightCrew
+
+#endif // ITEMREFPRESENT_H
 

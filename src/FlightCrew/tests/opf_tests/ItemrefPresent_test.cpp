@@ -20,31 +20,31 @@
 *************************************************************************/
 
 #include <stdafx_tests.h>
-#include "Validators/Opf/ItemPresent.h"
+#include "Validators/Opf/ItemrefPresent.h"
 #include "Result.h"
 
 using namespace FlightCrew;
 
-TEST( ItemPresentTest, NoItem )
+TEST( ItemrefPresentTest, NoItemref )
 {
-    ItemPresent validator;
+    ItemrefPresent validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ItemPresent_NoItem.xml" );
+            "test_data/opf_tests/ItemrefPresent_NoItemref.xml" );
             
     EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ELEMENT_NOT_PRESENT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
-    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 15 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 12 );
 
     std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments[ 0 ], "item" );
+    EXPECT_EQ( message_arguments[ 0 ], "itemref" );  
 }
 
-TEST( ItemPresentTest, HasItem )
+TEST( ItemrefPresentTest, HasItemref )
 {
-    ItemPresent validator;
+    ItemrefPresent validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ItemPresent_HasItem.xml" );
+            "test_data/opf_tests/ItemrefPresent_HasItemref.xml" );
     
     EXPECT_EQ( results.size(), 0U );
 }

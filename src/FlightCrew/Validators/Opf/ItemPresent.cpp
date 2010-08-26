@@ -21,8 +21,6 @@
 
 #include <stdafx.h>
 #include "ItemPresent.h"
-#include <ToXercesStringConverter.h>
-#include <FromXercesStringConverter.h>
 #include <XmlUtils.h>
 
 namespace FlightCrew
