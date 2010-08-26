@@ -20,7 +20,7 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "ItemReqModsOnlyWithReqNS.h"
+#include "ItemPresent.h"
 #include <ToXercesStringConverter.h>
 #include <FromXercesStringConverter.h>
 #include <XmlUtils.h>
@@ -28,25 +28,13 @@
 namespace FlightCrew
 {
 
-std::vector<Result> ItemReqModsOnlyWithReqNS::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> ItemPresent::ValidateXml( const xc::DOMDocument &document )
 {
-    std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
-        document, QName( "item", OPF_XML_NAMESPACE ) );
+    std::vector< QName > possible_parents;
+    possible_parents.push_back( QName( "manifest", OPF_XML_NAMESPACE ) );
 
-    std::vector<Result> results;
-
-    foreach( xc::DOMElement* item, items )
-    {
-        if ( item->hasAttribute( toX( "required-modules" ) ) &&
-             !item->hasAttribute( toX( "required-namespace" ) ) 
-           )
-        {
-            results.push_back( 
-                ResultWithNodeLocation( ERROR_OPF_ITEM_REQMOD_WITHOUT_REQNS, *item ) );
-        }       
-    }
-
-    return results;
+    return VerifyElementPresent( 
+        QName( "item", OPF_XML_NAMESPACE ), possible_parents, document );
 }
 
 } // namespace FlightCrew

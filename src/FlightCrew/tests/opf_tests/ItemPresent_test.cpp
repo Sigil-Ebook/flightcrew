@@ -19,35 +19,30 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "ItemReqModsOnlyWithReqNS.h"
-#include <ToXercesStringConverter.h>
-#include <FromXercesStringConverter.h>
-#include <XmlUtils.h>
+#include <stdafx_tests.h>
+#include "Validators/Opf/ItemPresent.h"
+#include "Result.h"
 
-namespace FlightCrew
+using namespace FlightCrew;
+
+TEST( ItemPresentTest, NoItem )
 {
-
-std::vector<Result> ItemReqModsOnlyWithReqNS::ValidateXml( const xc::DOMDocument &document )
-{
-    std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
-        document, QName( "item", OPF_XML_NAMESPACE ) );
-
-    std::vector<Result> results;
-
-    foreach( xc::DOMElement* item, items )
-    {
-        if ( item->hasAttribute( toX( "required-modules" ) ) &&
-             !item->hasAttribute( toX( "required-namespace" ) ) 
-           )
-        {
-            results.push_back( 
-                ResultWithNodeLocation( ERROR_OPF_ITEM_REQMOD_WITHOUT_REQNS, *item ) );
-        }       
-    }
-
-    return results;
+    ItemPresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/ItemPresent_NoItem.xml" );
+            
+    EXPECT_EQ( results.size(), 1U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ELEMENT_NOT_PRESENT );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 15 );
 }
 
-} // namespace FlightCrew
+TEST( ItemPresentTest, HasItem )
+{
+    ItemPresent validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/ItemPresent_HasItem.xml" );
+    
+    EXPECT_EQ( results.size(), 0U );
+}
 

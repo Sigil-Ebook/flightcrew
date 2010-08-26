@@ -19,35 +19,23 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "ItemReqModsOnlyWithReqNS.h"
-#include <ToXercesStringConverter.h>
-#include <FromXercesStringConverter.h>
-#include <XmlUtils.h>
+#pragma once
+#ifndef ITEMPRESENT_H
+#define ITEMPRESENT_H
+
+#include "../ElementPresentValidator.h"
 
 namespace FlightCrew
 {
 
-std::vector<Result> ItemReqModsOnlyWithReqNS::ValidateXml( const xc::DOMDocument &document )
+class ItemPresent : public ElementPresentValidator
 {
-    std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
-        document, QName( "item", OPF_XML_NAMESPACE ) );
+public:
 
-    std::vector<Result> results;
-
-    foreach( xc::DOMElement* item, items )
-    {
-        if ( item->hasAttribute( toX( "required-modules" ) ) &&
-             !item->hasAttribute( toX( "required-namespace" ) ) 
-           )
-        {
-            results.push_back( 
-                ResultWithNodeLocation( ERROR_OPF_ITEM_REQMOD_WITHOUT_REQNS, *item ) );
-        }       
-    }
-
-    return results;
-}
+    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
+};
 
 } // namespace FlightCrew
+
+#endif // ITEMPRESENT_H
 
