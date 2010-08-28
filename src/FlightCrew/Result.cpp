@@ -68,9 +68,10 @@ int Result::GetErrorColumn()
 }
 
 
-void Result::SetErrorColumn( int error_line )
+Result& Result::SetErrorColumn( int error_line )
 {
     m_ErrorColumn = error_line;
+    return *this;
 }
 
 
@@ -81,9 +82,10 @@ Result& Result::AddMessageArgument( const std::string &message_argument )
 }
 
 
-void Result::SetMessageArguments( const std::vector< std::string > &message_arguments )
+Result& Result::SetMessageArguments( const std::vector< std::string > &message_arguments )
 {
     m_MessageArguments = message_arguments;
+    return *this;
 }
 
 
@@ -95,6 +97,10 @@ const std::vector< std::string > & Result::GetMessageArguments()
 
 std::string Result::GetErrorMessage()
 {
+    if ( !m_CustomMessage.empty() )
+
+        return m_CustomMessage;
+
     boost::format formatter( ErrorMessages::Instance().MessageForId( m_ResultId ) );
 
     foreach( std::string argument, m_MessageArguments )
@@ -103,6 +109,13 @@ std::string Result::GetErrorMessage()
     }
 
     return formatter.str();
+}
+
+
+Result& Result::SetCustomMessage( const std::string &custom_message )
+{
+    m_CustomMessage = custom_message;
+    return *this;
 }
 
 } // namespace FlightCrew

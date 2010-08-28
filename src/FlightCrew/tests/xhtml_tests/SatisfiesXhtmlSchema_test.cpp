@@ -20,32 +20,40 @@
 *************************************************************************/
 
 #include <stdafx_tests.h>
-#include "Validators/Opf/ItemrefPresent.h"
+#include "Validators/Xhtml/SatisfiesXhtmlSchema.h"
 #include "Result.h"
 
 using namespace FlightCrew;
 
-TEST( ItemrefPresentTest, NoItemref )
+TEST( SatisfiesXhtmlSchemaTest, DoesntSatisfySchema )
 {
-    ItemrefPresent validator;
+    SatisfiesXhtmlSchema validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ItemrefPresent_NoItemref.xml" );
-            
-    EXPECT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ELEMENT_NOT_PRESENT );
-    EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
-    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 12 );
+        "test_data/xhtml_tests/SatisfiesXhtmlSchema_DoesntSatisfySchema.xhtml" );
 
-    std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments[ 0 ], "itemref" );  
+    EXPECT_EQ( results.size(), 1U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 12 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 25 ); 
 }
 
-TEST( ItemrefPresentTest, HasItemref )
+TEST( SatisfiesXhtmlSchemaTest, XmlError )
 {
-    ItemrefPresent validator;
+    SatisfiesXhtmlSchema validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ItemrefPresent_HasItemref.xml" );
-    
+        "test_data/xhtml_tests/SatisfiesXhtmlSchema_XmlError.xhtml" );
+
+    EXPECT_EQ( results.size(), 1U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_NOT_WELL_FORMED );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 8 ); 
+}
+
+TEST( SatisfiesXhtmlSchemaTest, SatisfiesSchema )
+{
+    SatisfiesXhtmlSchema validator;
+    std::vector<Result> results = validator.ValidateFile(
+        "test_data/xhtml_tests/SatisfiesXhtmlSchema_SatisfiesSchema.xhtml" );
+
     EXPECT_EQ( results.size(), 0U );
 }
-

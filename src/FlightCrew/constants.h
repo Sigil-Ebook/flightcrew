@@ -49,6 +49,10 @@ extern const QName COVERAGE_QNAME;
 extern const QName RIGHTS_QNAME;   
 extern const QName META_QNAME;   
 
+extern const char*         XHTML11_FLAT_DTD_ID;
+extern const unsigned int  XHTML11_FLAT_DTD_LEN;
+extern const unsigned char XHTML11_FLAT_DTD[];
+
 }
 
 #endif // CONSTANTS_H

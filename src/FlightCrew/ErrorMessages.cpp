@@ -70,8 +70,10 @@ void ErrorMessages::LoadMessages()
         "All OK.";
     m_Messages[ ERROR_GENERIC ] =
         "Error.";
+    m_Messages[ ERROR_SCHEMA_NOT_SATISFIED ] =
+        "The corresponding schema constraints were not satisfied.";
 
-    m_Messages[ ERROR_XML_SYNTAX ] =
+    m_Messages[ ERROR_XML_NOT_WELL_FORMED ] =
         "XML syntax error.";
     m_Messages[ ERROR_XML_ELEMENT_NOT_PRESENT ] =
         "The <%1%> element is missing.";

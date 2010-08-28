@@ -21,7 +21,6 @@
 
 #include <stdafx.h>
 #include "XmlValidator.h"
-#include <ToXercesStringConverter.h>
 #include <LocationAwareDOMParser.h>
 #include <XmlUtils.h>
 

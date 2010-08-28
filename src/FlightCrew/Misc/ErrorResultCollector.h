@@ -20,43 +20,41 @@
 *************************************************************************/
 
 #pragma once
-#ifndef RESULTID_H
-#define RESULTID_H
+#ifndef ERRORRESULTCOLLECTOR_H
+#define ERRORRESULTCOLLECTOR_H
+
+#include <vector>
+#include <xercesc/sax/ErrorHandler.hpp>
+namespace XERCES_CPP_NAMESPACE { class SAXParseException; }
+namespace xc = XERCES_CPP_NAMESPACE;
+
+#include "Result.h"
 
 namespace FlightCrew
 {
 
-enum ResultId
+class ErrorResultCollector : public xc::ErrorHandler
 {
-    ALL_OK = 100,
-    UNABLE_TO_PERFORM_VALIDATION,
+public:
 
-    ERROR_GENERIC,
-    ERROR_SCHEMA_NOT_SATISFIED,
+    void warning(    const xc::SAXParseException &exception );
 
-    ERROR_XML_NOT_WELL_FORMED,
-    ERROR_XML_ELEMENT_NOT_PRESENT,
-    ERROR_XML_WRONG_ELEMENT_COUNT,
-    ERROR_XML_CHILD_NOT_RECOGNIZED,
-    ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED,
-    ERROR_XML_REQUIRED_ATTRIBUTE_MISSING,
-    ERROR_XML_ID_NOT_UNIQUE,
-    ERROR_XML_BAD_ID_VALUE,
+    void error(      const xc::SAXParseException &exception );
 
-    ERROR_OPF_PACKAGE_NOT_ROOT,
-    ERROR_OPF_IDREF_ID_DOES_NOT_EXIST,
-    ERROR_OPF_PACKAGE_UNIQUE_IDENTIFIER_DOES_NOT_EXIST,
-    ERROR_OPF_BAD_PACKAGE_VERSION,
-    ERROR_OPF_BAD_ITEM_LINEAR_VALUE,
-    ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE,
-    ERROR_OPF_BAD_REFERENCE_TYPE_VALUE,
-    ERROR_OPF_BAD_DATE_VALUE,
-    ERROR_OPF_ITEM_HREF_INVALID_URI,
-    ERROR_OPF_ITEM_HREF_HAS_FRAGMENT,
-    ERROR_OPF_ITEM_HREF_NOT_UNIQUE,
-    ERROR_OPF_ITEM_REQMOD_WITHOUT_REQNS
+    void fatalError( const xc::SAXParseException &exception );
+
+    void resetErrors();
+
+    std::vector<Result> GetResults();
+
+private:
+
+    void AddNewExceptionAsResult( const xc::SAXParseException &exception,
+                                  bool xml_error = false );
+
+    std::vector<Result> m_Results;
 };
 
 } // namespace FlightCrew
 
-#endif // RESULTID_H
+#endif // ERRORRESULTCOLLECTOR_H

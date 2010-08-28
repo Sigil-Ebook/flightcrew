@@ -48,15 +48,17 @@ public:
 
     int GetErrorColumn();
 
-    void SetErrorColumn( int error_column );
+    Result& SetErrorColumn( int error_column );
 
     Result& AddMessageArgument( const std::string &message_argument );
 
-    void SetMessageArguments( const std::vector< std::string > &message_arguments );
+    Result& SetMessageArguments( const std::vector< std::string > &message_arguments );
 
     const std::vector< std::string > &GetMessageArguments();
 
     std::string GetErrorMessage();
+
+    Result& SetCustomMessage( const std::string &custom_message );
 
 private:
 
@@ -65,9 +67,14 @@ private:
     ///////////////////////////////
 
     ResultId m_ResultId;
+
     int m_ErrorLine;
+
     int m_ErrorColumn;
+
     std::vector< std::string > m_MessageArguments;
+
+    std::string m_CustomMessage;
 };
 
 } // namespace FlightCrew
