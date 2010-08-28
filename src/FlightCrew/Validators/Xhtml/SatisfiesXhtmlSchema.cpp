@@ -25,34 +25,36 @@
 #include <ToXercesStringConverter.h>
 #include <XmlUtils.h>
 #include <xercesc/framework/MemBufInputSource.hpp>
-#include <xercesc/sax2/SAX2XMLReader.hpp>
-#include <xercesc/sax2/XMLReaderFactory.hpp>
-
+#include <LocationAwareDOMParser.h>
 
 namespace FlightCrew
 {
 
 std::vector<Result> FlightCrew::SatisfiesXhtmlSchema::ValidateFile( const fs::path &filepath )
 {
-    boost::scoped_ptr< xc::SAX2XMLReader > parser( xc::XMLReaderFactory::createXMLReader() );
+    xe::LocationAwareDOMParser parser;
 
-    parser->setFeature( xc::XMLUni::fgSAX2CoreValidation, true );
-    parser->setFeature( xc::XMLUni::fgXercesLoadSchema, false );
-    parser->setFeature( xc::XMLUni::fgXercesUseCachedGrammarInParse, true );
+    // We strictly use DTDs
+    parser.setDoSchema( false );
+    parser.setLoadSchema( false );
 
-    parser->setProperty( xc::XMLUni::fgXercesScannerName, 
-                         (void*) xc::XMLUni::fgDGXMLScanner );     
+    // This scanner only uses DTDs and ignores schemas
+    parser.useScanner( xc::XMLUni::fgDGXMLScanner );
+
+    parser.setDoNamespaces( true );
+    parser.setValidationScheme( xc::AbstractDOMParser::Val_Always );
+    parser.useCachedGrammarInParse( true );    
 
     xc::MemBufInputSource dtd( XHTML11_FLAT_DTD,
                                XHTML11_FLAT_DTD_LEN,
                                toX( XHTML11_FLAT_DTD_ID ) );        
 
-    parser->loadGrammar( dtd, xc::Grammar::DTDGrammarType, true );
+    parser.loadGrammar( dtd, xc::Grammar::DTDGrammarType, true );
 
     ErrorResultCollector collector;
-    parser->setErrorHandler( &collector );
+    parser.setErrorHandler( &collector );
 
-    parser->parse( filepath.string().c_str() );
+    parser.parse( filepath.string().c_str() );
 
     return collector.GetResults();
 }
