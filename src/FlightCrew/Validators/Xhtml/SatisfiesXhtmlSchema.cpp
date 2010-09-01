@@ -34,12 +34,9 @@ std::vector<Result> FlightCrew::SatisfiesXhtmlSchema::ValidateFile( const fs::pa
 {
     xe::LocationAwareDOMParser parser;
 
-    // We strictly use DTDs
-    parser.setDoSchema( false );
+    parser.setDoSchema( true );
     parser.setLoadSchema( false );
-
-    // This scanner only uses DTDs and ignores schemas
-    parser.useScanner( xc::XMLUni::fgDGXMLScanner );
+    parser.setSkipDTDValidation( true );
 
     parser.setDoNamespaces( true );
     parser.setValidationScheme( xc::AbstractDOMParser::Val_Always );
@@ -49,7 +46,34 @@ std::vector<Result> FlightCrew::SatisfiesXhtmlSchema::ValidateFile( const fs::pa
                                XHTML11_FLAT_DTD_LEN,
                                toX( XHTML11_FLAT_DTD_ID ) );        
 
-    parser.loadGrammar( dtd, xc::Grammar::DTDGrammarType, true );
+    xc::MemBufInputSource ops( OPS201_XSD,
+                               OPS201_XSD_LEN,
+                               toX( OPS201_XSD_ID ) );
+
+    xc::MemBufInputSource ops_switch( OPS_SWITCH_XSD, 
+                                      OPS_SWITCH_XSD_LEN,
+                                      toX( OPS_SWITCH_XSD_ID ) );      
+
+    xc::MemBufInputSource svg( SVG11_XSD, 
+                               SVG11_XSD_LEN,  
+                               toX( SVG11_XSD_ID ) );      
+
+    xc::MemBufInputSource xlink( XLINK_XSD, 
+                                 XLINK_XSD_LEN,
+                                 toX( XLINK_XSD_ID ) );       
+
+    xc::MemBufInputSource xml( XML_XSD, 
+                               XML_XSD_LEN,
+                               toX( XML_XSD_ID  ) );      
+
+    parser.loadGrammar( dtd,        xc::Grammar::DTDGrammarType,    true );
+    parser.loadGrammar( xml,        xc::Grammar::SchemaGrammarType, true );
+    parser.loadGrammar( xlink,      xc::Grammar::SchemaGrammarType, true );
+    parser.loadGrammar( svg,        xc::Grammar::SchemaGrammarType, true );
+    parser.loadGrammar( ops_switch, xc::Grammar::SchemaGrammarType, true );
+    parser.loadGrammar( ops,        xc::Grammar::SchemaGrammarType, true );
+
+    parser.setExternalSchemaLocation( "http://www.w3.org/1999/xhtml ops201.xsd" );
 
     ErrorResultCollector collector;
     parser.setErrorHandler( &collector );

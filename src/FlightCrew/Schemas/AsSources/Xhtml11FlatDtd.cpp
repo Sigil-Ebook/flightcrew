@@ -23,8 +23,12 @@
 
 /*
    Extensible HTML version 1.1 DTD, flat file
+   
+   Specification: http://www.w3.org/TR/xhtml11/Overview.html
 
-   Namespace = http://www.w3.org/1999/xhtml
+   Namespace: http://www.w3.org/1999/xhtml
+   
+   Taken from: http://www.w3.org/TR/xhtml11/xhtml11.zip
 
    This DTD module is identified by the PUBLIC and SYSTEM identifiers:
 
@@ -36,11 +40,9 @@
 namespace FlightCrew
 {
 
-const char* XHTML11_FLAT_DTD_ID = "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd";
-
-const unsigned int XHTML11_FLAT_DTD_LEN = 153112;
-
-const unsigned char XHTML11_FLAT_DTD[] = {
+const char*         XHTML11_FLAT_DTD_ID  = "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd";
+const unsigned int  XHTML11_FLAT_DTD_LEN = 153112;
+const unsigned char XHTML11_FLAT_DTD[]   = {
   0x3c, 0x21, 0x2d, 0x2d, 0x20, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e,
   0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e,
   0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e, 0x2e,

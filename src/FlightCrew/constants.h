@@ -53,6 +53,26 @@ extern const char*         XHTML11_FLAT_DTD_ID;
 extern const unsigned int  XHTML11_FLAT_DTD_LEN;
 extern const unsigned char XHTML11_FLAT_DTD[];
 
+extern const char*         OPS201_XSD_ID; 
+extern const unsigned int  OPS201_XSD_LEN;
+extern const unsigned char OPS201_XSD[];
+
+extern const char*         OPS_SWITCH_XSD_ID; 
+extern const unsigned int  OPS_SWITCH_XSD_LEN;
+extern const unsigned char OPS_SWITCH_XSD[];  
+
+extern const char*         SVG11_XSD_ID; 
+extern const unsigned int  SVG11_XSD_LEN;
+extern const unsigned char SVG11_XSD[];  
+
+extern const char*         XLINK_XSD_ID; 
+extern const unsigned int  XLINK_XSD_LEN;
+extern const unsigned char XLINK_XSD[]; 
+
+extern const char*         XML_XSD_ID; 
+extern const unsigned int  XML_XSD_LEN;
+extern const unsigned char XML_XSD[];  
+
 }
 
 #endif // CONSTANTS_H

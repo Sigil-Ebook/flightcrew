@@ -34,8 +34,33 @@ TEST( SatisfiesXhtmlSchemaTest, DoesntSatisfySchema )
     EXPECT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 12 );
-    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 25 ); 
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 62 ); 
 }
+
+TEST( SatisfiesXhtmlSchemaTest, DoesntSatisfySchemaNoDtd )
+{
+    SatisfiesXhtmlSchema validator;
+    std::vector<Result> results = validator.ValidateFile(
+        "test_data/xhtml_tests/SatisfiesXhtmlSchema_DoesntSatisfySchemaNoDtd.xhtml" );
+
+    EXPECT_EQ( results.size(), 4U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 10 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 32 ); 
+
+    EXPECT_EQ( results[ 1 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
+    EXPECT_EQ( results[ 1 ].GetErrorLine(), 11 );
+    EXPECT_EQ( results[ 1 ].GetErrorColumn(), 61 ); 
+
+    EXPECT_EQ( results[ 2 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
+    EXPECT_EQ( results[ 2 ].GetErrorLine(), 12 );
+    EXPECT_EQ( results[ 2 ].GetErrorColumn(), 49 ); 
+
+    EXPECT_EQ( results[ 3 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
+    EXPECT_EQ( results[ 3 ].GetErrorLine(), 64 );
+    EXPECT_EQ( results[ 3 ].GetErrorColumn(), 22 ); 
+}
+
 
 TEST( SatisfiesXhtmlSchemaTest, XmlError )
 {
@@ -47,6 +72,15 @@ TEST( SatisfiesXhtmlSchemaTest, XmlError )
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_NOT_WELL_FORMED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 8 ); 
+}
+
+TEST( SatisfiesXhtmlSchemaTest, SatisfiesSchemaNoDtd )
+{
+    SatisfiesXhtmlSchema validator;
+    std::vector<Result> results = validator.ValidateFile(
+        "test_data/xhtml_tests/SatisfiesXhtmlSchema_SatisfiesSchemaNoDtd.xhtml" );
+
+    EXPECT_EQ( results.size(), 0U );
 }
 
 TEST( SatisfiesXhtmlSchemaTest, SatisfiesSchema )

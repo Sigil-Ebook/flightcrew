@@ -11,7 +11,7 @@ cmake_minimum_required( VERSION 2.8 )
 
 project( FlightCrew )
 
-file( GLOB_RECURSE SOURCES *.h *.cpp )
+file( GLOB_RECURSE SOURCES *.h *.cpp *.xsd *.dtd )
 
 # The test sources are a part of a different target, so we remove them
 file( GLOB_RECURSE to_remove tests/*.h tests/*.cpp )
