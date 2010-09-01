@@ -23,6 +23,8 @@
 #ifndef SATISFIESXHTMLSCHEMA_H
 #define SATISFIESXHTMLSCHEMA_H
 
+#include <xercesc/framework/MemBufInputSource.hpp>
+namespace xc = XERCES_CPP_NAMESPACE;
 #include "../IValidator.h"
 
 namespace FlightCrew
@@ -32,7 +34,19 @@ class SatisfiesXhtmlSchema : public IValidator
 {
 public:
 
+    SatisfiesXhtmlSchema();
+
     std::vector<Result> ValidateFile( const fs::path &filepath );
+
+private:
+
+    const xc::MemBufInputSource m_Dtd;
+    const xc::MemBufInputSource m_OpsSchema;
+    const xc::MemBufInputSource m_OpsSwitchSchema;
+    const xc::MemBufInputSource m_SvgSchema;
+    const xc::MemBufInputSource m_XmlSchema;
+    const xc::MemBufInputSource m_XlinkSchema;
+
 };
 
 } // namespace FlightCrew
