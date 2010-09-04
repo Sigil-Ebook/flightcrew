@@ -20,15 +20,15 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "ContainerSatisfiesSchema.h"
+#include "SignaturesSatisfiesSchema.h"
 #include "Result.h"
 
 namespace FlightCrew
 {
 
-std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &filepath )
+std::vector<Result> SignaturesSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
-    return ValidateMetaInfFile( filepath, CONTAINER_XSD_ID ); 
+    return ValidateMetaInfFile( filepath, SIGNATURES_XSD_ID ); 
 }
 
 } //namespace FlightCrew

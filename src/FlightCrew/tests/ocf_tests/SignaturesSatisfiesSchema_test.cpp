@@ -19,16 +19,29 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "ContainerSatisfiesSchema.h"
+#include <stdafx_tests.h>
+#include "Validators/Ocf/SignaturesSatisfiesSchema.h"
 #include "Result.h"
 
-namespace FlightCrew
-{
+using namespace FlightCrew;
 
-std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &filepath )
+TEST( SignaturesSatisfiesSchemaTest, DoesntSatisfySchema )
 {
-    return ValidateMetaInfFile( filepath, CONTAINER_XSD_ID ); 
+    SignaturesSatisfiesSchema validator;
+    std::vector<Result> results = validator.ValidateFile(
+        "test_data/ocf_tests/SignaturesSatisfiesSchema_DoesntSatisfySchema.xml" );
+
+    EXPECT_EQ( results.size(), 1U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 27 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 31 ); 
 }
 
-} //namespace FlightCrew
+TEST( SignaturesSatisfiesSchemaTest, SatisfiesSchema )
+{
+    SignaturesSatisfiesSchema validator;
+    std::vector<Result> results = validator.ValidateFile(
+        "test_data/ocf_tests/SignaturesSatisfiesSchema_SatisfiesSchema.xml" );
+
+    EXPECT_EQ( results.size(), 0U );
+}

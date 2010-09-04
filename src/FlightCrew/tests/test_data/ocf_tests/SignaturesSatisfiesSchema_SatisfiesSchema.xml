@@ -1,0 +1,85 @@
+<?xml version='1.0'?>
+<signatures xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <Signature Id="MyFirstSignature" xmlns="http://www.w3.org/2000/09/xmldsig#" >
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2000/WD-xml-c14n-20000710"> </CanonicalizationMethod>
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa"> </SignatureMethod>
+      <Reference URI="http://www.w3.org/TR/xml-stylesheet/">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#base64"/>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#null"/>
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"> </DigestMethod>
+        <DigestValue>j6lwx3rvEPO0vKtMup4NbeVu8nk=</DigestValue>
+      </Reference>
+      <Reference URI="http://www.w3.org/TR/REC-xml-names/">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#base64"/>
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"> </DigestMethod>
+        <DigestValue>UrXLDLBIta6skoV5/A8Q38GEw44=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>MC0CFFrVLtRlkMc3Daon4BqqnkhCOlEaAhUAk8pH1iRNK+q1I+sisDTz2TFEALE=</SignatureValue>
+    <KeyInfo>
+      <KeyValue>
+        <DSAKeyValue>
+          <P>UrXLDLBIta6skoV5/A8Q38GEw44=</P>
+          <Q>UrXLDLBIta6skoV5/A8Q38GEw44=</Q>
+          <G>UrXLDLBIta6skoV5/A8Q38GEw44=</G>
+          <Y>UrXLDLBIta6skoV5/A8Q38GEw44=</Y>
+        </DSAKeyValue>
+      </KeyValue>
+    </KeyInfo>
+    <Object>
+      <SignatureProperties>
+        <SignatureProperty Target="#MyFirstSignature">
+          <ts:timestamp xmlns:ts="http://www.example.org/rfc/rfcxxxx.txt"> this is a test of the
+            mixed content model</ts:timestamp>
+        </SignatureProperty>
+      </SignatureProperties>
+    </Object>
+  </Signature>
+  
+  <Signature Id="MySecondSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2000/WD-xml-c14n-20000710"> </CanonicalizationMethod>
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa"> </SignatureMethod>
+      <Reference URI="http://www.w3.org/TR/xml-stylesheet/">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#base64"/>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#null"/>
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"> </DigestMethod>
+        <DigestValue>j6lwx3rvEPO0vKtMup4NbeVu8nk=</DigestValue>
+      </Reference>
+      <Reference URI="http://www.w3.org/TR/REC-xml-names/">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#base64"/>
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"> </DigestMethod>
+        <DigestValue>UrXLDLBIta6skoV5/A8Q38GEw44=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>MC0CFFrVLtRlkMc3Daon4BqqnkhCOlEaAhUAk8pH1iRNK+q1I+sisDTz2TFEALE=</SignatureValue>
+    <KeyInfo>
+      <KeyValue>
+        <DSAKeyValue>
+          <P>UrXLDLBIta6skoV5/A8Q38GEw44=</P>
+          <Q>UrXLDLBIta6skoV5/A8Q38GEw44=</Q>
+          <G>UrXLDLBIta6skoV5/A8Q38GEw44=</G>
+          <Y>UrXLDLBIta6skoV5/A8Q38GEw44=</Y>
+        </DSAKeyValue>
+      </KeyValue>
+    </KeyInfo>
+    <Object>
+      <SignatureProperties>
+        <SignatureProperty Target="#MySecondSignature">
+          <ts:timestamp xmlns:ts="http://www.example.org/rfc/rfcxxxx.txt"> this is a test of the
+            mixed content model</ts:timestamp>
+        </SignatureProperty>
+      </SignatureProperties>
+    </Object>
+  </Signature>
+</signatures>

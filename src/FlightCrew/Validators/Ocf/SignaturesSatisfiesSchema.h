@@ -20,39 +20,22 @@
 *************************************************************************/
 
 #pragma once
-#ifndef METAINFVALIDATOR_H
-#define METAINFVALIDATOR_H
+#ifndef SIGNATURESSATISFIESSCHEMA_H
+#define SIGNATURESSATISFIESSCHEMA_H
 
-#include <xercesc/framework/MemBufInputSource.hpp>
-namespace XERCES_CPP_NAMESPACE { class SAX2XMLReader; };
-namespace xc = XERCES_CPP_NAMESPACE;
-#include "../IValidator.h"
+#include "MetaInfValidator.h"
 
 namespace FlightCrew
 {
 
-class MetaInfValidator : public IValidator
+class SignaturesSatisfiesSchema : public MetaInfValidator
 {
 public:
 
-    MetaInfValidator();
+    std::vector<Result> ValidateFile( const fs::path &filepath );
 
-protected:
-
-    std::vector<Result> ValidateMetaInfFile( const fs::path &filepath, 
-                                             const std::string &xsd_id_to_use );
-
-private:
-
-    void LoadSchemas( xc::SAX2XMLReader &parser, const std::string &xsd_id_to_use );
-
-    const xc::MemBufInputSource m_EncryptionSchema;
-    const xc::MemBufInputSource m_ContainerSchema;
-    const xc::MemBufInputSource m_SignaturesSchema;
-    const xc::MemBufInputSource m_XencSchema;
-    const xc::MemBufInputSource m_XmldsigSchema;
 };
 
 } // namespace FlightCrew
 
-#endif // METAINFVALIDATOR_H
+#endif // SIGNATURESSATISFIESSCHEMA_H

@@ -30,7 +30,7 @@
 
 namespace FlightCrew
 {
-
+    
 MetaInfValidator::MetaInfValidator()
     :
     m_EncryptionSchema( ENCRYPTION_XSD,
@@ -39,6 +39,9 @@ MetaInfValidator::MetaInfValidator()
     m_ContainerSchema( CONTAINER_XSD,
                        CONTAINER_XSD_LEN,
                        toX( CONTAINER_XSD_ID ) ),
+    m_SignaturesSchema( SIGNATURES_XSD,
+                        SIGNATURES_XSD_LEN,
+                        toX( SIGNATURES_XSD_ID ) ),
     m_XencSchema( XENC_SCHEMA_XSD,
                   XENC_SCHEMA_XSD_LEN,
                   toX( XENC_SCHEMA_XSD_ID ) ),
@@ -107,6 +110,12 @@ void MetaInfValidator::LoadSchemas( xc::SAX2XMLReader &parser, const std::string
             parser.loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
             parser.loadGrammar( m_XencSchema,       xc::Grammar::SchemaGrammarType, true );
             parser.loadGrammar( m_EncryptionSchema, xc::Grammar::SchemaGrammarType, true );
+        }
+
+        else if ( xsd_id_to_use == SIGNATURES_XSD_ID )
+        {
+            parser.loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
+            parser.loadGrammar( m_SignaturesSchema, xc::Grammar::SchemaGrammarType, true );  
         }
 
         parser.setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 
