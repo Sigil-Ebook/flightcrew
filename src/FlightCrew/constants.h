@@ -73,6 +73,27 @@ extern const char*         XML_XSD_ID;
 extern const unsigned int  XML_XSD_LEN;
 extern const unsigned char XML_XSD[];  
 
+extern const char*         CONTAINER_XSD_NS;
+extern const char*         CONTAINER_XSD_ID; 
+extern const unsigned int  CONTAINER_XSD_LEN;
+extern const unsigned char CONTAINER_XSD[];  
+
+extern const char*         ENCRYPTION_XSD_ID; 
+extern const unsigned int  ENCRYPTION_XSD_LEN;
+extern const unsigned char ENCRYPTION_XSD[];  
+
+extern const char*         SIGNATURES_XSD_ID; 
+extern const unsigned int  SIGNATURES_XSD_LEN;
+extern const unsigned char SIGNATURES_XSD[];  
+
+extern const char*         XENC_SCHEMA_XSD_ID; 
+extern const unsigned int  XENC_SCHEMA_XSD_LEN;
+extern const unsigned char XENC_SCHEMA_XSD[];  
+
+extern const char*         XMLDSIG_CORE_SCHEMA_XSD_ID; 
+extern const unsigned int  XMLDSIG_CORE_SCHEMA_XSD_LEN;
+extern const unsigned char XMLDSIG_CORE_SCHEMA_XSD[];  
+
 }
 
 #endif // CONSTANTS_H

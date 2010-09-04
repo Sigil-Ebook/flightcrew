@@ -20,7 +20,7 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "SatisfiesXhtmlSchema.h"
+#include "ContainerSatisfiesSchema.h"
 #include "Misc/ErrorResultCollector.h"
 #include <ToXercesStringConverter.h>
 #include <XmlUtils.h>
@@ -29,32 +29,17 @@
 namespace FlightCrew
 {
 
-SatisfiesXhtmlSchema::SatisfiesXhtmlSchema()
+ContainerSatisfiesSchema::ContainerSatisfiesSchema()
     :
-    m_Dtd( XHTML11_FLAT_DTD,
-           XHTML11_FLAT_DTD_LEN,
-           toX( XHTML11_FLAT_DTD_ID ) ),
-    m_OpsSchema( OPS201_XSD,
-                 OPS201_XSD_LEN,
-                 toX( OPS201_XSD_ID ) ),
-    m_OpsSwitchSchema( OPS_SWITCH_XSD, 
-                       OPS_SWITCH_XSD_LEN,
-                       toX( OPS_SWITCH_XSD_ID ) ),
-    m_SvgSchema( SVG11_XSD, 
-                 SVG11_XSD_LEN,  
-                 toX( SVG11_XSD_ID ) ),
-    m_XlinkSchema( XLINK_XSD, 
-                   XLINK_XSD_LEN,
-                   toX( XLINK_XSD_ID ) ),
-    m_XmlSchema( XML_XSD, 
-                 XML_XSD_LEN,
-                 toX( XML_XSD_ID ) )
+    m_ContainerSchema( CONTAINER_XSD,
+                       CONTAINER_XSD_LEN,
+                       toX( CONTAINER_XSD_ID ) )
 {
 
 }
 
 
-std::vector<Result> SatisfiesXhtmlSchema::ValidateFile( const fs::path &filepath )
+std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
     xe::LocationAwareDOMParser parser;
 
@@ -66,15 +51,10 @@ std::vector<Result> SatisfiesXhtmlSchema::ValidateFile( const fs::path &filepath
     parser.setValidationScheme( xc::AbstractDOMParser::Val_Always );
     parser.useCachedGrammarInParse( true );    
 
-    parser.loadGrammar( m_Dtd,             xc::Grammar::DTDGrammarType,    true );
-    parser.loadGrammar( m_XmlSchema,       xc::Grammar::SchemaGrammarType, true );
-    parser.loadGrammar( m_XlinkSchema,     xc::Grammar::SchemaGrammarType, true );
-    parser.loadGrammar( m_SvgSchema,       xc::Grammar::SchemaGrammarType, true );
-    parser.loadGrammar( m_OpsSwitchSchema, xc::Grammar::SchemaGrammarType, true );
-    parser.loadGrammar( m_OpsSchema,       xc::Grammar::SchemaGrammarType, true );     
+    parser.loadGrammar( m_ContainerSchema, xc::Grammar::SchemaGrammarType, true );  
 
-    parser.setExternalSchemaLocation( "http://www.w3.org/1999/xhtml ops201.xsd" );
-
+    parser.setExternalSchemaLocation( "urn:oasis:names:tc:opendocument:xmlns:container container.xsd" );
+                                      
     ErrorResultCollector collector;
     parser.setErrorHandler( &collector );
 
