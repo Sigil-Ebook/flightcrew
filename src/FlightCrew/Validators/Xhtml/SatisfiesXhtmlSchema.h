@@ -44,8 +44,8 @@ private:
     const xc::MemBufInputSource m_OpsSchema;
     const xc::MemBufInputSource m_OpsSwitchSchema;
     const xc::MemBufInputSource m_SvgSchema;
-    const xc::MemBufInputSource m_XmlSchema;
     const xc::MemBufInputSource m_XlinkSchema;
+    const xc::MemBufInputSource m_XmlSchema;
 
 };
 
