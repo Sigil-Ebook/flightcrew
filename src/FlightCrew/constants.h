@@ -53,6 +53,7 @@ extern const char*         XHTML11_FLAT_DTD_ID;
 extern const unsigned int  XHTML11_FLAT_DTD_LEN;
 extern const unsigned char XHTML11_FLAT_DTD[];
 
+extern const char*         OPS201_XSD_NS;
 extern const char*         OPS201_XSD_ID; 
 extern const unsigned int  OPS201_XSD_LEN;
 extern const unsigned char OPS201_XSD[];

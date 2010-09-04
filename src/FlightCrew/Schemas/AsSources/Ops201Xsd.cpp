@@ -36,6 +36,7 @@
 namespace FlightCrew
 {
 
+const char*         OPS201_XSD_NS  = "http://www.w3.org/1999/xhtml";
 const char*         OPS201_XSD_ID  = "ops201.xsd";
 const unsigned int  OPS201_XSD_LEN = 64996;
 const unsigned char OPS201_XSD[]   = {

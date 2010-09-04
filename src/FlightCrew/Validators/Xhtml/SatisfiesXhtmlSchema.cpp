@@ -74,7 +74,8 @@ std::vector<Result> SatisfiesXhtmlSchema::ValidateFile( const fs::path &filepath
     parser.loadGrammar( m_OpsSwitchSchema, xc::Grammar::SchemaGrammarType, true );
     parser.loadGrammar( m_OpsSchema,       xc::Grammar::SchemaGrammarType, true );     
 
-    parser.setExternalSchemaLocation( "http://www.w3.org/1999/xhtml ops201.xsd" );
+    parser.setExternalSchemaLocation( 
+        std::string( OPS201_XSD_NS ).append( " " ).append( OPS201_XSD_ID ).c_str() );
 
     ErrorResultCollector collector;
     parser.setErrorHandler( &collector );

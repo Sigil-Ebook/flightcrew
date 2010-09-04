@@ -57,7 +57,7 @@ std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &file
     parser->loadGrammar( m_ContainerSchema, xc::Grammar::SchemaGrammarType, true );  
 
     parser->setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 
-                         (void*) toX( "urn:oasis:names:tc:opendocument:xmlns:container container.xsd" ) );   
+        (void*) toX( std::string( CONTAINER_XSD_NS ).append( " " ).append( CONTAINER_XSD_ID ) ) );   
                                       
     ErrorResultCollector collector;
     parser->setErrorHandler( &collector );
