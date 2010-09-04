@@ -20,7 +20,7 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "ContainerSatisfiesSchema.h"
+#include "EncryptionSatisfiesSchema.h"
 #include "Misc/ErrorResultCollector.h"
 #include <ToXercesStringConverter.h>
 #include <FromXercesStringConverter.h>
@@ -31,17 +31,23 @@
 namespace FlightCrew
 {
 
-ContainerSatisfiesSchema::ContainerSatisfiesSchema()
+EncryptionSatisfiesSchema::EncryptionSatisfiesSchema()
     :
-    m_ContainerSchema( CONTAINER_XSD,
-                       CONTAINER_XSD_LEN,
-                       toX( CONTAINER_XSD_ID ) )
+    m_EncryptionSchema( ENCRYPTION_XSD,
+                        ENCRYPTION_XSD_LEN,
+                        toX( ENCRYPTION_XSD_ID ) ),
+    m_XencSchema( XENC_SCHEMA_XSD,
+                  XENC_SCHEMA_XSD_LEN,
+                  toX( XENC_SCHEMA_XSD_ID ) ),
+    m_XmldsigSchema( XMLDSIG_CORE_SCHEMA_XSD,
+                     XMLDSIG_CORE_SCHEMA_XSD_LEN,
+                     toX( XMLDSIG_CORE_SCHEMA_XSD_ID ) )
 {
 
 }
 
 
-std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &filepath )
+std::vector<Result> EncryptionSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
     boost::scoped_ptr< xc::SAX2XMLReader > parser( xc::XMLReaderFactory::createXMLReader() );
 
@@ -54,12 +60,14 @@ std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &file
     parser->setProperty( xc::XMLUni::fgXercesScannerName, 
                          (void*) xc::XMLUni::fgSGXMLScanner );    
 
-    parser->loadGrammar( m_ContainerSchema, xc::Grammar::SchemaGrammarType, true );  
+    parser->loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
+    parser->loadGrammar( m_XencSchema,       xc::Grammar::SchemaGrammarType, true );  
+    parser->loadGrammar( m_EncryptionSchema, xc::Grammar::SchemaGrammarType, true );  
 
     parser->setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 
                         (void*) toX( std::string( CONTAINER_XSD_NS )
                                      .append( " " )
-                                     .append( CONTAINER_XSD_ID ) 
+                                     .append( ENCRYPTION_XSD_ID ) 
                                    ) 
                        );   
                                       
