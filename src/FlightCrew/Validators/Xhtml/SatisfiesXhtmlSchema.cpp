@@ -25,6 +25,7 @@
 #include <ToXercesStringConverter.h>
 #include <XmlUtils.h>
 #include <LocationAwareDOMParser.h>
+#include <xercesc/sax/SAXException.hpp>
 
 namespace FlightCrew
 {
@@ -58,13 +59,13 @@ std::vector<Result> SatisfiesXhtmlSchema::ValidateFile( const fs::path &filepath
 {
     xe::LocationAwareDOMParser parser;
 
-    parser.setDoSchema( true );
-    parser.setLoadSchema( false );
-    parser.setSkipDTDValidation( true );
+    parser.setDoSchema(             true  );
+    parser.setLoadSchema(           false );
+    parser.setSkipDTDValidation(    true  );
+    parser.setDoNamespaces(         true  );
+    parser.useCachedGrammarInParse( true  );  
 
-    parser.setDoNamespaces( true );
-    parser.setValidationScheme( xc::AbstractDOMParser::Val_Always );
-    parser.useCachedGrammarInParse( true );    
+    parser.setValidationScheme( xc::AbstractDOMParser::Val_Always ); 
 
     parser.loadGrammar( m_Dtd,             xc::Grammar::DTDGrammarType,    true );
     parser.loadGrammar( m_XmlSchema,       xc::Grammar::SchemaGrammarType, true );
@@ -78,7 +79,25 @@ std::vector<Result> SatisfiesXhtmlSchema::ValidateFile( const fs::path &filepath
     ErrorResultCollector collector;
     parser.setErrorHandler( &collector );
 
-    parser.parse( filepath.string().c_str() );
+    try
+    {
+        parser.parse( filepath.string().c_str() );
+    }
+
+    catch ( xc::SAXException& exception )
+    {
+    	collector.AddNewExceptionAsResult( exception );
+    }
+
+    catch ( xc::XMLException& exception )
+    {
+        collector.AddNewExceptionAsResult( exception );
+    }  
+
+    catch ( xc::DOMException& exception )
+    {
+        collector.AddNewExceptionAsResult( exception );
+    }
 
     return collector.GetResults();
 }

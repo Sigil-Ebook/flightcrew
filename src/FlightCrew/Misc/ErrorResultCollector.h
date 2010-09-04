@@ -25,7 +25,8 @@
 
 #include <vector>
 #include <xercesc/sax/ErrorHandler.hpp>
-namespace XERCES_CPP_NAMESPACE { class SAXParseException; }
+namespace XERCES_CPP_NAMESPACE 
+{ class SAXParseException; class SAXException; class DOMException; }
 namespace xc = XERCES_CPP_NAMESPACE;
 
 #include "Result.h"
@@ -47,10 +48,16 @@ public:
 
     std::vector<Result> GetResults();
 
-private:
-
     void AddNewExceptionAsResult( const xc::SAXParseException &exception,
                                   bool xml_error = false );
+
+    void AddNewExceptionAsResult( const xc::SAXException &exception );
+
+    void AddNewExceptionAsResult( const xc::XMLException &exception );
+
+    void AddNewExceptionAsResult( const xc::DOMException &exception );
+
+private:
 
     std::vector<Result> m_Results;
 };

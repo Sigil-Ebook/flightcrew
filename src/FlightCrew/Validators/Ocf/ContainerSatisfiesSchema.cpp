@@ -23,6 +23,7 @@
 #include "ContainerSatisfiesSchema.h"
 #include "Misc/ErrorResultCollector.h"
 #include <ToXercesStringConverter.h>
+#include <FromXercesStringConverter.h>
 #include <XmlUtils.h>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
@@ -49,8 +50,9 @@ std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &file
     parser->setFeature( xc::XMLUni::fgXercesUseCachedGrammarInParse, true  );
     parser->setFeature( xc::XMLUni::fgXercesSkipDTDValidation,       true  );
 
+    // We don't need DTD validation
     parser->setProperty( xc::XMLUni::fgXercesScannerName, 
-                        (void*) xc::XMLUni::fgSGXMLScanner );    
+                         (void*) xc::XMLUni::fgSGXMLScanner );    
 
     parser->loadGrammar( m_ContainerSchema, xc::Grammar::SchemaGrammarType, true );  
 
@@ -60,7 +62,20 @@ std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &file
     ErrorResultCollector collector;
     parser->setErrorHandler( &collector );
 
-    parser->parse( filepath.string().c_str() );
+    try
+    {
+        parser->parse( filepath.string().c_str() );
+    }
+
+    catch ( xc::SAXException& exception )
+    {
+    	collector.AddNewExceptionAsResult( exception );
+    }
+
+    catch ( xc::XMLException& exception )
+    {
+        collector.AddNewExceptionAsResult( exception );
+    }    
 
     return collector.GetResults();
 }

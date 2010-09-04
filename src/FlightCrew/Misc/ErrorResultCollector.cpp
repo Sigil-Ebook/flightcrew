@@ -69,4 +69,29 @@ void ErrorResultCollector::AddNewExceptionAsResult( const xc::SAXParseException 
                        );
 }
 
+
+void ErrorResultCollector::AddNewExceptionAsResult( const xc::SAXException &exception )
+{
+    m_Results.push_back( Result().SetCustomMessage( fromX( exception.getMessage() ) )
+                                 .SetResultId( ERROR_GENERIC )
+                       );
+}
+
+
+void ErrorResultCollector::AddNewExceptionAsResult( const xc::XMLException &exception )
+{
+    m_Results.push_back( Result().SetCustomMessage( fromX( exception.getMessage() ) )
+                                 .SetErrorLine( (int) exception.getSrcLine() )
+                                 .SetResultId( ERROR_GENERIC )
+                       );
+}
+
+
+void ErrorResultCollector::AddNewExceptionAsResult( const xc::DOMException &exception )
+{
+    m_Results.push_back( Result().SetCustomMessage( fromX( exception.getMessage() ) )
+                                 .SetResultId( ERROR_GENERIC )
+                       );
+}
+
 } //namespace FlightCrew
