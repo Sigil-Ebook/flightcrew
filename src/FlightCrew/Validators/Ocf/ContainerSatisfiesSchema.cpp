@@ -24,7 +24,8 @@
 #include "Misc/ErrorResultCollector.h"
 #include <ToXercesStringConverter.h>
 #include <XmlUtils.h>
-#include <LocationAwareDOMParser.h>
+#include <xercesc/sax2/SAX2XMLReader.hpp>
+#include <xercesc/sax2/XMLReaderFactory.hpp>
 
 namespace FlightCrew
 {
@@ -41,24 +42,25 @@ ContainerSatisfiesSchema::ContainerSatisfiesSchema()
 
 std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
-    xe::LocationAwareDOMParser parser;
+    boost::scoped_ptr< xc::SAX2XMLReader > parser( xc::XMLReaderFactory::createXMLReader() );
 
-    parser.setDoSchema( true );
-    parser.setLoadSchema( false );
-    parser.setSkipDTDValidation( true );
+    parser->setFeature( xc::XMLUni::fgSAX2CoreValidation,            true  );
+    parser->setFeature( xc::XMLUni::fgXercesLoadSchema,              false );
+    parser->setFeature( xc::XMLUni::fgXercesUseCachedGrammarInParse, true  );
+    parser->setFeature( xc::XMLUni::fgXercesSkipDTDValidation,       true  );
 
-    parser.setDoNamespaces( true );
-    parser.setValidationScheme( xc::AbstractDOMParser::Val_Always );
-    parser.useCachedGrammarInParse( true );    
+    parser->setProperty( xc::XMLUni::fgXercesScannerName, 
+                        (void*) xc::XMLUni::fgSGXMLScanner );    
 
-    parser.loadGrammar( m_ContainerSchema, xc::Grammar::SchemaGrammarType, true );  
+    parser->loadGrammar( m_ContainerSchema, xc::Grammar::SchemaGrammarType, true );  
 
-    parser.setExternalSchemaLocation( "urn:oasis:names:tc:opendocument:xmlns:container container.xsd" );
+    parser->setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 
+                         (void*) toX( "urn:oasis:names:tc:opendocument:xmlns:container container.xsd" ) );   
                                       
     ErrorResultCollector collector;
-    parser.setErrorHandler( &collector );
+    parser->setErrorHandler( &collector );
 
-    parser.parse( filepath.string().c_str() );
+    parser->parse( filepath.string().c_str() );
 
     return collector.GetResults();
 }
