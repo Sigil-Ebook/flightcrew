@@ -23,8 +23,6 @@
 #include "MetaInfValidator.h"
 #include "Misc/ErrorResultCollector.h"
 #include <ToXercesStringConverter.h>
-#include <FromXercesStringConverter.h>
-#include <XmlUtils.h>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
 
@@ -94,37 +92,38 @@ std::vector<Result> MetaInfValidator::ValidateMetaInfFile(
 
 void MetaInfValidator::LoadSchemas( xc::SAX2XMLReader &parser, const std::string &xsd_id_to_use )
 {
-    if ( !xsd_id_to_use.empty() )
+    if ( xsd_id_to_use.empty() )
+
+        return;
+    
+    // Normally we would just load all the schemas 
+    // and have Xerces pick the one to use by the id,
+    // but for some reason Xerces borks out when we 
+    // load schemas that we then don't use.
+    if ( xsd_id_to_use == CONTAINER_XSD_ID )
     {
-        // Normally we would just load all the schemas 
-        // and have Xerces pick the one to use by the id,
-        // but for some reason Xerces borks out when we 
-        // load schemas that we then don't use.
-        if ( xsd_id_to_use == CONTAINER_XSD_ID )
-        {
-            parser.loadGrammar( m_ContainerSchema,  xc::Grammar::SchemaGrammarType, true );
-        }
-
-        else if ( xsd_id_to_use == ENCRYPTION_XSD_ID )
-        {
-            parser.loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
-            parser.loadGrammar( m_XencSchema,       xc::Grammar::SchemaGrammarType, true );
-            parser.loadGrammar( m_EncryptionSchema, xc::Grammar::SchemaGrammarType, true );
-        }
-
-        else if ( xsd_id_to_use == SIGNATURES_XSD_ID )
-        {
-            parser.loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
-            parser.loadGrammar( m_SignaturesSchema, xc::Grammar::SchemaGrammarType, true );  
-        }
-
-        parser.setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 
-                            (void*) toX( std::string( CONTAINER_XSD_NS )
-                                         .append( " " )
-                                         .append( xsd_id_to_use ) 
-                                        ) 
-                           );        
+        parser.loadGrammar( m_ContainerSchema,  xc::Grammar::SchemaGrammarType, true );
     }
+
+    else if ( xsd_id_to_use == ENCRYPTION_XSD_ID )
+    {
+        parser.loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
+        parser.loadGrammar( m_XencSchema,       xc::Grammar::SchemaGrammarType, true );
+        parser.loadGrammar( m_EncryptionSchema, xc::Grammar::SchemaGrammarType, true );
+    }
+
+    else if ( xsd_id_to_use == SIGNATURES_XSD_ID )
+    {
+        parser.loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
+        parser.loadGrammar( m_SignaturesSchema, xc::Grammar::SchemaGrammarType, true );  
+    }
+
+    parser.setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 
+                        (void*) toX( std::string( CONTAINER_XSD_NS )
+                                        .append( " " )
+                                        .append( xsd_id_to_use ) 
+                                    ) 
+                       );
 }
 
 } //namespace FlightCrew

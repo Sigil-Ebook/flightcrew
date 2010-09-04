@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<container 
+    version="1.0" 
+    xmlns="urn:oasis:names:tc:opendocument:xmlns:container"
+    xmlns:foo="foobarnamespace"
+    foo:moo="test" >
+    <rootfiles foo:moo="test" foo:mouuo="test" >
+        <rootfile full-path="OEBPS/As You Like It.opf"
+            media-type="application/oebps-package+xml"
+            foo:moo="test" />
+        <rootfile full-path="OEBPS/As You Like It.pdf"
+            media-type="application/pdf">
+            <foo:bar>
+                euieu ieuie      
+            </foo:bar>
+        </rootfile> 
+    </rootfiles>
+</container>
