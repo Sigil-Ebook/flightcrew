@@ -21,67 +21,16 @@
 
 #include <stdafx.h>
 #include "ContainerSatisfiesSchema.h"
-#include "Misc/ErrorResultCollector.h"
-#include <ToXercesStringConverter.h>
-#include <FromXercesStringConverter.h>
-#include <XmlUtils.h>
-#include <xercesc/sax2/SAX2XMLReader.hpp>
-#include <xercesc/sax2/XMLReaderFactory.hpp>
+#include "Result.h"
 
 namespace FlightCrew
 {
 
-ContainerSatisfiesSchema::ContainerSatisfiesSchema()
-    :
-    m_ContainerSchema( CONTAINER_XSD,
-                       CONTAINER_XSD_LEN,
-                       toX( CONTAINER_XSD_ID ) )
-{
-
-}
-
-
 std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
-    boost::scoped_ptr< xc::SAX2XMLReader > parser( xc::XMLReaderFactory::createXMLReader() );
-
-    parser->setFeature( xc::XMLUni::fgSAX2CoreValidation,            true  );
-    parser->setFeature( xc::XMLUni::fgXercesLoadSchema,              false );
-    parser->setFeature( xc::XMLUni::fgXercesUseCachedGrammarInParse, true  );
-    parser->setFeature( xc::XMLUni::fgXercesSkipDTDValidation,       true  );
-
-    // We don't need DTD validation
-    parser->setProperty( xc::XMLUni::fgXercesScannerName, 
-                         (void*) xc::XMLUni::fgSGXMLScanner );    
-
-    parser->loadGrammar( m_ContainerSchema, xc::Grammar::SchemaGrammarType, true );  
-
-    parser->setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 
-                        (void*) toX( std::string( CONTAINER_XSD_NS )
-                                     .append( " " )
-                                     .append( CONTAINER_XSD_ID ) 
-                                   ) 
-                       );   
-                                      
-    ErrorResultCollector collector;
-    parser->setErrorHandler( &collector );
-
-    try
-    {
-        parser->parse( filepath.string().c_str() );
-    }
-
-    catch ( xc::SAXException& exception )
-    {
-    	collector.AddNewExceptionAsResult( exception );
-    }
-
-    catch ( xc::XMLException& exception )
-    {
-        collector.AddNewExceptionAsResult( exception );
-    }    
-
-    return collector.GetResults();
+    return ValidateMetaInfFile( filepath, CONTAINER_XSD_ID ); 
 }
+
+
 
 } //namespace FlightCrew

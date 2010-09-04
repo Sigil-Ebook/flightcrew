@@ -23,24 +23,16 @@
 #ifndef CONTAINERSATISFIESSCHEMA_H
 #define CONTAINERSATISFIESSCHEMA_H
 
-#include <xercesc/framework/MemBufInputSource.hpp>
-namespace xc = XERCES_CPP_NAMESPACE;
-#include "../IValidator.h"
+#include "MetaInfValidator.h"
 
 namespace FlightCrew
 {
 
-class ContainerSatisfiesSchema : public IValidator
+class ContainerSatisfiesSchema : public MetaInfValidator
 {
 public:
 
-    ContainerSatisfiesSchema();
-
     std::vector<Result> ValidateFile( const fs::path &filepath );
-
-private:
-
-    const xc::MemBufInputSource m_ContainerSchema;
 
 };
 
