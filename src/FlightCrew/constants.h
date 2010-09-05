@@ -95,6 +95,15 @@ extern const char*         XMLDSIG_CORE_SCHEMA_XSD_ID;
 extern const unsigned int  XMLDSIG_CORE_SCHEMA_XSD_LEN;
 extern const unsigned char XMLDSIG_CORE_SCHEMA_XSD[];  
 
+extern const char*         NCX_XSD_NS; 
+extern const char*         NCX_XSD_ID; 
+extern const unsigned int  NCX_XSD_LEN;
+extern const unsigned char NCX_XSD[]; 
+
+extern const char*         NCX_2005_1_DTD_ID; 
+extern const unsigned int  NCX_2005_1_DTD_LEN;
+extern const unsigned char NCX_2005_1_DTD[];  
+
 }
 
 #endif // CONSTANTS_H
