@@ -43,11 +43,15 @@ SignaturesSatisfiesSchema::SignaturesSatisfiesSchema()
 
 std::vector<Result> SignaturesSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
+    std::string location = std::string( CONTAINER_XSD_NS )
+                                        .append( " " )
+                                        .append( SIGNATURES_XSD_ID );
+
     std::vector< const xc::MemBufInputSource* > schemas;
     schemas.push_back( &m_XmldsigSchema    );
     schemas.push_back( &m_SignaturesSchema );
 
-    return ValidateMetaInfFile( filepath, SIGNATURES_XSD_ID, schemas ); 
+    return ValidateAgainstSchema( filepath, location, schemas ); 
 }
 
 } //namespace FlightCrew

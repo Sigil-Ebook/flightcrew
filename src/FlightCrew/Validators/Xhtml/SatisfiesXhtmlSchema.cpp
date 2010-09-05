@@ -57,52 +57,21 @@ SatisfiesXhtmlSchema::SatisfiesXhtmlSchema()
 
 std::vector<Result> SatisfiesXhtmlSchema::ValidateFile( const fs::path &filepath )
 {
-    xe::LocationAwareDOMParser parser;
+    std::string location = std::string( OPS201_XSD_NS )
+                           .append( " " )
+                           .append( OPS201_XSD_ID );
 
-    parser.setDoSchema(             true  );
-    parser.setLoadSchema(           false );
-    parser.setSkipDTDValidation(    true  );
-    parser.setDoNamespaces(         true  );
-    parser.useCachedGrammarInParse( true  );  
+    std::vector< const xc::MemBufInputSource* > schemas;
+    schemas.push_back( &m_XmlSchema       );
+    schemas.push_back( &m_XlinkSchema     );
+    schemas.push_back( &m_SvgSchema       );
+    schemas.push_back( &m_OpsSwitchSchema );
+    schemas.push_back( &m_OpsSchema       );
 
-    parser.setValidationScheme( xc::AbstractDOMParser::Val_Always ); 
+    std::vector< const xc::MemBufInputSource* > dtds;
+    dtds.push_back( &m_Dtd );
 
-    parser.loadGrammar( m_Dtd,             xc::Grammar::DTDGrammarType,    true );
-    parser.loadGrammar( m_XmlSchema,       xc::Grammar::SchemaGrammarType, true );
-    parser.loadGrammar( m_XlinkSchema,     xc::Grammar::SchemaGrammarType, true );
-    parser.loadGrammar( m_SvgSchema,       xc::Grammar::SchemaGrammarType, true );
-    parser.loadGrammar( m_OpsSwitchSchema, xc::Grammar::SchemaGrammarType, true );
-    parser.loadGrammar( m_OpsSchema,       xc::Grammar::SchemaGrammarType, true );     
-
-    parser.setExternalSchemaLocation( std::string( OPS201_XSD_NS )
-                                      .append( " " )
-                                      .append( OPS201_XSD_ID )
-                                      .c_str() );
-
-    ErrorResultCollector collector;
-    parser.setErrorHandler( &collector );
-
-    try
-    {
-        parser.parse( filepath.string().c_str() );
-    }
-
-    catch ( xc::SAXException& exception )
-    {
-    	collector.AddNewExceptionAsResult( exception );
-    }
-
-    catch ( xc::XMLException& exception )
-    {
-        collector.AddNewExceptionAsResult( exception );
-    }  
-
-    catch ( xc::DOMException& exception )
-    {
-        collector.AddNewExceptionAsResult( exception );
-    }
-
-    return collector.GetResults();
+    return ValidateAgainstSchema( filepath, location, schemas, dtds ); 
 }
 
 } //namespace FlightCrew

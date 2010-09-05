@@ -25,12 +25,12 @@
 
 #include <xercesc/framework/MemBufInputSource.hpp>
 namespace xc = XERCES_CPP_NAMESPACE;
-#include "../IValidator.h"
+#include "../DomSchemaValidator.h"
 
 namespace FlightCrew
 {
 
-class SatisfiesXhtmlSchema : public IValidator
+class SatisfiesXhtmlSchema : public DomSchemaValidator
 {
 public:
 

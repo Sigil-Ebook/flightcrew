@@ -41,10 +41,14 @@ ContainerSatisfiesSchema::ContainerSatisfiesSchema()
 
 std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
+    std::string location = std::string( CONTAINER_XSD_NS )
+                                        .append( " " )
+                                        .append( CONTAINER_XSD_ID );
+
     std::vector< const xc::MemBufInputSource* > schemas;
     schemas.push_back( &m_ContainerSchema );
 
-    return ValidateMetaInfFile( filepath, CONTAINER_XSD_ID, schemas ); 
+    return ValidateAgainstSchema( filepath, location, schemas ); 
 }
 
 } //namespace FlightCrew

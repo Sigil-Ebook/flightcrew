@@ -47,12 +47,16 @@ EncryptionSatisfiesSchema::EncryptionSatisfiesSchema()
 
 std::vector<Result> EncryptionSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
+    std::string location = std::string( CONTAINER_XSD_NS )
+                                        .append( " " )
+                                        .append( ENCRYPTION_XSD_ID );
+
     std::vector< const xc::MemBufInputSource* > schemas;
     schemas.push_back( &m_XmldsigSchema    );
     schemas.push_back( &m_XencSchema       );
     schemas.push_back( &m_EncryptionSchema );
 
-    return ValidateMetaInfFile( filepath, ENCRYPTION_XSD_ID, schemas ); 
+    return ValidateAgainstSchema( filepath, location, schemas ); 
 }
 
 } //namespace FlightCrew

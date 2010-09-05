@@ -20,39 +20,39 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "SaxSchemaValidator.h"
+#include "DomSchemaValidator.h"
 #include "Misc/ErrorResultCollector.h"
 #include <ToXercesStringConverter.h>
-#include <xercesc/sax2/SAX2XMLReader.hpp>
-#include <xercesc/sax2/XMLReaderFactory.hpp>
+#include <LocationAwareDOMParser.h>
+#include <xercesc/sax/SAXException.hpp>
 
 namespace FlightCrew
 {
     
-std::vector<Result> SaxSchemaValidator::ValidateAgainstSchema(
+std::vector<Result> DomSchemaValidator::ValidateAgainstSchema(
     const fs::path &filepath,
     const std::string &external_schema_location,
-    const std::vector< const xc::MemBufInputSource* > &schemas )
+    const std::vector< const xc::MemBufInputSource* > &schemas,
+    const std::vector< const xc::MemBufInputSource* > &dtds )
 {
-    boost::scoped_ptr< xc::SAX2XMLReader > parser( xc::XMLReaderFactory::createXMLReader() );
+    xe::LocationAwareDOMParser parser;
 
-    parser->setFeature( xc::XMLUni::fgSAX2CoreValidation,            true  );
-    parser->setFeature( xc::XMLUni::fgXercesLoadSchema,              false );
-    parser->setFeature( xc::XMLUni::fgXercesUseCachedGrammarInParse, true  );
-    parser->setFeature( xc::XMLUni::fgXercesSkipDTDValidation,       true  );
+    parser.setDoSchema(             true  );
+    parser.setLoadSchema(           false );
+    parser.setSkipDTDValidation(    true  );
+    parser.setDoNamespaces(         true  );
+    parser.useCachedGrammarInParse( true  );  
 
-    // We don't need DTD validation
-    parser->setProperty( xc::XMLUni::fgXercesScannerName, 
-                         (void*) xc::XMLUni::fgSGXMLScanner );    
+    parser.setValidationScheme( xc::AbstractDOMParser::Val_Always ); 
 
-    LoadSchemas( *parser, external_schema_location, schemas );
+    LoadSchemas( parser, external_schema_location, schemas, dtds );
 
     ErrorResultCollector collector;
-    parser->setErrorHandler( &collector );
+    parser.setErrorHandler( &collector ); 
 
     try
     {
-        parser->parse( filepath.string().c_str() );
+        parser.parse( filepath.string().c_str() );
     }
 
     catch ( xc::SAXException& exception )
@@ -69,19 +69,23 @@ std::vector<Result> SaxSchemaValidator::ValidateAgainstSchema(
 }
 
 
-void SaxSchemaValidator::LoadSchemas( 
-    xc::SAX2XMLReader &parser,
+void DomSchemaValidator::LoadSchemas( 
+    xe::LocationAwareDOMParser &parser,
     const std::string &external_schema_location,
-    const std::vector< const xc::MemBufInputSource* > &schemas )
+    const std::vector< const xc::MemBufInputSource* > &schemas,
+    const std::vector< const xc::MemBufInputSource* > &dtds )
 {
-   
+    foreach( const xc::MemBufInputSource *input, dtds )
+    {
+        parser.loadGrammar( *input, xc::Grammar::DTDGrammarType,    true );   
+    }
+
     foreach( const xc::MemBufInputSource *input, schemas )
     {
         parser.loadGrammar( *input, xc::Grammar::SchemaGrammarType, true );  
     }
 
-    parser.setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 
-                        (void*) toX( external_schema_location ) );
+    parser.setExternalSchemaLocation( external_schema_location.c_str() );
 }
 
 } //namespace FlightCrew

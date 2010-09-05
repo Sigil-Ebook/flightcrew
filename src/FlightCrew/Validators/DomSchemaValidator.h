@@ -20,18 +20,20 @@
 *************************************************************************/
 
 #pragma once
-#ifndef SAXSCHEMAVALIDATOR_H
-#define SAXSCHEMAVALIDATOR_H
+#ifndef DOMSCHEMAVALIDATOR_H
+#define DOMSCHEMAVALIDATOR_H
 
 #include <xercesc/framework/MemBufInputSource.hpp>
-namespace XERCES_CPP_NAMESPACE { class SAX2XMLReader; class MemBufInputSource; };
+namespace XERCES_CPP_NAMESPACE { class MemBufInputSource; };
 namespace xc = XERCES_CPP_NAMESPACE;
+namespace XercesExt { class LocationAwareDOMParser; }
+namespace xe = XercesExt;
 #include "IValidator.h"
 
 namespace FlightCrew
 {
 
-class SaxSchemaValidator : public IValidator
+class DomSchemaValidator : public IValidator
 {
 
 protected:
@@ -39,15 +41,18 @@ protected:
     std::vector<Result> ValidateAgainstSchema( 
         const fs::path &filepath, 
         const std::string &external_schema_location,
-        const std::vector< const xc::MemBufInputSource* > &schemas );
+        const std::vector< const xc::MemBufInputSource* > &schemas,
+        const std::vector< const xc::MemBufInputSource* > &dtds );
 
 private:
 
-    void LoadSchemas( xc::SAX2XMLReader &parser,
-                      const std::string &external_schema_location,
-                      const std::vector< const xc::MemBufInputSource* > &schemas );
+    void LoadSchemas( 
+        xe::LocationAwareDOMParser &parser,
+        const std::string &external_schema_location,
+        const std::vector< const xc::MemBufInputSource* > &schemas,
+        const std::vector< const xc::MemBufInputSource* > &dtds );
 };
 
 } // namespace FlightCrew
 
-#endif // SAXSCHEMAVALIDATOR_H
+#endif // DOMSCHEMAVALIDATOR_H
