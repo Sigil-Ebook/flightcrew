@@ -23,12 +23,12 @@
 #ifndef CONTAINERSATISFIESSCHEMA_H
 #define CONTAINERSATISFIESSCHEMA_H
 
-#include "MetaInfValidator.h"
+#include "../SaxSchemaValidator.h"
 
 namespace FlightCrew
 {
 
-class ContainerSatisfiesSchema : public MetaInfValidator
+class ContainerSatisfiesSchema : public SaxSchemaValidator
 {
 public:
 

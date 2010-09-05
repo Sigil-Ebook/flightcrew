@@ -23,12 +23,12 @@
 #ifndef ENCRYPTIONSATISFIESSCHEMA_H
 #define ENCRYPTIONSATISFIESSCHEMA_H
 
-#include "MetaInfValidator.h"
+#include "../SaxSchemaValidator.h"
 
 namespace FlightCrew
 {
 
-class EncryptionSatisfiesSchema : public MetaInfValidator
+class EncryptionSatisfiesSchema : public SaxSchemaValidator
 {
 public:
 

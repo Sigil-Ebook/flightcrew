@@ -20,7 +20,7 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "MetaInfValidator.h"
+#include "SaxSchemaValidator.h"
 #include "Misc/ErrorResultCollector.h"
 #include <ToXercesStringConverter.h>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
@@ -30,7 +30,7 @@
 namespace FlightCrew
 {
     
-std::vector<Result> MetaInfValidator::ValidateMetaInfFile(
+std::vector<Result> SaxSchemaValidator::ValidateMetaInfFile(
     const fs::path &filepath,
     const std::string &xsd_id_to_use,
     const std::vector< const xc::MemBufInputSource* > &schemas )
@@ -70,7 +70,7 @@ std::vector<Result> MetaInfValidator::ValidateMetaInfFile(
 }
 
 
-void MetaInfValidator::LoadSchemas( 
+void SaxSchemaValidator::LoadSchemas( 
     xc::SAX2XMLReader &parser,
     const std::string &xsd_id_to_use,
     const std::vector< const xc::MemBufInputSource* > &schemas )

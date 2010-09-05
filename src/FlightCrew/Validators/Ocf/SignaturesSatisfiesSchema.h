@@ -23,12 +23,12 @@
 #ifndef SIGNATURESSATISFIESSCHEMA_H
 #define SIGNATURESSATISFIESSCHEMA_H
 
-#include "MetaInfValidator.h"
+#include "../SaxSchemaValidator.h"
 
 namespace FlightCrew
 {
 
-class SignaturesSatisfiesSchema : public MetaInfValidator
+class SignaturesSatisfiesSchema : public SaxSchemaValidator
 {
 public:
 

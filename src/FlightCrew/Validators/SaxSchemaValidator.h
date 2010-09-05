@@ -26,12 +26,12 @@
 #include <xercesc/framework/MemBufInputSource.hpp>
 namespace XERCES_CPP_NAMESPACE { class SAX2XMLReader; class MemBufInputSource; };
 namespace xc = XERCES_CPP_NAMESPACE;
-#include "../IValidator.h"
+#include "IValidator.h"
 
 namespace FlightCrew
 {
 
-class MetaInfValidator : public IValidator
+class SaxSchemaValidator : public IValidator
 {
 
 protected:
