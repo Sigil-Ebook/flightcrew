@@ -22,13 +22,32 @@
 #include <stdafx.h>
 #include "SignaturesSatisfiesSchema.h"
 #include "Result.h"
+#include <ToXercesStringConverter.h>
 
 namespace FlightCrew
 {
 
+
+SignaturesSatisfiesSchema::SignaturesSatisfiesSchema()
+    :
+    m_SignaturesSchema( SIGNATURES_XSD,
+                        SIGNATURES_XSD_LEN,
+                        toX( SIGNATURES_XSD_ID ) ),
+    m_XmldsigSchema( XMLDSIG_CORE_SCHEMA_XSD,
+                     XMLDSIG_CORE_SCHEMA_XSD_LEN,
+                     toX( XMLDSIG_CORE_SCHEMA_XSD_ID ) )
+{
+
+}
+
+
 std::vector<Result> SignaturesSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
-    return ValidateMetaInfFile( filepath, SIGNATURES_XSD_ID ); 
+    std::vector< const xc::MemBufInputSource* > schemas;
+    schemas.push_back( &m_XmldsigSchema    );
+    schemas.push_back( &m_SignaturesSchema );
+
+    return ValidateMetaInfFile( filepath, SIGNATURES_XSD_ID, schemas ); 
 }
 
 } //namespace FlightCrew

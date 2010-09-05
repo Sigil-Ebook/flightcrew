@@ -22,13 +22,29 @@
 #include <stdafx.h>
 #include "ContainerSatisfiesSchema.h"
 #include "Result.h"
+#include <ToXercesStringConverter.h>
+
 
 namespace FlightCrew
 {
 
+
+ContainerSatisfiesSchema::ContainerSatisfiesSchema()
+    :
+    m_ContainerSchema( CONTAINER_XSD,
+                       CONTAINER_XSD_LEN,
+                       toX( CONTAINER_XSD_ID ) )
+{
+
+}
+
+
 std::vector<Result> ContainerSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
-    return ValidateMetaInfFile( filepath, CONTAINER_XSD_ID ); 
+    std::vector< const xc::MemBufInputSource* > schemas;
+    schemas.push_back( &m_ContainerSchema );
+
+    return ValidateMetaInfFile( filepath, CONTAINER_XSD_ID, schemas ); 
 }
 
 } //namespace FlightCrew

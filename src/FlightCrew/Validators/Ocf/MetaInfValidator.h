@@ -24,7 +24,7 @@
 #define METAINFVALIDATOR_H
 
 #include <xercesc/framework/MemBufInputSource.hpp>
-namespace XERCES_CPP_NAMESPACE { class SAX2XMLReader; };
+namespace XERCES_CPP_NAMESPACE { class SAX2XMLReader; class MemBufInputSource; };
 namespace xc = XERCES_CPP_NAMESPACE;
 #include "../IValidator.h"
 
@@ -33,24 +33,19 @@ namespace FlightCrew
 
 class MetaInfValidator : public IValidator
 {
-public:
-
-    MetaInfValidator();
 
 protected:
 
-    std::vector<Result> ValidateMetaInfFile( const fs::path &filepath, 
-                                             const std::string &xsd_id_to_use );
+    std::vector<Result> ValidateMetaInfFile( 
+        const fs::path &filepath, 
+        const std::string &xsd_id_to_use,
+        const std::vector< const xc::MemBufInputSource* > &schemas );
 
 private:
 
-    void LoadSchemas( xc::SAX2XMLReader &parser, const std::string &xsd_id_to_use );
-
-    const xc::MemBufInputSource m_EncryptionSchema;
-    const xc::MemBufInputSource m_ContainerSchema;
-    const xc::MemBufInputSource m_SignaturesSchema;
-    const xc::MemBufInputSource m_XencSchema;
-    const xc::MemBufInputSource m_XmldsigSchema;
+    void LoadSchemas( xc::SAX2XMLReader &parser,
+                      const std::string &xsd_id_to_use,
+                      const std::vector< const xc::MemBufInputSource* > &schemas );
 };
 
 } // namespace FlightCrew

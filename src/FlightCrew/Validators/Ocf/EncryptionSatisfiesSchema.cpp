@@ -22,13 +22,37 @@
 #include <stdafx.h>
 #include "EncryptionSatisfiesSchema.h"
 #include "Result.h"
+#include <ToXercesStringConverter.h>
+
 
 namespace FlightCrew
 {
 
+
+EncryptionSatisfiesSchema::EncryptionSatisfiesSchema()
+    :
+    m_EncryptionSchema( ENCRYPTION_XSD,
+                        ENCRYPTION_XSD_LEN,
+                        toX( ENCRYPTION_XSD_ID ) ),
+    m_XencSchema( XENC_SCHEMA_XSD,
+                  XENC_SCHEMA_XSD_LEN,
+                  toX( XENC_SCHEMA_XSD_ID ) ),
+    m_XmldsigSchema( XMLDSIG_CORE_SCHEMA_XSD,
+                     XMLDSIG_CORE_SCHEMA_XSD_LEN,
+                     toX( XMLDSIG_CORE_SCHEMA_XSD_ID ) )
+{
+
+}
+
+
 std::vector<Result> EncryptionSatisfiesSchema::ValidateFile( const fs::path &filepath )
 {
-    return ValidateMetaInfFile( filepath, ENCRYPTION_XSD_ID ); 
+    std::vector< const xc::MemBufInputSource* > schemas;
+    schemas.push_back( &m_XmldsigSchema    );
+    schemas.push_back( &m_XencSchema       );
+    schemas.push_back( &m_EncryptionSchema );
+
+    return ValidateMetaInfFile( filepath, ENCRYPTION_XSD_ID, schemas ); 
 }
 
 } //namespace FlightCrew

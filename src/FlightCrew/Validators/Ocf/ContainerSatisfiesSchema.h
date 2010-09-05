@@ -32,7 +32,13 @@ class ContainerSatisfiesSchema : public MetaInfValidator
 {
 public:
 
+    ContainerSatisfiesSchema();
+
     std::vector<Result> ValidateFile( const fs::path &filepath );
+
+private:
+
+    const xc::MemBufInputSource m_ContainerSchema;
 
 };
 

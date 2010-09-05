@@ -25,35 +25,15 @@
 #include <ToXercesStringConverter.h>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
+#include <xercesc/framework/MemBufInputSource.hpp>
 
 namespace FlightCrew
 {
     
-MetaInfValidator::MetaInfValidator()
-    :
-    m_EncryptionSchema( ENCRYPTION_XSD,
-                        ENCRYPTION_XSD_LEN,
-                        toX( ENCRYPTION_XSD_ID ) ),
-    m_ContainerSchema( CONTAINER_XSD,
-                       CONTAINER_XSD_LEN,
-                       toX( CONTAINER_XSD_ID ) ),
-    m_SignaturesSchema( SIGNATURES_XSD,
-                        SIGNATURES_XSD_LEN,
-                        toX( SIGNATURES_XSD_ID ) ),
-    m_XencSchema( XENC_SCHEMA_XSD,
-                  XENC_SCHEMA_XSD_LEN,
-                  toX( XENC_SCHEMA_XSD_ID ) ),
-    m_XmldsigSchema( XMLDSIG_CORE_SCHEMA_XSD,
-                     XMLDSIG_CORE_SCHEMA_XSD_LEN,
-                     toX( XMLDSIG_CORE_SCHEMA_XSD_ID ) )
-{
-
-}
-
-
 std::vector<Result> MetaInfValidator::ValidateMetaInfFile(
     const fs::path &filepath,
-    const std::string &xsd_id_to_use )
+    const std::string &xsd_id_to_use,
+    const std::vector< const xc::MemBufInputSource* > &schemas )
 {
     boost::scoped_ptr< xc::SAX2XMLReader > parser( xc::XMLReaderFactory::createXMLReader() );
 
@@ -66,7 +46,7 @@ std::vector<Result> MetaInfValidator::ValidateMetaInfFile(
     parser->setProperty( xc::XMLUni::fgXercesScannerName, 
                          (void*) xc::XMLUni::fgSGXMLScanner );    
 
-    LoadSchemas( *parser, xsd_id_to_use );
+    LoadSchemas( *parser, xsd_id_to_use, schemas );
 
     ErrorResultCollector collector;
     parser->setErrorHandler( &collector );
@@ -90,32 +70,15 @@ std::vector<Result> MetaInfValidator::ValidateMetaInfFile(
 }
 
 
-void MetaInfValidator::LoadSchemas( xc::SAX2XMLReader &parser, const std::string &xsd_id_to_use )
+void MetaInfValidator::LoadSchemas( 
+    xc::SAX2XMLReader &parser,
+    const std::string &xsd_id_to_use,
+    const std::vector< const xc::MemBufInputSource* > &schemas )
 {
-    if ( xsd_id_to_use.empty() )
-
-        return;
-    
-    // Normally we would just load all the schemas 
-    // and have Xerces pick the one to use by the id,
-    // but for some reason Xerces borks out when we 
-    // load schemas that we then don't use.
-    if ( xsd_id_to_use == CONTAINER_XSD_ID )
+   
+    foreach( const xc::MemBufInputSource *input, schemas )
     {
-        parser.loadGrammar( m_ContainerSchema,  xc::Grammar::SchemaGrammarType, true );
-    }
-
-    else if ( xsd_id_to_use == ENCRYPTION_XSD_ID )
-    {
-        parser.loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
-        parser.loadGrammar( m_XencSchema,       xc::Grammar::SchemaGrammarType, true );
-        parser.loadGrammar( m_EncryptionSchema, xc::Grammar::SchemaGrammarType, true );
-    }
-
-    else if ( xsd_id_to_use == SIGNATURES_XSD_ID )
-    {
-        parser.loadGrammar( m_XmldsigSchema,    xc::Grammar::SchemaGrammarType, true );  
-        parser.loadGrammar( m_SignaturesSchema, xc::Grammar::SchemaGrammarType, true );  
+        parser.loadGrammar( *input, xc::Grammar::SchemaGrammarType, true );  
     }
 
     parser.setProperty( xc::XMLUni::fgXercesSchemaExternalSchemaLocation, 

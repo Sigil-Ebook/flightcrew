@@ -32,7 +32,14 @@ class SignaturesSatisfiesSchema : public MetaInfValidator
 {
 public:
 
+    SignaturesSatisfiesSchema();
+
     std::vector<Result> ValidateFile( const fs::path &filepath );
+
+private:
+
+    const xc::MemBufInputSource m_SignaturesSchema;
+    const xc::MemBufInputSource m_XmldsigSchema;
 
 };
 

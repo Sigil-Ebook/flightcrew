@@ -32,7 +32,15 @@ class EncryptionSatisfiesSchema : public MetaInfValidator
 {
 public:
 
+    EncryptionSatisfiesSchema();
+
     std::vector<Result> ValidateFile( const fs::path &filepath );
+
+private:
+
+    const xc::MemBufInputSource m_EncryptionSchema;
+    const xc::MemBufInputSource m_XencSchema;
+    const xc::MemBufInputSource m_XmldsigSchema;
 };
 
 } // namespace FlightCrew
