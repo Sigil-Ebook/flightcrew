@@ -37,8 +37,6 @@ TEST( NcxSatisfiesSchemaTest, DoesntSatisfySchema )
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 81 ); 
 }
 
-
-
 TEST( NcxSatisfiesSchemaTest, SatisfiesSchemaOpf201 )
 {
     NcxSatisfiesSchema validator;

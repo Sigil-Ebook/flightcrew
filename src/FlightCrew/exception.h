@@ -19,41 +19,32 @@
 **
 *************************************************************************/
 
-#pragma once
-#ifndef UTILITIES_H
-#define UTILITIES_H
-
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <boost/filesystem.hpp>
-namespace fs = boost::filesystem;
+#include <boost/exception/all.hpp>
 
 namespace FlightCrew
 {
 
-namespace Util
-{
-    std::string ReadUnicodFile( const fs::path &filepath );
+#define boost_throw(x) BOOST_THROW_EXCEPTION(x)
 
-    template <typename T>
-    bool Contains( const std::vector<T> &vector, const T &value )
-    {
-        return std::find( vector.begin(), vector.end(), value ) != vector.end(); 
-    }
+// FlightCrew uses the "Exception types as semantic tags" idiom.
+// For more information, see this link:
+//   http://www.boost.org/doc/libs/1_44_0/libs/exception/doc/exception_types_as_simple_semantic_tags.html
 
-    template <typename T>
-    std::vector<T>& Extend( std::vector<T> &base_vector, const std::vector <T> &extension_vector ) 
-    {
-            base_vector.insert( base_vector.end(), extension_vector.begin(), extension_vector.end() );
-            return base_vector;
-    }
+/**
+ * The common base for all exceptions.
+ */
+struct ExceptionBase: virtual std::exception, virtual boost::exception {};
 
-    std::string GetFirstNumChars( const std::string &string, unsigned int num_chars );
+/**
+* Thrown when a file does not exist.
+*/
+struct FileDoesNotExistEx : virtual ExceptionBase {};
+typedef boost::error_info< struct file_path, std::string > ei_FilePath;
 
+/**
+* Thrown when a file is not in utf-8/16.
+*/
+struct FileNotInUnicodeEx : virtual ExceptionBase {};
 
-} // namespace Util
 
 } // namespace FlightCrew
-
-#endif // UTILITIES_H
