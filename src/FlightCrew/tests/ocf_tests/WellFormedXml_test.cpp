@@ -31,7 +31,7 @@ TEST( WellFormedXmlTest, NotValid )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ocf_tests/WellFormedXml_NotValid.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_NOT_WELL_FORMED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 8 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 9 ); 
@@ -43,5 +43,5 @@ TEST( WellFormedXmlTest, Valid )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ocf_tests/WellFormedXml_Valid.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }

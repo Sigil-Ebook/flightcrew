@@ -31,7 +31,7 @@ TEST( IdsUniqueTest, AllNotUnique )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/IdsUnique_AllNotUnique.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ID_NOT_UNIQUE );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 6 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 26 );
@@ -46,6 +46,6 @@ TEST( IdsUniqueTest, AllUnique )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/IdsUnique_AllUnique.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

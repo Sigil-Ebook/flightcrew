@@ -31,7 +31,7 @@ TEST( EncryptionSatisfiesSchemaTest, DoesntSatisfySchema )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ocf_tests/EncryptionSatisfiesSchema_DoesntSatisfySchema.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 104 ); 
@@ -43,5 +43,5 @@ TEST( EncryptionSatisfiesSchemaTest, SatisfiesSchema )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ocf_tests/EncryptionSatisfiesSchema_SatisfiesSchema.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }

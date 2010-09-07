@@ -31,7 +31,7 @@ TEST( ReferenceTypeValidTest, BadValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ReferenceTypeValid_BadValue.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_BAD_REFERENCE_TYPE_VALUE );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 37 );
@@ -46,6 +46,6 @@ TEST( ReferenceTypeValidTest, GoodValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ReferenceTypeValid_GoodValue.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

@@ -31,7 +31,7 @@ TEST( ItemHrefUniqueTest, HrefsNotUnique )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemHrefUnique_HrefsNotUnique.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_ITEM_HREF_NOT_UNIQUE );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 6 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 26 );
@@ -46,6 +46,6 @@ TEST( ItemHrefUniqueTest, HrefsUnique )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemHrefUnique_HrefsUnique.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

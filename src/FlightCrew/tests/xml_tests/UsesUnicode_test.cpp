@@ -31,7 +31,7 @@ TEST( UsesUnicodeTest, FileDoesntExist )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xml_tests/ohutoeuoeueudtneodutont.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), UNABLE_TO_PERFORM_VALIDATION );
 }
 
@@ -42,7 +42,7 @@ TEST( UsesUnicodeTest, DeclaresOtherUsesOther )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xml_tests/UsesUnicode_DeclaresOtherUsesOther.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_SPECIFIES_NEITHER_UTF8_NOR_UTF16 );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 1 );
 }
@@ -53,7 +53,7 @@ TEST( UsesUnicodeTest, DeclaresUtf8UsesOther )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xml_tests/UsesUnicode_DeclaresUtf8UsesOther.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_BYTESTREAM_NEITHER_UTF8_NOR_UTF16 );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 1 );
 }
@@ -64,7 +64,7 @@ TEST( UsesUnicodeTest, DeclaresUtf16UsesOther )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xml_tests/UsesUnicode_DeclaresUtf16UsesOther.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_BYTESTREAM_NEITHER_UTF8_NOR_UTF16 );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 1 );
 }
@@ -75,7 +75,7 @@ TEST( UsesUnicodeTest, ValidUtf8 )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xml_tests/UsesUnicode_ValidUtf8.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 
 TEST( UsesUnicodeTest, ValidUtf16LE )
@@ -84,7 +84,7 @@ TEST( UsesUnicodeTest, ValidUtf16LE )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xml_tests/UsesUnicode_ValidUtf16LE.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 
 TEST( UsesUnicodeTest, ValidUtf16BE )
@@ -93,5 +93,5 @@ TEST( UsesUnicodeTest, ValidUtf16BE )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xml_tests/UsesUnicode_ValidUtf16BE.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }

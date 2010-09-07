@@ -31,7 +31,7 @@ TEST( IdsValidTest, BadValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/IdsValid_BadValue.xml" );
             
-    EXPECT_EQ( results.size(), 4U );
+    ASSERT_EQ( results.size(), 4U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_BAD_ID_VALUE );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 31 );
@@ -67,6 +67,6 @@ TEST( IdsValidTest, GoodValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/IdsValid_GoodValue.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

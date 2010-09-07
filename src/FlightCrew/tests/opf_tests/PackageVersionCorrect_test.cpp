@@ -31,7 +31,7 @@ TEST( PackageVersionCorrectTest, BadPackageVersion )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/PackageVersionCorrect_BadPackageVersion.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_BAD_PACKAGE_VERSION );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 90 );
@@ -47,6 +47,6 @@ TEST( PackageVersionCorrectTest, GoodPackageVersion )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/PackageVersionCorrect_GoodPackageVersion.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

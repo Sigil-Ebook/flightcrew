@@ -31,7 +31,7 @@ TEST( TitlePresentTest, NoTitle_Error )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/TitlePresent_NoTitle.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ELEMENT_NOT_PRESENT );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 98 );
@@ -46,5 +46,5 @@ TEST( TitlePresentTest, HasTitle_OK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/TitlePresent_HasTitle.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
