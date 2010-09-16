@@ -31,7 +31,7 @@ TEST( PackageAttributesPresentTest, NotAllowedAttributes )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/PackageAttributesPresent_NotAllowedAttributes.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 114 );
@@ -47,7 +47,7 @@ TEST( PackageAttributesPresentTest, MissingAttributes )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/opf_tests/PackageAttributesPresent_MissingAttributes.xml" );
 
-    EXPECT_EQ( results.size(), 2U );
+    ASSERT_EQ( results.size(), 2U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_REQUIRED_ATTRIBUTE_MISSING );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 58 );
@@ -71,6 +71,6 @@ TEST( PackageAttributesPresentTest, AllowedAttributes )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/PackageAttributesPresent_AllowedAttributes.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

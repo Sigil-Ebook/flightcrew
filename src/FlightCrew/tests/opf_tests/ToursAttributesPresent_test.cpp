@@ -31,7 +31,7 @@ TEST( ToursAttributesPresentTest, NotAllowedAttributes )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ToursAttributesPresent_NotAllowedAttributes.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 39 );
@@ -47,6 +47,6 @@ TEST( ToursAttributesPresentTest, AllowedAttributes )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ToursAttributesPresent_AllowedAttributes.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

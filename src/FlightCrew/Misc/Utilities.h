@@ -24,13 +24,18 @@
 #define UTILITIES_H
 
 #include <vector>
+#include <string>
 #include <algorithm>
+#include <boost/filesystem.hpp>
+namespace fs = boost::filesystem;
 
 namespace FlightCrew
 {
 
 namespace Util
 {
+    std::string ReadUnicodFile( const fs::path &filepath );
+
     template <typename T>
     bool Contains( const std::vector<T> &vector, const T &value )
     {
@@ -43,6 +48,9 @@ namespace Util
             base_vector.insert( base_vector.end(), extension_vector.begin(), extension_vector.end() );
             return base_vector;
     }
+
+    std::string GetFirstNumChars( const std::string &string, unsigned int num_chars );
+
 
 } // namespace Util
 

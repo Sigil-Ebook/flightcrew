@@ -31,7 +31,7 @@ TEST( PackageUniqueIdentifierValidTest, IdDoesNotExist )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/PackageUniqueIdentifierValid_IdDoesNotExist.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_PACKAGE_UNIQUE_IDENTIFIER_DOES_NOT_EXIST );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 2 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 88 );
@@ -46,6 +46,6 @@ TEST( PackageUniqueIdentifierValidTest, IdExists )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/PackageUniqueIdentifierValid_IdExists.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

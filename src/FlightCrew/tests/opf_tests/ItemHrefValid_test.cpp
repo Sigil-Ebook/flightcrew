@@ -31,7 +31,7 @@ TEST( ItemHrefValidTest, InvalidURI )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemHrefValid_BadValue.xml" );
             
-    EXPECT_EQ( results.size(), 4U );
+    ASSERT_EQ( results.size(), 4U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_ITEM_HREF_INVALID_URI );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 31 );
@@ -67,6 +67,6 @@ TEST( ItemHrefValidTest, GoodValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemHrefValid_GoodValue.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

@@ -31,7 +31,7 @@ TEST( PackageAllowedChildrenTest, WrongChildren )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/PackageAllowedChildren_WrongChildren.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 14 );
@@ -43,6 +43,6 @@ TEST( PackageAllowedChildrenTest, ChildrenOK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/PackageAllowedChildren_ChildrenOK.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

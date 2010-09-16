@@ -31,7 +31,7 @@ TEST( CreatorOrContributorRoleValidTest, BadValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/CreatorOrContributorRoleValid_BadValue.xml" );
             
-    EXPECT_EQ( results.size(), 2U );
+    ASSERT_EQ( results.size(), 2U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 38 );
@@ -53,6 +53,6 @@ TEST( CreatorOrContributorRoleValidTest, GoodValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/CreatorOrContributorRoleValid_GoodValue.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

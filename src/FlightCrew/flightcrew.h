@@ -25,20 +25,21 @@
 
 #include <vector>
 #include <string>
+#include "DllExporting.h"
 #include "Result.h"
 
 namespace FlightCrew
 {
 
-std::vector< Result > ValidateEpub(  const std::string &absolute_path );
+WIN_DLL_API std::vector< Result > ValidateEpub(  const std::string &absolute_path );
 
-std::vector< Result > ValidateOpf(   const std::string &absolute_path );
+WIN_DLL_API std::vector< Result > ValidateOpf(   const std::string &absolute_path );
 
-std::vector< Result > ValidateNcx(   const std::string &absolute_path );
+WIN_DLL_API std::vector< Result > ValidateNcx(   const std::string &absolute_path );
 
-std::vector< Result > ValidateXhtml( const std::string &absolute_path );
+WIN_DLL_API std::vector< Result > ValidateXhtml( const std::string &absolute_path );
 
-std::vector< Result > ValidateCss(   const std::string &absolute_path );
+WIN_DLL_API std::vector< Result > ValidateCss(   const std::string &absolute_path );
 
 } // namespace FlightCrew
 

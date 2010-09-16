@@ -31,7 +31,7 @@ TEST( SatisfiesXhtmlSchemaTest, DoesntSatisfySchema )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xhtml_tests/SatisfiesXhtmlSchema_DoesntSatisfySchema.xhtml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 12 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 62 ); 
@@ -43,7 +43,7 @@ TEST( SatisfiesXhtmlSchemaTest, DoesntSatisfySchemaNoDtd )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xhtml_tests/SatisfiesXhtmlSchema_DoesntSatisfySchemaNoDtd.xhtml" );
 
-    EXPECT_EQ( results.size(), 4U );
+    ASSERT_EQ( results.size(), 4U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 10 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 32 ); 
@@ -68,7 +68,7 @@ TEST( SatisfiesXhtmlSchemaTest, XmlError )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xhtml_tests/SatisfiesXhtmlSchema_XmlError.xhtml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_NOT_WELL_FORMED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 8 ); 
@@ -80,7 +80,7 @@ TEST( SatisfiesXhtmlSchemaTest, SatisfiesSchemaNoDtd )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xhtml_tests/SatisfiesXhtmlSchema_SatisfiesSchemaNoDtd.xhtml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 
 TEST( SatisfiesXhtmlSchemaTest, SatisfiesSchema )
@@ -89,5 +89,5 @@ TEST( SatisfiesXhtmlSchemaTest, SatisfiesSchema )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/xhtml_tests/SatisfiesXhtmlSchema_SatisfiesSchema.xhtml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }

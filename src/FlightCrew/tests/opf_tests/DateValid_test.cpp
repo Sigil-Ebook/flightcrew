@@ -31,7 +31,7 @@ TEST( DateValidTest, BadValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/DateValid_BadValue.xml" );
             
-    EXPECT_EQ( results.size(), 8U );
+    ASSERT_EQ( results.size(), 8U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_BAD_DATE_VALUE );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 18 );
@@ -95,6 +95,6 @@ TEST( DateValidTest, GoodValue )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/DateValid_GoodValue.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

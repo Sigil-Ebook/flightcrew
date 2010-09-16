@@ -54,7 +54,7 @@ namespace xe = XercesExt;
 using xe::QName;
 
 #include "constants.h"
-//#include "exception.h"
+#include "exception.h"
 #include "Misc/CustomAssert.h"
 
 // We're most definitely not going to use

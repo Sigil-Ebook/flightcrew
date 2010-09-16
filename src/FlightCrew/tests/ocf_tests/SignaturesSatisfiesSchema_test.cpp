@@ -31,7 +31,7 @@ TEST( SignaturesSatisfiesSchemaTest, DoesntSatisfySchema )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ocf_tests/SignaturesSatisfiesSchema_DoesntSatisfySchema.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 27 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 31 ); 
@@ -43,5 +43,5 @@ TEST( SignaturesSatisfiesSchemaTest, SatisfiesSchema )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ocf_tests/SignaturesSatisfiesSchema_SatisfiesSchema.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }

@@ -31,7 +31,7 @@ TEST( ItemrefIdrefValidTest, IdDoesNotExist )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemrefIdrefValid_IdDoesNotExist.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_IDREF_ID_DOES_NOT_EXIST );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 7 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 33 );
@@ -46,6 +46,6 @@ TEST( ItemrefIdrefValidTest, IdExists )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemrefIdrefValid_IdExists.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

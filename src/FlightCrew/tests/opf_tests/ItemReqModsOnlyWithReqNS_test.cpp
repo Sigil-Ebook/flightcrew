@@ -31,7 +31,7 @@ TEST( ItemReqModsOnlyWithReqNSTest, RequiredNamespaceNotPresent )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemReqModsOnlyWithReqNS_RequiredNamespaceNotPresent.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_ITEM_REQMOD_WITHOUT_REQNS );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 40 );
@@ -43,6 +43,6 @@ TEST( ItemReqModsOnlyWithReqNSTest, RequiredNamespacePresent )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemReqModsOnlyWithReqNS_RequiredNamespacePresent.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

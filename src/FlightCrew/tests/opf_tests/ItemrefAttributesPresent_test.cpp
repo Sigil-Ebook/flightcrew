@@ -31,7 +31,7 @@ TEST( ItemrefAttributesPresentTest, NotAllowedAttributes )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemrefAttributesPresent_NotAllowedAttributes.xml" );
             
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ATTRIBUTE_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 73 );
@@ -47,7 +47,7 @@ TEST( ItemrefAttributesPresentTest, MissingAttributes )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/opf_tests/ItemrefAttributesPresent_MissingAttributes.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_REQUIRED_ATTRIBUTE_MISSING );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 44 );
@@ -63,6 +63,6 @@ TEST( ItemrefAttributesPresentTest, AllowedAttributes )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ItemrefAttributesPresent_AllowedAttributes.xml" );
     
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

@@ -31,7 +31,7 @@ TEST( SpineAllowedChildrenTest, WrongChildren )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/SpineAllowedChildren_WrongChildren.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_CHILD_NOT_RECOGNIZED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 4 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 21 );
@@ -43,6 +43,6 @@ TEST( SpineAllowedChildrenTest, ChildrenOK )
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/SpineAllowedChildren_ChildrenOK.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
 

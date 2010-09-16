@@ -31,13 +31,11 @@ TEST( NcxSatisfiesSchemaTest, DoesntSatisfySchema )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ncx_tests/NcxSatisfiesSchema_DoesntSatisfySchema.xml" );
 
-    EXPECT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_SCHEMA_NOT_SATISFIED );
     EXPECT_EQ( results[ 0 ].GetErrorLine(), 3 );
     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 81 ); 
 }
-
-
 
 TEST( NcxSatisfiesSchemaTest, SatisfiesSchemaOpf201 )
 {
@@ -45,7 +43,7 @@ TEST( NcxSatisfiesSchemaTest, SatisfiesSchemaOpf201 )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ncx_tests/NcxSatisfiesSchema_SatisfiesSchemaOpf201.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
     
 TEST( NcxSatisfiesSchemaTest, SatisfiesSchema )
@@ -54,5 +52,5 @@ TEST( NcxSatisfiesSchemaTest, SatisfiesSchema )
     std::vector<Result> results = validator.ValidateFile(
         "test_data/ncx_tests/NcxSatisfiesSchema_SatisfiesSchema.xml" );
 
-    EXPECT_EQ( results.size(), 0U );
+    ASSERT_EQ( results.size(), 0U );
 }
