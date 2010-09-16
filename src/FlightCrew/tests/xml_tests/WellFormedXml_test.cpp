@@ -20,7 +20,7 @@
 *************************************************************************/
 
 #include <stdafx_tests.h>
-#include "Validators/Ocf/WellFormedXml.h"
+#include "Validators/Xml/WellFormedXml.h"
 #include "Result.h"
 
 using namespace FlightCrew;
@@ -29,7 +29,7 @@ TEST( WellFormedXmlTest, NotValid )
 {
     WellFormedXml validator;
     std::vector<Result> results = validator.ValidateFile(
-        "test_data/ocf_tests/WellFormedXml_NotValid.xml" );
+        "test_data/xml_tests/WellFormedXml_NotValid.xml" );
 
     ASSERT_EQ( results.size(), 1U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_NOT_WELL_FORMED );
@@ -41,7 +41,7 @@ TEST( WellFormedXmlTest, Valid )
 {
     WellFormedXml validator;
     std::vector<Result> results = validator.ValidateFile(
-        "test_data/ocf_tests/WellFormedXml_Valid.xml" );
+        "test_data/xml_tests/WellFormedXml_Valid.xml" );
 
     ASSERT_EQ( results.size(), 0U );
 }
