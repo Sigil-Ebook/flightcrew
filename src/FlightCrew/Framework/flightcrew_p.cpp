@@ -21,45 +21,47 @@
 
 #include <stdafx.h>
 #include "flightcrew.h"
-#include "Framework/flightcrew_p.h"
+
+// TODO: Remove this when the functions are implemented properly.
+#if defined(_MSC_VER)
+#   pragma warning( disable : 4100 )
+#endif
 
 namespace FlightCrew
 {
 
-fs::path ConvertUtf8PathToBoostPath( const std::string &absolute_path )
+std::vector< Result > ValidateEpub( const fs::path &filepath )
 {
-    // FIXME: this will not work for windows unicode paths
-    return fs::path( absolute_path );
+    // TODO
+    return std::vector< Result >();
 }
 
 
-WIN_DLL_API std::vector< Result > ValidateEpub( const std::string &absolute_path )
+std::vector< Result > ValidateOpf( const fs::path &filepath )
 {
-    return ValidateEpub( ConvertUtf8PathToBoostPath( absolute_path ) );
+    // TODO
+    return std::vector< Result >();
 }
 
 
-WIN_DLL_API std::vector< Result > ValidateOpf( const std::string &absolute_path )
+std::vector< Result > ValidateNcx( const fs::path &filepath )
 {
-    return ValidateOpf( ConvertUtf8PathToBoostPath( absolute_path ) );
+    // TODO
+    return std::vector< Result >();
 }
 
 
-WIN_DLL_API std::vector< Result > ValidateNcx( const std::string &absolute_path )
+std::vector< Result > ValidateXhtml( const fs::path &filepath )
 {
-    return ValidateNcx( ConvertUtf8PathToBoostPath( absolute_path ) );
+    // TODO
+    return std::vector< Result >();
 }
 
 
-WIN_DLL_API std::vector< Result > ValidateXhtml( const std::string &absolute_path )
+std::vector< Result > ValidateCss( const fs::path &filepath )
 {
-    return ValidateXhtml( ConvertUtf8PathToBoostPath( absolute_path ) );
-}
-
-
-WIN_DLL_API std::vector< Result > ValidateCss( const std::string &absolute_path )
-{
-    return ValidateCss( ConvertUtf8PathToBoostPath( absolute_path ) );
+    // TODO
+    return std::vector< Result >();
 }
 
 } // namespace FlightCrew
