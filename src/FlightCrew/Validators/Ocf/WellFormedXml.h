@@ -23,7 +23,11 @@
 #ifndef WELLFORMEDXML_H
 #define WELLFORMEDXML_H
 
+#include <LocationAwareDOMParser.h>
 #include "../IValidator.h"
+#include <xercesc/util/XercesDefs.hpp>
+namespace XERCES_CPP_NAMESPACE { class DOMDocument; };
+namespace xc = XERCES_CPP_NAMESPACE;
 
 namespace FlightCrew
 {
@@ -32,7 +36,15 @@ class WellFormedXml : public IValidator
 {
 public:
 
+    WellFormedXml();
+
     std::vector<Result> ValidateFile( const fs::path &filepath );
+
+    xc::DOMDocument& GetDocument(); 
+
+private:
+
+    XercesExt::LocationAwareDOMParser parser;
 
 };
 

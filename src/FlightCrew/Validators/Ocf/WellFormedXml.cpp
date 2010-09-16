@@ -22,26 +22,32 @@
 #include <stdafx.h>
 #include "WellFormedXml.h"
 #include "Misc/ErrorResultCollector.h"
-#include <xercesc/sax2/SAX2XMLReader.hpp>
-#include <xercesc/sax2/XMLReaderFactory.hpp>
+#include <xercesc/sax/SAXException.hpp>
+#include <LocationAwareDOMParser.h>
 
 namespace FlightCrew
 {
     
+
+WellFormedXml::WellFormedXml()
+{
+    // This scanner ignores schemas and DTDs
+    parser.useScanner( xc::XMLUni::fgWFXMLScanner );
+    parser.setValidationScheme( xc::AbstractDOMParser::Val_Never );
+    parser.setDoNamespaces( true );
+}
+
+
 std::vector<Result> WellFormedXml::ValidateFile( const fs::path &filepath )
 {
-    boost::scoped_ptr< xc::SAX2XMLReader > parser( xc::XMLReaderFactory::createXMLReader() );
-
-    // We need only the most basic parser
-    parser->setProperty( xc::XMLUni::fgXercesScannerName, 
-                         (void*) xc::XMLUni::fgWFXMLScanner );    
+    parser.resetDocumentPool();
 
     ErrorResultCollector collector;
-    parser->setErrorHandler( &collector );
+    parser.setErrorHandler( &collector );
 
     try
     {
-        parser->parse( filepath.string().c_str() );
+        parser.parse( filepath.string().c_str() );
     }
 
     catch ( xc::SAXException& exception )
@@ -54,7 +60,18 @@ std::vector<Result> WellFormedXml::ValidateFile( const fs::path &filepath )
         collector.AddNewExceptionAsResult( exception );
     }    
 
+    catch ( xc::DOMException& exception )
+    {
+    	collector.AddNewExceptionAsResult( exception );
+    }
+
     return collector.GetResults();
+}
+
+
+xc::DOMDocument& WellFormedXml::GetDocument()
+{
+    return *parser.getDocument();
 }
 
 } //namespace FlightCrew
