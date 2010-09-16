@@ -35,7 +35,6 @@ TEST( UsesUnicodeTest, FileDoesntExist )
     EXPECT_EQ( results[ 0 ].GetResultId(), UNABLE_TO_PERFORM_VALIDATION );
 }
 
-
 TEST( UsesUnicodeTest, DeclaresOtherUsesOther )
 {
     UsesUnicode validator;

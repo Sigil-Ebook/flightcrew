@@ -30,33 +30,33 @@
 namespace FlightCrew
 {
 
-std::vector< Result > ValidateEpub( const std::string &absolute_path )
+WIN_DLL_API std::vector< Result > ValidateEpub( const std::string &absolute_path )
 {
     // TODO
     return std::vector< Result >();
 }
 
-std::vector< Result > ValidateOpf( const std::string &absolute_path )
-{
-    // TODO
-    return std::vector< Result >();
-}
-
-
-std::vector< Result > ValidateNcx( const std::string &absolute_path )
-{
-    // TODO
-    return std::vector< Result >();
-}
-
-std::vector< Result > ValidateXhtml( const std::string &absolute_path )
+WIN_DLL_API std::vector< Result > ValidateOpf( const std::string &absolute_path )
 {
     // TODO
     return std::vector< Result >();
 }
 
 
-std::vector< Result > ValidateCss( const std::string &absolute_path )
+WIN_DLL_API std::vector< Result > ValidateNcx( const std::string &absolute_path )
+{
+    // TODO
+    return std::vector< Result >();
+}
+
+WIN_DLL_API std::vector< Result > ValidateXhtml( const std::string &absolute_path )
+{
+    // TODO
+    return std::vector< Result >();
+}
+
+
+WIN_DLL_API std::vector< Result > ValidateCss( const std::string &absolute_path )
 {
     // TODO
     return std::vector< Result >();
