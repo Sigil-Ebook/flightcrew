@@ -11,15 +11,12 @@
 # the BCP tool:
 #   http://www.boost.org/doc/libs/1_44_0/tools/bcp/doc/html/index.html
 #    
-# bcp call: bcp boost/bind.hpp boost/lambda/lambda.hpp boost/exception/all.hpp boost/tuple/tuple_io.hpp boost/tuple/tuple_comparison.hpp boost/filesystem.hpp boost/regex.hpp boost/foreach.hpp boost/program_options.hpp boost/smart_ptr.hpp boost/algorithm/string_regex.hpp boost/thread.hpp boost/unordered_map.hpp boost/unordered_set.hpp boost/format.hpp boost/ptr_container/ptr_container.hpp ../BoostParts
+# bcp call: bcp boost/bind.hpp boost/lambda/lambda.hpp boost/exception/all.hpp boost/tuple/tuple_io.hpp boost/tuple/tuple_comparison.hpp boost/filesystem.hpp boost/filesystem/fstream.hpp boost/regex.hpp boost/foreach.hpp boost/program_options.hpp boost/smart_ptr.hpp boost/algorithm/string_regex.hpp boost/thread.hpp boost/unordered_map.hpp boost/unordered_set.hpp boost/format.hpp boost/ptr_container/ptr_container.hpp ../BoostParts
 
 # WARNING: When doing this from fresh boost sources, note that
 # in the file /boost/config/user.hpp the BOOST_ALL_NO_LIB
 # define has been uncommented. Otherwise, we will get linker 
 # errors on MSVC because of boost auto-linking.
-
-# NOTE: boost/filesystem.hpp was also changed to force the use
-# of the v3 lib
 
 cmake_minimum_required( VERSION 2.8 ) 
 

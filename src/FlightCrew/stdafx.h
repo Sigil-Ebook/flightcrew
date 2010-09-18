@@ -29,11 +29,9 @@
 #include <xercesc/util/XMLString.hpp>
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
-
 #include <boost/tuple/tuple.hpp>
 #include <boost/bind/bind.hpp>
 #include <boost/lambda/lambda.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/format.hpp> 
@@ -41,6 +39,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/regex.hpp>
 #include <boost/unordered_set.hpp>
+#include "Misc/BoostFilesystemUse.h"
 
 // ... and then we reset the warning level
 // back to normal (warning level 4)
@@ -66,7 +65,6 @@ using xe::QName;
 using boost::tuple;
 using boost::make_tuple;
 using boost::tie;
-namespace fs = boost::filesystem;
 
 namespace xc = XERCES_CPP_NAMESPACE;
 
