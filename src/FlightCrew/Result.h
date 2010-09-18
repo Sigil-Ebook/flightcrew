@@ -60,7 +60,7 @@ public:
 
     Result& SetCustomMessage( const std::string &custom_message );
     
-    bool operator< ( const Result& other );
+    bool operator< ( const Result& other ) const;
 
 private:
 

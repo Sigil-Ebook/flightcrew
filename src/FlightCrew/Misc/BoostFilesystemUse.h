@@ -20,27 +20,12 @@
 *************************************************************************/
 
 #pragma once
-#ifndef FLIGHTCREW_P_H
-#define FLIGHTCREW_P_H
+#ifndef BOOSTFILESYSTEMUSE_H
+#define BOOSTFILESYSTEMUSE_H
 
-#include <vector>
-#include <string>
-#include "Result.h"
-#include "Misc/BoostFilesystemUse.h"
+#define BOOST_FILESYSTEM_VERSION 3
+#include <boost/filesystem/fstream.hpp>
+#include <boost/filesystem.hpp>
+namespace fs = boost::filesystem;
 
-namespace FlightCrew
-{
-
-std::vector< Result > ValidateEpub(  const fs::path &filepath );
-
-std::vector< Result > ValidateOpf(   const fs::path &filepath );
-
-std::vector< Result > ValidateNcx(   const fs::path &filepath );
-
-std::vector< Result > ValidateXhtml( const fs::path &filepath );
-
-std::vector< Result > ValidateCss(   const fs::path &filepath );
-
-} // namespace FlightCrew
-
-#endif // FLIGHTCREW_P_H
+#endif // BOOSTFILESYSTEMUSE_H
