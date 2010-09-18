@@ -107,7 +107,7 @@ bool DeflateOutputStreambuf::closeStream() {
 
 
 int DeflateOutputStreambuf::overflow( int c ) {
-  _zs.avail_in = pptr() - pbase() ;
+  _zs.avail_in = static_cast< uInt >( pptr() - pbase() ) ;
   _zs.next_in = reinterpret_cast< unsigned char * >( &( _invec[ 0 ] ) ) ;
 
   _crc32 = crc32( _crc32, _zs.next_in, _zs.avail_in ) ; // update crc32
@@ -161,7 +161,7 @@ int DeflateOutputStreambuf::sync() {
 
 bool DeflateOutputStreambuf::flushOutvec() {
   int deflated_bytes = _outvecsize - _zs.avail_out ;
-  int bc = _outbuf->sputn( &( _outvec[ 0 ] ), deflated_bytes ) ;
+  int bc = static_cast< int >( _outbuf->sputn( &( _outvec[ 0 ] ), deflated_bytes ) ) ;
 
   _zs.next_out = reinterpret_cast< unsigned char * >( &( _outvec[ 0 ] ) ) ;
   _zs.avail_out = _outvecsize ;

@@ -15,7 +15,7 @@ ZipInputStream::ZipInputStream( std::istream &is, std::streampos pos )
 // SGIs basic_ifstream calls istream with 0, but calls basic_ios constructor first??
     ifs( 0 )
 {
-  izf = new ZipInputStreambuf( is.rdbuf(), pos ) ;
+  izf = new ZipInputStreambuf( is.rdbuf(), static_cast< int >( pos ) ) ;
 //  this->rdbuf( izf ) ; is replaced by:
   this->init( izf ) ;
 }
@@ -25,7 +25,7 @@ ZipInputStream::ZipInputStream( const std::string &filename, std::streampos pos 
     ifs( 0 )
 {
   ifs = new std::ifstream( filename.c_str(), std::ios::in |std:: ios::binary ) ;
-  izf = new ZipInputStreambuf( ifs->rdbuf(), pos ) ;
+  izf = new ZipInputStreambuf( ifs->rdbuf(), static_cast< int >( pos ) ) ;
 //  this->rdbuf( izf ) ; is replaced by:
   this->init( izf ) ;
 }

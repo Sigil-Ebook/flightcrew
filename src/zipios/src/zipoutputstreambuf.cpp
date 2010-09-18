@@ -71,7 +71,7 @@ void ZipOutputStreambuf::putNextEntry( const ZipCDirEntry &entry ) {
   ostream os( _outbuf ) ;
 
   // Update entry header info
-  ent.setLocalHeaderOffset( os.tellp() ) ;
+  ent.setLocalHeaderOffset( static_cast< uint32 >( os.tellp() ) ) ;
   ent.setMethod( _method ) ;
   
   os << static_cast< ZipLocalEntry >( ent ) ;
@@ -136,7 +136,7 @@ void ZipOutputStreambuf::updateEntryHeaderInfo() {
     return ;
 
   ostream os( _outbuf ) ;
-  int curr_pos = os.tellp() ;
+  int curr_pos = static_cast< int >( os.tellp() ) ;
   
   // update fields in _entries.back()
   ZipCDirEntry &entry = _entries.back() ;
@@ -164,7 +164,7 @@ void ZipOutputStreambuf::updateEntryHeaderInfo() {
 void ZipOutputStreambuf::writeCentralDirectory( const vector< ZipCDirEntry > &entries, 
 						EndOfCentralDirectory eocd, 
 						ostream &os ) {
-  int cdir_start = os.tellp() ;
+  int cdir_start = static_cast< int >( os.tellp() ) ;
   std::vector< ZipCDirEntry >::const_iterator it ;
   int cdir_size = 0 ;
 
@@ -174,7 +174,7 @@ void ZipOutputStreambuf::writeCentralDirectory( const vector< ZipCDirEntry > &en
   }
   eocd.setOffset( cdir_start ) ;
   eocd.setCDirSize( cdir_size ) ;
-  eocd.setTotalCount( entries.size() ) ;
+  eocd.setTotalCount( static_cast< uint16 >( entries.size() ) ) ;
   os << eocd ;
 }
 

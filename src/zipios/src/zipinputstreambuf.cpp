@@ -25,8 +25,8 @@ void ZipInputStreambuf::closeEntry() {
     return ;
   
   // check if we're positioned correctly, otherwise position us correctly
-  int position = _inbuf->pubseekoff(0, ios::cur, 
-				    ios::in);
+  int position = static_cast< int >( _inbuf->pubseekoff(0, ios::cur, 
+				    ios::in) );
   if ( position != _data_start + static_cast< int >( _curr_entry.getCompressedSize() ) )
     _inbuf->pubseekoff(_data_start + _curr_entry.getCompressedSize(), 
 		       ios::beg, ios::in) ;
@@ -47,7 +47,7 @@ ConstEntryPointer ZipInputStreambuf::getNextEntry() {
   try {
     is >> _curr_entry ;
     if ( _curr_entry.isValid() ) {
-      _data_start = _inbuf->pubseekoff(0, ios::cur, ios::in);
+      _data_start = static_cast< int >( _inbuf->pubseekoff(0, ios::cur, ios::in) );
       if ( _curr_entry.getMethod() == DEFLATED ) {
         _open_entry = true ;
         reset() ; // reset inflatestream data structures 
@@ -87,7 +87,7 @@ int ZipInputStreambuf::underflow() {
 
   // Ok, we're are stored, so we handle it ourselves.
   int num_b = min( _remain, _outvecsize ) ;
-  int g = _inbuf->sgetn( &(_outvec[ 0 ] ) , num_b ) ;
+  int g = static_cast< int >( _inbuf->sgetn( &(_outvec[ 0 ] ) , num_b ) ) ;
   setg( &( _outvec[ 0 ] ),
 	&( _outvec[ 0 ] ),
 	&( _outvec[ 0 ] ) + g ) ;

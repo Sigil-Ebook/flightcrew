@@ -129,7 +129,7 @@ void ZipLocalEntry::setCrc( uint32 crc ) {
 
 void ZipLocalEntry::setExtra( const vector< unsigned char > &extra ) {
   extra_field = extra ;
-  extra_field_len = extra_field.size() ;
+  extra_field_len = static_cast< uint16 >( extra_field.size() ) ;
 }
 
 void ZipLocalEntry::setMethod( StorageMethod method ) {
@@ -138,7 +138,7 @@ void ZipLocalEntry::setMethod( StorageMethod method ) {
 
 void ZipLocalEntry::setName( const string &name ) {
   filename = name ;
-  filename_len = filename.size() ;
+  filename_len = static_cast< uint16 >( filename.size() ) ;
 }
 
 void ZipLocalEntry::setSize( uint32 size ) {
@@ -162,7 +162,7 @@ string ZipLocalEntry::toString() const {
 }
 
 int ZipLocalEntry::getLocalHeaderSize() const {
-  return 30 + filename.size() + extra_field.size() ;
+  return static_cast< int >( 30 + filename.size() + extra_field.size() ) ;
 }
 
 bool ZipLocalEntry::trailingDataDescriptor() const {
@@ -211,7 +211,7 @@ void ZipCDirEntry::setLocalHeaderOffset( uint32 offset ) {
 
 void ZipCDirEntry::setComment( const string &comment ) {
   file_comment = comment ;
-  file_comment_len = file_comment.size() ;
+  file_comment_len = static_cast< uint16 >( file_comment.size() ) ;
 }
 
 
@@ -224,7 +224,7 @@ string ZipCDirEntry::toString() const {
 
 
 int ZipCDirEntry::getCDirHeaderSize() const {
-  return 46 + filename.size() + extra_field.size() + file_comment.size() ;
+  return static_cast< int >( 46 + filename.size() + extra_field.size() + file_comment.size() ) ;
 }
 
 

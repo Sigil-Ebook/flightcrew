@@ -81,7 +81,7 @@ inline uint32 readUint32 ( istream &is ) {
   int rsf = 0 ;
   while ( rsf < buf_len ) {
     is.read ( reinterpret_cast< char * >( buf ) + rsf, buf_len - rsf ) ;
-    rsf += is.gcount () ;
+    rsf += static_cast< int >( is.gcount () ) ;
   }
   return  ztohl ( buf ) ;
 }
@@ -97,13 +97,13 @@ inline uint16 readUint16 ( istream &is ) {
   int rsf = 0 ;
   while ( rsf < buf_len ) {
     is.read ( reinterpret_cast< char * >( buf ) + rsf, buf_len - rsf ) ;
-    rsf += is.gcount () ;
+    rsf += static_cast< int >( is.gcount () ) ;
   }
   return  ztohs ( buf ) ;
 }
 
 inline void writeUint16 ( uint16 host_val, ostream &os ) {
-  uint16 val = htozl( reinterpret_cast< unsigned char * >( &host_val ) ) ;
+  uint16 val = static_cast< uint16 >( htozl( reinterpret_cast< unsigned char * >( &host_val ) ) ) ;
   os.write( reinterpret_cast< char * >( &val ), sizeof( uint16 ) ) ;
 }
 
@@ -112,7 +112,7 @@ inline void readByteSeq ( istream &is, string &con, int count ) {
   int rsf = 0 ;
   while ( rsf < count && is ) {
     is.read ( buf + rsf, count - rsf ) ;
-    rsf += is.gcount() ;
+    rsf += static_cast< int >( is.gcount() ) ;
   }
   buf [ count ] = '\0' ;
 
@@ -129,7 +129,7 @@ inline void readByteSeq ( istream &is, unsigned char *buf, int count ) {
 
   while ( rsf < count && is ) {
     is.read ( reinterpret_cast< char * >( buf ) + rsf, count - rsf ) ;
-    rsf += is.gcount() ;
+    rsf += static_cast< int >( is.gcount() ) ;
   }
 }
 
@@ -142,7 +142,7 @@ inline void readByteSeq ( istream &is, vector < unsigned char > &vec, int count 
   int rsf = 0 ;
   while ( rsf < count && is ) {
     is.read ( reinterpret_cast< char * >( buf ) + rsf, count - rsf ) ;
-    rsf += is.gcount() ;
+    rsf += static_cast< int >( is.gcount() ) ;
   }
   
   vec.insert ( vec.end (), buf, buf + count ) ;

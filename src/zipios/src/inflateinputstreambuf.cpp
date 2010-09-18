@@ -67,8 +67,8 @@ int InflateInputStreambuf::underflow() {
   int err = Z_OK ;
   while ( _zs.avail_out > 0 && err == Z_OK ) {
     if ( _zs.avail_in == 0 ) { // fill _invec
-      int bc = _inbuf->sgetn( &(_invec[ 0 ] ) , 
-			      _invecsize ) ;
+      int bc = static_cast< int >( _inbuf->sgetn( &(_invec[ 0 ] ) , 
+			      _invecsize ) ) ;
       // FIXME: handle i/o problems.
       _zs.next_in  = reinterpret_cast< unsigned char * >( &( _invec[0] ) ) ;
       _zs.avail_in = bc ;

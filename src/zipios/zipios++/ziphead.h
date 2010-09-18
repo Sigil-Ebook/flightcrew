@@ -170,7 +170,7 @@ public:
 	cdir_tot_entries ( _cdir_tot_entries   ),
 	cdir_size        ( _cdir_size          ),
 	cdir_offset      ( _cdir_offset        ),
-	zip_comment_len  ( _zip_comment.size() ),
+	zip_comment_len  ( static_cast< uint16 >( _zip_comment.size() ) ),
 	zip_comment      ( _zip_comment        )  {}
 
   uint32    offset() const          { return cdir_offset ;          }
@@ -179,7 +179,7 @@ public:
   void setOffset( uint32 offset )   { cdir_offset = offset ;        }
 
   void setTotalCount( uint16 c )    { cdir_entries = c ; cdir_tot_entries = c ; }
-  int  eocdOffSetFromEnd() const { return eocd_offset_from_end ; }
+  int  eocdOffSetFromEnd() const { return static_cast< int >( eocd_offset_from_end ) ; }
   bool read( vector<unsigned char> &buf, int pos ) ;
 private:
   static const uint32 signature;

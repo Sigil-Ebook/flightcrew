@@ -33,7 +33,7 @@ BasicEntry::BasicEntry( const string &filename, const string &comment,
     _valid = false ;
   } else {
     is.seekg( 0, ios::end ) ;
-    _size = is.tellg() ;
+    _size = static_cast< int >( is.tellg() ) ;
     is.close() ;
     _valid = true ;
   }

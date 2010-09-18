@@ -57,7 +57,7 @@ string FileCollection::getName() const {
 int FileCollection::size() const {
   if ( ! _valid )
     throw InvalidStateException( "Attempt to get size of an invalid FileCollection" ) ;
-  return _entries.size() ;
+  return static_cast< int >( _entries.size() ) ;
 }
 
 FileCollection::~FileCollection() {

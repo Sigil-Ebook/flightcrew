@@ -31,7 +31,7 @@ target_link_libraries( ${PROJECT_NAME} zlib )
 # "Link time code generation" flags for MSVC
 # TODO: split into special cmake file
 if( MSVC )
-    add_definitions( /DUNICODE /D_UNICODE )
+    add_definitions( /DUNICODE /D_UNICODE /D_CRT_SECURE_NO_DEPRECATE )
     
     # This warning is present only at the highest warning level (/W4)
     # and is routinely disabled because it complains about valid 

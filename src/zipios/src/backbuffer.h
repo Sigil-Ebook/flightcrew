@@ -76,7 +76,7 @@ int BackBuffer::readChunk( int &read_pointer ) {
   // Update chunk_size and file position
   _chunk_size = min<int> ( static_cast< int >( _file_pos ), _chunk_size ) ;
   _file_pos -= _chunk_size ;
-  _vs.vseekg( _is, _file_pos, ios::beg ) ;
+  _vs.vseekg( _is, static_cast< int >( _file_pos ), ios::beg ) ;
   // Make space for _chunk_size new bytes first in buffer
   insert ( begin(), _chunk_size, static_cast< char > ( 0 ) ) ; 
   // Read in the next _chunk_size of bytes
