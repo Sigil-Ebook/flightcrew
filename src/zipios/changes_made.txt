@@ -1,0 +1,6 @@
+zipios++/zipios_defs.h was modified to use include the boost cstdint.hpp header
+so that the uint16 and uint32 types can be declared to something sensible on a
+64 bit operating system. The previous values were wrong.
+
+zipios++/zipios-config.h was created and it now includes the zipios-config.unix.h
+or zipios-config.w32.h headers based on the platform. 

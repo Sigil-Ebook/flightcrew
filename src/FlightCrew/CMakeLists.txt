@@ -37,7 +37,7 @@ list( REMOVE_ITEM SOURCES ${to_remove} )
 include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
 set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
                   ${Xerces_SOURCE_DIR}
-                  ${ZipArchive_SOURCE_DIR} )
+                  ${zipios_SOURCE_DIR} )
 set( GCC_PCH_TARGET gccPCH_fc )
 
 precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
@@ -49,7 +49,7 @@ precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
 # and the headers for the linked-to libraries
 include_directories( ${CMAKE_CURRENT_BINARY_DIR}
                      ${CMAKE_CURRENT_SOURCE_DIR}
-                     ../ZipArchive 
+                     ../zipios 
                      ../BoostParts 
                      ../Xerces
                      ../XercesExtensions
@@ -60,7 +60,7 @@ link_directories ( ${PROJECT_BINARY_DIR}/lib )
 
 add_library( ${PROJECT_NAME} ${SOURCES} )
 
-target_link_libraries( ${PROJECT_NAME} ZipArchive BoostParts XercesExtensions )
+target_link_libraries( ${PROJECT_NAME} zipios BoostParts XercesExtensions )
 
 #############################################################################
 
