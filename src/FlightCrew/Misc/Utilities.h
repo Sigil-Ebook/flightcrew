@@ -36,6 +36,8 @@ namespace Util
 {
     std::string ReadUnicodFile( const fs::path &filepath );
 
+    std::string GetFirstNumChars( const std::string &string, unsigned int num_chars );
+
     template <typename T>
     bool Contains( const std::vector<T> &vector, const T &value )
     {
@@ -49,8 +51,12 @@ namespace Util
             return base_vector;
     }
 
-    std::string GetFirstNumChars( const std::string &string, unsigned int num_chars );
-
+    template <typename T>
+    std::vector<T>& SortedInPlace( std::vector<T> &vector ) 
+    {
+        std::sort( vector.begin(), vector.end() );
+        return vector;
+    }
 
 } // namespace Util
 

@@ -59,6 +59,8 @@ public:
     std::string GetErrorMessage();
 
     Result& SetCustomMessage( const std::string &custom_message );
+    
+    bool operator< ( const Result& other );
 
 private:
 

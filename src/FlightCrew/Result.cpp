@@ -118,6 +118,14 @@ Result& Result::SetCustomMessage( const std::string &custom_message )
     return *this;
 }
 
+
+bool Result::operator< ( const Result& other )
+{
+    return m_ErrorLine   != other.m_ErrorLine  ? 
+           m_ErrorLine   <  other.m_ErrorLine  : 
+           m_ErrorColumn <  other.m_ErrorColumn;
+}
+
 } // namespace FlightCrew
 
 

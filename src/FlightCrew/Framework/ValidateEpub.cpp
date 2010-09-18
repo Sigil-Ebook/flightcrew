@@ -20,7 +20,8 @@
 *************************************************************************/
 
 #include <stdafx.h>
-#include "flightcrew.h"
+#include <vector>
+#include "Result.h"
 
 // TODO: Remove this when the functions are implemented properly.
 #if defined(_MSC_VER)
@@ -31,34 +32,6 @@ namespace FlightCrew
 {
 
 std::vector< Result > ValidateEpub( const fs::path &filepath )
-{
-    // TODO
-    return std::vector< Result >();
-}
-
-
-std::vector< Result > ValidateOpf( const fs::path &filepath )
-{
-    // TODO
-    return std::vector< Result >();
-}
-
-
-std::vector< Result > ValidateNcx( const fs::path &filepath )
-{
-    // TODO
-    return std::vector< Result >();
-}
-
-
-std::vector< Result > ValidateXhtml( const fs::path &filepath )
-{
-    // TODO
-    return std::vector< Result >();
-}
-
-
-std::vector< Result > ValidateCss( const fs::path &filepath )
 {
     // TODO
     return std::vector< Result >();
