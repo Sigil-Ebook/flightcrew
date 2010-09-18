@@ -119,7 +119,7 @@ Result& Result::SetCustomMessage( const std::string &custom_message )
 }
 
 
-bool Result::operator< ( const Result& other )
+bool Result::operator< ( const Result& other ) const
 {
     return m_ErrorLine   != other.m_ErrorLine  ? 
            m_ErrorLine   <  other.m_ErrorLine  : 
