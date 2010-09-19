@@ -19,29 +19,17 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include <vector>
-#include "Result.h"
-#include "Validators/Xml/WellFormedXml.h"
-#include "Validators/Xml/UsesUnicode.h"
-#include "Misc/Utilities.h"
-#include "Validators/Ncx/NcxSatisfiesSchema.h"
+#pragma once
+#ifndef ZIPEXTRACTION_H
+#define ZIPEXTRACTION_H
 
+#include "../../FlightCrew/Misc/BoostFilesystemUse.h"
 
-namespace FlightCrew
+namespace zipios 
 {
+    void ExtractZipToFolder( const fs::path &path_to_zip, const fs::path &path_to_folder );
 
-std::vector< Result > ValidateNcx( const fs::path &filepath )
-{
-    // TODO: throw exception
-    if ( !fs::exists( filepath ) )
+} // namespace zipios
 
-        return std::vector< Result >();
 
-    std::vector< Result > results;  
-    Util::Extend( results, NcxSatisfiesSchema().ValidateFile( filepath ) );
-    Util::Extend( results, UsesUnicode()       .ValidateFile( filepath ) );
-    return Util::SortedInPlace( results );
-}
-
-} // namespace FlightCrew
+#endif // ZIPEXTRACTION_H

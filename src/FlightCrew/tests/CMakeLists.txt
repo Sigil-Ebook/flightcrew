@@ -41,8 +41,7 @@ list( REMOVE_ITEM TEST_SOURCES ${to_remove} )
 # That means that subdirs inherit the include_directories of their parents.
 # So techincally we don't need to include Xerces etc.
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} 
-                     ${CMAKE_CURRENT_SOURCE_DIR}
-                     ../../ZipArchive 
+                     ${CMAKE_CURRENT_SOURCE_DIR} 
                      ../../BoostParts 
                      ../../Xerces 
                      ../../XercesExtensions 

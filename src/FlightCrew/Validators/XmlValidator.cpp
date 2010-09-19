@@ -21,7 +21,7 @@
 
 #include <stdafx.h>
 #include "XmlValidator.h"
-#include <LocationAwareDOMParser.h>
+#include "Misc/Utilities.h"
 #include <XmlUtils.h>
 
 namespace FlightCrew
@@ -33,16 +33,7 @@ const std::string DC_XML_NAMESPACE   = "http://purl.org/dc/elements/1.1/";
 
 std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 {
-    xe::LocationAwareDOMParser parser;
-
-    // This scanner ignores schemas and DTDs
-    parser.useScanner( xc::XMLUni::fgWFXMLScanner );
-    parser.setValidationScheme( xc::AbstractDOMParser::Val_Never );
-    parser.setDoNamespaces( true );
-
-    parser.parse( filepath.string().c_str() );
-
-    return ValidateXml( *parser.getDocument() );
+    return ValidateXml( *Util::LoadDocument( filepath ) );
 }
 
 

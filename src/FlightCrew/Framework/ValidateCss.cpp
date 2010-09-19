@@ -23,16 +23,17 @@
 #include <vector>
 #include "Result.h"
 
-// TODO: Remove this when the functions are implemented properly.
-#if defined(_MSC_VER)
-#   pragma warning( disable : 4100 )
-#endif
 
 namespace FlightCrew
 {
 
 std::vector< Result > ValidateCss( const fs::path &filepath )
 {
+    // TODO: throw exception
+    if ( !fs::exists( filepath ) )
+
+        return std::vector< Result >();
+
     // TODO
     return std::vector< Result >();
 }

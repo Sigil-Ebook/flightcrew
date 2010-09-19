@@ -16,6 +16,7 @@ file( GLOB_RECURSE SOURCES *.cpp *.h )
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
+                     ${BoostParts_SOURCE_DIR}
                      ${zlib_SOURCE_DIR}
                      ${zlib_BINARY_DIR}
                      )
@@ -24,7 +25,7 @@ link_directories ( ${PROJECT_BINARY_DIR}/lib )
 
 add_library( ${PROJECT_NAME} ${SOURCES} )
 
-target_link_libraries( ${PROJECT_NAME} zlib )
+target_link_libraries( ${PROJECT_NAME} zlib BoostParts )
 
 #############################################################################
 
@@ -37,7 +38,7 @@ if( MSVC )
     # and is routinely disabled because it complains about valid 
     # constructs like "while (true)"
     add_definitions( /wd4127 )
-    
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-" )
     set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
     set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
 

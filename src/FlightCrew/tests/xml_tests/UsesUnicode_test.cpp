@@ -77,6 +77,24 @@ TEST( UsesUnicodeTest, ValidUtf8 )
     ASSERT_EQ( results.size(), 0U );
 }
 
+TEST( UsesUnicodeTest, ValidUtf8lowercase )
+{
+    UsesUnicode validator;
+    std::vector<Result> results = validator.ValidateFile(
+        "test_data/xml_tests/UsesUnicode_ValidUtf8lowercase.xml" );
+
+    ASSERT_EQ( results.size(), 0U );
+}
+
+TEST( UsesUnicodeTest, ValidUtf8implicit )
+{
+    UsesUnicode validator;
+    std::vector<Result> results = validator.ValidateFile(
+        "test_data/xml_tests/UsesUnicode_ValidUtf8implicit.xml" );
+
+    ASSERT_EQ( results.size(), 0U );
+}
+
 TEST( UsesUnicodeTest, ValidUtf16LE )
 {
     UsesUnicode validator;

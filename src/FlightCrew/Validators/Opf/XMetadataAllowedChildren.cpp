@@ -36,10 +36,8 @@ std::vector<Result> XMetadataAllowedChildren::ValidateXml( const xc::DOMDocument
     std::vector<Result> results;
 
     if ( xmetadatas->getLength() < 1 )
-    {
-        results.push_back( Result( UNABLE_TO_PERFORM_VALIDATION ) );
-        return results;
-    }
+    
+        return results;    
 
     xc::DOMElement* xmetadata = static_cast< xc::DOMElement* >( xmetadatas->item( 0 ) );
     std::vector< xc::DOMElement* > children = xe::GetElementChildren( *xmetadata );

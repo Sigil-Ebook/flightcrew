@@ -33,6 +33,11 @@ namespace FlightCrew
    
 std::vector< Result > ValidateOpf( const fs::path &filepath )
 {
+    // TODO: throw exception
+    if ( !fs::exists( filepath ) )
+
+        return std::vector< Result >();
+
     std::vector< Result > results;
 
     WellFormedXml wf_validator;

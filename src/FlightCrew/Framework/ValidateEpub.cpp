@@ -22,19 +22,231 @@
 #include <stdafx.h>
 #include <vector>
 #include "Result.h"
-
-// TODO: Remove this when the functions are implemented properly.
-#if defined(_MSC_VER)
-#   pragma warning( disable : 4100 )
-#endif
+#include <zipios++/zipextraction.h>
+#include "Misc/TempFolder.h"
+#include "Misc/Utilities.h"
+#include "Validators/Xml/WellFormedXml.h"
+#include <XmlUtils.h>
+#include <FromXercesStringConverter.h>
+#include <ToXercesStringConverter.h>
+#include <xercesc/util/XMLUri.hpp>
+#include "flightcrew_p.h"
+#include "Validators/Ocf/ContainerSatisfiesSchema.h"
+#include "Validators/Ocf/EncryptionSatisfiesSchema.h"
+#include "Validators/Ocf/SignaturesSatisfiesSchema.h"
+#include "Validators/Xml/UsesUnicode.h"
 
 namespace FlightCrew
 {
 
+const std::string OEBPS_MIME = "application/oebps-package+xml";
+const std::string XHTML_MIME = "application/xhtml+xml";
+const std::string NCX_MIME   = "application/x-dtbncx+xml";
+const std::string CONTAINER_XML_NAMESPACE = "urn:oasis:names:tc:opendocument:xmlns:container";
+
+
+std::vector< Result > ValidateMetaInf( const fs::path &path_to_meta_inf )
+{
+    fs::path container_xml(  path_to_meta_inf / "container.xml"  );
+    fs::path signatures_xml( path_to_meta_inf / "signatures.xml" );
+    fs::path manifest_xml(   path_to_meta_inf / "manifest.xml"   );
+    fs::path rights_xml(     path_to_meta_inf / "rights.xml"     );
+    fs::path metadata_xml(   path_to_meta_inf / "metadata.xml"   );
+    fs::path encryption_xml( path_to_meta_inf / "encryption.xml" );
+
+    std::vector< Result > results;
+
+    if ( fs::exists( container_xml ) )
+    
+        Util::Extend( results, ContainerSatisfiesSchema().ValidateFile( container_xml ) );
+    
+    if ( fs::exists( encryption_xml ) )
+     
+        Util::Extend( results, EncryptionSatisfiesSchema().ValidateFile( encryption_xml ) );
+
+    if ( fs::exists( signatures_xml ) )
+    
+        Util::Extend( results, SignaturesSatisfiesSchema().ValidateFile( signatures_xml ) );
+
+    std::vector< fs::path > all_files;
+    all_files.push_back( container_xml  );
+    all_files.push_back( signatures_xml );
+    all_files.push_back( encryption_xml );
+    all_files.push_back( manifest_xml   );
+    all_files.push_back( rights_xml     );
+    all_files.push_back( metadata_xml   );
+
+    foreach( fs::path file, all_files )
+    {
+        if ( fs::exists( file ) )
+
+            Util::Extend( results, UsesUnicode().ValidateFile( file ) );        
+    }
+
+    // i starts at 3 because we already (implicitly) checked well-formedness  
+    // for container.xml, signatures.xml and encryption.xml so 
+    // we don't want to check it again and get duplicated errors.
+    for ( int i = 3; i < all_files.size(); ++i )
+    {
+        if ( fs::exists( all_files[ i ] ) )
+
+            Util::Extend( results, WellFormedXml().ValidateFile( all_files[ i ] ) );        
+    }    
+
+    return results;
+}
+
+
+fs::path GetRelativePathToNcx( const xc::DOMDocument &opf )
+{
+    std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
+        opf, QName( "item", OPF_XML_NAMESPACE ) );
+
+    foreach( xc::DOMElement* item, items )
+    {
+        std::string href       = fromX( item->getAttribute( toX( "href" )       ) );
+        std::string media_type = fromX( item->getAttribute( toX( "media-type" ) ) );
+
+        if ( xc::XMLUri::isValidURI( true, toX( href ) ) &&
+             media_type == NCX_MIME )
+
+            return fs::path( Util::UrlDecode( href ) );
+        
+    }
+
+    return fs::path();
+}
+
+
+std::vector< fs::path > GetRelativePathsToXhtmlDocuments( const xc::DOMDocument &opf )
+{
+    std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
+        opf, QName( "item", OPF_XML_NAMESPACE ) );
+
+    std::vector< fs::path > paths;
+
+    foreach( xc::DOMElement* item, items )
+    {
+        std::string href       = fromX( item->getAttribute( toX( "href" )       ) );
+        std::string media_type = fromX( item->getAttribute( toX( "media-type" ) ) );
+
+        if ( xc::XMLUri::isValidURI( true, toX( href ) ) &&
+             media_type == XHTML_MIME )
+                    
+            paths.push_back( fs::path( Util::UrlDecode( href ) ) );
+    }
+
+    return paths;
+}
+
+
+std::vector< Result > DescendToOpf( const fs::path &path_to_opf )
+{
+    WellFormedXml wf_validator;
+
+    // We can't continue if the OPF is not well-formed.
+    // ValidateOpf will take care of returning any 
+    // validation results for the OPF
+    if ( !wf_validator.ValidateFile( path_to_opf ).empty() )
+  
+        return std::vector< Result >();
+
+    xc::DOMDocument& opf = wf_validator.GetDocument();
+    std::vector< Result > results;
+
+    fs::path opf_parent = path_to_opf.parent_path();
+    fs::path ncx_path   = opf_parent / GetRelativePathToNcx( opf );
+    // TODO: handle empty/missing ncx path
+    Util::Extend( results, ValidateNcx( ncx_path ) );
+
+    std::vector< fs::path > xhtml_paths = GetRelativePathsToXhtmlDocuments( opf );
+    
+    foreach( fs::path xhtml_path, xhtml_paths )
+    {
+        Util::Extend( results, ValidateXhtml( opf_parent / xhtml_path ) );
+    }
+    
+    return results;
+}
+
+
+fs::path GetRelativeOpfPath( const xc::DOMDocument &content_xml )
+{
+    std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
+        content_xml, QName( "rootfile", CONTAINER_XML_NAMESPACE ) );
+
+    foreach( xc::DOMElement* item, items )
+    {
+        std::string full_path_attribute = fromX( item->getAttribute( toX( "full-path"  ) ) );
+        std::string media_type          = fromX( item->getAttribute( toX( "media-type" ) ) );
+        
+        if ( media_type == OEBPS_MIME )                 
+                       
+            return fs::path( full_path_attribute );         
+    }
+
+    return fs::path();
+}
+
+
+std::vector< Result > DescendToContentXml( const fs::path &path_to_content_xml )
+{
+    WellFormedXml wf_validator;   
+
+    // We can't continue if content.xml is not well-formed.
+    // ValidateMetaInf will take care of returning any 
+    // validation results for content.xml
+    if ( !wf_validator.ValidateFile( path_to_content_xml ).empty() )
+  
+        return std::vector< Result >();
+
+    // The base path for the OPF is the publication root path
+    fs::path opf_path = 
+        path_to_content_xml.parent_path().parent_path() /
+        GetRelativeOpfPath( wf_validator.GetDocument() );
+
+    std::vector< Result > results;
+    // TODO: handle empty/missing opf path
+    Util::Extend( results, ValidateOpf( opf_path ) );
+    Util::Extend( results, DescendToOpf( opf_path ) );
+    return results;
+}
+
+
 std::vector< Result > ValidateEpub( const fs::path &filepath )
 {
-    // TODO
-    return std::vector< Result >();
+    // TODO: throw exception
+    if ( !fs::exists( filepath ) )
+
+        return std::vector< Result >();
+
+    TempFolder temp_folder;
+
+    std::vector< Result > results;
+
+    try
+    {
+        zipios::ExtractZipToFolder( filepath, temp_folder.GetPath() );
+    }
+    
+    catch ( std::exception& )
+    {        
+        results.push_back( Result( ERROR_EPUB_NOT_VALID_ZIP_ARCHIVE ) );
+        return results;
+    }
+
+    Util::Extend( results, ValidateMetaInf( temp_folder.GetPath() / "META-INF" ) );
+
+    fs::path path_to_content_xml = temp_folder.GetPath() / "META-INF/container.xml";
+
+    if ( !fs::exists( path_to_content_xml ) )
+    {
+        results.push_back( Result( ERROR_EPUB_NO_CONTAINER_XML ) );
+        return results;
+    }
+    
+    Util::Extend( results, DescendToContentXml( path_to_content_xml ) );
+    return results;
 }
 
 } // namespace FlightCrew

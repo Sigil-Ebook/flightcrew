@@ -9,6 +9,7 @@
 #include "zipios++/fcoll.h"
 #include "zipios++/ziphead.h"
 #include "zipios++/virtualseeker.h"
+#include "../../FlightCrew/Misc/BoostFilesystemUse.h"
 
 namespace zipios {
 
@@ -53,6 +54,9 @@ public:
       @throw IOException Thrown if an I/O problem is encountered, while the directory
       of the specified zip archive is being read. */
   explicit ZipFile( const string &name, int s_off = 0, int e_off = 0
+		    /* , ios::open_mode mode  = ios::in | ios::binary */ ) ;
+
+  explicit ZipFile( const fs::path &name, int s_off = 0, int e_off = 0
 		    /* , ios::open_mode mode  = ios::in | ios::binary */ ) ;
 
   virtual FileCollection *clone() const ;

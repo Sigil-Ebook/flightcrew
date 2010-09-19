@@ -41,10 +41,8 @@ std::vector<Result> AllowedChildrenValidator::ValidateAllowedChildren(
     std::vector<Result> results;
 
     if ( parents_matching->getLength() < 1 )
-    {
-        results.push_back( Result( UNABLE_TO_PERFORM_VALIDATION ) );
-        return results;
-    }
+    
+        return results;    
 
     xc::DOMElement* parent = static_cast< xc::DOMElement* >( parents_matching->item( 0 ) );
     std::vector< xc::DOMElement* > children = xe::GetElementChildren( *parent );

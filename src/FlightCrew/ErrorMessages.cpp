@@ -63,7 +63,7 @@ void ErrorMessages::LoadMessages()
     // It would be great if these could be read from an external file,
     // but we don't want a runtime dependency. So we hard-code them.
     // This would be bad for translations, but since we can't translate the
-    // error messages coming from the schema checkers, wo won't be translating
+    // error messages coming from the schema checkers, we won't be translating
     // these either. So it's not a problem.
 
     m_Messages[ ALL_OK ] =
@@ -72,6 +72,12 @@ void ErrorMessages::LoadMessages()
         "Error.";
     m_Messages[ ERROR_SCHEMA_NOT_SATISFIED ] =
         "The corresponding schema constraints were not satisfied.";
+
+    m_Messages[ ERROR_EPUB_NOT_VALID_ZIP_ARCHIVE ] =
+        "The epub file is not a valid ZIP archive.";
+    m_Messages[ ERROR_EPUB_NO_CONTAINER_XML ] =
+        "The META-INF/container.xml file was not found.";
+    
 
     m_Messages[ ERROR_XML_NOT_WELL_FORMED ] =
         "XML syntax error.";

@@ -24,6 +24,10 @@
 #include <fstream>
 #include <utf8.h>
 #include <xercesc/util/TransService.hpp>
+#include <xercesc/dom/DOMDocument.hpp>
+#include <XmlUtils.h>
+#include <LocationAwareDOMParser.h>
+
 
 namespace FlightCrew
 {
@@ -101,6 +105,64 @@ std::string GetFirstNumChars( const std::string &string, uint num_chars )
 
     return line;
 }
+
+
+boost::shared_ptr< xc::DOMDocument > RaiiWrapDocument( xc::DOMDocument *document )
+{
+    return boost::shared_ptr< xc::DOMDocument >( document, XercesExt::XercesDeallocator< xc::DOMDocument > );
+}
+
+
+boost::shared_ptr< xc::DOMDocument > LoadDocument( const fs::path &filepath )
+{
+    xe::LocationAwareDOMParser parser;
+
+    // This scanner ignores schemas and DTDs
+    parser.useScanner( xc::XMLUni::fgWFXMLScanner );
+    parser.setValidationScheme( xc::AbstractDOMParser::Val_Never );
+    parser.setDoNamespaces( true );
+
+    parser.parse( filepath.string().c_str() );
+
+    return RaiiWrapDocument( parser.adoptDocument() );
+}
+
+
+char CharFromTwoHex( std::string two_hex_chars )
+{
+    std::istringstream stream( two_hex_chars );
+    int int_value;
+    stream >> std::hex >> int_value;
+
+    return static_cast< char >( int_value );
+}
+
+
+std::string UrlDecode( const std::string &encoded_url )
+{
+    std::string decoded;
+    decoded.reserve( encoded_url.size() );
+
+    int i = 0;
+    while ( i < encoded_url.size() )
+    {
+        if ( encoded_url[ i ] == '%' &&
+             i + 2 < encoded_url.size() )
+        {
+            decoded += CharFromTwoHex( encoded_url.substr( i + 1, 2 ) );
+            i += 3;            
+        }
+
+        else 
+        {
+            decoded += encoded_url[ i ];
+            ++i;
+        }
+    }
+
+    return decoded;
+}
+
 
 } // namespace Util
 

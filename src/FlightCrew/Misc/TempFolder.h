@@ -19,29 +19,36 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include <vector>
-#include "Result.h"
-#include "Validators/Xml/WellFormedXml.h"
-#include "Validators/Xml/UsesUnicode.h"
-#include "Misc/Utilities.h"
-#include "Validators/Ncx/NcxSatisfiesSchema.h"
+#pragma once
+#ifndef TEMPFOLDER_H
+#define TEMPFOLDER_H
 
+#include "Misc/BoostFilesystemUse.h"
 
 namespace FlightCrew
 {
 
-std::vector< Result > ValidateNcx( const fs::path &filepath )
+class TempFolder
 {
-    // TODO: throw exception
-    if ( !fs::exists( filepath ) )
+public:
 
-        return std::vector< Result >();
+    TempFolder();
 
-    std::vector< Result > results;  
-    Util::Extend( results, NcxSatisfiesSchema().ValidateFile( filepath ) );
-    Util::Extend( results, UsesUnicode()       .ValidateFile( filepath ) );
-    return Util::SortedInPlace( results );
-}
+    ~TempFolder();
+
+    fs::path GetPath();
+
+private: 
+
+    TempFolder& operator= ( const TempFolder& ) {}
+    TempFolder( const TempFolder& ) {}
+
+    static fs::path GetNewTempFolderPath();
+
+    fs::path m_PathToFolder;
+
+};
 
 } // namespace FlightCrew
+
+#endif // TEMPFOLDER_H

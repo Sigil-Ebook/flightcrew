@@ -32,15 +32,12 @@ namespace FlightCrew
 
 std::vector< Result > ValidateXhtml( const fs::path &filepath )
 {
-    std::vector< Result > results;
-    Util::Extend( results, WellFormedXml().ValidateFile( filepath ) );
+    // TODO: throw exception
+    if ( !fs::exists( filepath ) )
 
-    // There is no point in running the other validators 
-    // if the document is not well-formed.
-    if ( !results.empty() )
-  
-        return Util::SortedInPlace( results );
-  
+        return std::vector< Result >();
+
+    std::vector< Result > results;
     Util::Extend( results, SatisfiesXhtmlSchema().ValidateFile( filepath ) );
     Util::Extend( results, UsesUnicode()         .ValidateFile( filepath ) );
     return Util::SortedInPlace( results );

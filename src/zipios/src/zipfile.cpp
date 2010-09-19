@@ -10,6 +10,8 @@
 
 #include "backbuffer.h"
 
+#include "../../FlightCrew/Misc/BoostFilesystemUse.h"
+
 namespace zipios {
 
 //
@@ -34,6 +36,16 @@ ZipFile::ZipFile( const string &name , int s_off, int e_off
   _filename = name ;
   
   ifstream _zipfile( name.c_str(), ios::in | ios::binary ) ;
+  init( _zipfile ) ;
+}
+
+ZipFile::ZipFile( const fs::path &name , int s_off, int e_off
+		  /* , ios::open_mode mode */ ) 
+  : _vs( s_off, e_off ) {
+
+  _filename = name.string();
+  
+  fs::ifstream _zipfile( name, ios::in | ios::binary ) ;
   init( _zipfile ) ;
 }
 

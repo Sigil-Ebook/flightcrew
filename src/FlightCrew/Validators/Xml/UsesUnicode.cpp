@@ -53,10 +53,11 @@ std::vector<Result> UsesUnicode::ValidateFile( const fs::path &filepath )
         }
 
         else
-        {
-            // It's in UTF-16
+        {            
             if ( !inital_chars.empty() )
             {
+                // It's in UTF-16
+
                 if ( !FileDeclaresUtf16( inital_chars ) )
                 {
                     results.push_back( Result( ERROR_XML_SPECIFIES_NEITHER_UTF8_NOR_UTF16 )
@@ -116,7 +117,10 @@ bool UsesUnicode::FileDeclaresUtf8( const std::string &line )
 {   
     if ( HasXmlDeclaration( line ) )
     {
-        if ( GetDeclaredEncoding( line ) == "UTF-8" )
+        std::string encoding = boost::to_upper_copy( GetDeclaredEncoding( line ) );
+
+        // Empty still counts as utf-8 as per spec
+        if ( encoding.empty() || encoding == "UTF-8" )
                 
             return true;
 
@@ -133,7 +137,7 @@ bool UsesUnicode::FileDeclaresUtf16( const std::string &line )
 {   
     if ( HasXmlDeclaration( line ) )
     {
-        if ( GetDeclaredEncoding( line ) == "UTF-16" )
+        if ( boost::to_upper_copy( GetDeclaredEncoding( line ) ) == "UTF-16" )
                 
             return true;
 

@@ -37,6 +37,10 @@ namespace Util
 
     std::string GetFirstNumChars( const std::string &string, unsigned int num_chars );
 
+    boost::shared_ptr< xc::DOMDocument > LoadDocument( const fs::path &filepath );
+
+    std::string UrlDecode( const std::string &encoded_url );
+
     template <typename T>
     bool Contains( const std::vector<T> &vector, const T &value )
     {

@@ -29,6 +29,7 @@ namespace FlightCrew
 extern const std::string MAIN_XML_NAMESPACE;
 extern const std::string OPF_XML_NAMESPACE;
 extern const std::string DC_XML_NAMESPACE;
+extern const std::string CONTAINER_XML_NAMESPACE;
 
 extern const QName DC_METADATA_QNAME;
 extern const QName X_METADATA_QNAME; 
