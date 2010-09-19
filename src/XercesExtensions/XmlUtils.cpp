@@ -39,7 +39,42 @@ namespace XercesExt
 
 NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node )
 {
-    return *static_cast< NodeLocationInfo* >( node.getUserData( toX( LOCATION_INFO_KEY ) ) );
+    NodeLocationInfo *location = static_cast< NodeLocationInfo* >(
+        node.getUserData( toX( LOCATION_INFO_KEY ) ) );
+
+    if ( location )
+
+        return *location;
+    
+    return NodeLocationInfo();
+}
+
+
+XercesExt::NodeLocationInfo GetNearestNodeLocationInfo( const xc::DOMNode &node )
+{
+    const xc::DOMNode *current_node = &node;
+    NodeLocationInfo location;
+
+    while ( true )
+    {
+        location = GetNodeLocationInfo( *current_node );
+
+        if ( location.LineNumber != -1 )
+        {
+            break;                        
+        }
+
+        else
+        {
+            current_node = current_node->getParentNode();
+
+            if ( !current_node )
+
+                break;   
+        }        
+    }
+
+    return location;
 }
 
 
@@ -178,6 +213,12 @@ xc::DOMNode* GetFirstAvailableElement( const QName &element_qname,
     element_qnames.push_back( element_qname );
 
     return GetFirstAvailableElement( element_qnames, document );
+}
+
+
+void XercesStringDeallocator( XMLCh *xstring )
+{
+    xc::XMLString::release( &xstring );
 }
 
 

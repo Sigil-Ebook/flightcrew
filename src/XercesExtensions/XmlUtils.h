@@ -37,6 +37,8 @@ namespace XercesExt
 {
     NodeLocationInfo GetNodeLocationInfo( const xc::DOMNode &node );
 
+    NodeLocationInfo GetNearestNodeLocationInfo( const xc::DOMNode &node );
+
     /**
      * Returns a list of elements that are descendants of the provided element
      * that also match the provided qualified name.
@@ -93,6 +95,14 @@ namespace XercesExt
      */
     xc::DOMNode* GetFirstAvailableElement( const QName &element_qname,
                                            const xc::DOMDocument &document );
+    
+    void XercesStringDeallocator( XMLCh *xstring );
+
+    template< class T >
+    void XercesDeallocator( T *xerclass )
+    {
+        xerclass->release();
+    }
 }
 
 #endif // XMLUTILS_H
