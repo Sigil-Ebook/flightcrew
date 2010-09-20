@@ -46,5 +46,10 @@ typedef boost::error_info< struct file_path, std::string > ei_FilePath;
 */
 struct FileNotInUnicodeEx : virtual ExceptionBase {};
 
+/**
+* Thrown when a path is not in utf-8.
+*/
+struct PathNotInUtf8 : virtual ExceptionBase {};
+
 
 } // namespace FlightCrew

@@ -22,44 +22,38 @@
 #include <stdafx.h>
 #include "flightcrew.h"
 #include "Framework/flightcrew_p.h"
+#include "Misc/Utilities.h"
 
 namespace FlightCrew
 {
 
-fs::path ConvertUtf8PathToBoostPath( const std::string &absolute_path )
-{
-    // FIXME: this will not work for windows unicode paths
-    return fs::path( absolute_path );
-}
-
-
 WIN_DLL_API std::vector< Result > ValidateEpub( const std::string &absolute_path )
 {
-    return ValidateEpub( ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateEpub( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
 }
 
 
 WIN_DLL_API std::vector< Result > ValidateOpf( const std::string &absolute_path )
 {
-    return ValidateOpf( ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateOpf( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
 }
 
 
 WIN_DLL_API std::vector< Result > ValidateNcx( const std::string &absolute_path )
 {
-    return ValidateNcx( ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateNcx( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
 }
 
 
 WIN_DLL_API std::vector< Result > ValidateXhtml( const std::string &absolute_path )
 {
-    return ValidateXhtml( ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateXhtml( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
 }
 
 
 WIN_DLL_API std::vector< Result > ValidateCss( const std::string &absolute_path )
 {
-    return ValidateCss( ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateCss( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
 }
 
 } // namespace FlightCrew

@@ -27,6 +27,7 @@
 #include <xercesc/dom/DOMDocument.hpp>
 #include <XmlUtils.h>
 #include <LocationAwareDOMParser.h>
+#include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
 
 
 namespace FlightCrew
@@ -161,6 +162,17 @@ std::string UrlDecode( const std::string &encoded_url )
     }
 
     return decoded;
+}
+
+
+fs::path ConvertUtf8PathToBoostPath( const std::string &utf8_path )
+{
+    if ( !utf8::is_valid( utf8_path.begin(), utf8_path.end() ) )
+        
+        boost_throw( PathNotInUtf8() << ei_FilePath( utf8_path ) );    
+
+    boost::filesystem::detail::utf8_codecvt_facet utf8facet;
+    return fs::path( utf8_path, utf8facet );
 }
 
 

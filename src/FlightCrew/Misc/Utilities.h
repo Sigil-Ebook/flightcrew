@@ -27,6 +27,8 @@
 #include <string>
 #include <algorithm>
 #include "Misc/BoostFilesystemUse.h"
+#include "XercesHUse.h"
+
 
 namespace FlightCrew
 {
@@ -40,6 +42,8 @@ namespace Util
     boost::shared_ptr< xc::DOMDocument > LoadDocument( const fs::path &filepath );
 
     std::string UrlDecode( const std::string &encoded_url );
+
+    fs::path ConvertUtf8PathToBoostPath( const std::string &utf8_path );
 
     template <typename T>
     bool Contains( const std::vector<T> &vector, const T &value )
