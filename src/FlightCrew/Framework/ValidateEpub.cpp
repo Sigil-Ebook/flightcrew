@@ -86,7 +86,7 @@ std::vector< Result > ValidateMetaInf( const fs::path &path_to_meta_inf )
     // i starts at 3 because we already (implicitly) checked well-formedness  
     // for container.xml, signatures.xml and encryption.xml so 
     // we don't want to check it again and get duplicated errors.
-    for ( int i = 3; i < all_files.size(); ++i )
+    for ( uint i = 3; i < all_files.size(); ++i )
     {
         if ( fs::exists( all_files[ i ] ) )
 
@@ -213,6 +213,7 @@ std::vector< Result > DescendToContentXml( const fs::path &path_to_content_xml )
 }
 
 
+
 std::vector< Result > ValidateEpub( const fs::path &filepath )
 {
     // TODO: throw exception
@@ -229,9 +230,10 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
         zipios::ExtractZipToFolder( filepath, temp_folder.GetPath() );
     }
     
-    catch ( std::exception& )
-    {        
-        results.push_back( Result( ERROR_EPUB_NOT_VALID_ZIP_ARCHIVE ) );
+    catch ( std::exception& exception )
+    {
+        results.push_back( Result( ERROR_EPUB_NOT_VALID_ZIP_ARCHIVE )
+                           .SetCustomMessage( exception.what() ) );
         return results;
     }
 

@@ -40,8 +40,8 @@ public:
 
 private: 
 
-    TempFolder& operator= ( const TempFolder& ) {}
-    TempFolder( const TempFolder& ) {}
+    TempFolder& operator= ( const TempFolder& );
+    TempFolder( const TempFolder& );
 
     static fs::path GetNewTempFolderPath();
 

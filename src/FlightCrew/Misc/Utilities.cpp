@@ -143,7 +143,7 @@ std::string UrlDecode( const std::string &encoded_url )
     std::string decoded;
     decoded.reserve( encoded_url.size() );
 
-    int i = 0;
+    uint i = 0;
     while ( i < encoded_url.size() )
     {
         if ( encoded_url[ i ] == '%' &&
