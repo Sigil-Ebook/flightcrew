@@ -28,7 +28,7 @@
 #include <XmlUtils.h>
 #include <LocationAwareDOMParser.h>
 #include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
-
+#include <ToXercesStringConverter.h>
 
 namespace FlightCrew
 {
@@ -123,7 +123,7 @@ boost::shared_ptr< xc::DOMDocument > LoadDocument( const fs::path &filepath )
     parser.setValidationScheme( xc::AbstractDOMParser::Val_Never );
     parser.setDoNamespaces( true );
 
-    parser.parse( filepath.string().c_str() );
+    parser.parse( toX( BoostPathToUtf8Path( filepath ) ) );
 
     return RaiiWrapDocument( parser.adoptDocument() );
 }
@@ -165,7 +165,7 @@ std::string UrlDecode( const std::string &encoded_url )
 }
 
 
-fs::path ConvertUtf8PathToBoostPath( const std::string &utf8_path )
+fs::path Utf8PathToBoostPath( const std::string &utf8_path )
 {
     if ( !utf8::is_valid( utf8_path.begin(), utf8_path.end() ) )
         
@@ -173,6 +173,13 @@ fs::path ConvertUtf8PathToBoostPath( const std::string &utf8_path )
 
     boost::filesystem::detail::utf8_codecvt_facet utf8facet;
     return fs::path( utf8_path, utf8facet );
+}
+
+
+std::string BoostPathToUtf8Path( const fs::path &filepath )
+{
+    boost::filesystem::detail::utf8_codecvt_facet utf8facet;
+    return filepath.generic_string( utf8facet );
 }
 
 

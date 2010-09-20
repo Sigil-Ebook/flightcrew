@@ -110,7 +110,7 @@ fs::path GetRelativePathToNcx( const xc::DOMDocument &opf )
         if ( xc::XMLUri::isValidURI( true, toX( href ) ) &&
              media_type == NCX_MIME )
 
-            return fs::path( Util::UrlDecode( href ) );
+            return Util::Utf8PathToBoostPath( Util::UrlDecode( href ) );
         
     }
 
@@ -133,7 +133,7 @@ std::vector< fs::path > GetRelativePathsToXhtmlDocuments( const xc::DOMDocument 
         if ( xc::XMLUri::isValidURI( true, toX( href ) ) &&
              media_type == XHTML_MIME )
                     
-            paths.push_back( fs::path( Util::UrlDecode( href ) ) );
+            paths.push_back( Util::Utf8PathToBoostPath( Util::UrlDecode( href ) ) );
     }
 
     return paths;
@@ -182,7 +182,7 @@ fs::path GetRelativeOpfPath( const xc::DOMDocument &content_xml )
         
         if ( media_type == OEBPS_MIME )                 
                        
-            return fs::path( full_path_attribute );         
+            return Util::Utf8PathToBoostPath( full_path_attribute );         
     }
 
     return fs::path();
@@ -211,7 +211,6 @@ std::vector< Result > DescendToContentXml( const fs::path &path_to_content_xml )
     Util::Extend( results, DescendToOpf( opf_path ) );
     return results;
 }
-
 
 
 std::vector< Result > ValidateEpub( const fs::path &filepath )

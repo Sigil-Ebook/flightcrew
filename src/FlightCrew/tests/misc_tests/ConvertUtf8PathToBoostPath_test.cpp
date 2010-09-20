@@ -31,12 +31,12 @@ TEST( ConvertUtf8PathToBoostPathTest, PathIsNotInUtf8 )
 {
     char utf8_path[] = "test_data/something/\xe6\x97\xa5\xd1\x88\xf0\x9d\x84";
 
-    ASSERT_THROW( ConvertUtf8PathToBoostPath( utf8_path ), PathNotInUtf8 );
+    ASSERT_THROW( Utf8PathToBoostPath( utf8_path ), PathNotInUtf8 );
 }
 
 TEST( ConvertUtf8PathToBoostPathTest, PathIsInUtf8 )
 {
     char utf8_path[] = "test_data/something/\xe6\x97\xa5\xd1\x88\xf0\x9d\x84\x9e";
 
-    ASSERT_NO_THROW( ConvertUtf8PathToBoostPath( utf8_path ) );
+    ASSERT_NO_THROW( Utf8PathToBoostPath( utf8_path ) );
 }

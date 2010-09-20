@@ -29,31 +29,31 @@ namespace FlightCrew
 
 WIN_DLL_API std::vector< Result > ValidateEpub( const std::string &absolute_path )
 {
-    return ValidateEpub( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateEpub( Util::Utf8PathToBoostPath( absolute_path ) );
 }
 
 
 WIN_DLL_API std::vector< Result > ValidateOpf( const std::string &absolute_path )
 {
-    return ValidateOpf( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateOpf( Util::Utf8PathToBoostPath( absolute_path ) );
 }
 
 
 WIN_DLL_API std::vector< Result > ValidateNcx( const std::string &absolute_path )
 {
-    return ValidateNcx( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateNcx( Util::Utf8PathToBoostPath( absolute_path ) );
 }
 
 
 WIN_DLL_API std::vector< Result > ValidateXhtml( const std::string &absolute_path )
 {
-    return ValidateXhtml( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateXhtml( Util::Utf8PathToBoostPath( absolute_path ) );
 }
 
 
 WIN_DLL_API std::vector< Result > ValidateCss( const std::string &absolute_path )
 {
-    return ValidateCss( Util::ConvertUtf8PathToBoostPath( absolute_path ) );
+    return ValidateCss( Util::Utf8PathToBoostPath( absolute_path ) );
 }
 
 } // namespace FlightCrew

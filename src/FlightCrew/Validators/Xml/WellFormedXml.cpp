@@ -24,6 +24,8 @@
 #include "Misc/ErrorResultCollector.h"
 #include <xercesc/sax/SAXException.hpp>
 #include <LocationAwareDOMParser.h>
+#include <ToXercesStringConverter.h>
+#include "Misc/Utilities.h"
 
 namespace FlightCrew
 {
@@ -47,7 +49,7 @@ std::vector<Result> WellFormedXml::ValidateFile( const fs::path &filepath )
 
     try
     {
-        parser.parse( filepath.string().c_str() );
+        parser.parse( toX( Util::BoostPathToUtf8Path( filepath ) ) );
     }
 
     catch ( xc::SAXException& exception )

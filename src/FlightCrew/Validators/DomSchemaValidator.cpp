@@ -25,6 +25,7 @@
 #include <ToXercesStringConverter.h>
 #include <LocationAwareDOMParser.h>
 #include <xercesc/sax/SAXException.hpp>
+#include "Misc/Utilities.h"
 
 namespace FlightCrew
 {
@@ -52,7 +53,7 @@ std::vector<Result> DomSchemaValidator::ValidateAgainstSchema(
 
     try
     {
-        parser.parse( filepath.string().c_str() );
+        parser.parse( toX( Util::BoostPathToUtf8Path( filepath ) ) );
     }
 
     catch ( xc::SAXException& exception )
