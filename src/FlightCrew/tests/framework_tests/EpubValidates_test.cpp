@@ -25,17 +25,14 @@
 
 using namespace FlightCrew;
 
-TEST( EpubValidatesTest, NotValid )
-{
-//     WellFormedXml validator;
-//     std::vector<Result> results = validator.ValidateFile(
-//         "test_data/xml_tests/WellFormedXml_NotValid.xml" );
-// 
-//     ASSERT_EQ( results.size(), 1U );
-//     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_NOT_WELL_FORMED );
-//     EXPECT_EQ( results[ 0 ].GetErrorLine(), 8 );
-//     EXPECT_EQ( results[ 0 ].GetErrorColumn(), 9 ); 
 
+TEST( EpubValidatesTest, NotAZip )
+{
+    std::vector<Result> results = ValidateEpub(
+        "test_data/framework_tests/EpubValidates_NotAZip.epub" );
+
+    ASSERT_EQ( results.size(), 1U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_EPUB_NOT_VALID_ZIP_ARCHIVE );
 }
 
 TEST( EpubValidatesTest, Valid )
