@@ -183,6 +183,22 @@ std::string BoostPathToUtf8Path( const fs::path &filepath )
 }
 
 
+// Taking by const ref and making a copy could be costly,
+// but you know what they say about premature optimization.
+// If the profiler ends up screaming at this, then we'll refactor.
+std::vector< Result > AddPathToResults( const std::vector< Result > &results, const fs::path &filepath )
+{
+    std::vector< Result > mod_results = results;
+
+    foreach( Result &result, mod_results )
+    {
+        result.SetFilepath( BoostPathToUtf8Path( filepath ) );
+    }
+
+    return mod_results;
+}
+
+
 } // namespace Util
 
 } // namespace FlightCrew

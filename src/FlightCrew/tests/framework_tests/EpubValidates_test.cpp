@@ -25,6 +25,27 @@
 
 using namespace FlightCrew;
 
+// This is basically a sanity check 
+TEST( EpubValidatesTest, MissingCreator )
+{
+    std::vector<Result> results = ValidateEpub(
+        "test_data/framework_tests/EpubValidates_MissingTitle.epub" );
+
+    ASSERT_EQ( results.size(), 1U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_XML_ELEMENT_NOT_PRESENT );
+
+    std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
+    EXPECT_EQ( message_arguments[ 0 ], "title" );
+}
+
+TEST( EpubValidatesTest, ResultsWithBasePath )
+{
+    std::vector<Result> results = ValidateEpub(
+        "test_data/framework_tests/EpubValidates_MissingTitle.epub" );
+
+    ASSERT_EQ( results.size(), 1U );
+    EXPECT_EQ( results[ 0 ].GetFilepath(), "OEBPS/content.opf" );
+}
 
 TEST( EpubValidatesTest, NotAZip )
 {

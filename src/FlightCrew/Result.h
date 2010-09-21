@@ -50,6 +50,10 @@ public:
 
     Result& SetErrorColumn( int error_column );
 
+    std::string GetFilepath();
+
+    Result& SetFilepath( const std::string &filepath );
+
     Result& AddMessageArgument( const std::string &message_argument );
 
     Result& SetMessageArguments( const std::vector< std::string > &message_arguments );
@@ -77,6 +81,8 @@ private:
     std::vector< std::string > m_MessageArguments;
 
     std::string m_CustomMessage;
+
+    std::string m_Filepath;
 };
 
 } // namespace FlightCrew

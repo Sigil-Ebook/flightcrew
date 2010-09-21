@@ -60,6 +60,8 @@ std::vector< Result > ValidateOpf( const fs::path &filepath )
     }
 
     Util::Extend( results, UsesUnicode().ValidateFile( filepath ) );
+
+    results = Util::AddPathToResults( results, filepath );
     return Util::SortedInPlace( results );
 }
 

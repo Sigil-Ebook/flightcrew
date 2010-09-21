@@ -84,7 +84,7 @@ std::vector<Result> UsesUnicode::ValidateFile( const fs::path &filepath )
         results.push_back( Result( UNABLE_TO_PERFORM_VALIDATION ) );        
     }  
 
-    return results;
+    return Util::AddPathToResults( results, filepath );
 }
 
 

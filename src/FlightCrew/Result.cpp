@@ -75,6 +75,19 @@ Result& Result::SetErrorColumn( int error_line )
 }
 
 
+std::string Result::GetFilepath()
+{
+    return m_Filepath;
+}
+
+
+Result& Result::SetFilepath( const std::string &filepath )
+{
+    m_Filepath = filepath;
+    return *this;
+}
+
+
 Result& Result::AddMessageArgument( const std::string &message_argument )
 {
     m_MessageArguments.push_back( message_argument );
@@ -125,6 +138,7 @@ bool Result::operator< ( const Result& other ) const
            m_ErrorLine   <  other.m_ErrorLine  : 
            m_ErrorColumn <  other.m_ErrorColumn;
 }
+
 
 } // namespace FlightCrew
 

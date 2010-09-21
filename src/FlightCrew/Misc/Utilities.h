@@ -28,6 +28,7 @@
 #include <algorithm>
 #include "Misc/BoostFilesystemUse.h"
 #include "XercesHUse.h"
+#include "Result.h"
 
 namespace FlightCrew
 {
@@ -45,6 +46,8 @@ namespace Util
     fs::path Utf8PathToBoostPath( const std::string &utf8_path );
 
     std::string BoostPathToUtf8Path( const fs::path &filepath );
+
+    std::vector< Result > AddPathToResults( const std::vector< Result > &results, const fs::path &filepath );
 
     template <typename T>
     bool Contains( const std::vector<T> &vector, const T &value )

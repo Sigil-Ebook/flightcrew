@@ -76,8 +76,7 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_EPUB_NOT_VALID_ZIP_ARCHIVE ] =
         "The epub file is not a valid ZIP archive.";
     m_Messages[ ERROR_EPUB_NO_CONTAINER_XML ] =
-        "The META-INF/container.xml file was not found.";
-    
+        "The META-INF/container.xml file was not found.";    
 
     m_Messages[ ERROR_XML_NOT_WELL_FORMED ] =
         "XML syntax error.";

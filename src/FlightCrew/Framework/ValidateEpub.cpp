@@ -110,8 +110,7 @@ fs::path GetRelativePathToNcx( const xc::DOMDocument &opf )
         if ( xc::XMLUri::isValidURI( true, toX( href ) ) &&
              media_type == NCX_MIME )
 
-            return Util::Utf8PathToBoostPath( Util::UrlDecode( href ) );
-        
+            return Util::Utf8PathToBoostPath( Util::UrlDecode( href ) );        
     }
 
     return fs::path();
@@ -212,6 +211,29 @@ std::vector< Result > DescendToContentXml( const fs::path &path_to_content_xml )
     return results;
 }
 
+void RemoveBasePathFromResultPaths( std::vector< Result > &results, const fs::path &basepath )
+{
+    std::string path_prefix = Util::BoostPathToUtf8Path( basepath );
+
+    foreach( Result &result, results )
+    {
+        std::string result_path = result.GetFilepath();
+
+        if ( !result_path.empty() )
+        {
+            std::string relative_path = boost::erase_first_copy( result_path, path_prefix );
+
+            // We don't want it to look like an absolute path
+            // because it's not.
+            if ( boost::starts_with( relative_path, "/" ) )
+
+                boost::erase_first( relative_path, "/" );
+
+            result.SetFilepath( relative_path );
+        }        
+    }
+}
+
 
 std::vector< Result > ValidateEpub( const fs::path &filepath )
 {
@@ -247,6 +269,8 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
     }
     
     Util::Extend( results, DescendToContentXml( path_to_content_xml ) );
+
+    RemoveBasePathFromResultPaths( results, temp_folder.GetPath() );
     return results;
 }
 

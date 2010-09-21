@@ -25,6 +25,7 @@
 #include <ToXercesStringConverter.h>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
+#include "Misc/Utilities.h"
 
 namespace FlightCrew
 {
@@ -63,9 +64,9 @@ std::vector<Result> SaxSchemaValidator::ValidateAgainstSchema(
     catch ( xc::XMLException& exception )
     {
         collector.AddNewExceptionAsResult( exception );
-    }    
+    }
 
-    return collector.GetResults();
+    return Util::AddPathToResults( collector.GetResults(), filepath );
 }
 
 

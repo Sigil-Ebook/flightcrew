@@ -67,7 +67,7 @@ std::vector<Result> WellFormedXml::ValidateFile( const fs::path &filepath )
     	collector.AddNewExceptionAsResult( exception );
     }
 
-    return collector.GetResults();
+    return Util::AddPathToResults( collector.GetResults(), filepath );
 }
 
 

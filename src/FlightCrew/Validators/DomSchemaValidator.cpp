@@ -66,7 +66,7 @@ std::vector<Result> DomSchemaValidator::ValidateAgainstSchema(
         collector.AddNewExceptionAsResult( exception );
     }    
 
-    return collector.GetResults();
+    return Util::AddPathToResults( collector.GetResults(), filepath );
 }
 
 
