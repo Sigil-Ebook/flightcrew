@@ -49,7 +49,7 @@ add_subdirectory( src/zlib )
 add_subdirectory( src/zipios )
 add_subdirectory( src/googlemock )
 add_subdirectory( src/FlightCrew )
-#add_subdirectory( src/FlightCrew-cli )
+add_subdirectory( src/FlightCrew-cli )
 #add_subdirectory( src/FlightCrew-gui )
 
 

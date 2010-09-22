@@ -48,19 +48,21 @@ public:
     Result( ResultId result_id = ALL_OK,
             XercesExt::NodeLocationInfo node_location = XercesExt::NodeLocationInfo() );
 
-    ResultId GetResultId();
+    ResultType GetResultType() const;
+
+    ResultId GetResultId() const;
 
     Result& SetResultId( ResultId result_id );
 
-    int GetErrorLine();
+    int GetErrorLine() const;
 
     Result& SetErrorLine( int error_line );
 
-    int GetErrorColumn();
+    int GetErrorColumn() const;
 
     Result& SetErrorColumn( int error_column );
 
-    std::string GetFilepath();
+    std::string GetFilepath() const;
 
     Result& SetFilepath( const std::string &filepath );
 
@@ -68,9 +70,9 @@ public:
 
     Result& SetMessageArguments( const std::vector< std::string > &message_arguments );
 
-    const std::vector< std::string > &GetMessageArguments();
+    const std::vector< std::string > &GetMessageArguments() const;
 
-    std::string GetErrorMessage();
+    std::string GetMessage() const;
 
     Result& SetCustomMessage( const std::string &custom_message );
     

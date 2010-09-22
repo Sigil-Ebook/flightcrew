@@ -35,8 +35,17 @@ Result::Result( ResultId result_id, xe::NodeLocationInfo node_location )
 
 }
 
+ResultType Result::GetResultType() const
+{
+    if ( m_ResultId < ResultType_WARNING )
 
-ResultId Result::GetResultId()
+        return ResultType_ERROR;
+
+    return ResultType_WARNING;
+}
+
+
+ResultId Result::GetResultId() const
 {
     return m_ResultId;
 }
@@ -49,7 +58,7 @@ Result& Result::SetResultId( ResultId result_id )
 }
 
 
-int Result::GetErrorLine()
+int Result::GetErrorLine() const
 {
     return m_ErrorLine;
 }
@@ -62,7 +71,7 @@ Result& Result::SetErrorLine( int error_line )
 }
 
 
-int Result::GetErrorColumn()
+int Result::GetErrorColumn() const
 {
     return m_ErrorColumn;
 }
@@ -75,7 +84,7 @@ Result& Result::SetErrorColumn( int error_line )
 }
 
 
-std::string Result::GetFilepath()
+std::string Result::GetFilepath() const
 {
     return m_Filepath;
 }
@@ -102,13 +111,13 @@ Result& Result::SetMessageArguments( const std::vector< std::string > &message_a
 }
 
 
-const std::vector< std::string > & Result::GetMessageArguments()
+const std::vector< std::string > & Result::GetMessageArguments() const
 {
     return m_MessageArguments;
 }
 
 
-std::string Result::GetErrorMessage()
+std::string Result::GetMessage() const
 {
     if ( !m_CustomMessage.empty() )
 

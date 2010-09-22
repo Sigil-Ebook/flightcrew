@@ -21,7 +21,9 @@
 
 #include <stdafx.h>
 #include <vector>
+#include <XercesInit.h>
 #include "Result.h"
+#include "Misc/Utilities.h"
 
 
 namespace FlightCrew
@@ -29,10 +31,11 @@ namespace FlightCrew
 
 std::vector< Result > ValidateCss( const fs::path &filepath )
 {
-    // TODO: throw exception
+    xe::XercesInit init;
+
     if ( !fs::exists( filepath ) )
 
-        return std::vector< Result >();
+        boost_throw( FileDoesNotExistEx() << ei_FilePath( Util::BoostPathToUtf8Path( filepath ) ) );
 
     // TODO
     return std::vector< Result >();

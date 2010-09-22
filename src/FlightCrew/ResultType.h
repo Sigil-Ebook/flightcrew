@@ -20,27 +20,18 @@
 *************************************************************************/
 
 #pragma once
-#ifndef FLIGHTCREW_H
-#define FLIGHTCREW_H
-
-#include <vector>
-#include <string>
-#include "DllExporting.h"
-#include "Result.h"
+#ifndef RESULTTYPE_H
+#define RESULTTYPE_H
 
 namespace FlightCrew
 {
 
-FC_WIN_DLL_API std::vector< Result > ValidateEpub(  const std::string &filepath );
-
-FC_WIN_DLL_API std::vector< Result > ValidateOpf(   const std::string &filepath );
-
-FC_WIN_DLL_API std::vector< Result > ValidateNcx(   const std::string &filepath );
-
-FC_WIN_DLL_API std::vector< Result > ValidateXhtml( const std::string &filepath );
-
-FC_WIN_DLL_API std::vector< Result > ValidateCss(   const std::string &filepath );
+enum ResultType
+{
+    ResultType_ERROR = 0,
+    ResultType_WARNING = 2000,
+};
 
 } // namespace FlightCrew
 
-#endif // FLIGHTCREW_H
+#endif // RESULTTYPE_H

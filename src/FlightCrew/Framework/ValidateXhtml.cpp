@@ -21,6 +21,7 @@
 
 #include <stdafx.h>
 #include <vector>
+#include <XercesInit.h>
 #include "Result.h"
 #include "Validators/Xml/WellFormedXml.h"
 #include "Validators/Xml/UsesUnicode.h"
@@ -32,10 +33,11 @@ namespace FlightCrew
 
 std::vector< Result > ValidateXhtml( const fs::path &filepath )
 {
-    // TODO: throw exception
+    xe::XercesInit init;
+
     if ( !fs::exists( filepath ) )
 
-        return std::vector< Result >();
+        boost_throw( FileDoesNotExistEx() << ei_FilePath( Util::BoostPathToUtf8Path( filepath ) ) );
 
     std::vector< Result > results;
     Util::Extend( results, SatisfiesXhtmlSchema().ValidateFile( filepath ) );

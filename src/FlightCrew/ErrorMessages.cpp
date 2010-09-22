@@ -25,6 +25,10 @@
 namespace FlightCrew
 {
 
+static const std::string NO_MESSAGE_PLACEHOLDER = 
+    "No message available. "
+    "Please report this on the FlightCrew issue tracker.";
+
 boost::mutex ErrorMessages::s_AccessMutex;
 ErrorMessages* ErrorMessages::s_Instance = NULL;
 
@@ -48,7 +52,11 @@ ErrorMessages& ErrorMessages::Instance()
 
 const std::string ErrorMessages::MessageForId( ResultId error_id )
 {
-    return m_Messages[ error_id ];
+    if ( m_Messages.count( error_id ) )
+
+        return m_Messages[ error_id ];
+
+    return NO_MESSAGE_PLACEHOLDER;
 }
 
 

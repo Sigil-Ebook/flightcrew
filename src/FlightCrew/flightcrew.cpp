@@ -27,33 +27,33 @@
 namespace FlightCrew
 {
 
-FC_WIN_DLL_API std::vector< Result > ValidateEpub( const std::string &absolute_path )
+FC_WIN_DLL_API std::vector< Result > ValidateEpub( const std::string &filepath )
 {
-    return ValidateEpub( Util::Utf8PathToBoostPath( absolute_path ) );
+    return ValidateEpub( Util::Utf8PathToBoostPath( filepath ) );
 }
 
 
-FC_WIN_DLL_API std::vector< Result > ValidateOpf( const std::string &absolute_path )
+FC_WIN_DLL_API std::vector< Result > ValidateOpf( const std::string &filepath )
 {
-    return ValidateOpf( Util::Utf8PathToBoostPath( absolute_path ) );
+    return ValidateOpf( Util::Utf8PathToBoostPath( filepath ) );
 }
 
 
-FC_WIN_DLL_API std::vector< Result > ValidateNcx( const std::string &absolute_path )
+FC_WIN_DLL_API std::vector< Result > ValidateNcx( const std::string &filepath )
 {
-    return ValidateNcx( Util::Utf8PathToBoostPath( absolute_path ) );
+    return ValidateNcx( Util::Utf8PathToBoostPath( filepath ) );
 }
 
 
-FC_WIN_DLL_API std::vector< Result > ValidateXhtml( const std::string &absolute_path )
+FC_WIN_DLL_API std::vector< Result > ValidateXhtml( const std::string &filepath )
 {
-    return ValidateXhtml( Util::Utf8PathToBoostPath( absolute_path ) );
+    return ValidateXhtml( Util::Utf8PathToBoostPath( filepath ) );
 }
 
 
-FC_WIN_DLL_API std::vector< Result > ValidateCss( const std::string &absolute_path )
+FC_WIN_DLL_API std::vector< Result > ValidateCss( const std::string &filepath )
 {
-    return ValidateCss( Util::Utf8PathToBoostPath( absolute_path ) );
+    return ValidateCss( Util::Utf8PathToBoostPath( filepath ) );
 }
 
 } // namespace FlightCrew

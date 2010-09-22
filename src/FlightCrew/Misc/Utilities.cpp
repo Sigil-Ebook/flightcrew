@@ -42,7 +42,7 @@ std::string ReadUnicodFile( const fs::path &filepath )
 
     if ( !file.is_open() )
 
-          boost_throw( FileDoesNotExistEx() << ei_FilePath( filepath.generic_string() ) );
+          boost_throw( FileDoesNotExistEx() << ei_FilePath( BoostPathToUtf8Path( filepath ) ) );
 
     std::vector< char > contents( (std::istreambuf_iterator< char>( file )), 
                                    std::istreambuf_iterator< char>() );

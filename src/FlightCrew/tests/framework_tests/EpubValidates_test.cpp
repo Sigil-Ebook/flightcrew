@@ -44,7 +44,7 @@ TEST( EpubValidatesTest, ResultsWithBasePath )
         "test_data/framework_tests/EpubValidates_MissingTitle.epub" );
 
     ASSERT_EQ( results.size(), 1U );
-    EXPECT_EQ( results[ 0 ].GetFilepath(), "OEBPS/content.opf" );
+    EXPECT_EQ( results[ 0 ].GetFilepath(), "EpubValidates_MissingTitle.epub/OEBPS/content.opf" );
 }
 
 TEST( EpubValidatesTest, NotAZip )

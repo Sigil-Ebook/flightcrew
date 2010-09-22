@@ -27,6 +27,7 @@
 #include "Misc/Utilities.h"
 #include "Validators/Xml/WellFormedXml.h"
 #include <XmlUtils.h>
+#include <XercesInit.h>
 #include <FromXercesStringConverter.h>
 #include <ToXercesStringConverter.h>
 #include <xercesc/util/XMLUri.hpp>
@@ -235,12 +236,32 @@ void RemoveBasePathFromResultPaths( std::vector< Result > &results, const fs::pa
 }
 
 
+void AddEpubFilenameToResultPaths( std::vector< Result > &results, const std::string &epub_name )
+{
+    foreach( Result &result, results )
+    {
+        std::string result_path = result.GetFilepath();
+
+        if ( !result_path.empty() )
+        {
+            result.SetFilepath( epub_name + "/" + result_path );
+        }  
+
+        else
+        {
+            result.SetFilepath( epub_name );
+        }
+    }
+}
+
+
 std::vector< Result > ValidateEpub( const fs::path &filepath )
 {
-    // TODO: throw exception
+    xe::XercesInit init;
+
     if ( !fs::exists( filepath ) )
 
-        return std::vector< Result >();
+        boost_throw( FileDoesNotExistEx() << ei_FilePath( Util::BoostPathToUtf8Path( filepath ) ) );
 
     TempFolder temp_folder;
 
@@ -271,6 +292,7 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
     Util::Extend( results, DescendToContentXml( path_to_content_xml ) );
 
     RemoveBasePathFromResultPaths( results, temp_folder.GetPath() );
+    AddEpubFilenameToResultPaths( results, Util::BoostPathToUtf8Path( filepath.filename() ) );
     return results;
 }
 

@@ -9,7 +9,13 @@
 
 cmake_minimum_required( VERSION 2.8 ) 
 
-project( FlightCrew )
+# We use the lower case name
+# on UNIX systems other than Mac OS X
+if ( WIN32 OR APPLE )
+    project( FlightCrew )
+else()
+    project( flightcrew )
+endif()
 
 file( GLOB_RECURSE SOURCES *.h *.cpp *.xsd *.dtd )
 
@@ -79,7 +85,7 @@ if( MSVC )
     # because the RC compiler picks it up too and it provokes a name clash
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-")
     set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
-    set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
+    set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
 
 elseif( CMAKE_COMPILER_IS_GNUCXX )
     # "Print all warnings" flag for GCC
