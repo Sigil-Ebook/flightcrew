@@ -19,16 +19,16 @@
 **
 *************************************************************************/
 
-#ifdef DLL_EXPORTING
+#ifdef FC_BUILT_AS_DLL
 #   ifdef _WIN32
-#       ifdef WIN_DLL_API
-#           define WIN_DLL_API __declspec(dllexport)
+#       ifdef FC_DLL_EXPORTING
+#           define FC_WIN_DLL_API __declspec(dllexport)
 #       else
-#           define WIN_DLL_API __declspec(dllimport)
+#           define FC_WIN_DLL_API __declspec(dllimport)
 #       endif
 #   else
-#       define WIN_DLL_API
+#       define FC_WIN_DLL_API
 #   endif
 #else
-#   define WIN_DLL_API
+#   define FC_WIN_DLL_API
 #endif

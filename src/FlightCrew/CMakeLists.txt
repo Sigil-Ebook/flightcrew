@@ -58,7 +58,14 @@ include_directories( ${CMAKE_CURRENT_BINARY_DIR}
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
-add_library( ${PROJECT_NAME} ${SOURCES} )
+if( BUILD_SHARED_FC )
+    # Windows clients also need to specify FC_BUILT_AS_DLL
+    # when they want a dll, but NOT FC_DLL_EXPORTING
+    add_definitions( -DFC_DLL_EXPORTING -DFC_BUILT_AS_DLL )
+    add_library( ${PROJECT_NAME} SHARED ${SOURCES} )
+else()
+    add_library( ${PROJECT_NAME} ${SOURCES} )
+endif()
 
 target_link_libraries( ${PROJECT_NAME} zipios BoostParts XercesExtensions )
 
@@ -87,4 +94,10 @@ add_definitions( -DXERCES_STATIC_LIBRARY )
 
 #############################################################################
 
-add_subdirectory( tests )
+# We don't build the tests when fc is built as a shared
+# library on msvc since the tests need access to the fc
+# internal apis which are not exported when building a DLL.
+# If we tried to build them, we would get linker errors.
+if( NOT ( BUILD_SHARED_FC AND MSVC ) )
+    add_subdirectory( tests )
+endif()

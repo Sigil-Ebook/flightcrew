@@ -27,11 +27,21 @@
 #include <vector>
 #include <NodeLocationInfo.h>
 #include "ResultId.h"
+#include "DllExporting.h"
+
+#if defined(_MSC_VER)
+// This warning complains that the private members 
+// of this class that use the STL are not being exported
+// for use by clients.
+// Since the clients can't even access the private members 
+// of this class, it's not a problem.
+#   pragma warning( disable : 4251 )
+#endif
 
 namespace FlightCrew
 {
 
-class Result
+class FC_WIN_DLL_API Result
 {
 public:
 
