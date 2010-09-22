@@ -44,8 +44,10 @@ namespace po = boost::program_options;
 #endif
 
 
-void ValidateFiles( const std::vector< std::string > &files_to_validate )
+bool ValidateFiles( const std::vector< std::string > &files_to_validate )
 {
+    bool seen_problems = false;
+
     foreach( const std::string &file, files_to_validate )
     {
         std::cerr << "\n";
@@ -64,6 +66,7 @@ void ValidateFiles( const std::vector< std::string > &files_to_validate )
 
         foreach( const fc::Result &result, results )
         {
+            seen_problems = true;
             std::cerr << result.GetFilepath();
 
             if ( result.GetErrorLine() > 0 )
@@ -88,6 +91,8 @@ void ValidateFiles( const std::vector< std::string > &files_to_validate )
 
         std::cerr << "\n";
     }
+
+    return seen_problems;
 }
 
 
@@ -120,7 +125,7 @@ int main( int argc, char *argv[] )
             std::vector< std::string > files_to_validate =
                 var_map[ "input-file" ].as< std::vector< std::string > >();
 
-            ValidateFiles( files_to_validate );
+            return ValidateFiles( files_to_validate );
         } 
         
         else
