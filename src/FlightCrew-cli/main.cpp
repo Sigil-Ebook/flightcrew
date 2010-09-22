@@ -48,34 +48,45 @@ void ValidateFiles( const std::vector< std::string > &files_to_validate )
 {
     foreach( const std::string &file, files_to_validate )
     {
-        std::cout << "\n";
-        std::vector< fc::Result > results = fc::ValidateEpub( file );
+        std::cerr << "\n";
+        std::vector< fc::Result > results;
+
+        try
+        {
+            results = fc::ValidateEpub( file );
+        }
+
+        catch ( fc::FileDoesNotExistEx& )
+        {
+            std::cerr << "File " << file << " does not exist.\n";
+            continue;
+        }
 
         foreach( const fc::Result &result, results )
         {
-            std::cout << result.GetFilepath();
+            std::cerr << result.GetFilepath();
 
             if ( result.GetErrorLine() > 0 )
                 
-                std::cout << "(" << result.GetErrorLine() << ")";
+                std::cerr << "(" << result.GetErrorLine() << ")";
 
-            std::cout << ": ";
+            std::cerr << ": ";
 
             if ( result.GetResultType() == fc::ResultType_ERROR )
 
-                std::cout << "error ";
+                std::cerr << "error ";
 
             else 
 
-                std::cout << "warning ";
+                std::cerr << "warning ";
 
-            std::cout << result.GetResultId() << ": ";
-            std::cout << result.GetMessage();                       
+            std::cerr << result.GetResultId() << ": ";
+            std::cerr << result.GetMessage();                       
 
-            std::cout << "\n";
+            std::cerr << "\n";
         }
 
-        std::cout << "\n";
+        std::cerr << "\n";
     }
 }
 

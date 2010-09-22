@@ -19,6 +19,10 @@
 **
 *************************************************************************/
 
+#pragma once
+#ifndef EXCEPTION_H
+#define EXCEPTION_H
+
 #include <boost/exception/all.hpp>
 
 namespace FlightCrew
@@ -53,3 +57,5 @@ struct PathNotInUtf8 : virtual ExceptionBase {};
 
 
 } // namespace FlightCrew
+
+#endif // EXCEPTION_H

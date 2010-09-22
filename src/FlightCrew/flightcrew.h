@@ -27,6 +27,7 @@
 #include <string>
 #include "DllExporting.h"
 #include "Result.h"
+#include "exception.h"
 
 namespace FlightCrew
 {
