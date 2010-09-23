@@ -116,6 +116,7 @@ int main( int argc, char *argv[] )
 
         if ( var_map.count( "help" ) )
         {
+            std::cout << "Usage: flightcrew-cli [options] file...\n";
             std::cout << options << "\n";
             return 1;
         }
@@ -134,13 +135,13 @@ int main( int argc, char *argv[] )
         }
     }
 
-    catch( std::exception& exception )
+    catch ( std::exception& exception )
     {
         std::cerr << "Error during run: " << exception.what() << "\n";
         return 1;
     }
 
-    catch(...) 
+    catch ( ... ) 
     {
         std::cerr << "Unknown exception!\n";
     }
