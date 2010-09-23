@@ -154,10 +154,13 @@ std::vector< Result > DescendToOpf( const fs::path &path_to_opf )
     xc::DOMDocument& opf = wf_validator.GetDocument();
     std::vector< Result > results;
 
-    fs::path opf_parent = path_to_opf.parent_path();
-    fs::path ncx_path   = opf_parent / GetRelativePathToNcx( opf );
-    // TODO: handle empty/missing ncx path
-    Util::Extend( results, ValidateNcx( ncx_path ) );
+    fs::path opf_parent    = path_to_opf.parent_path();
+    fs::path rel_ncx_path  = GetRelativePathToNcx( opf );
+    fs::path full_ncx_path = opf_parent / GetRelativePathToNcx( opf );
+
+    if ( !rel_ncx_path.empty() && fs::exists( full_ncx_path ) )
+
+        Util::Extend( results, ValidateNcx( full_ncx_path ) );
 
     std::vector< fs::path > xhtml_paths = GetRelativePathsToXhtmlDocuments( opf );
     
