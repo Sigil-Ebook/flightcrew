@@ -106,10 +106,13 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
     m_Messages[ ERROR_OPF_IDREF_ID_DOES_NOT_EXIST ] =
-        "The <itemref> element's \"idref\" is pointing to an <item> with id=\"%1%\" which "
+        "The <itemref> element's \"idref\" attribute is pointing to an <item> with id=\"%1%\" which "
+        "does not exist in the <manifest>.";
+    m_Messages[ ERROR_OPF_BAD_SPINE_TOC_VALUE ] =
+        "The <spine> element's \"toc\" attribute is pointing to an <item> with id=\"%1%\" which "
         "does not exist in the <manifest>.";
     m_Messages[ ERROR_OPF_PACKAGE_UNIQUE_IDENTIFIER_DOES_NOT_EXIST ] =
-        "The <package> element's \"unique-identifier\" is pointing to an <identifier> "
+        "The <package> element's \"unique-identifier\" attribute is pointing to an <identifier> "
         "with id=\"%1%\" which does not exist in the <metadata>.";
     m_Messages[ ERROR_OPF_BAD_PACKAGE_VERSION ] =
         "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";
@@ -123,7 +126,7 @@ void ErrorMessages::LoadMessages()
         "The <reference> element's \"type\" attribute has value \"%1%\" which is not an "
         "OPF-specified value. Either use a predefined type or start your type with \"other.\"";
     m_Messages[ ERROR_OPF_BAD_DATE_VALUE ] =
-        "The <date> element's value is \"%1%\", which is not a valid date format.";
+        "The <date> element's value is \"%1%\", which is not a valid date format.";    
     m_Messages[ ERROR_OPF_ITEM_HREF_INVALID_URI ] =
         "The <item> element's \"href\" attribute value is \"%1%\", which is not a valid URI.";
     m_Messages[ ERROR_OPF_ITEM_HREF_HAS_FRAGMENT ] =
