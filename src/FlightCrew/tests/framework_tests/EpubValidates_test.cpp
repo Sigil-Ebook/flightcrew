@@ -56,6 +56,15 @@ TEST( EpubValidatesTest, NotAZip )
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_EPUB_NOT_VALID_ZIP_ARCHIVE );
 }
 
+TEST( EpubValidatesTest, NoContainerXml )
+{
+    std::vector<Result> results = ValidateEpub(
+        "test_data/framework_tests/EpubValidates_NoContainerXml.epub" );
+
+    ASSERT_EQ( results.size(), 1U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_EPUB_NO_CONTAINER_XML );
+}
+
 TEST( EpubValidatesTest, Valid )
 {
     std::vector<Result> results = ValidateEpub(

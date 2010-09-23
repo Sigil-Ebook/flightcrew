@@ -175,13 +175,13 @@ std::vector< Result > DescendToOpf( const fs::path &path_to_opf )
 
 fs::path GetRelativeOpfPath( const xc::DOMDocument &content_xml )
 {
-    std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
+    std::vector< xc::DOMElement* > rootfiles = xe::GetElementsByQName( 
         content_xml, QName( "rootfile", CONTAINER_XML_NAMESPACE ) );
 
-    foreach( xc::DOMElement* item, items )
+    foreach( xc::DOMElement* rootfile, rootfiles )
     {
-        std::string full_path_attribute = fromX( item->getAttribute( toX( "full-path"  ) ) );
-        std::string media_type          = fromX( item->getAttribute( toX( "media-type" ) ) );
+        std::string full_path_attribute = fromX( rootfile->getAttribute( toX( "full-path"  ) ) );
+        std::string media_type          = fromX( rootfile->getAttribute( toX( "media-type" ) ) );
         
         if ( media_type == OEBPS_MIME )                 
                        
@@ -204,14 +204,19 @@ std::vector< Result > DescendToContentXml( const fs::path &path_to_content_xml )
         return std::vector< Result >();
 
     // The base path for the OPF is the publication root path
-    fs::path opf_path = 
-        path_to_content_xml.parent_path().parent_path() /
-        GetRelativeOpfPath( wf_validator.GetDocument() );
+    fs::path root_path     = path_to_content_xml.parent_path().parent_path();
+    fs::path rel_opf_path  = GetRelativeOpfPath( wf_validator.GetDocument() );
+    fs::path full_opf_path = root_path / rel_opf_path;     
 
     std::vector< Result > results;
-    // TODO: handle empty/missing opf path
-    Util::Extend( results, ValidateOpf( opf_path ) );
-    Util::Extend( results, DescendToOpf( opf_path ) );
+
+    // TODO: validator for this
+    if ( !rel_opf_path.empty() && fs::exists( full_opf_path ) )
+    {
+        Util::Extend( results, ValidateOpf( full_opf_path ) );
+        Util::Extend( results, DescendToOpf( full_opf_path ) );
+    }    
+
     return results;
 }
 
