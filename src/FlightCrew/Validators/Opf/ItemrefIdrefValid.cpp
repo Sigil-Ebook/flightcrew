@@ -39,25 +39,20 @@ std::vector<Result> ItemrefIdrefValid::ValidateXml( const xc::DOMDocument &docum
         QName( "id", "" ),
         document );
 
+    boost::unordered_set< std::string > item_id_set;
+
+    foreach( xc::DOMAttr* item_id, item_ids )
+    {
+        item_id_set.insert( fromX( item_id->getValue() ) );
+    }
+
     std::vector<Result> results;
 
     foreach( xc::DOMAttr* idref, idrefs )
     {
         std::string idref_value = fromX( idref->getValue() );   
-        bool item_exists = false;
 
-        foreach( xc::DOMAttr* item_id, item_ids )
-        {
-            std::string item_id_value = fromX( item_id->getValue() );
-
-            if ( item_id_value == idref_value )
-            {
-                item_exists = true;
-                break;
-            }
-        }
-
-        if ( !item_exists )
+        if ( item_id_set.count( idref_value ) == 0 )
         {
             results.push_back( 
                 ResultWithNodeLocation( ERROR_OPF_IDREF_ID_DOES_NOT_EXIST, *idref )
