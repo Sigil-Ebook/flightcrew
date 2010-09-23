@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+    <manifest>
+        <item id="style" href="css/main.css" media-type="text/css"/>
+        <item id="pagetemplate" href="page-template.xpgt" media-type="application/vnd.adobe-page-template+xml"/>
+    </manifest>
+</package>

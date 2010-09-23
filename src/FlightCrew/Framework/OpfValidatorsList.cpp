@@ -79,6 +79,7 @@
 #include "Validators/Opf/TypeAttributesPresent.h"
 #include "Validators/Opf/XMetadataAllowedChildren.h"
 #include "Validators/Opf/XMetadataAttributesPresent.h"
+#include "Validators/Opf/NcxPresent.h"
 
 namespace FlightCrew
 {
@@ -144,6 +145,7 @@ std::vector< boost::shared_ptr< XmlValidator > > GetOpfXmlValidators()
     validators.push_back( boost::shared_ptr< XmlValidator >( new TypeAttributesPresent() ) );
     validators.push_back( boost::shared_ptr< XmlValidator >( new XMetadataAllowedChildren() ) );
     validators.push_back( boost::shared_ptr< XmlValidator >( new XMetadataAttributesPresent() ) );
+    validators.push_back( boost::shared_ptr< XmlValidator >( new NcxPresent() ) );    
     
     return validators;
 }

@@ -135,6 +135,9 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_ITEM_REQMOD_WITHOUT_REQNS ] =
         "The <item> element has a \"required-modules\" attribute but doesn't have a "
         "\"required-namespace\" attribute.";
+    m_Messages[ ERROR_OPF_NCX_NOT_PRESENT ] =
+        "There is no <item> element in the <manifest> that has the NCX mimetype "
+        "(\"application/x-dtbncx+xml\"). The use of an NCX is mandatory in EPUB.";    
 }
 
 } // namespace FlightCrew

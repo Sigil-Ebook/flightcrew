@@ -31,6 +31,10 @@ extern const std::string OPF_XML_NAMESPACE;
 extern const std::string DC_XML_NAMESPACE;
 extern const std::string CONTAINER_XML_NAMESPACE;
 
+extern const std::string OEBPS_MIME;
+extern const std::string XHTML_MIME;
+extern const std::string NCX_MIME;
+
 extern const QName DC_METADATA_QNAME;
 extern const QName X_METADATA_QNAME; 
 extern const QName TITLE_QNAME;      
