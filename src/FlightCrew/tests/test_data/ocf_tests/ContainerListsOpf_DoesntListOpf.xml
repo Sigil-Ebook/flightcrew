@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<container 
+    version="1.0" 
+    xmlns="urn:oasis:names:tc:opendocument:xmlns:container" >
+    <rootfiles>
+        <rootfile full-path="OEBPS/As You Like It.pdf"
+            media-type="application/pdf">
+        </rootfile>        
+    </rootfiles>
+</container>

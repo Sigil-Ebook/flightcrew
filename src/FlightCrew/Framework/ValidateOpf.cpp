@@ -63,6 +63,8 @@ std::vector< Result > ValidateOpf( const fs::path &filepath )
 
     Util::Extend( results, UsesUnicode().ValidateFile( filepath ) );
 
+    // Needed because the XmlValidators for the opf take
+    // a DOM document and not a path
     results = Util::AddPathToResults( results, filepath );
     return Util::SortedInPlace( results );
 }

@@ -35,6 +35,7 @@
 #include "Validators/Ocf/ContainerSatisfiesSchema.h"
 #include "Validators/Ocf/EncryptionSatisfiesSchema.h"
 #include "Validators/Ocf/SignaturesSatisfiesSchema.h"
+#include "Validators/Ocf/ContainerListsOpf.h"
 #include "Validators/Xml/UsesUnicode.h"
 
 namespace FlightCrew
@@ -46,7 +47,7 @@ const std::string NCX_MIME   = "application/x-dtbncx+xml";
 const std::string CONTAINER_XML_NAMESPACE = "urn:oasis:names:tc:opendocument:xmlns:container";
 
 
-std::vector< Result > ValidateMetaInf( const fs::path &path_to_meta_inf )
+std::vector< Result > BasicMetaInfValidation( const fs::path &path_to_meta_inf )
 {
     fs::path container_xml(  path_to_meta_inf / "container.xml"  );
     fs::path signatures_xml( path_to_meta_inf / "signatures.xml" );
@@ -58,8 +59,10 @@ std::vector< Result > ValidateMetaInf( const fs::path &path_to_meta_inf )
     std::vector< Result > results;
 
     if ( fs::exists( container_xml ) )
-    
+    {
         Util::Extend( results, ContainerSatisfiesSchema().ValidateFile( container_xml ) );
+        Util::Extend( results, ContainerListsOpf()       .ValidateFile( container_xml ) );
+    }
     
     if ( fs::exists( encryption_xml ) )
      
@@ -197,7 +200,7 @@ std::vector< Result > DescendToContentXml( const fs::path &path_to_content_xml )
     WellFormedXml wf_validator;   
 
     // We can't continue if content.xml is not well-formed.
-    // ValidateMetaInf will take care of returning any 
+    // BasicMetaInfValidation will take care of returning any 
     // validation results for content.xml
     if ( !wf_validator.ValidateFile( path_to_content_xml ).empty() )
   
@@ -206,16 +209,15 @@ std::vector< Result > DescendToContentXml( const fs::path &path_to_content_xml )
     // The base path for the OPF is the publication root path
     fs::path root_path     = path_to_content_xml.parent_path().parent_path();
     fs::path rel_opf_path  = GetRelativeOpfPath( wf_validator.GetDocument() );
-    fs::path full_opf_path = root_path / rel_opf_path;     
+    fs::path full_opf_path = root_path / rel_opf_path;
 
     std::vector< Result > results;
 
-    // TODO: validator for this
     if ( !rel_opf_path.empty() && fs::exists( full_opf_path ) )
     {
         Util::Extend( results, ValidateOpf( full_opf_path ) );
         Util::Extend( results, DescendToOpf( full_opf_path ) );
-    }    
+    }
 
     return results;
 }
@@ -251,14 +253,12 @@ void AddEpubFilenameToResultPaths( std::vector< Result > &results, const std::st
         std::string result_path = result.GetFilepath();
 
         if ( !result_path.empty() )
-        {
-            result.SetFilepath( epub_name + "/" + result_path );
-        }  
+        
+            result.SetFilepath( epub_name + "/" + result_path );        
 
         else
-        {
-            result.SetFilepath( epub_name );
-        }
+        
+            result.SetFilepath( epub_name );        
     }
 }
 
@@ -287,7 +287,7 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
         return results;
     }
 
-    Util::Extend( results, ValidateMetaInf( temp_folder.GetPath() / "META-INF" ) );
+    Util::Extend( results, BasicMetaInfValidation( temp_folder.GetPath() / "META-INF" ) );
 
     fs::path path_to_content_xml = temp_folder.GetPath() / "META-INF/container.xml";
 
