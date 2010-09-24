@@ -25,7 +25,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> PackageAllowedChildren::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> PackageAllowedChildren::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     std::vector< QName > allowed_children;
 

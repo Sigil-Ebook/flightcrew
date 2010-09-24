@@ -35,7 +35,9 @@ class MetadataAllowedChildren : public AllowedChildrenValidator
 {
 public:
 
-    virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document );
+    virtual std::vector<Result> ValidateXml( 
+        const xc::DOMDocument &document,
+        const fs::path &filepath = fs::path() );
 
 private:
 

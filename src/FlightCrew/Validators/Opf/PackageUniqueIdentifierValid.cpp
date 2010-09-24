@@ -28,7 +28,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> PackageUniqueIdentifierValid::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> PackageUniqueIdentifierValid::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     xc::DOMElement *package_element = document.getDocumentElement();
     std::string unique_id = fromX( package_element->getAttribute( toX( "unique-identifier" ) ) );

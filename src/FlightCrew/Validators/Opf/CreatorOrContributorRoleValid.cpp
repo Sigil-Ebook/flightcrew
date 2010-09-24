@@ -29,7 +29,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> CreatorOrContributorRoleValid::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> CreatorOrContributorRoleValid::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     std::vector< xc::DOMElement* > elements = xe::GetElementsByQName( 
         document, QName( "creator", DC_XML_NAMESPACE ) );

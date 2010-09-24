@@ -25,7 +25,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> OneManifest::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> OneManifest::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     return VerifyElementCountOne( QName( "manifest", OPF_XML_NAMESPACE ),
                                   QName( "package", OPF_XML_NAMESPACE ),

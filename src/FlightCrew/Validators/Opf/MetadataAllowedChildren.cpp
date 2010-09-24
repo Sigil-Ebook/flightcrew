@@ -49,7 +49,9 @@ const QName RIGHTS_QNAME      = QName( "rights",      DC_XML_NAMESPACE  );
 const QName META_QNAME        = QName( "meta",        OPF_XML_NAMESPACE );
 
 
-std::vector<Result> MetadataAllowedChildren::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> MetadataAllowedChildren::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     xc::DOMNodeList *metadatas = document.getElementsByTagNameNS(
                                     toX( OPF_XML_NAMESPACE ),  toX( "metadata" ) );

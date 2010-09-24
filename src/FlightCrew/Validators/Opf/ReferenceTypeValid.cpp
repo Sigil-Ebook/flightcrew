@@ -28,7 +28,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> ReferenceTypeValid::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> ReferenceTypeValid::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     std::vector< xc::DOMElement* > elements = xe::GetElementsByQName( 
         document, QName( "reference", OPF_XML_NAMESPACE ) );

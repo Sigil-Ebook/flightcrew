@@ -28,7 +28,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> SpineTocValid::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> SpineTocValid::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     std::vector< xc::DOMAttr* > tocs = xe::GetAllAttributesFromElements(
         QName( "spine", OPF_XML_NAMESPACE ),

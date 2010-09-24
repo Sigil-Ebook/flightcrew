@@ -58,7 +58,7 @@ std::vector< Result > ValidateOpf( const fs::path &filepath )
 
     foreach( boost::shared_ptr< XmlValidator > validator, xmlvalidators )
     {
-        Util::Extend( results, validator->ValidateXml( document ) );
+        Util::Extend( results, validator->ValidateXml( document, filepath ) );
     }
 
     Util::Extend( results, UsesUnicode().ValidateFile( filepath ) );

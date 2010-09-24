@@ -30,7 +30,9 @@ static const std::string VALID_PACKAGE_VERSION = "2.0";
 namespace FlightCrew
 {
 
-std::vector<Result> PackageVersionCorrect::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> PackageVersionCorrect::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     xc::DOMElement *package_element = document.getDocumentElement();
     std::vector<Result> results;

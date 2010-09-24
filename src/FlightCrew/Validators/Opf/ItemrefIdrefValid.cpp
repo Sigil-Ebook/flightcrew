@@ -27,7 +27,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> ItemrefIdrefValid::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> ItemrefIdrefValid::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     std::vector< xc::DOMAttr* > idrefs = xe::GetAllAttributesFromElements( 
         QName( "itemref", OPF_XML_NAMESPACE ),

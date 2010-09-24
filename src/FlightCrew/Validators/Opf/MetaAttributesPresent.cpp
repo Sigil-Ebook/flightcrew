@@ -26,7 +26,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> MetaAttributesPresent::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> MetaAttributesPresent::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     std::vector< QName > allowed_attributes;
     allowed_attributes.push_back( QName( "id", "" ) );

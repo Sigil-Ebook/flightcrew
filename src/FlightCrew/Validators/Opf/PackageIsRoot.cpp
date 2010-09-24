@@ -26,7 +26,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> PackageIsRoot::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> PackageIsRoot::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     xc::DOMElement *root_element = document.getDocumentElement();
 

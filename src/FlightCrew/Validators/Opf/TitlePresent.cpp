@@ -25,7 +25,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> TitlePresent::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> TitlePresent::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     std::vector< QName > possible_parents;
     possible_parents.push_back( QName( "metadata",    OPF_XML_NAMESPACE ) );

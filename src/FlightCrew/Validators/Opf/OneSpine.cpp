@@ -26,7 +26,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> OneSpine::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> OneSpine::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     return VerifyElementCountOne( QName( "spine", OPF_XML_NAMESPACE ),
                                   QName( "package", OPF_XML_NAMESPACE ),

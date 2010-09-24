@@ -28,7 +28,9 @@
 namespace FlightCrew
 {
 
-std::vector<Result> ItemLinearValid::ValidateXml( const xc::DOMDocument &document )
+std::vector<Result> ItemLinearValid::ValidateXml(
+    const xc::DOMDocument &document,
+    const fs::path& )
 {
     std::vector< xc::DOMElement* > items = xe::GetElementsByQName( 
         document, QName( "item", OPF_XML_NAMESPACE ) );
