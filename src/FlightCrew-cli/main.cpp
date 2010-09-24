@@ -50,7 +50,6 @@ bool ValidateFiles( const std::vector< std::string > &files_to_validate )
 
     foreach( const std::string &file, files_to_validate )
     {
-        std::cerr << "\n";
         std::vector< fc::Result > results;
 
         try
@@ -60,13 +59,13 @@ bool ValidateFiles( const std::vector< std::string > &files_to_validate )
 
         catch ( fc::FileDoesNotExistEx& )
         {
-            std::cerr << "File " << file << " does not exist.\n";
+            std::cerr << "File " << file << " does not exist.\n\n";
             continue;
         }
 
         foreach( const fc::Result &result, results )
         {
-            seen_problems = true;
+            seen_problems = true;            
             std::cerr << result.GetFilepath();
 
             if ( result.GetErrorLine() > 0 )
@@ -84,12 +83,12 @@ bool ValidateFiles( const std::vector< std::string > &files_to_validate )
                 std::cerr << "warning ";
 
             std::cerr << result.GetResultId() << ": ";
-            std::cerr << result.GetMessage();                       
-
-            std::cerr << "\n";
+            std::cerr << result.GetMessage() << "\n";   
         }
 
-        std::cerr << "\n";
+        if ( !results.empty() )
+        
+            std::cerr << "\n";
     }
 
     return seen_problems;
@@ -126,7 +125,12 @@ int main( int argc, char *argv[] )
             std::vector< std::string > files_to_validate =
                 var_map[ "input-file" ].as< std::vector< std::string > >();
 
-            return ValidateFiles( files_to_validate );
+            bool problems_found = ValidateFiles( files_to_validate );
+            if ( !problems_found )
+
+                std::cout << "No problems found.\n";
+
+            return problems_found;
         } 
         
         else
