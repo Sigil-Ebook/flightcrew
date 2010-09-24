@@ -84,7 +84,12 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_EPUB_NOT_VALID_ZIP_ARCHIVE ] =
         "The epub file is not a valid ZIP archive.";
     m_Messages[ ERROR_EPUB_NO_CONTAINER_XML ] =
-        "The META-INF/container.xml file was not found.";    
+        "The META-INF/container.xml file was not found.";  
+
+    m_Messages[ ERROR_OCF_CONTAINER_DOESNT_LIST_OPF ] =
+        "An OPF file is not listed as a <rootfile>.";
+    m_Messages[ ERROR_OCF_CONTAINER_SPECIFIED_OPF_DOESNT_EXIST ] =
+        "The specified OPF file \"%1%\" does not exist."; 
 
     m_Messages[ ERROR_XML_NOT_WELL_FORMED ] =
         "XML syntax error.";

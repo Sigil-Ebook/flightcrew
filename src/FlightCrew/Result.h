@@ -78,6 +78,8 @@ public:
     
     bool operator< ( const Result& other ) const;
 
+    bool operator== ( const Result& other ) const;
+
 private:
 
     ///////////////////////////////

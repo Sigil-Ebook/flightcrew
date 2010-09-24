@@ -39,7 +39,7 @@ public:
 
     virtual std::vector<Result> ValidateXml( const xc::DOMDocument &document ) = 0;
 
-    virtual ~XmlValidator() {}
+    virtual ~XmlValidator() {};
 
 protected:
 

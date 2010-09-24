@@ -37,7 +37,7 @@ public:
 
     virtual std::vector<Result> ValidateFile( const fs::path &filepath ) = 0;
 
-    virtual ~IValidator() {}
+    virtual ~IValidator() {};
 };
 
 } // namespace FlightCrew

@@ -165,6 +165,18 @@ bool Result::operator< ( const Result& other ) const
 }
 
 
+bool Result::operator==( const Result& other ) const
+{
+    return
+        m_ResultId         == other.m_ResultId      &&
+        m_ErrorLine        == other.m_ErrorLine     &&
+        m_ErrorColumn      == other.m_ErrorColumn   &&        
+        m_Filepath         == other.m_Filepath      &&
+        m_CustomMessage    == other.m_CustomMessage &&
+        m_MessageArguments == other.m_MessageArguments;
+}
+
+
 } // namespace FlightCrew
 
 

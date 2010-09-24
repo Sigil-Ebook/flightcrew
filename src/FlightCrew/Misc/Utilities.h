@@ -50,7 +50,7 @@ namespace Util
     std::vector< Result > AddPathToResults( const std::vector< Result > &results, const fs::path &filepath );
 
     template <typename T>
-    void RemoveDuplicates( const std::vector<T> &vector )
+    void RemoveDuplicates( std::vector<T> &vector )
     {
         std::sort( vector.begin(), vector.end() );
         vector.erase( std::unique( vector.begin(), vector.end() ), vector.end() );

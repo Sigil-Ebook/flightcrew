@@ -36,6 +36,7 @@
 #include "Validators/Ocf/EncryptionSatisfiesSchema.h"
 #include "Validators/Ocf/SignaturesSatisfiesSchema.h"
 #include "Validators/Ocf/ContainerListsOpf.h"
+#include "Validators/Ocf/ContainerListedOpfPresent.h"
 #include "Validators/Xml/UsesUnicode.h"
 
 namespace FlightCrew
@@ -60,8 +61,9 @@ std::vector< Result > BasicMetaInfValidation( const fs::path &path_to_meta_inf )
 
     if ( fs::exists( container_xml ) )
     {
-        Util::Extend( results, ContainerSatisfiesSchema().ValidateFile( container_xml ) );
-        Util::Extend( results, ContainerListsOpf()       .ValidateFile( container_xml ) );
+        Util::Extend( results, ContainerSatisfiesSchema() .ValidateFile( container_xml ) );
+        Util::Extend( results, ContainerListsOpf()        .ValidateFile( container_xml ) );
+        Util::Extend( results, ContainerListedOpfPresent().ValidateFile( container_xml ) );
     }
     
     if ( fs::exists( encryption_xml ) )
@@ -89,7 +91,7 @@ std::vector< Result > BasicMetaInfValidation( const fs::path &path_to_meta_inf )
 
     // i starts at 3 because we already (implicitly) checked well-formedness  
     // for container.xml, signatures.xml and encryption.xml so 
-    // we don't want to check it again and get duplicated errors.
+    // we don't want to check it again.
     for ( uint i = 3; i < all_files.size(); ++i )
     {
         if ( fs::exists( all_files[ i ] ) )
@@ -97,6 +99,8 @@ std::vector< Result > BasicMetaInfValidation( const fs::path &path_to_meta_inf )
             Util::Extend( results, WellFormedXml().ValidateFile( all_files[ i ] ) );        
     }    
 
+    // There are some possible duplicates
+    Util::RemoveDuplicates( results );
     return results;
 }
 
@@ -288,8 +292,6 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
     }
 
     Util::Extend( results, BasicMetaInfValidation( temp_folder.GetPath() / "META-INF" ) );
-    // There are possible duplicates coming from BasicMetaInfValidation
-    Util::RemoveDuplicates( results );
 
     fs::path path_to_content_xml = temp_folder.GetPath() / "META-INF/container.xml";
 
