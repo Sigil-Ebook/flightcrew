@@ -48,7 +48,7 @@ const std::string NCX_MIME   = "application/x-dtbncx+xml";
 const std::string CONTAINER_XML_NAMESPACE = "urn:oasis:names:tc:opendocument:xmlns:container";
 
 
-std::vector< Result > BasicMetaInfValidation( const fs::path &path_to_meta_inf )
+std::vector< Result > ValidateMetaInf( const fs::path &path_to_meta_inf )
 {
     fs::path container_xml(  path_to_meta_inf / "container.xml"  );
     fs::path signatures_xml( path_to_meta_inf / "signatures.xml" );
@@ -64,6 +64,11 @@ std::vector< Result > BasicMetaInfValidation( const fs::path &path_to_meta_inf )
         Util::Extend( results, ContainerSatisfiesSchema() .ValidateFile( container_xml ) );
         Util::Extend( results, ContainerListsOpf()        .ValidateFile( container_xml ) );
         Util::Extend( results, ContainerListedOpfPresent().ValidateFile( container_xml ) );
+    }
+
+    else
+    {
+        results.push_back( Result( ERROR_EPUB_NO_CONTAINER_XML ) );
     }
     
     if ( fs::exists( encryption_xml ) )
@@ -204,7 +209,7 @@ std::vector< Result > DescendToContentXml( const fs::path &path_to_content_xml )
     WellFormedXml wf_validator;   
 
     // We can't continue if content.xml is not well-formed.
-    // BasicMetaInfValidation will take care of returning any 
+    // ValidateMetaInf will take care of returning any 
     // validation results for content.xml
     if ( !wf_validator.ValidateFile( path_to_content_xml ).empty() )
   
@@ -291,13 +296,12 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
         return results;
     }
 
-    Util::Extend( results, BasicMetaInfValidation( temp_folder.GetPath() / "META-INF" ) );
+    Util::Extend( results, ValidateMetaInf( temp_folder.GetPath() / "META-INF" ) );
 
     fs::path path_to_content_xml = temp_folder.GetPath() / "META-INF/container.xml";
 
     if ( !fs::exists( path_to_content_xml ) )
     {
-        results.push_back( Result( ERROR_EPUB_NO_CONTAINER_XML ) );
         return results;
     }
     
