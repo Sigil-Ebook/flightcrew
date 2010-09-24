@@ -90,7 +90,7 @@ std::vector<Result> UsesUnicode::ValidateFile( const fs::path &filepath )
 
 bool UsesUnicode::FileIsValidUtf8( const fs::path &filepath )
 {
-    std::ifstream file( filepath.c_str(), std::ios::in | std::ios::binary );
+    fs::ifstream file( filepath, std::ios::in | std::ios::binary );
     std::istreambuf_iterator<char> it( file.rdbuf() );
     std::istreambuf_iterator<char> eos;
 

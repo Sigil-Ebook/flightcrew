@@ -38,7 +38,7 @@ namespace Util
 
 std::string ReadUnicodFile( const fs::path &filepath )
 {
-    std::ifstream file( filepath.c_str(), std::ios::in | std::ios::binary );
+    fs::ifstream file( filepath, std::ios::in | std::ios::binary );
 
     if ( !file.is_open() )
 
