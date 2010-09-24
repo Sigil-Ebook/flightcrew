@@ -288,6 +288,8 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
     }
 
     Util::Extend( results, BasicMetaInfValidation( temp_folder.GetPath() / "META-INF" ) );
+    // There are possible duplicates coming from BasicMetaInfValidation
+    Util::RemoveDuplicates( results );
 
     fs::path path_to_content_xml = temp_folder.GetPath() / "META-INF/container.xml";
 

@@ -50,6 +50,13 @@ namespace Util
     std::vector< Result > AddPathToResults( const std::vector< Result > &results, const fs::path &filepath );
 
     template <typename T>
+    void RemoveDuplicates( const std::vector<T> &vector )
+    {
+        std::sort( vector.begin(), vector.end() );
+        vector.erase( std::unique( vector.begin(), vector.end() ), vector.end() );
+    }
+
+    template <typename T>
     bool Contains( const std::vector<T> &vector, const T &value )
     {
         return std::find( vector.begin(), vector.end(), value ) != vector.end(); 

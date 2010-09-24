@@ -143,9 +143,25 @@ Result& Result::SetCustomMessage( const std::string &custom_message )
 
 bool Result::operator< ( const Result& other ) const
 {
-    return m_ErrorLine   != other.m_ErrorLine  ? 
-           m_ErrorLine   <  other.m_ErrorLine  : 
-           m_ErrorColumn <  other.m_ErrorColumn;
+    // Yes, this is ugly but it also needs to be fast.
+    // We need to make sure that all private vars are
+    // included because some STL algos uses two "<" 
+    // operations to check for equality. Since this is
+    // called freaking everywhere, we have to make sure
+    // only the required comparisons are made, and no more.
+
+    return
+        m_Filepath != other.m_Filepath ?
+        m_Filepath <  other.m_Filepath :
+            m_ErrorLine != other.m_ErrorLine ? 
+            m_ErrorLine <  other.m_ErrorLine :
+                m_ErrorColumn != other.m_ErrorColumn ? 
+                m_ErrorColumn <  other.m_ErrorColumn :
+                    m_ResultId != other.m_ResultId ? 
+                    m_ResultId <  other.m_ResultId :
+                        m_CustomMessage != other.m_CustomMessage ? 
+                        m_CustomMessage <  other.m_CustomMessage :
+                            m_MessageArguments < other.m_MessageArguments;
 }
 
 
