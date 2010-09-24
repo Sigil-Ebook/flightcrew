@@ -37,6 +37,7 @@
 #include "Validators/Ocf/SignaturesSatisfiesSchema.h"
 #include "Validators/Ocf/ContainerListsOpf.h"
 #include "Validators/Ocf/ContainerListedOpfPresent.h"
+#include "Validators/Ocf/MimetypeBytesValid.h"
 #include "Validators/Xml/UsesUnicode.h"
 
 namespace FlightCrew
@@ -296,6 +297,8 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
         return results;
     }
 
+    
+    Util::Extend( results, MimetypeBytesValid().ValidateFile( filepath ) );
     Util::Extend( results, ValidateMetaInf( temp_folder.GetPath() / "META-INF" ) );
 
     fs::path path_to_content_xml = temp_folder.GetPath() / "META-INF/container.xml";

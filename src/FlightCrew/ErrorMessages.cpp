@@ -89,7 +89,14 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OCF_CONTAINER_DOESNT_LIST_OPF ] =
         "An OPF file is not listed as a <rootfile>.";
     m_Messages[ ERROR_OCF_CONTAINER_SPECIFIED_OPF_DOESNT_EXIST ] =
-        "The specified OPF file \"%1%\" does not exist."; 
+        "The specified OPF file \"%1%\" does not exist.";
+    m_Messages[ ERROR_EPUB_MIMETYPE_BYTES_INVALID ] =
+        "Bytes 30-60 of your epub file are invalid. This means that one or more of the following "
+        "rules are not satisfied:\n"
+        "   1. There needs to be a \"mimetype\" file in the root folder.\n"
+        "   2. Its content needs to be *exactly* \"application/epub+zip\".\n"
+        "   3. It needs to be the first file in the epub zip archive.\n"
+        "   4. It needs to be uncompressed.";
 
     m_Messages[ ERROR_XML_NOT_WELL_FORMED ] =
         "XML syntax error.";
