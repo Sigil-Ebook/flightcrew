@@ -32,7 +32,7 @@ namespace FlightCrew
 
 std::vector<Result> ContainerListsOpf::ValidateXml( 
     const xc::DOMDocument &document,
-    const fs::path &filepath )
+    const fs::path& )
 {
     std::vector< xc::DOMElement* > rootfiles = xe::GetElementsByQName( 
         document, QName( "rootfile", CONTAINER_XML_NAMESPACE ) );
