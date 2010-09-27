@@ -82,6 +82,7 @@
 #include "Validators/Opf/NcxPresent.h"
 #include "Validators/Opf/SpineTocValid.h"
 #include "Validators/Opf/ItemFilesPresent.h"
+#include "Validators/Opf/ReachabilityAnalysis.h"
 
 namespace FlightCrew
 {
@@ -150,6 +151,7 @@ std::vector< boost::shared_ptr< XmlValidator > > GetOpfXmlValidators()
     validators.push_back( boost::shared_ptr< XmlValidator >( new NcxPresent() ) );    
     validators.push_back( boost::shared_ptr< XmlValidator >( new SpineTocValid() ) );
     validators.push_back( boost::shared_ptr< XmlValidator >( new ItemFilesPresent() ) );    
+    validators.push_back( boost::shared_ptr< XmlValidator >( new ReachabilityAnalysis() ) );
     
     return validators;
 }

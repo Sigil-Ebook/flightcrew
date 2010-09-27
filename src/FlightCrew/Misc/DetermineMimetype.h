@@ -20,42 +20,15 @@
 *************************************************************************/
 
 #pragma once
-#ifndef ERRORMESSAGES_H
-#define ERRORMESSAGES_H
+#ifndef DETERMINEMIMETYPE_H
+#define DETERMINEMIMETYPE_H
 
-#include <string>
-#include <boost/thread/mutex.hpp>
-#include <boost/unordered/unordered_map_fwd.hpp>
-#include "ResultId.h"
+#include "BoostFilesystemUse.h"
 
 namespace FlightCrew
 {
-
-class ErrorMessages
-{
-public:
-
-    static ErrorMessages& Instance();
-
-    const std::string MessageForId( ResultId error_id );
-
-private:
-
-    ErrorMessages();
-
-    void LoadMessages();
-
-    ///////////////////////////////
-    // PRIVATE MEMBER VARIABLES
-    ///////////////////////////////
-
-    static boost::mutex s_AccessMutex;
-
-    static ErrorMessages *s_Instance;
-
-    boost::unordered_map< ResultId, std::string > m_Messages;
-};
+    std::string DetermineMimetype( const fs::path &filepath );
 
 } // namespace FlightCrew
 
-#endif // ERRORMESSAGES_H
+#endif // DETERMINEMIMETYPE_H

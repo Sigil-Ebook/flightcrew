@@ -34,7 +34,7 @@ const std::string DC_XML_NAMESPACE   = "http://purl.org/dc/elements/1.1/";
 std::vector<Result> XmlValidator::ValidateFile( const fs::path &filepath )
 {
     return Util::AddPathToResults( 
-        ValidateXml( *Util::LoadDocument( filepath ), filepath ),
+        ValidateXml( *Util::LoadXmlDocument( filepath ), filepath ),
         filepath );
 }
 

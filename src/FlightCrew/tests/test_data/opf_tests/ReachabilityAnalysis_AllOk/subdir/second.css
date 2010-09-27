@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Fontin";
+  font-weight: normal;
+  font-style: normal;
+  src: url(../font1.ttf);
+}
+
+@font-face {
+  font-family: "Fontin";
+  font-weight: bold;
+  font-style: normal;
+  src: url(../font2.ttf);
+}
+
+@font-face {
+  font-family: "Fontin";
+  font-weight: normal;
+  font-style: italic;
+  src: url(../font3.ttf);
+} 

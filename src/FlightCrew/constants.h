@@ -31,9 +31,23 @@ extern const std::string OPF_XML_NAMESPACE;
 extern const std::string DC_XML_NAMESPACE;
 extern const std::string CONTAINER_XML_NAMESPACE;
 
-extern const std::string OEBPS_MIME;
-extern const std::string XHTML_MIME;
-extern const std::string NCX_MIME;
+extern const std::string OEBPS_MIME;  
+extern const std::string XHTML_MIME; 
+extern const std::string NCX_MIME;    
+extern const std::string PNG_MIME;    
+extern const std::string GIF_MIME;   
+extern const std::string JPEG_MIME;   
+extern const std::string SVG_MIME;    
+extern const std::string DTBOOK_MIME; 
+extern const std::string CSS_MIME;    
+extern const std::string XML_MIME;    
+extern const std::string XPGT_MIME;   
+extern const std::string OTF_MIME;    
+extern const std::string TTF_MIME;    
+extern const std::string OEB_DOC_MIME;
+extern const std::string OEB_CSS_MIME;
+
+extern const std::string UNKNOWN_MIME;
 
 extern const QName DC_METADATA_QNAME;
 extern const QName X_METADATA_QNAME; 

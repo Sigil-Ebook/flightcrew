@@ -94,7 +94,7 @@ void ErrorMessages::LoadMessages()
         "Bytes 30-60 of your epub file are invalid. This means that one or more of the following "
         "rules are not satisfied:\n"
         "   1. There needs to be a \"mimetype\" file in the root folder.\n"
-        "   2. Its content needs to be *exactly* \"application/epub+zip\".\n"
+        "   2. Its content needs to be *exactly* the ASCII string \"application/epub+zip\".\n"
         "   3. It needs to be the first file in the epub zip archive.\n"
         "   4. It needs to be uncompressed.";
 
@@ -155,7 +155,16 @@ void ErrorMessages::LoadMessages()
         "which does not exist.";      
     m_Messages[ ERROR_OPF_NCX_NOT_PRESENT ] =
         "There is no <item> element in the <manifest> that has the NCX mimetype "
-        "(\"application/x-dtbncx+xml\"). The use of an NCX is mandatory in EPUB.";    
+        "(\"application/x-dtbncx+xml\"). The use of an NCX is mandatory in EPUB.";
+    m_Messages[ ERROR_OPF_REACHABLE_OPS_DOC_NOT_IN_SPINE ] =
+        "This OPS document is reachable but not present in the OPF <spine>."; 
+    m_Messages[ ERROR_OPF_REACHABLE_RESOURCE_NOT_IN_MANIFEST ] =
+        "This resource is reachable but not present in the OPF <manifest>."; 
+
+    m_Messages[ WARNING_GENERIC ] =
+        "Warning."; 
+    m_Messages[ WARNING_OPF_RESOURCE_IN_MANIFEST_NOT_REACHABLE ] =
+        "This resource is present in the OPF <manifest>, but is not reachable (it's unused).";
 }
 
 } // namespace FlightCrew

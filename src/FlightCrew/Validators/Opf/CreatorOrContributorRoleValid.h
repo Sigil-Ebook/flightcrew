@@ -24,7 +24,7 @@
 #define CREATORORCONTRIBUTORROLEVALID_H
 
 #include "../XmlValidator.h"
-#include <boost/unordered_set.hpp>
+#include <boost/unordered/unordered_set_fwd.hpp>
 
 namespace FlightCrew
 {

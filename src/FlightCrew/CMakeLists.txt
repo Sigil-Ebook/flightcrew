@@ -81,6 +81,12 @@ target_link_libraries( ${PROJECT_NAME} zipios BoostParts XercesExtensions )
 # TODO: split into special cmake file
 if( MSVC )
     add_definitions( /DUNICODE /D_UNICODE /W4 )
+    
+    # This warning is present only at the highest warning level (/W4)
+    # and is routinely disabled because it complains about valid 
+    # constructs like "while (true)"
+    add_definitions( /wd4127 )
+    
     # The /Zc:wchar_t- flag can't go into add_definitions
     # because the RC compiler picks it up too and it provokes a name clash
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-")

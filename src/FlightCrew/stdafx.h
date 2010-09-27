@@ -33,13 +33,15 @@
 #include <boost/bind/bind.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/thread.hpp>
-#include <boost/unordered_map.hpp>
 #include <boost/format.hpp> 
 #include <boost/foreach.hpp> 
 #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/regex.hpp>
 #include <boost/regex.hpp>
 #include <boost/unordered_set.hpp>
+#include <boost/unordered_map.hpp>
 #include "Misc/BoostFilesystemUse.h"
+
 
 // ... and then we reset the warning level
 // back to normal (warning level 4)

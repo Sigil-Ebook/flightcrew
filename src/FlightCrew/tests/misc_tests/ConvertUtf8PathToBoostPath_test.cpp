@@ -21,7 +21,6 @@
 
 #include <stdafx_tests.h>
 #include "Misc/Utilities.h"
-#include "Result.h"
 #include "exception.h"
 
 using namespace FlightCrew;

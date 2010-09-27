@@ -158,6 +158,8 @@ std::string UsesUnicode::GetDeclaredEncoding( const std::string &line )
 {
     boost::regex expression( "encoding\\s*=\\s*(?:\"|')([^\"']+)(?:\"|')" );
     boost::match_results< std::string::const_iterator > matches;
+
+    // FIXME: return only when regex_search returns true
     boost::regex_search( line, matches, expression );
     return matches[ 1 ];
 }

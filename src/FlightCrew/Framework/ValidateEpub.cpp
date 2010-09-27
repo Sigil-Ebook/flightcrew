@@ -43,9 +43,6 @@
 namespace FlightCrew
 {
 
-const std::string OEBPS_MIME = "application/oebps-package+xml";
-const std::string XHTML_MIME = "application/xhtml+xml";
-const std::string NCX_MIME   = "application/x-dtbncx+xml";
 const std::string CONTAINER_XML_NAMESPACE = "urn:oasis:names:tc:opendocument:xmlns:container";
 
 
@@ -296,7 +293,6 @@ std::vector< Result > ValidateEpub( const fs::path &filepath )
                            .SetCustomMessage( exception.what() ) );
         return results;
     }
-
     
     Util::Extend( results, MimetypeBytesValid().ValidateFile( filepath ) );
     Util::Extend( results, ValidateMetaInf( temp_folder.GetPath() / "META-INF" ) );

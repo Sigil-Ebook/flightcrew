@@ -25,10 +25,12 @@
 #include <utf8.h>
 #include <xercesc/util/TransService.hpp>
 #include <xercesc/dom/DOMDocument.hpp>
+#include <xercesc/framework/MemBufInputSource.hpp>
 #include <XmlUtils.h>
 #include <LocationAwareDOMParser.h>
 #include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
 #include <ToXercesStringConverter.h>
+
 
 namespace FlightCrew
 {
@@ -114,7 +116,7 @@ boost::shared_ptr< xc::DOMDocument > RaiiWrapDocument( xc::DOMDocument *document
 }
 
 
-boost::shared_ptr< xc::DOMDocument > LoadDocument( const fs::path &filepath )
+boost::shared_ptr< xc::DOMDocument > LoadXmlDocument( const fs::path &filepath )
 {
     xe::LocationAwareDOMParser parser;
 
@@ -122,6 +124,33 @@ boost::shared_ptr< xc::DOMDocument > LoadDocument( const fs::path &filepath )
     parser.useScanner( xc::XMLUni::fgWFXMLScanner );
     parser.setValidationScheme( xc::AbstractDOMParser::Val_Never );
     parser.setDoNamespaces( true );
+
+    parser.parse( toX( BoostPathToUtf8Path( filepath ) ) );
+
+    return RaiiWrapDocument( parser.adoptDocument() );
+}
+
+
+boost::shared_ptr< xc::DOMDocument > LoadXhtmlDocument( const fs::path &filepath )
+{
+    xe::LocationAwareDOMParser parser;
+
+    parser.setDoSchema(             false );
+    parser.setLoadSchema(           false );
+    parser.setSkipDTDValidation(    true  );
+    parser.setDoNamespaces(         true  );
+    parser.useCachedGrammarInParse( true  );
+
+    parser.setValidationScheme( xc::AbstractDOMParser::Val_Never );
+
+    // This scanner ignores schemas, but does use DTDs
+    parser.useScanner( xc::XMLUni::fgDGXMLScanner );
+
+    const xc::MemBufInputSource input( XHTML11_FLAT_DTD,
+                                       XHTML11_FLAT_DTD_LEN,
+                                       toX( XHTML11_FLAT_DTD_ID ) );
+
+    parser.loadGrammar( input, xc::Grammar::DTDGrammarType, true ); 
 
     parser.parse( toX( BoostPathToUtf8Path( filepath ) ) );
 
@@ -165,6 +194,60 @@ std::string UrlDecode( const std::string &encoded_url )
 }
 
 
+std::string UrlWithoutFragment( const std::string &decoded_url )
+{
+    int hash_location = static_cast< int >( decoded_url.find( '#' ) );
+
+    if ( hash_location != -1 )
+
+        return boost::erase_tail_copy( decoded_url, hash_location );
+    
+    return decoded_url;
+}
+
+
+std::string UrlWithoutFileScheme( const std::string &decoded_url )
+{
+    if ( boost::starts_with( decoded_url, "file://" ) )
+
+        return boost::erase_first_copy( decoded_url, "file://" );
+
+    return decoded_url;
+}
+
+
+
+fs::path NormalizePath( const fs::path &filepath )
+{
+    std::string path_string = BoostPathToUtf8Path( filepath );        
+    boost::regex up_dir_regex( "[^/]+/../" );
+
+    while ( true )
+    {
+        std::string old_path = path_string;
+        path_string = boost::erase_all_regex_copy( path_string, up_dir_regex );
+
+        if ( path_string == old_path )
+
+            break;
+    }
+
+    boost::regex current_dir_regex( "/./" );
+
+    while ( true )
+    {
+        std::string old_path = path_string;
+        path_string = boost::erase_all_regex_copy( path_string, current_dir_regex );
+
+        if ( path_string == old_path )
+
+            break;
+    }
+
+    return Utf8PathToBoostPath( path_string );    
+}
+
+
 fs::path Utf8PathToBoostPath( const std::string &utf8_path )
 {
     if ( !utf8::is_valid( utf8_path.begin(), utf8_path.end() ) )
@@ -192,7 +275,9 @@ std::vector< Result > AddPathToResults( const std::vector< Result > &results, co
 
     foreach( Result &result, mod_results )
     {
-        result.SetFilepath( BoostPathToUtf8Path( filepath ) );
+        if ( result.GetFilepath().empty() )
+
+            result.SetFilepath( BoostPathToUtf8Path( filepath ) );
     }
 
     return mod_results;
