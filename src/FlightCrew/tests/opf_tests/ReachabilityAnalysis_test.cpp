@@ -35,12 +35,15 @@ TEST( ReachabilityAnalysisTest, ReachableDocsNotInSpine )
     // ReachabilityAnalysis uses hashes
     std::sort( results.begin(), results.end() );
             
-    ASSERT_EQ( results.size(), 2U );
+    ASSERT_EQ( results.size(), 3U );
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_REACHABLE_OPS_DOC_NOT_IN_SPINE );
     EXPECT_TRUE( boost::contains( results[ 0 ].GetFilepath(), "test2.xhtml" ) );
 
     EXPECT_EQ( results[ 1 ].GetResultId(), ERROR_OPF_REACHABLE_OPS_DOC_NOT_IN_SPINE );
     EXPECT_TRUE( boost::contains( results[ 1 ].GetFilepath(), "test3.xhtml" ) );
+
+    EXPECT_EQ( results[ 2 ].GetResultId(), ERROR_OPF_REACHABLE_OPS_DOC_NOT_IN_SPINE );
+    EXPECT_TRUE( boost::contains( results[ 2 ].GetFilepath(), "test4.xhtml" ) );
 }
 
 TEST( ReachabilityAnalysisTest, ManifestResourceNotReachable )

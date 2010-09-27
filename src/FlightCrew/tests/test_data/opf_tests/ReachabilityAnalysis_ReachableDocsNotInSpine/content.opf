@@ -4,6 +4,7 @@
     <item id="test1" href="test1.xhtml" media-type="application/xhtml+xml"/>
     <item id="test2" href="test2.xhtml" media-type="application/xhtml+xml"/>
     <item id="test3" href="test3.xhtml" media-type="application/xhtml+xml"/>
+    <item id="test4" href="test4.xhtml" media-type="application/xhtml+xml"/>
     <item id="style" href="main.css" media-type="text/css"/>
     <item id="eee"   href="cover.gif" media-type="image/gif"/>  
     <item id="eoeee" href="img2.jpg" media-type="image/jpeg"/>
@@ -11,4 +12,8 @@
   <spine>
     <itemref idref="test1"/>
   </spine>
+  
+  <guide>
+    <reference type="text" href="test4.xhtml" />
+  </guide>
 </package>
