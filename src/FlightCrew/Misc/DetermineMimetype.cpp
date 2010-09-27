@@ -38,7 +38,19 @@ const std::string CSS_MIME     = "text/css";
 const std::string XML_MIME     = "application/xml"; // used for out-of-line xml islands
 const std::string XPGT_MIME    = "application/vnd.adobe-page-template+xml";
 const std::string OTF_MIME     = "application/vnd.ms-opentype";
-const std::string TTF_MIME     = "application/x-font-truetype";
+
+// For the "correct" truetype font mimetype, see this link
+// http://mx.gw.com/pipermail/file/2009/000400.html
+// Apparently ISO/IEC JTC 1/SC34 are working on a new font top-level medatype. But on
+// the other hand they also recognize "application/x-font-ttf" as being the
+// experimental (read: not standardized) defacto MIME type for Truetype fonts.
+// Number of Google hits for all three possibilities:
+//    "application/x-truetype-font"   2100
+//    "application/x-font-truetype"   4100
+//    "application/x-font-ttf"       45900
+//
+// So "application/x-font-ttf" it is.
+const std::string TTF_MIME     = "application/x-font-ttf";
 const std::string OEB_DOC_MIME = "text/x-oeb1-document";
 const std::string OEB_CSS_MIME = "text/x-oeb1-css";
 
