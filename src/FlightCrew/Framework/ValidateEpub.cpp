@@ -141,9 +141,11 @@ std::vector< fs::path > GetRelativePathsToXhtmlDocuments( const xc::DOMDocument 
         std::string media_type = fromX( item->getAttribute( toX( "media-type" ) ) );
 
         if ( xc::XMLUri::isValidURI( true, toX( href ) ) &&
-             media_type == XHTML_MIME )
+             ( media_type == XHTML_MIME || media_type == OEB_DOC_MIME ) )
+        {
                     
             paths.push_back( Util::Utf8PathToBoostPath( Util::UrlDecode( href ) ) );
+        }
     }
 
     return paths;

@@ -29,7 +29,7 @@ extern const std::string OEBPS_MIME;
 extern const std::string XHTML_MIME; 
 extern const std::string NCX_MIME;    
 extern const std::string PNG_MIME;    
-extern const std::string GIF_MIME;   
+extern const std::string GIF_MIME;  
 extern const std::string JPEG_MIME;   
 extern const std::string SVG_MIME;    
 extern const std::string DTBOOK_MIME; 
