@@ -66,7 +66,6 @@ std::vector<Result> ReachabilityAnalysis::ValidateXml(
     boost::unordered_set< fs::path > starting_set = 
         StartingSetOpsPaths( document, manifest_items, opf_folder_path );
 
-    // TODO: fonts in css
     boost::unordered_set< fs::path > reachable_resources =
         DetermineReachableResources( starting_set );
 

@@ -40,20 +40,25 @@ namespace FlightCrew
 struct ExceptionBase: virtual std::exception, virtual boost::exception {};
 
 /**
-* Thrown when a file does not exist.
-*/
+ * Thrown when a file does not exist.
+ */
 struct FileDoesNotExistEx : virtual ExceptionBase {};
 typedef boost::error_info< struct file_path, std::string > ei_FilePath;
 
 /**
-* Thrown when a file is not in utf-8/16.
-*/
+ * Thrown when a file is not in utf-8/16.
+ */
 struct FileNotInUnicodeEx : virtual ExceptionBase {};
 
 /**
-* Thrown when a path is not in utf-8.
-*/
+ * Thrown when a path is not in utf-8.
+ */
 struct PathNotInUtf8 : virtual ExceptionBase {};
+
+/**
+ * Thrown when the Xerces parser gives us null for a document.
+ */
+struct XercesParsingError : virtual ExceptionBase {};
 
 
 } // namespace FlightCrew

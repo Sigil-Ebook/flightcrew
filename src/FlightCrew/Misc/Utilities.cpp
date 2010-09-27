@@ -127,7 +127,13 @@ boost::shared_ptr< xc::DOMDocument > LoadXmlDocument( const fs::path &filepath )
 
     parser.parse( toX( BoostPathToUtf8Path( filepath ) ) );
 
-    return RaiiWrapDocument( parser.adoptDocument() );
+    xc::DOMDocument *document = parser.adoptDocument();
+
+    if ( !document )
+
+        boost_throw( XercesParsingError() );        
+
+    return RaiiWrapDocument( document );
 }
 
 
@@ -154,7 +160,13 @@ boost::shared_ptr< xc::DOMDocument > LoadXhtmlDocument( const fs::path &filepath
 
     parser.parse( toX( BoostPathToUtf8Path( filepath ) ) );
 
-    return RaiiWrapDocument( parser.adoptDocument() );
+    xc::DOMDocument *document = parser.adoptDocument();
+
+    if ( !document )
+
+        boost_throw( XercesParsingError() );        
+
+    return RaiiWrapDocument( document );
 }
 
 

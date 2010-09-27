@@ -48,10 +48,17 @@ TEST( ReachabilityAnalysisTest, ManifestResourceNotReachable )
     ReachabilityAnalysis validator;
     std::vector<Result> results = validator.ValidateFile(
             "test_data/opf_tests/ReachabilityAnalysis_ManifestResourceNotReachable/content.opf" );
+
+    // Needed for checking filepaths,
+    // ReachabilityAnalysis uses hashes
+    std::sort( results.begin(), results.end() );
             
-    ASSERT_EQ( results.size(), 1U );
+    ASSERT_EQ( results.size(), 2U );
     EXPECT_EQ( results[ 0 ].GetResultId(), WARNING_OPF_RESOURCE_IN_MANIFEST_NOT_REACHABLE );
-    EXPECT_TRUE( boost::contains( results[ 0 ].GetFilepath(), "doesNotExist.jpg" ) );
+    EXPECT_TRUE( boost::contains( results[ 0 ].GetFilepath(), ".xhtml" ) );
+
+    EXPECT_EQ( results[ 1 ].GetResultId(), WARNING_OPF_RESOURCE_IN_MANIFEST_NOT_REACHABLE );
+    EXPECT_TRUE( boost::contains( results[ 1 ].GetFilepath(), "doesNotExist.jpg" ) );
 }
 
 TEST( ReachabilityAnalysisTest, AllOk )
