@@ -20,48 +20,38 @@
 *************************************************************************/
 
 #include <stdafx_tests.h>
-#include "Validators/Opf/ItemMediaTypeValid.h"
+#include "Validators/Opf/ItemrefIdrefUnique.h"
 #include "Result.h"
-
-namespace FlightCrew
-{
-
-extern const std::string XHTML_MIME;
-extern const std::string OTF_MIME;    
-
-}
 
 using namespace FlightCrew;
 
-TEST( ItemMediaTypeValidTest, BadValue )
+TEST( ItemrefIdrefUniqueTest, AllNotUnique )
 {
-    ItemMediaTypeValid validator;
+    ItemrefIdrefUnique validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ItemMediaTypeValid_BadValue.xml" );
+            "test_data/opf_tests/ItemrefIdrefUnique_AllNotUnique.xml" );
             
     EXPECT_EQ( results.size(), 2U );
-    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_BAD_ITEM_MEDIA_TYPE_VALUE );
-    EXPECT_EQ( results[ 0 ].GetErrorLine(), 9 );
-    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 86 );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_IDREF_NOT_UNIQUE );
+    EXPECT_EQ( results[ 0 ].GetErrorLine(), 17 );
+    EXPECT_EQ( results[ 0 ].GetErrorColumn(), 34 );
     
     std::vector< std::string > message_arguments = results[ 0 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments[ 0 ], "break1"   );
-    EXPECT_EQ( message_arguments[ 1 ], XHTML_MIME );
+    EXPECT_EQ( message_arguments[ 0 ], "chapter-13" );
 
-    EXPECT_EQ( results[ 1 ].GetResultId(), ERROR_OPF_BAD_ITEM_MEDIA_TYPE_VALUE );
-    EXPECT_EQ( results[ 1 ].GetErrorLine(), 14 );
-    EXPECT_EQ( results[ 1 ].GetErrorColumn(), 87 );
+    EXPECT_EQ( results[ 1 ].GetResultId(), ERROR_OPF_IDREF_NOT_UNIQUE );
+    EXPECT_EQ( results[ 1 ].GetErrorLine(), 22 );
+    EXPECT_EQ( results[ 1 ].GetErrorColumn(), 34 );
 
     message_arguments = results[ 1 ].GetMessageArguments();
-    EXPECT_EQ( message_arguments[ 0 ], "break2" );
-    EXPECT_EQ( message_arguments[ 1 ], OTF_MIME );
+    EXPECT_EQ( message_arguments[ 0 ], "chapter-17" );
 }
 
-TEST( ItemMediaTypeValidTest, GoodValue )
+TEST( ItemrefIdrefUniqueTest, AllUnique )
 {
-    ItemMediaTypeValid validator;
+    ItemrefIdrefUnique validator;
     std::vector<Result> results = validator.ValidateFile(
-            "test_data/opf_tests/ItemMediaTypeValid_GoodValue.xml" );
+            "test_data/opf_tests/ItemrefIdrefUnique_AllUnique.xml" );
     
     EXPECT_EQ( results.size(), 0U );
 }

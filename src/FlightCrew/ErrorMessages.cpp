@@ -120,6 +120,9 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_IDREF_ID_DOES_NOT_EXIST ] =
         "The <itemref> element's \"idref\" attribute is pointing to an <item> with id=\"%1%\" which "
         "does not exist in the <manifest>.";
+    m_Messages[ ERROR_OPF_IDREF_NOT_UNIQUE ] =
+        "The <itemref> element's \"idref\" attribute has value \"%1%\", but that value is already "
+        "in use in a previous <itemref>.";    
     m_Messages[ ERROR_OPF_BAD_SPINE_TOC_VALUE ] =
         "The <spine> element's \"toc\" attribute is pointing to an <item> with id=\"%1%\" which "
         "does not exist in the <manifest>.";

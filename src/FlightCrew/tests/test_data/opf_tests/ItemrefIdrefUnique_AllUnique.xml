@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+  <spine>
+    <itemref idref="chapter-01"/>
+    <itemref idref="chapter-02"/>
+    <itemref idref="chapter-03"/>
+    <itemref idref="chapter-04"/>
+    <itemref idref="chapter-05"/>
+    <itemref idref="chapter-06"/>
+    <itemref idref="chapter-07"/>
+    <itemref idref="chapter-08"/>
+    <itemref idref="chapter-09"/>
+    <itemref idref="chapter-10"/>
+    <itemref idref="chapter-11"/>
+    <itemref idref="chapter-12"/>
+    <itemref idref="chapter-13"/>
+    <itemref idref="chapter-14"/>
+    <itemref idref="chapter-15"/>
+    <itemref idref="chapter-16"/>
+    <itemref idref="chapter-17"/>
+    <itemref idref="chapter-18"/>
+    <itemref idref="chapter-19"/>
+  </spine>
+</package>
