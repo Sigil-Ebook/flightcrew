@@ -84,6 +84,7 @@
 #include "Validators/Opf/ItemFilesPresent.h"
 #include "Validators/Opf/ReachabilityAnalysis.h"
 #include "Validators/Opf/ItemMediaTypeValid.h"
+#include "Validators/Opf/ItemrefIdrefUnique.h"
 
 
 namespace FlightCrew
@@ -154,7 +155,8 @@ std::vector< boost::shared_ptr< XmlValidator > > GetOpfXmlValidators()
     validators.push_back( boost::shared_ptr< XmlValidator >( new SpineTocValid() ) );
     validators.push_back( boost::shared_ptr< XmlValidator >( new ItemFilesPresent() ) );    
     validators.push_back( boost::shared_ptr< XmlValidator >( new ReachabilityAnalysis() ) );
-    validators.push_back( boost::shared_ptr< XmlValidator >( new ItemMediaTypeValid() ) );    
+    validators.push_back( boost::shared_ptr< XmlValidator >( new ItemMediaTypeValid() ) );   
+    validators.push_back( boost::shared_ptr< XmlValidator >( new ItemrefIdrefUnique() ) );   
     
     return validators;
 }
