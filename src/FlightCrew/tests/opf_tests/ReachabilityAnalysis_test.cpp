@@ -64,6 +64,31 @@ TEST( ReachabilityAnalysisTest, ManifestResourceNotReachable )
     EXPECT_TRUE( boost::contains( results[ 1 ].GetFilepath(), "doesNotExist.jpg" ) );
 }
 
+TEST( ReachabilityAnalysisTest, ReachableResourceNotInManifest )
+{
+    ReachabilityAnalysis validator;
+    std::vector<Result> results = validator.ValidateFile(
+            "test_data/opf_tests/ReachabilityAnalysis_ReachableResourceNotInManifest/content.opf" );
+
+    // Needed for checking filepaths,
+    // ReachabilityAnalysis uses hashes
+    std::sort( results.begin(), results.end() );
+            
+    ASSERT_EQ( results.size(), 4U );
+    EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_OPF_REACHABLE_RESOURCE_NOT_IN_MANIFEST );
+    EXPECT_TRUE( boost::contains( results[ 0 ].GetFilepath(), "notInManifest.css" ) );
+
+    EXPECT_EQ( results[ 1 ].GetResultId(), ERROR_OPF_REACHABLE_RESOURCE_NOT_IN_MANIFEST );
+    EXPECT_TRUE( boost::contains( results[ 1 ].GetFilepath(), "notInManifest.gif" ) );
+
+    EXPECT_EQ( results[ 2 ].GetResultId(), ERROR_OPF_REACHABLE_OPS_DOC_NOT_IN_SPINE );
+    EXPECT_TRUE( boost::contains( results[ 2 ].GetFilepath(), "test4.xhtml" ) );
+
+    EXPECT_EQ( results[ 3 ].GetResultId(), ERROR_OPF_REACHABLE_RESOURCE_NOT_IN_MANIFEST );
+    EXPECT_TRUE( boost::contains( results[ 3 ].GetFilepath(), "test4.xhtml" ) );
+}
+
+
 TEST( ReachabilityAnalysisTest, AllOk )
 {
     ReachabilityAnalysis validator;

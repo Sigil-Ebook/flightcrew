@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" xml:lang="en" version="2005-1">
+  <navMap>
+    <navPoint id="Chapter-01" >
+      <navLabel>
+        <text>Chapter I</text>
+      </navLabel>
+      <content src="test1.xhtml" />
+    </navPoint>
+    <navPoint id="Chapter-02" >
+      <navLabel>
+        <text>Chapter II</text>
+      </navLabel>
+      <content src="test2.xhtml#id1" />
+    </navPoint>
+    <navPoint id="Chapter-03">
+      <navLabel>
+        <text>Chapter III</text>
+      </navLabel>
+      <content src="test4.xhtml#id2" />
+    </navPoint>
+  </navMap>
+</ncx>

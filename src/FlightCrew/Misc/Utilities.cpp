@@ -118,6 +118,10 @@ boost::shared_ptr< xc::DOMDocument > RaiiWrapDocument( xc::DOMDocument *document
 
 boost::shared_ptr< xc::DOMDocument > LoadXmlDocument( const fs::path &filepath )
 {
+    if ( filepath.empty() )
+
+        boost_throw( XercesParsingError() );  
+
     xe::LocationAwareDOMParser parser;
 
     // This scanner ignores schemas and DTDs
@@ -139,6 +143,10 @@ boost::shared_ptr< xc::DOMDocument > LoadXmlDocument( const fs::path &filepath )
 
 boost::shared_ptr< xc::DOMDocument > LoadXhtmlDocument( const fs::path &filepath )
 {
+    if ( filepath.empty() )
+
+        boost_throw( XercesParsingError() );  
+
     xe::LocationAwareDOMParser parser;
 
     parser.setDoSchema(             false );
@@ -276,6 +284,10 @@ fs::path NormalizePath( const fs::path &filepath )
 
 fs::path Utf8PathToBoostPath( const std::string &utf8_path )
 {
+    if ( utf8_path.empty() )
+
+        return fs::path();
+
     if ( !utf8::is_valid( utf8_path.begin(), utf8_path.end() ) )
         
         boost_throw( PathNotInUtf8() << ei_FilePath( utf8_path ) );    
@@ -287,6 +299,10 @@ fs::path Utf8PathToBoostPath( const std::string &utf8_path )
 
 std::string BoostPathToUtf8Path( const fs::path &filepath )
 {
+    if ( filepath.empty() )
+
+        return std::string();
+
     boost::filesystem::detail::utf8_codecvt_facet utf8facet;
     return filepath.generic_string( utf8facet );
 }

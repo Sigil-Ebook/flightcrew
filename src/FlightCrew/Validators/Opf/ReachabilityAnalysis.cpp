@@ -190,6 +190,7 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::StartingSetOpsPaths(
     boost::unordered_set< fs::path > starting_set = SpinePaths( document, manifest_items );
     starting_set = Util::SetUnion( starting_set, GuidePaths( document, opf_folder_path ) );
     starting_set = Util::SetUnion( starting_set, ToursPaths( document, opf_folder_path ) );
+    starting_set = Util::SetUnion( starting_set, NcxPaths( document, manifest_items ) );    
             
     return starting_set;
 }
@@ -258,6 +259,71 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::ToursPaths(
     }
             
     return tours_paths;
+}
+
+
+fs::path ReachabilityAnalysis::GetPathToNcx( 
+    const xc::DOMDocument &document, 
+    const boost::unordered_map< std::string, fs::path > &manifest_items )
+{
+    std::vector< xc::DOMAttr* > tocs = xe::GetAllAttributesFromElements( 
+        QName( "spine", OPF_XML_NAMESPACE ),
+        QName( "toc", "" ),
+        document );
+
+    if ( tocs.empty() )
+
+        return fs::path();
+
+    std::string toc_id = fromX( tocs[ 0 ]->getValue() );
+
+    if ( !manifest_items.count( toc_id ) )
+
+        return fs::path();
+
+    return manifest_items.at( toc_id );
+}
+
+
+boost::unordered_set< fs::path > ReachabilityAnalysis::NcxPaths( 
+    const xc::DOMDocument &document, 
+    const boost::unordered_map< std::string, fs::path > &manifest_items )
+{
+    fs::path ncx_path = GetPathToNcx( document, manifest_items );
+    boost::shared_ptr< xc::DOMDocument > ncx_document;
+
+    try
+    {
+        ncx_document = Util::LoadXmlDocument( ncx_path );
+    }
+
+    catch ( std::exception& )
+    {
+        // If the file doesn't exist or some other
+        // snafu, then there are obviously no links.
+        return boost::unordered_set< fs::path > ();
+    }
+
+    boost::unordered_set< fs::path > ncx_paths;
+
+    std::vector< xc::DOMAttr* > srcs = xe::GetAllAttributesFromElements( 
+        QName( "content", NCX_XML_NAMESPACE ),
+        QName( "src", "" ),
+        *ncx_document );
+
+    fs::path ncx_folder = ncx_path.parent_path();
+
+    foreach( xc::DOMAttr* src, srcs )
+    {
+        fs::path resource_path = 
+            Util::Utf8PathToBoostPath(
+                Util::UrlWithoutFragment( 
+                    Util::UrlDecode( fromX( src->getValue() ) ) ) ); 
+        
+        ncx_paths.insert( ncx_folder / resource_path );
+    }
+
+    return ncx_paths;
 }
 
 

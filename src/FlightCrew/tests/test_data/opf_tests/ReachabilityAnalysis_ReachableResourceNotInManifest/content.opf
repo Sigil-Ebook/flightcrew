@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId">
+  <manifest>
+    <item id="test1" href="test1.xhtml" media-type="application/xhtml+xml"/>
+    <item id="test2" href="test2.xhtml" media-type="application/xhtml+xml"/>
+    <item id="test3" href="test3.xhtml" media-type="application/xhtml+xml"/>
+    <item id="style" href="main.css" media-type="text/css"/>
+    <item id="eee"   href="cover.gif" media-type="image/gif"/>  
+    <item id="eoeee" href="img2.jpg" media-type="image/jpeg"/>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>    
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="test1"/>
+    <itemref idref="test2"/>
+    <itemref idref="test3"/>
+  </spine>
+</package>

@@ -77,6 +77,14 @@ private:
         const xc::DOMDocument &document,
         const fs::path &opf_folder_path );
 
+    fs::path GetPathToNcx( 
+        const xc::DOMDocument &document, 
+        const boost::unordered_map< std::string, fs::path > &manifest_items );
+
+    boost::unordered_set< fs::path > NcxPaths( 
+        const xc::DOMDocument &document,
+        const boost::unordered_map< std::string, fs::path > &manifest_items );
+
     boost::unordered_set< fs::path > DetermineReachableResources( 
         const boost::unordered_set< fs::path > &starting_ops_paths );
 
