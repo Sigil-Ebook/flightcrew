@@ -130,7 +130,7 @@ void ErrorMessages::LoadMessages()
         "The <package> element's \"unique-identifier\" attribute is pointing to an <identifier> "
         "with id=\"%1%\" which does not exist in the <metadata>.";
     m_Messages[ ERROR_OPF_BAD_PACKAGE_VERSION ] =
-        "The <package> element's \"version\" attribute value needs to be \"%1%\", and is \"%2%\".";
+        "The <package> element's \"version\" attribute value needs to be \"%1%\", but is \"%2%\".";
     m_Messages[ ERROR_OPF_BAD_ITEM_LINEAR_VALUE ] =
         "The <item> element's \"linear\" attribute has value \"%1%\", but only \"yes\" and \"no\" "
         "are allowed.";
@@ -151,13 +151,13 @@ void ErrorMessages::LoadMessages()
         "The <item> element's \"href\" attribute value is \"%1%\", which contains "
         "a fragment identifier.";
     m_Messages[ ERROR_OPF_ITEM_HREF_NOT_UNIQUE ] =
-        "The <item> element's \"href\" attribute value is \"%1%\", "
+        "The <item> element's \"href\" attribute value is \"%1%\" "
         "which is already in use in a previous <item>.";
     m_Messages[ ERROR_OPF_ITEM_REQMOD_WITHOUT_REQNS ] =
         "The <item> element has a \"required-modules\" attribute but doesn't have a "
         "\"required-namespace\" attribute.";
     m_Messages[ ERROR_OPF_ITEM_FILE_DOESNT_EXIST ] =
-        "The <item> element's \"href\" attribute points to file \"%1%\", "
+        "The <item> element's \"href\" attribute points to file \"%1%\" "
         "which does not exist.";      
     m_Messages[ ERROR_OPF_NCX_NOT_PRESENT ] =
         "There is no <item> element in the <manifest> that has the NCX mimetype "
@@ -168,15 +168,15 @@ void ErrorMessages::LoadMessages()
         "This resource is reachable but not present in the OPF <manifest>."; 
 
     m_Messages[ ERROR_NCX_CONTENT_FILE_DOES_NOT_EXIST ] =
-        "This <content> element's \"src\" attribute is \"%1%\", but that file does not exist.";
+        "This <content> element's \"src\" attribute value is \"%1%\", but that file does not exist.";
     m_Messages[ ERROR_NCX_CONTENT_FRAGMENT_DOES_NOT_EXIST ] =
-        "This <content> element's \"src\" attribute is \"%1%\", but an element with an ID the "
+        "This <content> element's \"src\" attribute value is \"%1%\", but an element with an ID the "
         "fragment is referring to does not exist in that file.";
 
     m_Messages[ WARNING_GENERIC ] =
         "Warning."; 
     m_Messages[ WARNING_OPF_RESOURCE_IN_MANIFEST_NOT_REACHABLE ] =
-        "This resource is present in the OPF <manifest>, but is not reachable (it's unused).";
+        "This resource is present in the OPF <manifest>, but it's not reachable (it's unused).";
 }
 
 } // namespace FlightCrew
