@@ -9,13 +9,7 @@
 
 cmake_minimum_required( VERSION 2.8 ) 
 
-# We use the lower case name
-# on UNIX systems other than Mac OS X
-if ( WIN32 OR APPLE )
-    project( FlightCrew )
-else()
-    project( flightcrew )
-endif()
+project( FlightCrew )
 
 file( GLOB_RECURSE SOURCES *.h *.cpp *.xsd *.dtd )
 

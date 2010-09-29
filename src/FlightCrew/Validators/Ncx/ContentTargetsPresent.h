@@ -47,7 +47,7 @@ private:
         std::string fragment;
         std::string raw_src_path;
 
-        bool operator< ( const ContentTarget &other )
+        bool operator< ( const ContentTarget &other ) const
         {
             return content_file < other.content_file; 
         }

@@ -37,7 +37,7 @@ Result::Result( ResultId result_id, xe::NodeLocationInfo node_location )
 
 ResultType Result::GetResultType() const
 {
-    if ( m_ResultId < ResultType_WARNING )
+    if ( static_cast< int >( m_ResultId ) < static_cast< int >( ResultType_WARNING ) )
 
         return ResultType_ERROR;
 

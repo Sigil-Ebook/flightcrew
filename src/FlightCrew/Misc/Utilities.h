@@ -103,7 +103,9 @@ namespace Util
         
             return SetIntersection( second, first );
 
-        for ( boost::unordered_set< T >::const_iterator it = first.begin(); it != first.end(); ++it )
+        for ( typename boost::unordered_set< T > ::const_iterator it = first.begin();
+            it != first.end();
+            ++it )
         {
             if ( second.find( *it ) != second.end() )
                     
@@ -132,7 +134,9 @@ namespace Util
     {
         boost::unordered_set< T > subtracted;
 
-        for ( boost::unordered_set< T >::const_iterator it = first.begin(); it != first.end(); ++it )
+        for ( typename boost::unordered_set< T >::const_iterator it = first.begin();
+            it != first.end();
+            ++it )
         {
             if ( second.find( *it ) == second.end() )
                     

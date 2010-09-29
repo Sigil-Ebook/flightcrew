@@ -211,7 +211,7 @@ std::string GetUrlFragment( const std::string &decoded_url )
     int hash_location = static_cast< int >( decoded_url.find( '#' ) );
 
     if ( hash_location != -1 && 
-         hash_location + 1 < decoded_url.size() )
+         hash_location + 1 < static_cast< int >( decoded_url.size() ) )
     {
         return decoded_url.substr( hash_location + 1, decoded_url.size() );
     }
