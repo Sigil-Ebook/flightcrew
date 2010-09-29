@@ -46,6 +46,8 @@ namespace Util
 
     std::string UrlDecode( const std::string &encoded_url );
 
+    std::string GetUrlFragment( const std::string &decoded_url );
+
     std::string UrlWithoutFragment( const std::string &decoded_url );
 
     std::string UrlWithoutFileScheme( const std::string &decoded_url );

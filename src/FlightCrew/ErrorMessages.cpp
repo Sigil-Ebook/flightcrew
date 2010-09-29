@@ -167,6 +167,12 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_OPF_REACHABLE_RESOURCE_NOT_IN_MANIFEST ] =
         "This resource is reachable but not present in the OPF <manifest>."; 
 
+    m_Messages[ ERROR_NCX_CONTENT_FILE_DOES_NOT_EXIST ] =
+        "This <content> element's \"src\" attribute is \"%1%\", but that file does not exist.";
+    m_Messages[ ERROR_NCX_CONTENT_FRAGMENT_DOES_NOT_EXIST ] =
+        "This <content> element's \"src\" attribute is \"%1%\", but an element with an ID the "
+        "fragment is referring to does not exist in that file.";
+
     m_Messages[ WARNING_GENERIC ] =
         "Warning."; 
     m_Messages[ WARNING_OPF_RESOURCE_IN_MANIFEST_NOT_REACHABLE ] =

@@ -30,6 +30,7 @@ extern const std::string MAIN_XML_NAMESPACE;
 extern const std::string OPF_XML_NAMESPACE;
 extern const std::string DC_XML_NAMESPACE;
 extern const std::string CONTAINER_XML_NAMESPACE;
+extern const std::string NCX_XML_NAMESPACE;
 
 extern const std::string OEBPS_MIME;  
 extern const std::string XHTML_MIME; 

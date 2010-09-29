@@ -20,35 +20,49 @@
 *************************************************************************/
 
 #pragma once
-#ifndef XMLVALIDATOR_H
-#define XMLVALIDATOR_H
+#ifndef CONTENTTARGETSPRESENT_H
+#define CONTENTTARGETSPRESENT_H
 
-#include <xercesc/dom/DOMDocument.hpp>
-namespace xc = XERCES_CPP_NAMESPACE;
-#include "IValidator.h"
-#include "Result.h"
+#include "../XmlValidator.h"
+#include <NodeLocationInfo.h>
+#include <boost/unordered/unordered_set_fwd.hpp>
 
 namespace FlightCrew
 {
 
-class XmlValidator : public IValidator
+class ContentTargetsPresent : public XmlValidator
 {
 public:
 
-    virtual std::vector<Result> ValidateFile( const fs::path &filepath );
-
     virtual std::vector<Result> ValidateXml( 
         const xc::DOMDocument &document,
-        const fs::path &filepath = fs::path() ) = 0;
+        const fs::path &filepath = fs::path() );
 
-    virtual ~XmlValidator() {};
+private:
 
-protected:
+    struct ContentTarget 
+    {
+        XercesExt::NodeLocationInfo content_node;
+        fs::path content_file;
+        std::string fragment;
+        std::string raw_src_path;
 
-    Result ResultWithNodeLocation( ResultId error_id, 
-                                   const xc::DOMNode &node );
+        bool operator< ( const ContentTarget &other )
+        {
+            return content_file < other.content_file; 
+        }
+    };
+
+    std::vector< ContentTarget > GetContentTargets( 
+        const xc::DOMDocument &document,
+        const fs::path &folderpath );
+
+    boost::unordered_set< std::string > GetAllIdsFromDocument(
+        const fs::path &filepath );
+
 };
 
 } // namespace FlightCrew
 
-#endif // XMLVALIDATOR_H
+#endif // CONTENTTARGETSPRESENT_H
+

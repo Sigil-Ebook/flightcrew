@@ -206,13 +206,27 @@ std::string UrlDecode( const std::string &encoded_url )
 }
 
 
+std::string GetUrlFragment( const std::string &decoded_url )
+{
+    int hash_location = static_cast< int >( decoded_url.find( '#' ) );
+
+    if ( hash_location != -1 && 
+         hash_location + 1 < decoded_url.size() )
+    {
+        return decoded_url.substr( hash_location + 1, decoded_url.size() );
+    }
+    
+    return std::string();
+}
+
+
 std::string UrlWithoutFragment( const std::string &decoded_url )
 {
     int hash_location = static_cast< int >( decoded_url.find( '#' ) );
 
     if ( hash_location != -1 )
-
-        return boost::erase_tail_copy( decoded_url, hash_location );
+    
+        return decoded_url.substr( 0, hash_location );    
     
     return decoded_url;
 }

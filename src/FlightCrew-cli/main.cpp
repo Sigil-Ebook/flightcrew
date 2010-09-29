@@ -148,6 +148,7 @@ int main( int argc, char *argv[] )
     catch ( ... ) 
     {
         std::cerr << "Unknown exception!\n";
+        return 1;
     }
 
     return 0;

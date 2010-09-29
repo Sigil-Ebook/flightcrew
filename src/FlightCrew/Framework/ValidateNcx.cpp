@@ -27,6 +27,7 @@
 #include "Validators/Xml/UsesUnicode.h"
 #include "Misc/Utilities.h"
 #include "Validators/Ncx/NcxSatisfiesSchema.h"
+#include "Validators/Ncx/ContentTargetsPresent.h"
 
 
 namespace FlightCrew
@@ -41,8 +42,9 @@ std::vector< Result > ValidateNcx( const fs::path &filepath )
         boost_throw( FileDoesNotExistEx() << ei_FilePath( Util::BoostPathToUtf8Path( filepath ) ) );
 
     std::vector< Result > results;  
-    Util::Extend( results, NcxSatisfiesSchema().ValidateFile( filepath ) );
-    Util::Extend( results, UsesUnicode()       .ValidateFile( filepath ) );
+    Util::Extend( results, NcxSatisfiesSchema()   .ValidateFile( filepath ) );
+    Util::Extend( results, ContentTargetsPresent().ValidateFile( filepath ) );
+    Util::Extend( results, UsesUnicode()          .ValidateFile( filepath ) );
     return Util::SortedInPlace( results );
 }
 
