@@ -50,6 +50,9 @@ extern const std::string OEB_CSS_MIME;
 
 extern const std::string UNKNOWN_MIME;
 
+extern const std::string XHTML11_SYSTEM_ID;
+extern const std::string XHTML11_PUBLIC_ID;
+
 extern const QName DC_METADATA_QNAME;
 extern const QName X_METADATA_QNAME; 
 extern const QName TITLE_QNAME;      

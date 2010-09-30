@@ -19,33 +19,28 @@
 **
 *************************************************************************/
 
-#include <stdafx.h>
-#include "MimetypeBytesValid.h"
-#include "Misc/Utilities.h"
+#pragma once
+#ifndef USESCORRECTDTD_H
+#define USESCORRECTDTD_H
 
-static const std::string MIMETYPE_BYTES = "mimetypeapplication/epub+zipPK";
+#include "../IValidator.h"
 
 namespace FlightCrew
 {
 
-std::vector<Result> MimetypeBytesValid::ValidateFile( const fs::path &filepath )
+class UsesCorrectDtd : public IValidator
 {
-    fs::ifstream file( filepath, std::ios::in | std::ios::binary );
+public:
 
-    // As per the OCF spec, bytes 30 to 60 of an epub archive 
-    // have to match what we have in MIMETYPE_BYTES
-    char bytes30to60[ 30 + 1 ] = { 0 };
-    file.seekg( 30 );
-    file.read( bytes30to60, 30 );
+    std::vector<Result> ValidateFile( const fs::path &filepath );
 
-    std::string string_bytes( bytes30to60 );
-    std::vector<Result> results;
+private:
 
-    if ( string_bytes != MIMETYPE_BYTES )
+    bool DtdCorrect( const std::string &inital_chars );
 
-        results.push_back( Result( ERROR_EPUB_MIMETYPE_BYTES_INVALID ) );
-
-    return results;
-}
+    int DtdStartLocation( const std::string &inital_chars );
+};
 
 } // namespace FlightCrew
+
+#endif // USESCORRECTDTD_H

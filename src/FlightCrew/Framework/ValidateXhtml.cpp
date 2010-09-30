@@ -27,6 +27,7 @@
 #include "Validators/Xml/UsesUnicode.h"
 #include "Misc/Utilities.h"
 #include "Validators/Xhtml/SatisfiesXhtmlSchema.h"
+#include "Validators/Xhtml/UsesCorrectDtd.h"
 
 namespace FlightCrew
 {
@@ -42,6 +43,7 @@ std::vector< Result > ValidateXhtml( const fs::path &filepath )
     std::vector< Result > results;
     Util::Extend( results, SatisfiesXhtmlSchema().ValidateFile( filepath ) );
     Util::Extend( results, UsesUnicode()         .ValidateFile( filepath ) );
+    Util::Extend( results, UsesCorrectDtd()      .ValidateFile( filepath ) );
     return Util::SortedInPlace( results );
 }
 

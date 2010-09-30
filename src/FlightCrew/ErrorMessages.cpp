@@ -136,13 +136,13 @@ void ErrorMessages::LoadMessages()
         "are allowed.";
     m_Messages[ ERROR_OPF_BAD_ITEM_MEDIA_TYPE_VALUE ] =
         "The <item> element's \"media-type\" attribute has value \"%1%\", but the file's "
-        "media type is \"%2%\"";    
+        "media type is \"%2%\".";    
     m_Messages[ ERROR_OPF_BAD_CREATOR_OR_CONTRIBUTOR_ROLE_VALUE ] =
         "The \"role\" value \"%1%\" is not a registered MARC value. Either use a valid MARC "
-        "relator or start your relator with \"oth.\"";
+        "relator or start your relator with \"oth.\".";
     m_Messages[ ERROR_OPF_BAD_REFERENCE_TYPE_VALUE ] =
         "The <reference> element's \"type\" attribute has value \"%1%\" which is not an "
-        "OPF-specified value. Either use a predefined type or start your type with \"other.\"";
+        "OPF-specified value. Either use a predefined type or start your type with \"other.\".";
     m_Messages[ ERROR_OPF_BAD_DATE_VALUE ] =
         "The <date> element's value is \"%1%\", which is not a valid date format.";    
     m_Messages[ ERROR_OPF_ITEM_HREF_INVALID_URI ] =
@@ -172,6 +172,11 @@ void ErrorMessages::LoadMessages()
     m_Messages[ ERROR_NCX_CONTENT_FRAGMENT_DOES_NOT_EXIST ] =
         "This <content> element's \"src\" attribute value is \"%1%\", but an element with an ID the "
         "fragment is referring to does not exist in that file.";
+
+    m_Messages[ ERROR_XHTML_BAD_DTD ] =
+        std::string( "The file specifies an incorrect DTD. The correct public ID for the DTD is \"" ) +
+         XHTML11_PUBLIC_ID + "\", while the correct system ID is \"" + XHTML11_SYSTEM_ID + "\". "
+         "Do note that using a DTD is optional; but if used, it must be correct.";
 
     m_Messages[ WARNING_GENERIC ] =
         "Warning."; 

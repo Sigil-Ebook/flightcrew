@@ -42,6 +42,8 @@ namespace Util
 
     std::string GetFirstNumCharsFromFile( const fs::path &filepath, unsigned int num_chars );
 
+    int LineOfCharIndex( const std::string &string, unsigned int char_index );
+
     boost::shared_ptr< xc::DOMDocument > LoadXmlDocument( const fs::path &filepath );
 
     boost::shared_ptr< xc::DOMDocument > LoadXhtmlDocument( const fs::path &filepath );

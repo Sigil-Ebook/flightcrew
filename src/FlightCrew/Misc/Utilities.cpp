@@ -126,6 +126,40 @@ std::string GetFirstNumCharsFromFile( const fs::path &filepath, uint num_chars )
 }
 
 
+int LineOfCharIndex( const std::string &string, unsigned int char_index )
+{
+    // \x0A is the line feed char, 
+    // \x0D is the carriage return char
+
+    std::string line_marker;
+
+    if ( string.find( "\x0A" ) != std::string::npos )
+
+        line_marker = "\x0A";
+
+    else 
+
+        line_marker = "\x0D";
+
+    size_t search_start = 0;
+    int count = 1;
+
+    while ( true )
+    {
+        size_t position = string.find( line_marker, search_start );
+
+        if ( position == std::string::npos || position > char_index )
+
+            break;
+
+        ++count;        
+        search_start = position + 1;
+    }
+
+    return count;
+}
+
+
 boost::shared_ptr< xc::DOMDocument > RaiiWrapDocument( xc::DOMDocument *document )
 {
     return boost::shared_ptr< xc::DOMDocument >( document, XercesExt::XercesDeallocator< xc::DOMDocument > );

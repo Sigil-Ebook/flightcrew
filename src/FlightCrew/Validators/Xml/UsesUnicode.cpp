@@ -27,7 +27,7 @@
 #include "Result.h"
 
 
-static int NUM_PEEK_CHARS_FOR_XML_DECLARATION = 80;
+static const int NUM_PEEK_CHARS_FOR_XML_DECLARATION = 80;
 
 namespace FlightCrew
 {
