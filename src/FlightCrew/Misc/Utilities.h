@@ -40,6 +40,8 @@ namespace Util
 
     std::string GetFirstNumChars( const std::string &string, unsigned int num_chars );
 
+    std::string GetFirstNumCharsFromFile( const fs::path &filepath, unsigned int num_chars );
+
     boost::shared_ptr< xc::DOMDocument > LoadXmlDocument( const fs::path &filepath );
 
     boost::shared_ptr< xc::DOMDocument > LoadXhtmlDocument( const fs::path &filepath );

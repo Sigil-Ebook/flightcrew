@@ -110,6 +110,22 @@ std::string GetFirstNumChars( const std::string &string, uint num_chars )
 }
 
 
+std::string GetFirstNumCharsFromFile( const fs::path &filepath, uint num_chars )
+{
+    try
+    {
+        // TODO: Let's not load the entire file
+        std::string contents = Util::ReadUnicodFile( filepath );
+        return GetFirstNumChars( contents, num_chars );
+    }
+
+    catch ( FileNotInUnicodeEx& )
+    {
+        return std::string();
+    }  
+}
+
+
 boost::shared_ptr< xc::DOMDocument > RaiiWrapDocument( xc::DOMDocument *document )
 {
     return boost::shared_ptr< xc::DOMDocument >( document, XercesExt::XercesDeallocator< xc::DOMDocument > );

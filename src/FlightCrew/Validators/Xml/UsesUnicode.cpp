@@ -38,7 +38,7 @@ std::vector<Result> UsesUnicode::ValidateFile( const fs::path &filepath )
 
     try
     {
-        std::string inital_chars = GetFirstNumCharsFromFile( filepath, NUM_PEEK_CHARS_FOR_XML_DECLARATION );
+        std::string inital_chars = Util::GetFirstNumCharsFromFile( filepath, NUM_PEEK_CHARS_FOR_XML_DECLARATION );
 
         if ( FileIsValidUtf8( filepath ) )
         {
@@ -95,21 +95,6 @@ bool UsesUnicode::FileIsValidUtf8( const fs::path &filepath )
     std::istreambuf_iterator<char> eos;
 
     return utf8::is_valid( it, eos );
-}
-
-
-std::string UsesUnicode::GetFirstNumCharsFromFile( const fs::path &filepath, uint num_chars )
-{
-    try
-    {
-        std::string contents = Util::ReadUnicodFile( filepath );
-        return Util::GetFirstNumChars( contents, num_chars );
-    }
-
-    catch ( FileNotInUnicodeEx& )
-    {
-        return std::string();
-    }  
 }
 
 
