@@ -27,6 +27,12 @@
 
 namespace FlightCrew
 {
+
+// These have to go here; otherwise, we get the static initialization order fiasco
+const std::string MAIN_XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace"; 
+const std::string OPF_XML_NAMESPACE  = "http://www.idpf.org/2007/opf"; 
+const std::string DC_XML_NAMESPACE   = "http://purl.org/dc/elements/1.1/";
+const std::string NCX_XML_NAMESPACE  = "http://www.daisy.org/z3986/2005/ncx/";
     
 const QName DC_METADATA_QNAME = QName( "dc-metadata", OPF_XML_NAMESPACE );
 const QName X_METADATA_QNAME  = QName( "x-metadata",  OPF_XML_NAMESPACE );

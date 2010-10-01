@@ -53,7 +53,7 @@ private:
      *
      * @param children The children of the metadata element.
      */
-    std::vector<Result> ValidateStandardChildren( std::vector< xc::DOMElement* > children );
+    std::vector<Result> ValidateStandardChildren( std::vector< xc::DOMElement* > children );       
 };
 
 } // namespace FlightCrew
