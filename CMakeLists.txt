@@ -39,7 +39,7 @@ set( CMAKE_OSX_DEPLOYMENT_TARGET "10.5" )
 set( CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk" )
 
 # Universal builds for mac
-set( CMAKE_OSX_ARCHITECTURES "ppc;i386" )
+set( CMAKE_OSX_ARCHITECTURES "ppc;ppc64;i386;x86_64" )
 
 # The parsing order is significant!
 add_subdirectory( src/BoostParts )
