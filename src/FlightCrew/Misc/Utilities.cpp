@@ -56,14 +56,14 @@ std::string ReadUnicodFile( const fs::path &filepath )
 
     if ( utf8::is_valid( contents.begin(), contents.end() ) )
 
-        return std::string( contents.data() );
+        return std::string( contents.begin(), contents.end() );
 
     // UTF-16BE
     if ( static_cast< unsigned char >( contents[ 0 ] ) == 0xfeU &&
          static_cast< unsigned char >( contents[ 1 ] ) == 0xffU )
     {
         xc::TranscodeFromStr transcoder( 
-            (const XMLByte*) contents.data(), contents.size() , "UTF-16BE" );
+            (const XMLByte*) &( *contents.begin() ), contents.size() , "UTF-16BE" );
 
         xc::TranscodeToStr transcoder_utf8( transcoder.str(), "UTF-8" );
 
@@ -75,7 +75,7 @@ std::string ReadUnicodFile( const fs::path &filepath )
               static_cast< unsigned char >( contents[ 1 ] ) == 0xfeU )
     {
         xc::TranscodeFromStr transcoder( 
-            (const XMLByte*) contents.data(), contents.size(), "UTF-16LE" );
+            (const XMLByte*) &( *contents.begin() ), contents.size(), "UTF-16LE" );
 
         xc::TranscodeToStr transcoder_utf8( transcoder.str(), "UTF-8" );
 
