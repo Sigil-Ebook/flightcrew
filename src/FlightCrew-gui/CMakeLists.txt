@@ -115,6 +115,13 @@ endif()
 
 #############################################################################
 
+# No console window shown on launch
+if ( WIN32 )
+    set_target_properties( ${PROJECT_NAME} PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS" )
+endif()
+
+#############################################################################
+
 # For Mac, add frameworks and make a DMG
 if( APPLE )
     add_custom_target(  addframeworks ALL 
@@ -166,7 +173,7 @@ else()
     # since the PRE_BUILD condition is not supported. Using the intermediate for
     # MSVC makes it unnecessarily recompile that target every time the project is built.
     # So we use the direct way on MSVC, and the intemediate way for other generators.
-    if( MSVC )
+    if( MSVC_IDE )
         set( TARGET_FOR_COPY makeinstaller )
         add_dependencies( makeinstaller ${PROJECT_NAME} )
     else()
@@ -209,7 +216,7 @@ else()
     endforeach( lib )
     
     # Set the path of the application executable
-    if( MSVC )
+    if( MSVC_IDE )
         set( EXE_PATH     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/${PROJECT_NAME}${CMAKE_EXECUTABLE_SUFFIX} )
         set( CLI_EXE_PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/${FC_CLI_NAME}${CMAKE_EXECUTABLE_SUFFIX} )        
     else()

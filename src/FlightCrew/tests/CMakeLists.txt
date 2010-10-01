@@ -94,13 +94,13 @@ add_definitions( -DXERCES_STATIC_LIBRARY )
 #############################################################################
 
 # The test executable expects a "test_data" dir in its working directory.
-if ( NOT MSVC )
+if ( NOT MSVC_IDE )
     add_custom_target( copy_test_data 
                        COMMAND cmake -E copy_directory 
                        ${CMAKE_CURRENT_SOURCE_DIR}/test_data 
                        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_data )
 else()
-    # MSVC creates the test executable in a Release or Debug subdir (depending
+    # MSVC_IDE creates the test executable in a Release or Debug subdir (depending
     # on the build configuration) so we copy the data there in this case.
     add_custom_target( copy_test_data 
                        COMMAND cmake -E copy_directory 
