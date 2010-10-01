@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleVersion</key>
+	<string>FCVERSION</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © Strahinja Markovic 2010, GNU LGPL v3, CC 3.0 BY-SA</string>
+	<key>CFBundleShortVersionString</key>
+	<string>FCVERSION</string>
+	<key>CFBundleGetInfoString</key>
+	<string>FCVERSION FlightCrew Open Source ePub Validator. See http://code.google.com/p/flightcrew/</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.valloric.Sigil.app</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>FlightCrew-gui</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>FlightCrew-gui</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>Fcva</string>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+	<key>LSRequiresCarbon</key>
+	<true/>
+</dict>
+</plist>

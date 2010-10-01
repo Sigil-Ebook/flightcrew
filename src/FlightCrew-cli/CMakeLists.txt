@@ -63,3 +63,15 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_definitions( -Wall )
 endif()
 
+#############################################################################
+
+# You can change the install location by 
+# running cmake like this:
+#
+#   cmake -DCMAKE_INSTALL_PREFIX=/new/install/prefix
+#
+# By default, the prefix is "/usr/local"
+# 
+if( UNIX AND NOT APPLE )
+    install( TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
+endif()
