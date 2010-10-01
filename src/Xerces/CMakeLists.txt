@@ -147,10 +147,15 @@ if( MSVC )
     
 else()
     add_definitions( -DXERCES_USE_FILEMGR_POSIX
-                     -DXERCES_USE_TRANSCODER_GNUICONV
                      -DXERCES_USE_MUTEXMGR_POSIX 
                    )  
-     
+    
+    if( APPLE )
+        add_definitions( -DXERCES_USE_TRANSCODER_MACOSUNICODECONVERTER )
+    else()
+        add_definitions( -DXERCES_USE_TRANSCODER_GNUICONV )
+    endif()
+                   
     # We need to link to pthreads on unix                                 
     target_link_libraries( ${PROJECT_NAME} pthread )
                        
