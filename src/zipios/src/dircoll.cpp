@@ -7,7 +7,7 @@
 
 #include "zipios++/dircoll.h"
 
-#include "directory.h"
+#include "../FlightCrew/Misc/BoostFilesystemUse.h"
 
 
 namespace zipios {
@@ -131,16 +131,16 @@ void DirectoryCollection::loadEntries() const {
 void DirectoryCollection::load( bool recursive, const FilePath &subdir ) {
   using namespace boost::filesystem ;
   BasicEntry *ent ;
-  for ( dir_it it( _filepath + subdir ) ; it != dir_it() ; ++it ) {
+  for ( fs::directory_iterator it( (_filepath + subdir).asString() ) ; it != fs::directory_iterator() ; ++it ) {
 
     if ( *it == "." || *it == ".." || *it == "..." )
       continue ;
 
-    if ( boost::filesystem::get< is_directory >( it ) && recursive ) {
-      load( recursive, subdir + *it ) ;
+    if ( fs::is_directory( it->path() ) && recursive ) {
+      load( recursive, subdir + it->path().filename().string() ) ;
     } else {
-      _entries.push_back( ent = new BasicEntry( subdir + *it, "", _filepath ) ) ;
-      ent->setSize( (zipios::uint32) boost::filesystem::get< boost::filesystem::size >( it ) ) ;
+      _entries.push_back( ent = new BasicEntry( subdir + it->path().filename().string(), "", _filepath ) ) ;
+      ent->setSize( (zipios::uint32) fs::file_size( it->path() ) ) ;
     }
 
   }

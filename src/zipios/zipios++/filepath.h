@@ -20,13 +20,15 @@ public:
   /** Constructor.
       @param path A string representation of the path.
       @param check_exists If true is specified the constructor will
-      check the existence and type of the path immidiately, instead of
+      check the existence and type of the path immediately, instead of
       deferring that task until it is needed. */
   FilePath( const string &path = "", bool check_exists = false ) ;
 
   inline FilePath &operator= ( const string &rhs ) ;
 
   inline operator string() const ;
+
+  inline std::string asString() const ;
 
   /** Concatenates FilePath objects. A file separator is inserted
       if appropriate. */
@@ -106,6 +108,10 @@ void FilePath::pruneTrailingSeparator() {
 FilePath::operator string() const { 
   return _path ;
 } 
+
+std::string FilePath::asString() const {
+  return _path ;
+}
 
 
 FilePath FilePath::operator+ ( const FilePath &name ) const { 
