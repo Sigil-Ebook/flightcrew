@@ -159,7 +159,7 @@ void MainWindow::BrowseForEpub()
 
 void MainWindow::DisplayResults( const std::vector< fc::Result > &results )
 {
-    for ( int i = 0; i < results.size(); ++i )
+    for ( unsigned int i = 0; i < results.size(); ++i )
     {
         fc::Result result = results[ i ];
 
