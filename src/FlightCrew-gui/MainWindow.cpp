@@ -45,7 +45,6 @@ MainWindow::MainWindow( QWidget*, Qt::WFlags )
     setAttribute( Qt::WA_DeleteOnClose );
     setAcceptDrops( true );
 
-    ui.FilepathsCombo->setInsertPolicy( QComboBox::InsertAtCurrent );
     ui.ResultTable->setColumnCount( 3 );
     ui.ResultTable->setHorizontalHeaderLabels( 
         QStringList() << tr( "File" ) << tr( "Line" ) << tr( "Message" ) );
@@ -249,7 +248,9 @@ void MainWindow::ReadSettings()
         restoreGeometry( geometry );
 
     ui.FilepathsCombo->addItems( settings.value( "path_strings" ).toStringList() );
-    m_LastFolderOpen = settings.value( "lastfolderopen"  ).toString();
+    m_LastFolderOpen = settings.value( "lastfolderopen" ).toString();
+
+    ui.FilepathsCombo->setCurrentIndex( settings.value( "lastusedcomboindex" ).toInt() );
 }
 
 
@@ -269,6 +270,7 @@ void MainWindow::WriteSettings()
     }
 
     settings.setValue( "path_strings", path_strings );
+    settings.setValue( "lastusedcomboindex", ui.FilepathsCombo->currentIndex() );
     settings.setValue( "lastfolderopen", m_LastFolderOpen );
 }
 
