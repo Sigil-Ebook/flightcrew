@@ -163,6 +163,13 @@ else()
     else()
         add_definitions( -DXERCES_USE_TRANSCODER_GNUICONV )
     endif()
+    
+    if( CMAKE_COMPILER_IS_GNUCXX )
+        # SSE2 autodetection sometimes fails on Linux, so we'll just
+        # require the presence of SSE2. Everything since the year 2000 (Pentium 4)
+        # has it, so it's not like we're leaving anyone out.
+        add_definitions( -msse2 ) 
+    endif()
                    
     # We need to link to pthreads on unix                                 
     target_link_libraries( ${PROJECT_NAME} pthread )
