@@ -1,2 +1,6 @@
+FlightCrew v0.7.1 ADD_DATE
+    - fixed an issue with anchor links to the current file (links with fragments only)
+    incorrectly throwing errors in the reachability analysis (issue #3)
+
 FlightCrew v0.7.0 2010.10.01.
     - initial release

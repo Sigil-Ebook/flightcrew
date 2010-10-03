@@ -478,7 +478,7 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::GetLinkedResourcesFromOps
                             Util::UrlWithoutFragment( 
                                 Util::UrlDecode( attribute_value ) ) ) );
 
-                if ( !IsFilesystemPath( resource_path ) )
+                if ( !IsFilesystemPath( resource_path ) || resource_path.empty() )
 
                     continue;
 
