@@ -114,6 +114,11 @@ void ErrorMessages::LoadMessages()
         "An element with ID value \"%1%\" already exists in the document.";
     m_Messages[ ERROR_XML_BAD_ID_VALUE ] =
         "An ID value of \"%1%\" is not a valid value for an ID.";
+    m_Messages[ ERROR_XML_SPECIFIES_NEITHER_UTF8_NOR_UTF16 ] =
+        "The file declares the use of the \"%1%\" encoding, but only UTF-8 and UTF-16 are allowed."; 
+    m_Messages[ ERROR_XML_BYTESTREAM_NEITHER_UTF8_NOR_UTF16 ] =
+        "The file declares the use of UTF-8 or UTF-16, but the bytestream of the file's contents "
+        "does not match either encoding.";   
 
     m_Messages[ ERROR_OPF_PACKAGE_NOT_ROOT ] =
         "The <package> element is not the root element.";
