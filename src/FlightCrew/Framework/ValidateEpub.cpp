@@ -176,9 +176,13 @@ std::vector< Result > DescendToOpf( const fs::path &path_to_opf )
 
     std::vector< fs::path > xhtml_paths = GetRelativePathsToXhtmlDocuments( opf );
     
-    foreach( fs::path xhtml_path, xhtml_paths )
+    foreach( fs::path rel_xhtml_path, xhtml_paths )
     {
-        Util::Extend( results, ValidateXhtml( opf_parent / xhtml_path ) );
+        fs::path full_xhtml_path = opf_parent / rel_xhtml_path;
+
+        if ( !rel_xhtml_path.empty() && fs::exists( full_xhtml_path ) )
+
+            Util::Extend( results, ValidateXhtml( full_xhtml_path ) );
     }
     
     return results;

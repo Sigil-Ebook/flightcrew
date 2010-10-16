@@ -65,6 +65,12 @@ TEST( EpubValidatesTest, NoContainerXml )
     EXPECT_EQ( results[ 0 ].GetResultId(), ERROR_EPUB_NO_CONTAINER_XML );
 }
 
+TEST( EpubValidatesTest, MissingXhtmlFiles )
+{
+    ASSERT_NO_THROW( ValidateEpub(
+        "test_data/framework_tests/EpubValidates_MissingXhtmlFiles.epub" ) );
+}
+
 TEST( EpubValidatesTest, Valid )
 {
     std::vector<Result> results = ValidateEpub(
