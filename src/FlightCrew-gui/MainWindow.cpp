@@ -171,29 +171,18 @@ void MainWindow::DisplayResults( const std::vector< fc::Result > &results )
 
         ui.ResultTable->insertRow( ui.ResultTable->rowCount() );
 
-        // TODO: use conditional operator
-        QBrush row_brush;
-        if ( result.GetResultType() == fc::ResultType_WARNING )
-        
-            row_brush = WARNING_BRUSH;
-        else
-      
-            row_brush = ERROR_BRUSH;
+        QBrush row_brush = result.GetResultType() == fc::ResultType_WARNING ?
+                           WARNING_BRUSH                                    :
+                           ERROR_BRUSH;
 
         QTableWidgetItem *item = NULL;
         item = new QTableWidgetItem( QString::fromUtf8( result.GetFilepath().c_str() ) );
         item->setBackground( row_brush );
         ui.ResultTable->setItem( i, 0, item );
 
-        int line = result.GetErrorLine();
-
-        if ( line > 0 )
-
-            item = new QTableWidgetItem( QString::number( result.GetErrorLine() ) );
-
-        else
-
-            item = new QTableWidgetItem( tr( "N/A" ) );
+        item = result.GetErrorLine() > 0                                        ?
+               new QTableWidgetItem( QString::number( result.GetErrorLine() ) ) :
+               new QTableWidgetItem( tr( "N/A" ) );
 
         item->setBackground( row_brush );
         ui.ResultTable->setItem( i, 1, item );
