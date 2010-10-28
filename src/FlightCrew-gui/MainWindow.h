@@ -109,11 +109,6 @@ private:
     void DisplayNoProblemsMessage();
 
     /**
-     * Clears the table of all results.
-     */
-    void ClearTable();
-
-    /**
      * Adds a filename to the combo box and makes in the 
      * currently selected item.
      *

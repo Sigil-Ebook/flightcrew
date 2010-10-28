@@ -108,7 +108,7 @@ void MainWindow::StartValidation()
         return;
     }
 
-    ClearTable();
+    ui.ResultTable->clearContents();
     std::vector< fc::Result > results;
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
@@ -228,22 +228,6 @@ void MainWindow::DisplayNoProblemsMessage()
     
     ui.ResultTable->setItem( 0, 0, item );
     ui.ResultTable->resizeRowToContents( 0 );
-}
-
-
-// TODO: use clearContents
-// QTableWidge.clear() also removes the headers
-void MainWindow::ClearTable()
-{
-    while ( ui.ResultTable->rowCount() )
-    {
-        ui.ResultTable->removeRow( 0 );
-    }
-
-    ui.ResultTable->update();
-
-    // Needed so that the table is repainted
-    qApp->processEvents();
 }
 
 
