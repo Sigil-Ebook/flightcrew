@@ -1,4 +1,6 @@
 FlightCrew v0.7.1 ADD_DATE
+    - the GUI now displays a "No problems found" message when the epub passes all checks 
+    (issue #9)
     - fixed an issue with missing XHTML files causing the GUI to show a dialog about an 
     std::exception and the CLI to report that the epub itself was not present (issue #8)
     - fixed an issue that was causing empty error messages for incorrect uses of XML encodings

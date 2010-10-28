@@ -103,6 +103,11 @@ private:
      */
     void DisplayResults( const std::vector< fc::Result > &results );
 
+     /**
+      * Informs the user that no problems were found.
+      */
+    void DisplayNoProblemsMessage();
+
     /**
      * Clears the table of all results.
      */
@@ -127,6 +132,11 @@ private:
      * window position, geometry etc.
      */
     void WriteSettings();
+
+     /**
+      * Confirgures the table for presenting validation results.
+      */
+    void ConfigureTableForResults();
 
     /**
      * Connects all the required signals to their slots.

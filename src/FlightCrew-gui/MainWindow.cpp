@@ -28,6 +28,7 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QUrl>
+#include <QtDebug>
 #include "MainWindow.h"
 #include <flightcrew.h>
 namespace fc = FlightCrew;
@@ -44,11 +45,6 @@ MainWindow::MainWindow( QWidget*, Qt::WFlags )
     // from memory when it is closed
     setAttribute( Qt::WA_DeleteOnClose );
     setAcceptDrops( true );
-
-    ui.ResultTable->setColumnCount( 3 );
-    ui.ResultTable->setHorizontalHeaderLabels( 
-        QStringList() << tr( "File" ) << tr( "Line" ) << tr( "Message" ) );
-    ui.ResultTable->verticalHeader()->setResizeMode( QHeaderView::ResizeToContents );
 
     // Needs to come before signals connect
     // (avoiding side-effects)
@@ -124,6 +120,7 @@ void MainWindow::StartValidation()
 
     catch ( std::exception& exception )
     {
+        // TODO: extract boost exception info
         QMessageBox::critical( this,
                                tr( "FlightCrew-gui" ),
                                tr( "An exception occurred: %1." )
@@ -158,12 +155,23 @@ void MainWindow::BrowseForEpub()
 
 void MainWindow::DisplayResults( const std::vector< fc::Result > &results )
 {
+    ui.ResultTable->clear();
+
+    if ( results.empty() )
+    {
+        DisplayNoProblemsMessage();
+        return;
+    }
+    
+    ConfigureTableForResults();
+
     for ( unsigned int i = 0; i < results.size(); ++i )
     {
         fc::Result result = results[ i ];
 
         ui.ResultTable->insertRow( ui.ResultTable->rowCount() );
 
+        // TODO: use conditional operator
         QBrush row_brush;
         if ( result.GetResultType() == fc::ResultType_WARNING )
         
@@ -203,6 +211,27 @@ void MainWindow::DisplayResults( const std::vector< fc::Result > &results )
     ui.ResultTable->resizeColumnToContents( 1 );
 }
 
+
+void MainWindow::DisplayNoProblemsMessage()
+{
+    ui.ResultTable->setRowCount( 1 );
+    ui.ResultTable->setColumnCount( 1 );
+    ui.ResultTable->setHorizontalHeaderLabels( 
+        QStringList() << tr( "Message" ) );
+
+    QTableWidgetItem *item = new QTableWidgetItem( tr( "No problems found!" ) );
+    item->setTextAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+    
+    QFont font = item->font();
+    font.setPointSize( 16 );
+    item->setFont( font );
+    
+    ui.ResultTable->setItem( 0, 0, item );
+    ui.ResultTable->resizeRowToContents( 0 );
+}
+
+
+// TODO: use clearContents
 // QTableWidge.clear() also removes the headers
 void MainWindow::ClearTable()
 {
@@ -272,6 +301,16 @@ void MainWindow::WriteSettings()
     settings.setValue( "path_strings", path_strings );
     settings.setValue( "lastusedcomboindex", ui.FilepathsCombo->currentIndex() );
     settings.setValue( "lastfolderopen", m_LastFolderOpen );
+}
+
+
+void MainWindow::ConfigureTableForResults()
+{
+    ui.ResultTable->setRowCount( 0 );
+    ui.ResultTable->setColumnCount( 3 );
+    ui.ResultTable->setHorizontalHeaderLabels( 
+        QStringList() << tr( "File" ) << tr( "Line" ) << tr( "Message" ) );
+    ui.ResultTable->verticalHeader()->setResizeMode( QHeaderView::ResizeToContents );
 }
 
 
