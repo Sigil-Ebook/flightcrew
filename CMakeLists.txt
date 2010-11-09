@@ -50,8 +50,7 @@ add_subdirectory( src/zipios )
 add_subdirectory( src/googlemock )
 add_subdirectory( src/FlightCrew )
 add_subdirectory( src/FlightCrew-cli )
-add_subdirectory( src/FlightCrew-gui )
 
-
-
-
+if( NOT SKIP_FC_GUI )
+    add_subdirectory( src/FlightCrew-gui )
+endif()
