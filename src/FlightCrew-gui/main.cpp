@@ -30,6 +30,7 @@
 
 // Needs to go here because of Qt includes for some reason
 #include "MainWindow.h"
+#include "UpdateChecker.h"
 
 // ... and then we reset the warning level
 // back to normal (warning level 4)
@@ -49,6 +50,11 @@ int main( int argc, char *argv[] )
     // easier use of QSettings classes
     QCoreApplication::setOrganizationName( "Strahinja Markovic" );
     QCoreApplication::setApplicationName( "FlightCrew-gui" );
+
+    // Needs to be created on the heap so that
+    // the reply has time to return.
+    UpdateChecker *checker = new UpdateChecker( &app );
+    checker->CheckForUpdate();
 
     MainWindow *widget = new MainWindow();    
     widget->show();

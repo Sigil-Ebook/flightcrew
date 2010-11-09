@@ -19,7 +19,7 @@ endif()
 
 #############################################################################
 
-find_package( Qt4 4.6.0 COMPONENTS QtCore QtGui QtMain REQUIRED )
+find_package( Qt4 4.6.0 COMPONENTS QtCore QtGui QtMain QtNetwork REQUIRED )
 
 include( ${QT_USE_FILE} )
 
@@ -29,6 +29,7 @@ file( GLOB_RECURSE RAW_SOURCES *.h *.cpp )
 
 set( QOBJECT_HEADERS
     MainWindow.h
+    UpdateChecker.h
     )
     
 set( UI_FILES   
@@ -112,6 +113,8 @@ if( MSVC )
 elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_definitions( -Wall )
 endif()
+
+set_source_files_properties( UpdateChecker.cpp PROPERTIES COMPILE_DEFINITIONS FLIGHTCREW_FULL_VERSION="${FLIGHTCREW_FULL_VERSION}" )
 
 #############################################################################
 
