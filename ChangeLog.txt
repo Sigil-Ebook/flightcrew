@@ -1,4 +1,4 @@
-FlightCrew v0.7.1 ADD_DATE
+FlightCrew v0.7.1 2010.11.10.
     - added an automatic update checker to the GUI app
     - the GUI now displays a "No problems found" message when the epub passes all checks 
     (issue #9)
