@@ -20,6 +20,9 @@ a few subdirectories:
                            code for Xerces; this lib is part of FC
     src/Zipios - a ZIP library
     src/zlib - a lib for data compression (the DEFLATE algorithm)
+    
+The entire public interface of the library can be accessed by including
+the src/FlightCrew/flightcrew.h header file.
 
 The installer directory contains the files needed to produce
 a binary installer for Windows and Linux.
