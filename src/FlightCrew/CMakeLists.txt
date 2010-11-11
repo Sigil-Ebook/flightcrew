@@ -46,17 +46,6 @@ list( REMOVE_ITEM SOURCES ${to_remove} )
 
 #############################################################################
 
-# creating PCH's for MSVC and GCC on Linux
-include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
-set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
-                  ${Xerces_SOURCE_DIR}
-                  ${zipios_SOURCE_DIR} )
-set( GCC_PCH_TARGET gccPCH_fc )
-
-precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} ${PROJECT_NAME} )
-
-#############################################################################
-
 # We need to pick up the stdafx.h file (current source dir),
 # the stdafx.h.gch file (current binary dir)
 # and the headers for the linked-to libraries
@@ -81,6 +70,17 @@ else()
 endif()
 
 target_link_libraries( ${PROJECT_NAME} zipios BoostParts XercesExtensions )
+
+#############################################################################
+
+# creating PCH's for MSVC and GCC on Linux
+include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
+set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
+                  ${Xerces_SOURCE_DIR}
+                  ${zipios_SOURCE_DIR} )
+set( GCC_PCH_TARGET gccPCH_fc )
+
+precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
 
 #############################################################################
 

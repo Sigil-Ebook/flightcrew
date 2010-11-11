@@ -53,19 +53,19 @@ link_directories ( ${PROJECT_BINARY_DIR}/lib )
 
 #############################################################################
 
+add_executable( ${PROJECT_NAME} ${TEST_SOURCES} )
+
+target_link_libraries( ${PROJECT_NAME} FlightCrew gmock )
+
+#############################################################################
+
 # creating PCH's for MSVC and GCC on Linux
 include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
 set( ALL_INCLUDES ${gtest_SOURCE_DIR}/include ${BoostParts_SOURCE_DIR} )
 
 set( GCC_PCH_TARGET gccPCH_tests )
 
-precompiled_header( TEST_SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} ${PROJECT_NAME} )
-
-#############################################################################
-
-add_executable( ${PROJECT_NAME} ${TEST_SOURCES} )
-
-target_link_libraries( ${PROJECT_NAME} FlightCrew gmock )
+precompiled_header( TEST_SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
 
 #############################################################################
 
