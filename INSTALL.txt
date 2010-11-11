@@ -139,6 +139,19 @@ compile it as a DLL, you need to do two things:
 Just pass `-DSKIP_FC_GUI=1` to the cmake call. This can be passed along 
 with the option to build FlightCrew as a DLL.
 
+== Not building the test executable ==
+
+The default build procedure will also build a `fc_test` executable in the
+`bin` directory of your build folder. Running this program runs the 
+FlightCrew test suite.
+
+You can disable the building of this application by passing 
+`-DNO_TEST_EXE=1` to the cmake call. This can also be combined with the 
+other build options.
+
+It is *highly* recommended to build and run the test application on your 
+system.
+
 = Compiling Qt = 
 
 Compiling Qt directly should not be necessary. Nevertheless, if you wish 

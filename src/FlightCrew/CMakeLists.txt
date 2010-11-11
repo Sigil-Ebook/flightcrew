@@ -117,6 +117,7 @@ add_definitions( -DXERCES_STATIC_LIBRARY )
 # library on msvc since the tests need access to the fc
 # internal apis which are not exported when building a DLL.
 # If we tried to build them, we would get linker errors.
-if( NOT ( BUILD_SHARED_FC AND MSVC ) )
+# We also don't build the tests if the user specified it.
+if( NOT ( BUILD_SHARED_FC AND MSVC ) AND NOT NO_TEST_EXE )
     add_subdirectory( tests )
 endif()
