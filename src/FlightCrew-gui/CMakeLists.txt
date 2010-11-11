@@ -120,13 +120,19 @@ set_source_files_properties( UpdateChecker.cpp PROPERTIES COMPILE_DEFINITIONS FL
 
 # For Mac, add frameworks and make a DMG
 if( APPLE )
+    if(CMAKE_GENERATOR STREQUAL Xcode)
+        set( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release" )
+    else()
+        set( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" )
+    endif()
+
     add_custom_target(  addframeworks ALL 
                         COMMAND ${QT_BINARY_DIR}/macdeployqt FlightCrew-gui.app
-                        WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} )
+                        WORKING_DIRECTORY ${WORK_DIR} )
 
     add_custom_target(  makedmg 
                         COMMAND ${QT_BINARY_DIR}/macdeployqt FlightCrew-gui.app -dmg -no-plugins
-                        WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+                        WORKING_DIRECTORY ${WORK_DIR}
                         DEPENDS ${PROJECT_NAME} )
                 
 # For Linux and Windows, provide binary installers.
