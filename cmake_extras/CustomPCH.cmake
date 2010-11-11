@@ -6,7 +6,7 @@
 # "includes" - unexpanded cmake variable holding all include paths the PCH needs to know about
 # "target_name" - the name of the a special target used to build the PCH for GCC
 # "header_name" - the name of the PCH header, without the extension; "stdafx" or something similar;
-# note that the source file compiling the header needs to have the same name 
+#                 note that the source file compiling the header needs to have the same name 
 macro( precompiled_header sources includes target_name header_name )
 
     # MSVC precompiled headers cmake code
@@ -71,5 +71,13 @@ macro( precompiled_header sources includes target_name header_name )
                             MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/${header_name}.h
                             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                             VERBATIM )
+    # Xcode has PCH support              
+    elseif( APPLE )                   
+        set_target_properties(
+            ${PROJECT_NAME} 
+            PROPERTIES
+            XCODE_ATTRIBUTE_GCC_PREFIX_HEADER "stdafx.h"
+            XCODE_ATTRIBUTE_GCC_PRECOMPILE_PREFIX_HEADER "YES"
+        )
     endif() 
 endmacro()
