@@ -71,13 +71,5 @@ macro( precompiled_header sources includes target_name header_name )
                             MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/${header_name}.h
                             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                             VERBATIM )
-    # Xcode has PCH support              
-    elseif( APPLE )                   
-        set_target_properties(
-            ${PROJECT_NAME} 
-            PROPERTIES
-            XCODE_ATTRIBUTE_GCC_PREFIX_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/${header_name}.h"
-            XCODE_ATTRIBUTE_GCC_PRECOMPILE_PREFIX_HEADER "YES"
-        )
     endif() 
 endmacro()
