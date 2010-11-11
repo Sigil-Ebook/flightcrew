@@ -3,7 +3,7 @@ AllowLanguageSelection
 {Yes}
 
 AppName
-{FlightCrew-gui}
+{FlightCrew}
 
 ApplicationID
 {A24B23EB-0632-4D92-B087-011CAE348023}
@@ -186,7 +186,7 @@ ScriptExt
 {.bat}
 
 ShortAppName
-{flightcrew-gui}
+{flightcrew}
 
 ShortcutOnPath
 {/usr/bin/<%ShortAppName%>}
