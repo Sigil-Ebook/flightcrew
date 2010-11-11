@@ -203,7 +203,7 @@ else()
                         COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/FlightCrew.mpi ${MPI_LOCATION} )                        
     
     # Copy Qt runtime libs
-    set( QT_LIBS QtCore QtGui )
+    set( QT_LIBS QtCore QtGui QtNetwork )
     
     if( UNIX )
         # DBus is needed on Linux
