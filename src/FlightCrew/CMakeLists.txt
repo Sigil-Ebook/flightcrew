@@ -53,7 +53,7 @@ set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
                   ${zipios_SOURCE_DIR} )
 set( GCC_PCH_TARGET gccPCH_fc )
 
-precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
+precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} ${PROJECT_NAME} )
 
 #############################################################################
 

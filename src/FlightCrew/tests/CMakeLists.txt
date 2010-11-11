@@ -59,7 +59,7 @@ set( ALL_INCLUDES ${gtest_SOURCE_DIR}/include ${BoostParts_SOURCE_DIR} )
 
 set( GCC_PCH_TARGET gccPCH_tests )
 
-precompiled_header( TEST_SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
+precompiled_header( TEST_SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} ${PROJECT_NAME} )
 
 #############################################################################
 
