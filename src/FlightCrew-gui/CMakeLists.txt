@@ -128,12 +128,13 @@ if( APPLE )
 
     add_custom_target(  addframeworks ALL 
                         COMMAND ${QT_BINARY_DIR}/macdeployqt FlightCrew-gui.app
-                        WORKING_DIRECTORY ${WORK_DIR} )
+                        WORKING_DIRECTORY ${WORK_DIR}
+                        DEPENDS ${PROJECT_NAME} )
 
     add_custom_target(  makedmg 
                         COMMAND ${QT_BINARY_DIR}/macdeployqt FlightCrew-gui.app -dmg -no-plugins
                         WORKING_DIRECTORY ${WORK_DIR}
-                        DEPENDS ${PROJECT_NAME} )
+                        DEPENDS addframeworks )
                 
 # For Linux and Windows, provide binary installers.
 # For this to work, InstallJammer needs to be installed and on the system path.
