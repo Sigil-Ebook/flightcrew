@@ -168,9 +168,11 @@ void ErrorMessages::LoadMessages()
         "There is no <item> element in the <manifest> that has the NCX mimetype "
         "(\"application/x-dtbncx+xml\"). The use of an NCX is mandatory in EPUB.";
     m_Messages[ ERROR_OPF_REACHABLE_OPS_DOC_NOT_IN_SPINE ] =
-        "This OPS document is reachable but not present in the OPF <spine>."; 
+        "This OPS document is reachable but not present in the OPF <spine>. "
+        "\"Reachable\" means that a reference of some kind that points to this resource exists in the epub."; 
     m_Messages[ ERROR_OPF_REACHABLE_RESOURCE_NOT_IN_MANIFEST ] =
-        "This resource is reachable but not present in the OPF <manifest>."; 
+        "This resource is reachable but not present in the OPF <manifest>. "
+        "\"Reachable\" means that a reference of some kind that points to this resource exists in the epub."; 
 
     m_Messages[ ERROR_NCX_CONTENT_FILE_DOES_NOT_EXIST ] =
         "This <content> element's \"src\" attribute value is \"%1%\", but that file does not exist.";

@@ -1,3 +1,6 @@
+FlightCrew v0.7.2 ADD_DATE
+    - clarified what "reachable" means in the error messages 
+
 FlightCrew v0.7.1 2010.11.11.
     - added an automatic update checker to the GUI app
     - the GUI now displays a "No problems found" message when the epub passes all checks 
