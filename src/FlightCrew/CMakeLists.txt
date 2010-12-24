@@ -28,7 +28,9 @@ file( GLOB_RECURSE SOURCES *.h *.cpp *.xsd *.dtd )
 
 # The test sources are a part of a different target, so we remove them
 file( GLOB_RECURSE to_remove tests/*.h tests/*.cpp )
-list( REMOVE_ITEM SOURCES ${to_remove} )
+if( to_remove )
+    list( REMOVE_ITEM SOURCES ${to_remove} )
+endif() 
 
 #############################################################################
 

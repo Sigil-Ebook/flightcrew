@@ -9,7 +9,7 @@
 
 # The interesting parts of Boost have been extracted using 
 # the BCP tool:
-#   http://www.boost.org/doc/libs/1_44_0/tools/bcp/doc/html/index.html
+#   http://www.boost.org/doc/libs/1_45_0/tools/bcp/doc/html/index.html
 #    
 # bcp call: bcp boost/bind.hpp boost/lambda/lambda.hpp boost/exception/all.hpp boost/tuple/tuple_io.hpp boost/tuple/tuple_comparison.hpp boost/filesystem.hpp boost/filesystem/fstream.hpp boost/regex.hpp boost/foreach.hpp boost/program_options.hpp boost/smart_ptr.hpp boost/algorithm/string_regex.hpp boost/thread.hpp boost/unordered_map.hpp boost/unordered_set.hpp boost/format.hpp boost/ptr_container/ptr_container.hpp ../BoostParts
 
