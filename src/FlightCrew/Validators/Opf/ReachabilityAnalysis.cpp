@@ -515,7 +515,7 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::GetLinkedResourcesFromCss
     std::string::const_iterator end   = contents.end(); 
 
     boost::match_results< std::string::const_iterator > matches; 
-    boost::regex expression( "(?:src:|@import)\\s*\\w+\\([\"']?([^)\"']*)[\"']?\\)" );
+    boost::regex expression( "(?:src\\s*:|@import)\\s*\\w+\\([\"']?([^)\"']*)[\"']?\\)" );
 
     while( boost::regex_search( start, end, matches, expression ) ) 
     { 

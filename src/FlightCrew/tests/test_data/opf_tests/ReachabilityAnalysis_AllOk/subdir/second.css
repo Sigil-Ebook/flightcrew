@@ -2,7 +2,8 @@
   font-family: "Fontin";
   font-weight: normal;
   font-style: normal;
-  src: url(../font1.ttf);
+  /* The space between the src and the colon is intentional and part of a test! */
+  src : url(../font1.ttf);
 }
 
 @font-face {
