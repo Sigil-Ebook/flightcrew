@@ -1,4 +1,6 @@
 FlightCrew v0.7.2 ADD_DATE
+    - fixed an issue with "background" and "background-image" CSS rules that referenced images
+    had those same images marked as unreachable files (issue #21)
     - fixed an issue with "src" declarations in @font-face rules that have a space before the colon
     throwing error messages about unreachable files (issue #21)
     - clarified what "reachable" means in the error messages 

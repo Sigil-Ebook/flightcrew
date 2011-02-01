@@ -19,3 +19,8 @@
   font-style: italic;
   src: url(../font3.ttf);
 } 
+
+body {
+  background: url('../background1.gif');
+  background-image: url('../background2.gif');   
+}

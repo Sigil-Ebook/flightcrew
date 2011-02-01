@@ -515,9 +515,10 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::GetLinkedResourcesFromCss
     std::string::const_iterator end   = contents.end(); 
 
     boost::match_results< std::string::const_iterator > matches; 
-    boost::regex expression( "(?:src\\s*:|@import)\\s*\\w+\\([\"']?([^)\"']*)[\"']?\\)" );
+    boost::regex expression( 
+        "(?:(?:src|background|background-image)\\s*:|@import)\\s*\\w+\\([\"']?([^)\"']*)[\"']?\\)" );
 
-    while( boost::regex_search( start, end, matches, expression ) ) 
+    while ( boost::regex_search( start, end, matches, expression ) ) 
     { 
         fs::path resource_path = Util::Utf8PathToBoostPath( matches[ 1 ] );        
         linked_resources.insert( Util::NormalizePath( css_doc_folder / resource_path ) );
