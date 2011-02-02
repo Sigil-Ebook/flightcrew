@@ -511,6 +511,10 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::GetLinkedResourcesFromCss
     boost::unordered_set< fs::path > linked_resources;
     fs::path css_doc_folder = css_document.parent_path();
 
+    // We have to erase all comments first, because we don't want
+    // to count commented-out links.
+    boost::erase_all_regex( contents, boost::regex( "/\\*.*?\\*/" ) );
+
     std::string::const_iterator start = contents.begin();
     std::string::const_iterator end   = contents.end(); 
 
