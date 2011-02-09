@@ -54,7 +54,7 @@ namespace FlightCrew
 {
 
 
-std::vector<Result> ReachabilityAnalysis::ValidateXml( 
+std::vector< Result > ReachabilityAnalysis::ValidateXml( 
     const xc::DOMDocument &document,
     const fs::path &filepath )
 {
@@ -69,7 +69,7 @@ std::vector<Result> ReachabilityAnalysis::ValidateXml(
     boost::unordered_set< fs::path > reachable_resources =
         DetermineReachableResources( starting_set );
 
-    std::vector<Result> results;
+    std::vector< Result > results;
 
     Util::Extend( results, ResultsForOpsDocsNotInSpine( document, manifest_items, reachable_resources ) );
     Util::Extend( results, ResultsForResourcesNotInManifest( manifest_items, reachable_resources ) );
@@ -79,7 +79,7 @@ std::vector<Result> ReachabilityAnalysis::ValidateXml(
 }
 
 
-std::vector<Result> ReachabilityAnalysis::ResultsForOpsDocsNotInSpine( 
+std::vector< Result > ReachabilityAnalysis::ResultsForOpsDocsNotInSpine( 
     const xc::DOMDocument &document,
     const boost::unordered_map< std::string, fs::path > &manifest_items,
     const boost::unordered_set< fs::path > &reachable_resources )
@@ -87,7 +87,7 @@ std::vector<Result> ReachabilityAnalysis::ResultsForOpsDocsNotInSpine(
     boost::unordered_set< fs::path > spine_paths = SpinePaths( document, manifest_items );
     boost::unordered_set< fs::path > ops_docs    = GetOnlyOpsDocs( reachable_resources );
 
-    std::vector<Result> results;
+    std::vector< Result > results;
 
     foreach( const fs::path &ops_path, ops_docs )
     {
@@ -104,14 +104,14 @@ std::vector<Result> ReachabilityAnalysis::ResultsForOpsDocsNotInSpine(
 }
 
 
-std::vector<Result> ReachabilityAnalysis::ResultsForResourcesNotInManifest( 
+std::vector< Result > ReachabilityAnalysis::ResultsForResourcesNotInManifest( 
     const boost::unordered_map< std::string, fs::path > &manifest_items,
     const boost::unordered_set< fs::path > &reachable_resources )
 {
     boost::unordered_set< fs::path > manifest_paths =
         GetPathsFromItems( manifest_items );
 
-    std::vector<Result> results;
+    std::vector< Result > results;
 
     foreach( const fs::path &resource_path, reachable_resources )
     {
@@ -128,11 +128,11 @@ std::vector<Result> ReachabilityAnalysis::ResultsForResourcesNotInManifest(
 }
 
 
-std::vector<Result> ReachabilityAnalysis::ResultsForUnusedResources(
+std::vector< Result > ReachabilityAnalysis::ResultsForUnusedResources(
     const boost::unordered_map< std::string, fs::path > &manifest_items,
     const boost::unordered_set< fs::path > &reachable_resources )
 {
-    std::vector<Result> results;
+    std::vector< Result > results;
 
     boost::unordered_set< fs::path > manifest_paths =
         GetPathsFromItems( manifest_items );

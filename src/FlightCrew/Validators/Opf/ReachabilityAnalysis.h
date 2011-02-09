@@ -39,7 +39,7 @@ class ReachabilityAnalysis : public XmlValidator
 public:
     
     // inherited
-    virtual std::vector<Result> ValidateXml( 
+    virtual std::vector< Result > ValidateXml( 
         const xc::DOMDocument &document,
         const fs::path &filepath = fs::path() );
 
@@ -54,7 +54,7 @@ private:
      * @param reachable_resources A set of full paths to all the reachable files.
      * @return The validation results.
      */
-    std::vector<Result> ResultsForOpsDocsNotInSpine( 
+    std::vector< Result > ResultsForOpsDocsNotInSpine( 
         const xc::DOMDocument &document,
         const boost::unordered_map< std::string, fs::path > &manifest_items,
         const boost::unordered_set< fs::path > &reachable_resources );
@@ -68,7 +68,7 @@ private:
      * @param reachable_resources A set of full paths to all the reachable files.
      * @return The validation results.
      */
-    std::vector<Result> ResultsForResourcesNotInManifest( 
+    std::vector< Result > ResultsForResourcesNotInManifest( 
         const boost::unordered_map< std::string, fs::path > &manifest_items,
         const boost::unordered_set< fs::path > &reachable_resources );
 
@@ -82,7 +82,7 @@ private:
      * @param reachable_resources A set of full paths to all the reachable files.
      * @return The validation results.
      */
-    std::vector<Result> ResultsForUnusedResources(
+    std::vector< Result > ResultsForUnusedResources(
         const boost::unordered_map< std::string, fs::path > &manifest_items,
         const boost::unordered_set< fs::path > &reachable_resources );
 
