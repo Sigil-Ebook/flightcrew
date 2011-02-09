@@ -155,6 +155,7 @@ std::vector<Result> ReachabilityAnalysis::ResultsForUnusedResources(
 
 bool ReachabilityAnalysis::AllowedToBeNotReachable( const fs::path &filepath )
 {
+    // As per spec, the only file that is allowed to be unreachable is the NCX file.
     return DetermineMimetype( filepath ) == NCX_MIME;
 }
 
@@ -336,7 +337,7 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::DetermineReachableResourc
     while ( true )
     {
         boost::unordered_set< fs::path > reachable_resource_set =
-            GetDirectlyReachable( new_resource_set );
+            GetDirectlyReachableResources( new_resource_set );
         
         boost::unordered_set< fs::path > next_resource_set =
             Util::SetUnion( reachable_resource_set, current_resource_set );
@@ -353,7 +354,7 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::DetermineReachableResourc
 }
 
 
-boost::unordered_set< fs::path > ReachabilityAnalysis::GetDirectlyReachable( 
+boost::unordered_set< fs::path > ReachabilityAnalysis::GetDirectlyReachableResources( 
     const boost::unordered_set< fs::path > &resources )
 {
     return Util::SetUnion( 
@@ -555,7 +556,7 @@ bool ReachabilityAnalysis::IsFilesystemPath( const fs::path &path )
 {   
     // If the attribute value in a href has ':', it's because
     // this is a non-filesystem path. We already removed the
-    // "file://" prefix if it exists.
+    // "file://" prefix if it existed.
     
     return path.string().find( ':' ) == std::string::npos;
 }
