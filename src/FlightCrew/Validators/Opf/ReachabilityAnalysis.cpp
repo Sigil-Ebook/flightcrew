@@ -521,7 +521,7 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::GetLinkedResourcesFromCss
 
     boost::match_results< std::string::const_iterator > matches; 
     boost::regex expression( 
-        "(?:(?:src|background|background-image)\\s*:|@import)\\s*\\w+\\([\"']?([^)\"']*)[\"']?\\)" );
+        "(?:(?:src|background|background-image)\\s*:|@import)\\s*\\w*\\(?[\"']?([^)\"']*)[\"']?\\)?" );
 
     while ( boost::regex_search( start, end, matches, expression ) ) 
     { 
