@@ -1,4 +1,5 @@
 FlightCrew v0.7.2 ADD_DATE
+    - made the CSS resource use detection far more robust
     - fixed an issue with CSS @import rules in the '@import "something.css"' format not being 
     recognized
     - fixed an issue with links to fonts in commented-out CSS producing "not in manifest" errors

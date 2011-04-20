@@ -21,6 +21,8 @@
 } 
 
 body {
-  background: url('../background1.gif');
-  background-image: url('../background2.gif');   
+  background-image: url('../background2.gif');  
+  background: #eee;        /* This needs to be ignored, it's not a path. */
+  background-image: none;  /* This as well. */
+  background: black url("../background1.gif") gray 50% repeat fixed;
 }
