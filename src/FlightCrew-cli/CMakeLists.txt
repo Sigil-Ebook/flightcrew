@@ -35,8 +35,6 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
                      ${XercesExtensions_SOURCE_DIR}
                      )
 
-link_directories ( ${PROJECT_BINARY_DIR}/lib )  
-
 add_executable( ${PROJECT_NAME} ${SOURCES} )
 
 target_link_libraries( ${PROJECT_NAME} FlightCrew )
@@ -62,6 +60,8 @@ if( MSVC )
 elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_definitions( -Wall )
 endif()
+
+set_source_files_properties( main.cpp PROPERTIES COMPILE_DEFINITIONS FLIGHTCREW_FULL_VERSION="${FLIGHTCREW_FULL_VERSION}" )
 
 #############################################################################
 

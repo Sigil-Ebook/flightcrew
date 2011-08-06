@@ -36,10 +36,14 @@ namespace fc = FlightCrew;
 static const QString SETTINGS_GROUP = "mainwindow";
 static const QBrush WARNING_BRUSH = QBrush( QColor( 255, 255, 230 ) );
 static const QBrush ERROR_BRUSH   = QBrush( QColor( 255, 230, 230 ) );
+static const QString FLIGHTCREW_VERSION = QString( FLIGHTCREW_FULL_VERSION );
 
 MainWindow::MainWindow( QWidget*, Qt::WFlags )
 {
     ui.setupUi( this );
+    
+    // We want to have the version showing in the window title.
+    setWindowTitle( "FlightCrew - " + FLIGHTCREW_VERSION );
     
     // Telling Qt to delete this window
     // from memory when it is closed

@@ -43,6 +43,7 @@ namespace po = boost::program_options;
 #   pragma warning( pop )
 #endif
 
+static const std::string FLIGHTCREW_VERSION = FLIGHTCREW_FULL_VERSION;
 
 bool ValidateFiles( const std::vector< std::string > &files_to_validate )
 {
@@ -102,6 +103,7 @@ int main( int argc, char *argv[] )
         po::options_description options( "Allowed options" );
         options.add_options()
             ( "help", "produce help message" )
+            ( "version", "show the program version")
             ( "input-file", po::value< std::vector< std::string > >(), "input file" );
 
         po::positional_options_description positionals;
@@ -117,6 +119,12 @@ int main( int argc, char *argv[] )
         {
             std::cout << "Usage: flightcrew-cli [options] file...\n";
             std::cout << options << "\n";
+            return 1;
+        }
+
+        if ( var_map.count( "version" ) )
+        {
+            std::cout << "flightcrew-cli version: " << FLIGHTCREW_VERSION <<  " " << "\n";
             return 1;
         }
 

@@ -72,8 +72,6 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
                      ${XercesExtensions_SOURCE_DIR}
                      )
 
-link_directories ( ${PROJECT_BINARY_DIR}/lib )  
-
 #############################################################################
 
 # We make bundles for Mac OS X
@@ -114,6 +112,7 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_definitions( -Wall )
 endif()
 
+set_source_files_properties( MainWindow.cpp PROPERTIES COMPILE_DEFINITIONS FLIGHTCREW_FULL_VERSION="${FLIGHTCREW_FULL_VERSION}" )
 set_source_files_properties( UpdateChecker.cpp PROPERTIES COMPILE_DEFINITIONS FLIGHTCREW_FULL_VERSION="${FLIGHTCREW_FULL_VERSION}" )
 
 #############################################################################
