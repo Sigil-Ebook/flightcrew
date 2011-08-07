@@ -1,4 +1,8 @@
 FlightCrew v0.7.2 ADD_DATE
+    - Use Inno for Windows installer.
+    - Add version display to GUI and CLI.
+    - Fix Sigil issue #813: erroneous Resource is reachable but not present in OPF detection.
+    - OS X minimum version bumped to 10.6.
     - made the CSS resource use detection far more robust
     - fixed an issue with CSS @import rules in the '@import "something.css"' format not being 
     recognized

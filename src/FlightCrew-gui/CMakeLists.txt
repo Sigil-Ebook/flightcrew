@@ -136,14 +136,46 @@ if( APPLE )
                         DEPENDS addframeworks )
                 
 # For Linux and Windows, provide binary installers.
-# For this to work, InstallJammer needs to be installed and on the system path.
+# For this to work on Linux, InstallJammer needs to be installed and on the system path.
+# For this to work on Windows, Inno Setup's iscc compiler needs to be installed and on the system path.
 else()
     set( TEMP_PACKAGE_DIR ${CMAKE_BINARY_DIR}/temp_folder )
     set( MAIN_PACKAGE_DIR ${TEMP_PACKAGE_DIR}/FlightCrew )
     set( OUTPUT_PACKAGE_DIR ${CMAKE_BINARY_DIR}/installer )
     
-    # MPI file will need to be copied to this location
+    # MPI (InstallJammer) file will need to be copied to this location
     set( MPI_LOCATION ${CMAKE_BINARY_DIR}/temp_folder/FlightCrew.mpi )
+    
+    # ISS conf file for the Inno Setup compiler
+    # We first create a CMake configured version of the ISS file,
+    # and then we copy it to the temp folder every time we need to build the installer.
+    set( ISS_MAIN_LOCATION ${CMAKE_SOURCE_DIR}/installer/FlightCrew.iss  )
+    Set( ISS_OC_LOCATION ${CMAKE_SOURCE_DIR}/OpenCandy/FlightCrewOC.iss  )
+    set( ISS_CONFIGURED_LOCATION ${CMAKE_BINARY_DIR}/FlightCrew_configured.iss )
+    set( ISS_TEMP_LOCATION ${CMAKE_BINARY_DIR}/temp_folder/FlightCrew_configured.iss )
+    
+   # Used in the ISS CMake configuration
+    set( LICENSE_LOCATION ${CMAKE_SOURCE_DIR}/installer/win_installer_note.txt  )
+
+    if ( 64_BIT_PLATFORM )
+        # Used in the ISS CMake configuration
+        set( ISS_ARCH "x64" )
+        set( ISS_SETUP_FILENAME_PLATFORM "-x64" )
+    endif()
+    
+    # This is used to build OpenCandy installers. You can't build them
+    # from the source repo and you shouldn't want to either. By default,
+    # vanilla installers are built. You want the vanillas.
+    if ( EXISTS ${ISS_OC_LOCATION} )
+        set( OC_INSTALLERS TRUE )
+    endif()
+    
+    # Creates a copy of the ISS file in ${ISS_CONFIGURED_LOCATION} and then configures it 
+    if ( OC_INSTALLERS )        
+        configure_file( ${ISS_OC_LOCATION} ${ISS_CONFIGURED_LOCATION} ) 
+    else()
+        configure_file( ${ISS_MAIN_LOCATION} ${ISS_CONFIGURED_LOCATION} ) 
+    endif()
     
     # Specify platform var for installjammer
     if ( WIN32 )
@@ -156,18 +188,26 @@ else()
         endif()
     endif()
     
-    # Run InstallJammer (*AFTER* all the PRE_BUILD custom commands execute)
-    add_custom_target(  makeinstaller 
-                        COMMAND cmake -E echo "For this to work, InstallJammer needs to be installed and on the system path."
-                        COMMAND installjammer   -DBaseDir ${MAIN_PACKAGE_DIR}  
-                                                -DFCMajorVersion ${FLIGHTCREW_MAJOR_VERSION}
-                                                -DFCMinorVersion ${FLIGHTCREW_MINOR_VERSION}
-                                                -DFCRevisionVersion ${FLIGHTCREW_REVISION_VERSION}
-                                                --platform ${PLATFORM}
-                                                --output-dir ${OUTPUT_PACKAGE_DIR}
-                                                --build-for-release
-                                                --verbose   
-                                                --build ${MPI_LOCATION} )
+    # We use Inno for the Windows installers and InstallJammer for the Linux ones
+    if ( WIN32 )
+        # Run Inno Setup's iscc compiler (*AFTER* all the PRE_BUILD custom commands execute)
+        add_custom_target(  makeinstaller 
+                            COMMAND cmake -E echo "For this to work, Inno Setup's iscc compiler needs to be installed and on the system path."
+                            COMMAND iscc ${ISS_TEMP_LOCATION} )
+    else()
+        # Run InstallJammer (*AFTER* all the PRE_BUILD custom commands execute)
+        add_custom_target(  makeinstaller 
+                            COMMAND cmake -E echo "For this to work, InstallJammer needs to be installed and on the system path."
+                            COMMAND installjammer   -DBaseDir ${MAIN_PACKAGE_DIR}  
+                                                    -DFCMajorVersion ${FLIGHTCREW_MAJOR_VERSION}
+                                                    -DFCMinorVersion ${FLIGHTCREW_MINOR_VERSION}
+                                                    -DFCRevisionVersion ${FLIGHTCREW_REVISION_VERSION}
+                                                    --platform ${PLATFORM}
+                                                    --output-dir ${OUTPUT_PACKAGE_DIR}
+                                                    --build-for-release
+                                                    --verbose   
+                                                    --build ${MPI_LOCATION} )
+    endif()
 
     # We need to copy the files that will be used to make the installer to
     # a temporary directory. On the MSVC compiler the PRE_BUILD custom commands
@@ -202,6 +242,10 @@ else()
     add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
                         COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/FlightCrew.mpi ${MPI_LOCATION} )                        
     
+    # Copy ISS file to temp folder location
+    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
+                        COMMAND cmake -E copy ${ISS_CONFIGURED_LOCATION} ${ISS_TEMP_LOCATION} )     
+
     # Copy Qt runtime libs
     set( QT_LIBS QtCore QtGui QtNetwork )
     
@@ -236,12 +280,17 @@ else()
                         
     # We need to copy the CRT dlls
     if ( WIN32 )
+        # Add -DWIN_INSTALLER_USE_64BIT_CRT=1 to the cmake call if you want to build
+        # an installer for the x64 verison of Sigil. This will make sure that the
+        # correct CRT libs are included in the installer.
         if ( WIN_INSTALLER_USE_64BIT_CRT )
+            message( STATUS "Using the 64 bit CRT in the FlightCrew Windows installer" )
             add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
                 COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/msvc_crt/x64/msvcp100.dll ${MAIN_PACKAGE_DIR} )
             add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
                 COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/msvc_crt/x64/msvcr100.dll ${MAIN_PACKAGE_DIR} )
         else()
+            message( STATUS "Using the 32 bit CRT in the FlightCrew Windows installer" )
             add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
                 COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/msvc_crt/x86/msvcp100.dll ${MAIN_PACKAGE_DIR} )
             add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
