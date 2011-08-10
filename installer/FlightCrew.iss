@@ -46,16 +46,6 @@ Name: main\cli; Description: "CLI"; Types: full
 Name: dicon; Description: "Create a desktop icon"; Types: full custom
 Name: dicon\common; Description: "For all users"; Types: full custom; Flags: exclusive
 Name: dicon\user; Description: "For the current user only"; Flags: exclusive
-; File associations
-Name: afiles; Description: "Associate ebook files with FlightCrew"; Types: full
-Name: afiles\epub; Description: "EPUB"; Types: full
-
-[Registry]
-; Associate EPUB files if requested.
-Components: afiles\epub; Root: HKCR; Subkey: ".epub"; ValueType: string; ValueName: ""; ValueData: "FlightCrewEPUB"; Flags: uninsdeletevalue uninsdeletekeyifempty
-Components: afiles\epub; Root: HKCR; Subkey: "FlightCrewEPUB"; ValueType: string; ValueName: ""; ValueData: "EPUB"; Flags: uninsdeletekey
-Components: afiles\epub; Root: HKCR; Subkey: "FlightCrewEPUB\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\FlightCrew-gui.exe,0"; Flags: uninsdeletekey
-Components: afiles\epub; Root: HKCR; Subkey: "FlightCrewEPUB\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\FlightCrew-gui.exe"" ""%1"""; Flags: uninsdeletekey
 
 [Icons]
 Name: "{group}\FlightCrew"; Filename: "{app}\FlightCrew-gui.exe"
