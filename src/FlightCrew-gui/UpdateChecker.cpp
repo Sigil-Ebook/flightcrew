@@ -32,7 +32,7 @@
 #include "UpdateChecker.h"
 
 static const QString DOWNLOAD_PAGE_LOCATION  = "http://code.google.com/p/flightcrew/downloads/list";
-static const QString UPDATE_XML_LOCATION     = "http://flightcrew.googlecode.com/hg/version.xml";
+static const QString UPDATE_XML_LOCATION     = "http://flightcrew.googlecode.com/git/version.xml";
 static const QString XML_VERSION_ELEMENT     = "current-version";
 static const QString LAST_ONLINE_VERSION_KEY = "last_online_version";
 static const QString LAST_CHECK_TIME_KEY     = "last_check_time";
@@ -94,7 +94,7 @@ void UpdateChecker::ReplyRecieved( QNetworkReply* reply )
         button_clicked = QMessageBox::question(  0,
                      QObject::tr( "FlightCrew" ),
                      QObject::tr( "<p>A newer version of FlightCrew is available, version <b>%1</b>.<br/>"
-                         "The ChangeLog can be seen <a href='http://flightcrew.googlecode.com/hg/ChangeLog.txt'>here</a>.</p>"
+                         "The ChangeLog can be seen <a href='http://flightcrew.googlecode.com/git/ChangeLog.txt'>here</a>.</p>"
                          "<p>Would you like to go to the download page?</p>" )
                      .arg( current_online_version ),
                      QMessageBox::Yes | QMessageBox::No,
