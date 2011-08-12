@@ -1,3 +1,10 @@
+A. GNU GENERAL PUBLIC LICENSE
+B. GNU LESSER GENERAL PUBLIC LICENSE
+
+---
+
+A.
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
@@ -676,6 +683,8 @@ Public License instead of this License.  But first, please read
 
 ======
 
+
+B.
 
                    GNU LESSER GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007

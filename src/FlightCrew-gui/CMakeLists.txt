@@ -153,9 +153,6 @@ else()
     Set( ISS_OC_LOCATION ${CMAKE_SOURCE_DIR}/OpenCandy/FlightCrewOC.iss  )
     set( ISS_CONFIGURED_LOCATION ${CMAKE_BINARY_DIR}/FlightCrew_configured.iss )
     set( ISS_TEMP_LOCATION ${CMAKE_BINARY_DIR}/temp_folder/FlightCrew_configured.iss )
-    
-   # Used in the ISS CMake configuration
-    set( LICENSE_LOCATION ${CMAKE_SOURCE_DIR}/installer/win_installer_note.txt  )
 
     if ( 64_BIT_PLATFORM )
         # Used in the ISS CMake configuration
@@ -171,9 +168,11 @@ else()
     endif()
     
     # Creates a copy of the ISS file in ${ISS_CONFIGURED_LOCATION} and then configures it 
-    if ( OC_INSTALLERS )        
+    if ( OC_INSTALLERS )
+        set( LICENSE_LOCATION ${CMAKE_SOURCE_DIR}/installer/win_installer_note.txt )
         configure_file( ${ISS_OC_LOCATION} ${ISS_CONFIGURED_LOCATION} ) 
     else()
+        set( LICENSE_LOCATION ${CMAKE_SOURCE_DIR}/OpenCandy/win_installer_note.txt )
         configure_file( ${ISS_MAIN_LOCATION} ${ISS_CONFIGURED_LOCATION} ) 
     endif()
     
