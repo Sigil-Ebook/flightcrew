@@ -18,6 +18,7 @@
 
 #define BOOST_REGEX_SOURCE
 
+#include <boost/config.hpp>
 #include <cstdio>
 #include <boost/regex.hpp>
 #include <boost/cregex.hpp>
@@ -124,7 +125,7 @@ BOOST_REGEX_DECL int BOOST_REGEX_CCALL regcompA(regex_tA* expression, const char
 #endif
       expression->re_magic = magic_value;
       static_cast<c_regex_type*>(expression->guts)->set_expression(ptr, p2, flags);
-      expression->re_nsub = static_cast<c_regex_type*>(expression->guts)->mark_count() - 1;
+      expression->re_nsub = static_cast<c_regex_type*>(expression->guts)->mark_count();
       result = static_cast<c_regex_type*>(expression->guts)->error_code();
 #ifndef BOOST_NO_EXCEPTIONS
    } 
@@ -167,11 +168,17 @@ BOOST_REGEX_DECL regsize_t BOOST_REGEX_CCALL regerrorA(int code, const regex_tA*
       {
          if(std::strcmp(e->re_endp, names[i]) == 0)
          {
+            //
+            // We're converting an integer i to a string, and since i <= REG_E_UNKNOWN
+            // a five character string is *always* large enough:
+            //
 #if BOOST_WORKAROUND(BOOST_MSVC, >= 1400) && !defined(_WIN32_WCE) && !defined(UNDER_CE)
-            (::sprintf_s)(localbuf, 5, "%d", i);
+            int r = (::sprintf_s)(localbuf, 5, "%d", i);
 #else
-            (std::sprintf)(localbuf, "%d", i);
+            int r = (std::sprintf)(localbuf, "%d", i);
 #endif
+            if(r < 0)
+               return 0; // sprintf failed
             if(std::strlen(localbuf) < buf_size)
                re_detail::strcpy_s(buf, buf_size, localbuf);
             return std::strlen(localbuf) + 1;
