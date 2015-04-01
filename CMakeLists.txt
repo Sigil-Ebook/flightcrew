@@ -74,3 +74,8 @@ add_subdirectory( src/FlightCrew-cli )
 if( NOT SKIP_FC_GUI )
     add_subdirectory( src/FlightCrew-gui )
 endif()
+
+if( NOT SKIP_FC_PLUGIN )
+    add_subdirectory( src/FlightCrew-plugin )
+endif()
+

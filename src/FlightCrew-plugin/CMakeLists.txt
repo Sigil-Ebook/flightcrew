@@ -12,9 +12,9 @@ cmake_minimum_required( VERSION 2.8 )
 # We use the lower case name
 # on UNIX systems other than Mac OS X
 if ( WIN32 OR APPLE )
-    project( FlightCrew-cli )
+    project( flightcrew-plugin )
 else()
-    project( flightcrew-cli )
+    project( flightcrew-plugin )
 endif()
 
 file( GLOB_RECURSE SOURCES *.cpp *.h ) 
@@ -38,12 +38,6 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
 add_executable( ${PROJECT_NAME} ${SOURCES} )
 
 target_link_libraries( ${PROJECT_NAME} FlightCrew )
-
-#############################################################################
-
-if( BUILD_SHARED_FC )
-    add_definitions( -DFC_BUILT_AS_DLL )
-endif()
 
 #############################################################################
 
