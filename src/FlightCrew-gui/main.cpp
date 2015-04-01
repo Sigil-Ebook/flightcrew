@@ -25,7 +25,8 @@
 #   pragma warning( push, 3 )
 #endif
 
-#include <QtGui/QApplication>
+#include <QCoreApplication>
+#include <QtWidgets/QApplication>
 #include <QMessageBox>
 
 // Needs to go here because of Qt includes for some reason
@@ -48,7 +49,7 @@ int main( int argc, char *argv[] )
 
     // Set application information for
     // easier use of QSettings classes
-    QCoreApplication::setOrganizationName( "Strahinja Markovic" );
+    QCoreApplication::setOrganizationName( "Sigil" );
     QCoreApplication::setApplicationName( "FlightCrew-gui" );
 
     // Needs to be created on the heap so that

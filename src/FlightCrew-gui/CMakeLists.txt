@@ -19,9 +19,19 @@ endif()
 
 #############################################################################
 
-find_package( Qt4 4.6.0 COMPONENTS QtCore QtGui QtMain QtNetwork REQUIRED )
+find_package( Qt5 5.4 COMPONENTS Core Gui Widgets Network REQUIRED )
 
-include( ${QT_USE_FILE} )
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)
+function(QUERY_QMAKE VAR RESULT)
+    exec_program(${QMAKE_EXECUTABLE} ARGS "-query ${VAR}" RETURN_VALUE return_code OUTPUT_VARIABLE output )
+    if(NOT return_code)
+        file(TO_CMAKE_PATH "${output}" output)
+        set(${RESULT} ${output} PARENT_SCOPE)
+    endif(NOT return_code)
+endfunction(QUERY_QMAKE)
 
 #############################################################################
 
@@ -36,11 +46,8 @@ set( UI_FILES
     Form.ui 
     )
     
-# Runs MOC on specifed files
-qt4_wrap_cpp( MOC_FILES_CPP ${QOBJECT_HEADERS} )
-
 # Runs UIC on specified files
-qt4_wrap_ui( UI_FILES_H ${UI_FILES} )
+qt5_wrap_ui( UI_FILES_H ${UI_FILES} )
 
 set( ALL_SOURCES ${RAW_SOURCES} ${MOC_FILES_CPP} ${UI_FILES_H} )
 
@@ -65,7 +72,8 @@ create_source_groups( RAW_SOURCES )
 
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
+include_directories( BEFORE
+                     ${CMAKE_CURRENT_SOURCE_DIR}
                      ${CMAKE_CURRENT_BINARY_DIR}
                      ${BoostParts_SOURCE_DIR}
                      ${FlightCrew_SOURCE_DIR}
@@ -103,7 +111,7 @@ if( MSVC )
     set_source_files_properties( MainWindow.cpp PROPERTIES COMPILE_DEFINITIONS /W4 )
     set_source_files_properties( main.cpp       PROPERTIES COMPILE_DEFINITIONS /W4 )
     
-    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t-" )
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t- /MP" )
     set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
     set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
 

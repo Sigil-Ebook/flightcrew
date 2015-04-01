@@ -29,6 +29,7 @@ if (COMMAND pre_project_set_up_hermetic_build)
   pre_project_set_up_hermetic_build()
 endif()
 
+
 ########################################################################
 #
 # Project-wide settings

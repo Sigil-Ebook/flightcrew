@@ -72,6 +72,7 @@ include_directories("${gmock_SOURCE_DIR}/include"
                     # Test sources.
                     "${gtest_SOURCE_DIR}")
 
+
 ########################################################################
 #
 # Defines the gmock & gmock_main libraries.  User tests should link
