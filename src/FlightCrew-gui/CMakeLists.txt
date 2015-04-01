@@ -9,6 +9,13 @@
 
 cmake_minimum_required( VERSION 2.8 ) 
 
+if(POLICY CMP0020)
+    cmake_policy(SET CMP0020 OLD)
+endif()
+if(POLICY CMP0043)
+    cmake_policy(SET CMP0043 OLD)
+endif()
+
 # We use the lower case name
 # on UNIX systems other than Mac OS X
 if ( WIN32 OR APPLE )
@@ -19,7 +26,7 @@ endif()
 
 #############################################################################
 
-find_package( Qt5 5.4 COMPONENTS Core Gui Widgets Network REQUIRED )
+find_package(Qt5 5.4 COMPONENTS Core Widgets Gui Network)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -91,7 +98,16 @@ else()
     add_executable( ${PROJECT_NAME} WIN32 ${ALL_SOURCES} )
 endif()
 
-target_link_libraries( ${PROJECT_NAME} FlightCrew ${QT_LIBRARIES} )
+
+if (MSVC)
+    set(QT_MAIN Qt5::WinMain)
+endif()
+
+# target_link_libraries( ${PROJECT_NAME} FlightCrew ${QT_LIBRARIES} )
+
+target_link_libraries( ${PROJECT_NAME} ${QT_MAIN} ${FLIGHTCREW_LIBRARIES} )
+qt5_use_modules(${PROJECT_NAME} Widgets Core Gui Network)
+
 
 #############################################################################
 
@@ -134,12 +150,12 @@ if( APPLE )
     endif()
 
     add_custom_target(  addframeworks ALL 
-                        COMMAND ${QT_BINARY_DIR}/macdeployqt FlightCrew-gui.app
+                        COMMAND macdeployqt FlightCrew-gui.app
                         WORKING_DIRECTORY ${WORK_DIR}
                         DEPENDS ${PROJECT_NAME} )
 
     add_custom_target(  makedmg 
-                        COMMAND ${QT_BINARY_DIR}/macdeployqt FlightCrew-gui.app -dmg -no-plugins
+                        COMMAND macdeployqt FlightCrew-gui.app -dmg -no-plugins
                         WORKING_DIRECTORY ${WORK_DIR}
                         DEPENDS addframeworks )
                 

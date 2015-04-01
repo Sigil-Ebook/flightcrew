@@ -28,6 +28,7 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QUrl>
+#include <QMimeData>
 #include <QtDebug>
 #include "MainWindow.h"
 #include <flightcrew.h>
@@ -38,7 +39,7 @@ static const QBrush WARNING_BRUSH = QBrush( QColor( 255, 255, 230 ) );
 static const QBrush ERROR_BRUSH   = QBrush( QColor( 255, 230, 230 ) );
 static const QString FLIGHTCREW_VERSION = QString( FLIGHTCREW_FULL_VERSION );
 
-MainWindow::MainWindow( QWidget*, Qt::WFlags )
+MainWindow::MainWindow( QWidget*, Qt::WindowFlags )
 {
     ui.setupUi( this );
     
@@ -287,7 +288,7 @@ void MainWindow::ConfigureTableForResults()
     ui.ResultTable->setColumnCount( 3 );
     ui.ResultTable->setHorizontalHeaderLabels( 
         QStringList() << tr( "File" ) << tr( "Line" ) << tr( "Message" ) );
-    ui.ResultTable->verticalHeader()->setResizeMode( QHeaderView::ResizeToContents );
+    ui.ResultTable->verticalHeader()->setSectionResizeMode( QHeaderView::ResizeToContents );
 }
 
 

@@ -29,7 +29,7 @@
 #   pragma warning( push, 3 )
 #endif
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include "ui_Form.h"
 
 // ... and then we reset the warning level
@@ -54,7 +54,7 @@ public:
      * @param parent The window's parent object.
      * @param flags The flags used to modify window behavior.
      */
-    MainWindow( QWidget *parent = 0, Qt::WFlags flags = 0 );
+    MainWindow( QWidget *parent = 0, Qt::WindowFlags flags = 0 );
 
     /**
      * Destructor.
