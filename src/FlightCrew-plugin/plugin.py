@@ -82,7 +82,7 @@ def run(bk):
 
     # ensure you have execute rights for unix based platforms
     if target == 'osx' or target == 'unx':
-        os.chmod(exe_path,0744)
+        os.chmod(exe_path,0o744)
 
     args.append(exe_path)
     args.append(ebook_root)
