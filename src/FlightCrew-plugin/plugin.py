@@ -8,19 +8,27 @@ import os
 import inspect
 import subprocess
 from subprocess import Popen, PIPE
+import stat
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
 target = None
 xname = None
+
+is_64bit = sys.maxsize > 2**32
+
 if sys.platform.startswith('win'):
-    target = 'win'
+    target = "win32"
+    if is_64bit:
+        target = 'win64'
     xname = 'flightcrew-plugin.exe'
 elif sys.platform.startswith('darwin'):
     target = 'osx'
     xname = 'flightcrew-plugin'
 else:
-    target = 'unx'
+    target = 'unx32'
+    if is_64bit:
+        target = 'unx64'
     xname = 'flightcrew-plugin'
    
 # This needs to be kept in sync with FlightCrew ResultId.h
