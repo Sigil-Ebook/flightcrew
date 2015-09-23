@@ -150,6 +150,9 @@ def run(bk):
 
                 if tname == "problem" and ttype == 'end':
                     msg = resid + ' : ' +  msg + " near column " + colno
+                    # since will be passed as attribute make sure to handle any embedded quotes
+                    # all other entity replacements have already been done
+                    msg = msg.replace("\"","&quot;")
                     bk.add_result(ptype, filepath, lineno, msg)
                     found_problem = True
                     continue
