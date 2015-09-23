@@ -89,7 +89,7 @@ def run(bk):
     exe_path = os.path.join(SCRIPT_DIR, target, xname)
 
     # ensure you have execute rights for unix based platforms
-    if target == 'osx' or target == 'unx':
+    if target == 'osx' or target.startswith('unx'):
         os.chmod(exe_path,0o744)
 
     args.append(exe_path)
