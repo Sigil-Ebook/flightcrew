@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
 <name>FlightCrew</name>
 <type>validation</type>
@@ -7,5 +7,7 @@
 <engine>python2.7</engine>
 <engine>python3.4</engine>
 <version>0.9.0</version>
-<oslist>osx,unx,win</oslist>
+<autostart>true</autostart>
+<autoclose>true</autoclose>
+<oslist>osx</oslist>
 </plugin>
