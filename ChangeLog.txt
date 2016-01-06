@@ -1,3 +1,9 @@
+FlightCrew v0.9.1
+  - Plugin support for autostart and autoclose has been added as well as restricting to epub2
+
+FligthCrew v0.9.0 
+    - The standalone Flightcrew code has been updated from Sigil source and converted to a plugin for Sigil 0.8.X and later
+
 FlightCrew v0.7.2 2011.08.15
     - Use Inno for Windows installer.
     - Add version display to GUI and CLI.
