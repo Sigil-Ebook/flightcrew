@@ -80,6 +80,14 @@ result_id_map = {
 }
      
 def run(bk):
+
+    epubversion = "2.0"
+    if bk.launcher_version() >= 20160102:
+        epubversion = bk.epub_version()
+    if epubversion.startswith("3"):
+        print("Error: FlightCrew only validates epub2 ebooks")
+        return -1
+
     # cheat and get real path to ebook root since we will not ever write
     # anything, only read and validate
     ebook_root = bk._w.ebook_root
