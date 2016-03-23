@@ -82,7 +82,7 @@ create_source_groups( RAW_SOURCES )
 include_directories( BEFORE
                      ${CMAKE_CURRENT_SOURCE_DIR}
                      ${CMAKE_CURRENT_BINARY_DIR}
-                     ${BoostParts_SOURCE_DIR}
+                     ${Boost_INCLUDE_DIRS}
                      ${FlightCrew_SOURCE_DIR}
                      ${XercesExtensions_SOURCE_DIR}
                      )

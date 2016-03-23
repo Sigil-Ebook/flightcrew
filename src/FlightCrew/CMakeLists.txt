@@ -50,8 +50,8 @@ list( REMOVE_ITEM SOURCES ${to_remove} )
 
 # creating PCH's for MSVC and GCC on Linux
 include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
-set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
-                  ${Xerces_SOURCE_DIR}
+set( ALL_INCLUDES ${Boost_INCLUDE_DIRS}
+                  ${XercesC_INCLUDE_DIRS}
                   ${zipios_SOURCE_DIR} )
 set( GCC_PCH_TARGET gccPCH_fc )
 
@@ -65,8 +65,8 @@ precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
 include_directories( ${CMAKE_CURRENT_BINARY_DIR}
                      ${CMAKE_CURRENT_SOURCE_DIR}
                      ../zipios 
-                     ../BoostParts 
-                     ../Xerces
+                     ${Boost_INCLUDE_DIRS}
+                     ${XercesC_INCLUDE_DIRS}
                      ../XercesExtensions
                      ../utf8-cpp
                    )
@@ -82,7 +82,7 @@ else()
     add_library( ${PROJECT_NAME} ${SOURCES} )
 endif()
 
-target_link_libraries( ${PROJECT_NAME} zipios BoostParts XercesExtensions )
+target_link_libraries( ${PROJECT_NAME} zipios ${Boost_LIBRARIES} XercesExtensions )
 
 #############################################################################
 

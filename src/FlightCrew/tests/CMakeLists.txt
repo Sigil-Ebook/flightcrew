@@ -42,20 +42,20 @@ list( REMOVE_ITEM TEST_SOURCES ${to_remove} )
 # So techincally we don't need to include Xerces etc.
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} 
                      ${CMAKE_CURRENT_SOURCE_DIR} 
-                     ../../BoostParts 
-                     ../../Xerces 
+                     ${Boost_INCLUDE_DIRS}
+                     ${XercesC_INCLUDE_DIRS}
                      ../../XercesExtensions 
-                     ../../googlemock/include
-                     ../../googlemock/gtest/include
+                     /usr/include/gmock
+                     ${GTEST_INCLUDE_DIRS}
                    )
 
-link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
+link_directories ( ${PROJECT_BINARY_DIR}/lib ${GTEST_BOTH_LIBRARIES} ) 
 
 #############################################################################
 
 # creating PCH's for MSVC and GCC on Linux
 include( ${CMAKE_SOURCE_DIR}/cmake_extras/CustomPCH.cmake )
-set( ALL_INCLUDES ${gtest_SOURCE_DIR}/include ${BoostParts_SOURCE_DIR} )
+set( ALL_INCLUDES ${GTEST_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} )
 
 set( GCC_PCH_TARGET gccPCH_tests )
 
@@ -65,7 +65,7 @@ precompiled_header( TEST_SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
 
 add_executable( ${PROJECT_NAME} ${TEST_SOURCES} )
 
-target_link_libraries( ${PROJECT_NAME} FlightCrew gmock )
+target_link_libraries( ${PROJECT_NAME} FlightCrew gmock ${GTEST_BOTH_LIBRARIES} )
 
 #############################################################################
 

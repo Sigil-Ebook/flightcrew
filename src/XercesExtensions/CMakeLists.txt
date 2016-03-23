@@ -16,14 +16,14 @@ file( GLOB SOURCES *.cpp *.h )
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
-                     ${XERCES_INCLUDE_DIRS}
-                     ${BOOST_INCLUDE_DIRS} )
+                     ${XercesC_INCLUDE_DIRS}
+                     ${Boost_INCLUDE_DIRS} )
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
 add_library( ${PROJECT_NAME} ${SOURCES} )
 
-target_link_libraries( ${PROJECT_NAME} ${XERCES_LIBRARIES} )
+target_link_libraries( ${PROJECT_NAME} ${XercesC_LIBRARIES} )
 
 #############################################################################
 

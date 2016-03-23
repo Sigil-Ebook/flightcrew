@@ -30,7 +30,7 @@ create_source_groups( SOURCES )
 # We need to pick up the stdafx.h file
 # and the headers for the linked-to libraries
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
-                     ${BoostParts_SOURCE_DIR}
+                     ${Boost_INCLUDE_DIRS}
                      ${FlightCrew_SOURCE_DIR}
                      ${XercesExtensions_SOURCE_DIR}
                      )
