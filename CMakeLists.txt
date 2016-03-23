@@ -39,31 +39,16 @@ set( CMAKE_OSX_DEPLOYMENT_TARGET "10.9" )
 # Universal builds for mac
 # set( CMAKE_OSX_ARCHITECTURES "i386;x86_64" )
 
-
-# The parsing order is significant!
-
-add_subdirectory( src/BoostParts )
-# Set these so zipios doesn't complain.
-set( Boost_DATE_TIME_LIBRARY 1 )
-set( Boost_FILESYSTEM_LIBRARY 1 )
-set( Boost_PROGRAM_OPTIONS_LIBRARY 1 )
-set( Boost_REGEX_LIBRARY 1 )
-set( Boost_SYSTEM_LIBRARY 1 )
-set( Boost_THREAD_LIBRARY 1 )
-set( BOOST_LIBS BoostParts )
-set( BOOST_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src/BoostParts )
-
-add_subdirectory( src/Xerces )
-set( XERCES_LIBRARIES Xerces )
-set( XERCES_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src/Xerces )
+FIND_PACKAGE(Boost REQUIRED COMPONENTS date_time filesystem program_options regex system thread)
+FIND_PACKAGE(XercesC 3.1)
+FIND_PACKAGE(GTest)
+FIND_PACKAGE(ZLIB)
 
 add_subdirectory( src/XercesExtensions )
 set( XERCESEXTENSIONS_LIBRARIES XercesExtensions )
 set( XERCESEXTENSIONS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src/XercesExtensions )
 
-add_subdirectory( src/zlib )
 add_subdirectory( src/zipios )
-add_subdirectory( src/googlemock )
 
 add_subdirectory( src/FlightCrew )
 set( FLIGHTCREW_LIBRARIES FlightCrew )
