@@ -78,6 +78,18 @@ result_id_map = {
     "2200" : "Warning OPF resource in manifest not reachable",
     "2201" : "Warning non ascii filename",
 }
+ 
+def generate_line_offsets(s):
+    offlst = [0]
+    i = s.find('\n', 0)
+    while i >= 0:
+        offlst.append(i)
+        i = s.find('\n', i + 1)
+    return offlst
+
+def charoffset(line, col, offlst):
+    coffset = offlst[line-1]  + 1 + (col - 1)
+    return coffset
      
 def run(bk):
 
@@ -117,7 +129,8 @@ def run(bk):
 
         found_problem = False
         content = None
-        
+        lastfilepath = None
+
         for text, tprefix, tname, ttype, tattr in qp.parse_iter():
             if text is not None:
                 content = text
@@ -130,6 +143,7 @@ def run(bk):
                     resid = None
                     msg = None
                     filepath = None
+                    coffset = None
                     continue
 
                 if tname == "type" and ttype == 'end':
@@ -157,11 +171,27 @@ def run(bk):
                     continue
 
                 if tname == "problem" and ttype == 'end':
+                    # generate file offsets once per file
+                    if bk.launcher_version() >= 20160802 and filepath != lastfilepath:
+                        text = None
+                        with open(os.path.join(ebook_root, filepath), 'rb') as f:
+                            text = f.read()
+                        text = text.decode('utf-8', errors='replace')
+                        offlst = generate_line_offsets(text)
+                        lastfilepath = filepath
+                    
+                    # generate column offset
+                    if bk.launcher_version() >= 20160802 and lineno and colno:
+                        coffset = charoffset(int(lineno), int(colno), offlst)
+                        
                     msg = resid + ' : ' +  msg + " near column " + colno
                     # since will be passed as attribute make sure to handle any embedded quotes
                     # all other entity replacements have already been done
                     msg = msg.replace("\"","&quot;")
-                    bk.add_result(ptype, filepath, lineno, msg)
+                    if coffset:
+                        bk.add_extended_result(ptype, filepath, lineno, coffset, msg)
+                    else:
+                        bk.add_result(ptype, filepath, lineno, msg)
                     found_problem = True
                     continue
                     
