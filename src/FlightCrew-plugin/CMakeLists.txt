@@ -50,6 +50,10 @@ if( MSVC )
     set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
     set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
 
+elseif( MINGW )
+    add_definitions( -Wall )
+    set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static" )
+
 # "Print all warnings" flag for GCC
 elseif( CMAKE_COMPILER_IS_GNUCXX )
     add_definitions( -Wall )

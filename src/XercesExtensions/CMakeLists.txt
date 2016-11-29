@@ -21,7 +21,7 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
-add_library( ${PROJECT_NAME} ${SOURCES} )
+add_library( ${PROJECT_NAME} STATIC ${SOURCES} )
 
 target_link_libraries( ${PROJECT_NAME} ${XERCES_LIBRARIES} )
 

@@ -79,7 +79,7 @@ if( BUILD_SHARED_FC )
     add_definitions( -DFC_DLL_EXPORTING -DFC_BUILT_AS_DLL )
     add_library( ${PROJECT_NAME} SHARED ${SOURCES} )
 else()
-    add_library( ${PROJECT_NAME} ${SOURCES} )
+    add_library( ${PROJECT_NAME} STATIC ${SOURCES} )
 endif()
 
 target_link_libraries( ${PROJECT_NAME} zipios BoostParts XercesExtensions )

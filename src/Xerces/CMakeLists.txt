@@ -88,18 +88,18 @@ file(GLOB to_remove xercesc/dom/impl/DOMDeepNodeListPool.c
                     
 list(REMOVE_ITEM SOURCES ${to_remove} )
 
-if( MSVC )
+if( MSVC OR MINGW )
     add_to_sources( xercesc/util/Transcoders/Win32 )
     
     list( APPEND SOURCES
         xercesc/util/FileManagers/WindowsFileMgr.cpp
         xercesc/util/MutexManagers/WindowsMutexMgr.cpp )
-        
-    file( GLOB to_remove ./stricmp.c
-                         ./strnicmp.c
-                         )
-    
-    list( REMOVE_ITEM SOURCES ${to_remove} )
+
+    if( MSVC )
+        file( GLOB to_remove ./stricmp.c
+                             ./strnicmp.c )
+        list( REMOVE_ITEM SOURCES ${to_remove} )
+    endif()
 else()
     if( APPLE )
         add_to_sources( xercesc/util/Transcoders/Iconv )
@@ -114,7 +114,7 @@ endif()
         
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
-add_library( ${PROJECT_NAME} ${SOURCES} ) 
+add_library( ${PROJECT_NAME} STATIC ${SOURCES} ) 
 
 add_definitions( -DXERCES_STATIC_LIBRARY
                  -DXERCES_BUILDING_LIBRARY
@@ -134,30 +134,36 @@ add_definitions( -DXERCES_STATIC_LIBRARY
                  -DHAVE_TOWLOWER
                  -DHAVE_TOWUPPER )
 
-if( MSVC )
-    add_definitions( -DUNICODE -D_UNICODE )
-    add_definitions( -D_CRT_SECURE_NO_DEPRECATE
-                     -DXERCES_PATH_DELIMITER_BACKSLASH
+if( MSVC OR MINGW )
+    add_definitions( -DXERCES_PATH_DELIMITER_BACKSLASH
                      -DXERCES_USE_TRANSCODER_WINDOWS
                      -DXERCES_USE_FILEMGR_WINDOWS   
                      -DXERCES_USE_MUTEXMGR_WINDOWS
                      -DHAVE_STRICMP
                      -DHAVE_STRNICMP
                    )
-                     
-    # xerces wants to disable these warnings
-    add_definitions( /wd4996 )
-    add_definitions( /wd4355 )
-    
-    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t- /MP")
-    set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
-    set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
-    
+
+    if( MSVC )
+        add_definitions( -DUNICODE -D_UNICODE )
+        add_definitions( -D_CRT_SECURE_NO_DEPRECATE)
+
+        # xerces wants to disable these warnings
+        add_definitions( /wd4996 )
+        add_definitions( /wd4355 )
+
+        set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t- /MP")
+        set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" )
+        set_target_properties( ${PROJECT_NAME} PROPERTIES STATIC_LIBRARY_FLAGS "/LTCG" )
+    else()
+        add_definitions( -msse2 )
+        target_link_libraries( ${PROJECT_NAME} pthread )
+    endif()
+
 else()
     add_definitions( -DXERCES_USE_FILEMGR_POSIX
                      -DXERCES_USE_MUTEXMGR_POSIX 
                    )  
-    
+
     if( APPLE )
         add_definitions( -DXERCES_USE_TRANSCODER_ICONV )
     else()

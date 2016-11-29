@@ -45,6 +45,8 @@
 //  If the next line generates an error then you haven't run ./configure
 #if defined(_MSC_VER)
 #   include	<xercesc/util/Xerces_autoconf_config.msvc.hpp>
+#elif defined(__MINGW32__)
+#   include	<xercesc/util/Xerces_autoconf_config.mingw.hpp>
 #else
 #   include	<xercesc/util/Xerces_autoconf_config.hpp>
 #endif

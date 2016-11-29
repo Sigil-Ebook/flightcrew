@@ -63,7 +63,9 @@ set( XERCESEXTENSIONS_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src/XercesExtensi
 
 add_subdirectory( src/zlib )
 add_subdirectory( src/zipios )
-add_subdirectory( src/googlemock )
+if( NOT MINGW )
+    add_subdirectory( src/googlemock )
+endif()
 
 add_subdirectory( src/FlightCrew )
 set( FLIGHTCREW_LIBRARIES FlightCrew )
