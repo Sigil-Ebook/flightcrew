@@ -80,6 +80,8 @@ result_id_map = {
 }
  
 def generate_line_offsets(s):
+    if s is None:
+        return None
     offlst = [0]
     i = s.find('\n', 0)
     while i >= 0:
@@ -174,15 +176,23 @@ def run(bk):
                     # generate file offsets once per file
                     if bk.launcher_version() >= 20160802 and filepath != lastfilepath:
                         text = None
-                        with open(os.path.join(ebook_root, filepath), 'rb') as f:
-                            text = f.read()
-                        text = text.decode('utf-8', errors='replace')
+                        afile = os.path.join(ebook_root, filepath)
+                        if os.path.isfile(afile):
+                            with open(afile, 'rb') as f:
+                                text = f.read()
+                                text = text.decode('utf-8', errors='replace')
                         offlst = generate_line_offsets(text)
                         lastfilepath = filepath
                     
                     # generate column offset
-                    if bk.launcher_version() >= 20160802 and lineno and colno:
-                        coffset = charoffset(int(lineno), int(colno), offlst)
+                    if bk.launcher_version() >= 20160802:
+                        if lineno is not None and colno is not None and offlst is not None:
+                            try:
+                                nlineno = int(lineno)
+                                ncolno = int(colno)
+                                coffset = charoffset(nlineno, ncolno, offlst)
+                            except ValueError:
+                                coffset = None
                         
                     msg = resid + ' : ' +  msg + " near column " + colno
                     # since will be passed as attribute make sure to handle any embedded quotes
