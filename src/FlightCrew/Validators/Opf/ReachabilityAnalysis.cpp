@@ -476,11 +476,20 @@ boost::unordered_set< fs::path > ReachabilityAnalysis::GetLinkedResourcesFromOps
                  attribute_name == "src" )
             {
                 std::string attribute_value = fromX( attribute->getValue() );
-                fs::path resource_path =
-                    Util::Utf8PathToBoostPath(
-                        Util::UrlWithoutFileScheme(
-                            Util::UrlWithoutFragment( 
-                                Util::UrlDecode( attribute_value ) ) ) );
+                fs::path resource_path;
+                try {
+                    resource_path =
+                        Util::Utf8PathToBoostPath(
+                            Util::UrlWithoutFileScheme(
+                                Util::UrlWithoutFragment( 
+                                    Util::UrlDecode( attribute_value ) ) ) );
+                }
+                catch ( PathNotInUtf8& )
+                {
+                    std::cerr << "Warning: URL Not properly utf-8 encoded: " 
+                              << attribute_value.c_str() << "\n";
+                    resource_path = "";
+                }
 
                 if ( !IsFilesystemPath( resource_path ) || resource_path.empty() )
 

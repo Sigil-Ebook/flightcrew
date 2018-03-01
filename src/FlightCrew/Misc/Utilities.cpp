@@ -234,7 +234,7 @@ char CharFromTwoHex( std::string two_hex_chars )
     int int_value;
     stream >> std::hex >> int_value;
 
-    return static_cast< char >( int_value );
+    return static_cast< unsigned char >( int_value );
 }
 
 
