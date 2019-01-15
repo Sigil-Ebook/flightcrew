@@ -43,8 +43,10 @@ create_source_groups( SOURCES )
 set( PCH_NAME stdafx )
 
 # stdafx.cpp is compiled separately as a PCH
-file( GLOB to_remove ${PCH_NAME}.cpp )
-list( REMOVE_ITEM SOURCES ${to_remove} )
+if( NOT SKIP_PCH )
+    file( GLOB to_remove ${PCH_NAME}.cpp )
+    list( REMOVE_ITEM SOURCES ${to_remove} )
+endif()
 
 #############################################################################
 
@@ -55,21 +57,26 @@ set( ALL_INCLUDES ${BoostParts_SOURCE_DIR}
                   ${zipios_SOURCE_DIR} )
 set( GCC_PCH_TARGET gccPCH_fc )
 
-precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
+if( NOT SKIP_PCH )
+    precompiled_header( SOURCES ALL_INCLUDES ${GCC_PCH_TARGET} ${PCH_NAME} )
+endif()
 
 #############################################################################
 
 # We need to pick up the stdafx.h file (current source dir),
-# the stdafx.h.gch file (current binary dir)
 # and the headers for the linked-to libraries
-include_directories( ${CMAKE_CURRENT_BINARY_DIR}
-                     ${CMAKE_CURRENT_SOURCE_DIR}
-                     ../zipios 
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}
+                     ../zipios
                      ../BoostParts 
                      ../Xerces
                      ../XercesExtensions
                      ../utf8-cpp
                    )
+
+# and pick up the stdafx.h.gch file (current binary dir) if generating PCHs
+if( NOT SKIP_PCH )
+    list( INSERT include_directories 0 ${CMAKE_CURRENT_BINARY_DIR} )
+endif()
 
 link_directories ( ${PROJECT_BINARY_DIR}/lib ) 
 
@@ -86,8 +93,10 @@ target_link_libraries( ${PROJECT_NAME} zipios BoostParts XercesExtensions )
 
 #############################################################################
 
-# Xcode PCH support. Has to come after the target is created.              
-xcode_pch( ${PCH_NAME} )
+if( NOT SKIP_PCH )
+    # Xcode PCH support. Has to come after the target is created.              
+    xcode_pch( ${PCH_NAME} )
+endif()
 
 #############################################################################
 
@@ -111,8 +120,10 @@ elseif( CMAKE_COMPILER_IS_GNUCXX )
     # "Print all warnings" flag for GCC
     add_definitions( -Wall )
 
-    # Make sure the PCH is built for GCC
-    add_dependencies( ${PROJECT_NAME} ${GCC_PCH_TARGET} )
+	if( NOT SKIP_PCH )
+        # Make sure the PCH is built for GCC
+        add_dependencies( ${PROJECT_NAME} ${GCC_PCH_TARGET} )
+	endif()
 endif()
 
 # needed for correct Xerces header inclusion

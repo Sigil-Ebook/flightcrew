@@ -143,15 +143,15 @@ int main( int argc, char *argv[] )
 
         if ( var_map.count( "help" ) )
         {
-            std::cout << "Usage: flightcrew-cli [options] file...\n";
+            std::cout << "Usage: flightcrew-plugin [options] file...\n";
             std::cout << options << "\n";
             return 1;
         }
 
         if ( var_map.count( "version" ) )
         {
-            std::cout << "flightcrew-cli version: " << FLIGHTCREW_VERSION <<  " " << "\n";
-            return 1;
+            std::cout << "flightcrew-plugin version: " << FLIGHTCREW_VERSION <<  " " << "\n";
+            return 0;
         }
 
         if ( var_map.count( "root-path" ) ) 

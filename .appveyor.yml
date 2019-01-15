@@ -1,0 +1,80 @@
+version: '0.9.3-{build}'
+
+branches:
+  only:
+  - master
+  - /\d+\.\d+\.\d+(-\d+)?/
+
+clone_depth: 5
+
+image:
+  - Visual Studio 2015
+  - Ubuntu
+
+configuration:
+  - Release
+
+platform:
+  - x86
+  - x64
+
+only_commits:
+  files:
+    - CMakeLists.txt
+    - appveyor.yml
+    - src/
+    - cmake_extras/
+    - appveyor_scripts/
+
+environment:
+  global:
+    MSYS_DIR: c:\msys64
+  matrix:
+    - MSYS_ARCH: i686
+      MSYSTEM: mingw32
+      SKIPPCH: -DSKIP_PCH=0
+      CMAKE: /mingw32/bin/cmake
+      NINJA: /mingw32/bin/ninja
+    - MSYS_ARCH: x86_64
+      MSYSTEM: mingw64
+      SKIPPCH: -DSKIP_PCH=1
+      CMAKE: /mingw64/bin/cmake
+      NINJA: /mingw64/bin/ninja
+
+matrix:
+  exclude:
+    - image: Visual Studio 2015
+      platform: x86
+    - image: Ubuntu
+      MSYS_ARCH: i686
+
+before_build:
+  - cmd: set PATH=%MSYS_DIR%\usr\bin;%PATH%
+  - cmd: bash -lc "pacman --noconfirm --needed -S mingw-w64-$MSYS_ARCH-cmake mingw-w64-$MSYS_ARCH-ninja"
+  - mkdir build
+  - cmd: bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; PATH=/$MSYSTEM/bin:/usr/bin:$PATH; exec 0</dev/null; $CMAKE .. -G \"Ninja\" -DCMAKE_BUILD_TYPE=Release -DSKIP_FC_GUI=1 -DNO_TEST_EXE=1 $SKIPPCH"
+
+build_script:
+  - cmd: bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; PATH=/$MSYSTEM/bin:/usr/bin:$PATH; exec 0</dev/null; $NINJA"
+  - sh: |
+      sudo service docker start
+      python3 appveyor_scripts/docker-build.py $PLATFORM
+
+after_build:
+  - cmd: bash -lc "cd $APPVEYOR_BUILD_FOLDER/build/bin; strip --strip-unneeded *.exe"
+  - sh: sudo chown -R $(id -u):$(id -g) $APPVEYOR_BUILD_FOLDER/build/bin
+  - sh: cd $APPVEYOR_BUILD_FOLDER/build/bin && ls -la && strip --strip-unneeded flightcrew-*
+
+test_script:
+  - cmd: set PATH=%APPVEYOR_BUILD_FOLDER%\build\bin;%PATH%
+  - cmd: echo %PATH%
+  - cmd: where flightcrew-plugin
+  - cmd: flightcrew-plugin --version
+  - sh: export PATH=$APPVEYOR_BUILD_FOLDER/build/bin:$PATH
+  - sh: echo $PATH
+  - sh: which flightcrew-plugin
+  - sh: flightcrew-plugin --version
+
+artifacts:
+  - path: build\bin\*.exe
+  - path: build\bin\flightcrew-*

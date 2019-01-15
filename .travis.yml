@@ -1,0 +1,19 @@
+os: osx
+osx_image: xcode7.3
+
+env:
+  - MACOSX_DEPLOYMENT_TARGET=10.9
+
+branches:
+  only:
+  - master
+  - /\d+\.\d+\.\d+(-\d+)?/
+
+git:
+  depth: 3
+
+script:
+  - mkdir build && cd build
+  - cmake -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 -DCMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/ -DCMAKE_BUILD_TYPE=Release -DSKIP_FC_GUI=1 -DNO_TEST_EXE=1 ../
+  - make -j4
+
