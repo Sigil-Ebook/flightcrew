@@ -19,7 +19,7 @@ git:
   depth: 3
 
 script:
-  - echo "token: $GDRIVE_REFRESH_TOKEN"
+  - echo "var = $GDRIVE_REFRESH_TOKEN"
   - brew install gdrive
   - gdrive --refresh-token $GDRIVE_REFRESH_TOKEN list
   - mkdir build && cd build
