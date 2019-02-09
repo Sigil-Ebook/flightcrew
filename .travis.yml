@@ -25,13 +25,11 @@ script:
   - mkdir build && cd build
   - cmake -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 -DCMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/ -DCMAKE_BUILD_TYPE=Release -DSKIP_FC_GUI=1 -DNO_TEST_EXE=1 ../
   - make -j4
+  - $TRAVIS_BUILD_DIR/build/bin/flightcrew-plugin --version
 
 after_success:
-  - strip --strip-unneeded $TRAVIS_BUILD_DIR/build/bin/flightcrew-*
-  - export PATH=$TRAVIS_BUILD_DIR/build/bin:$PATH
-  - echo $PATH
-  - which flightcrew-plugin
-  - flightcrew-plugin --version
+  - strip -u -r $TRAVIS_BUILD_DIR/build/bin/flightcrew-*
+
 
 deploy:
   provider: script
