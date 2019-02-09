@@ -26,7 +26,7 @@ script:
 
 deploy:
   provider: script
-  script: bash appveyor_scripts/macdeploy.sh
+  script: bash ../appveyor_scripts/macdeploy.sh
   skip_cleanup: true
   on:
     branch: master
