@@ -17,6 +17,11 @@ branches:
 git:
   depth: 3
 
+before_install:
+  - brew update
+  - if brew outdated --quiet | grep -qx cloog; then brew upgrade cloog; fi
+  - if brew outdated --quiet | grep -qx gcc@49; then brew upgrade gcc@49; fi
+
 script:
   - brew install gdrive
   - mkdir build && cd build
