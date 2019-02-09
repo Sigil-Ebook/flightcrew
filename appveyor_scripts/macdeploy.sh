@@ -7,6 +7,7 @@
 #echo "Finished archive (size $FILESIZE), starting Google Drive upload"
 #./bin/gdrive upload --refresh-token $GDRIVE_REFRESH_TOKEN --parent $GDRIVE_DIR "$ARCHIVE"
 echo "Testing gdrive"
+echo "Refresh token $GDRIVE_REFRESH_TOKEN"
 gdrive --refresh-token $GDRIVE_REFRESH_TOKEN list
 FILESIZE=$(stat -f%z ./bin/flightcrew-plugin)
 echo "File size = $FILESIZE"
