@@ -3,6 +3,9 @@ osx_image: xcode7.3
 
 env:
   - MACOSX_DEPLOYMENT_TARGET=10.9
+  secure: "web3+8Ocy61gWpFQ3Fc/FEjbPzBDtNdfKeiwHvoN821Zdcgy3wM7PCpE4n7vdI/SxxMeXA5KpZ01FEkJas0noTU5LXYWK4Be3kjZYHBvrbLxBYFMFjOMIb1rLaM1PrgrbB5EldTx8bpLyPqdg9DFElTAVWc/UBASapvjShjZnHe1Z0yfVH6RFOYPLPoK3A0/HwjCbiNEOp/I4hfhbBbSX1rYJqirU9gZBVKcNAxs3rYDMYxFRsCrKz+z0+NUY41dtHIJv8Ez8xgJVoRVBTnrH6OLucIcKwiDXp7MzKJASMGqeEFNq36O8y28+3Rzm7QTvriyB3RiWq4uPSJ6y0R0Gz6eLDZ6Y7WHSO/JZAKe3vOFJm4pQ/VkAq/+kSinnxGQTYn1bXEZtOSSoZesmu2F5iraa9I+ww9kCs8A7DWPPgCam78v3V3QkSksnenjvk2mEbH5vJVJZ9YlTmT0v/VbRDo9PF/tYqJ+AAIcjpxxSWUgF9GaNXLGCKSA6LPWA5cxHSI2hr942Xr4bcBtVfHocJSC6UF+Qj/CLDO3OmDtTel3bA5OFC4To8tVcUAmwT2d0g0/YgGSX7rHterTRFUSaCmvL4Qi2Xii8XkH323VNluKamRuNJB1FTUInzxhs1k624fMEyK28BywzN5+m3inx83JpIvTAGZDoo3so4eFi5U="
+
+  secure: "urw8LzqV/d9LAiSRmH2v7Nv0cdIKb+EiqotNahGH8ZYFqzPDKIHIzQ0MgaqlcMR023qo5RGx24Phy+JpokSwnMZsa7Ujp3LRP24lDKO+houiseWfk9Efoh1MxDqyIpPifY9S2lZgDxIdzXodG7XkmtPs7hj6Te693gzonFr2PmZOhBzIsTsCmi5FEE8mSfSe+HJo2vsqc5CapIqDnkO21pLJXbs/+UM6vLrZQ0rioStxMtqJA+DR5KyjpV2MP8kn/iD1p8AgSs9kVMRwGmU3stdQr7locxpbpXiSgcpL4uImMx5wVFVXQL5R8vArBYyRBAoAANE1AmXvW4PQyw97Gwnd53WSc0t5G5CTUOFTYldJIyBqr8BXJauKsYcmUTlI3v8fn1bS3ZnQ7crlykN5N9xPowqCy4rJTfkSMvN6UqDssut+SI1NU/5n8rzMfI0Q4NWK40RUu4e8dqsh5jWZtStJrlqnLUowgc2B//PCJqq50XxKZ3YyGolSad1i5jxsmd9kLhWlc6h0Gn/PrROTNCBViyiyqonm0Urs3JCXxrUFGbC/EmIAoRiVcWrUl/LTTCkq5JULcWO2walBcHtbWw+59qnnv3JUk/N9ZyqeuBVoBwiZEGceL4shre7Q9eVyOUTDfmXXsU4dk406p+V0+A2wdRF8ccKUgwV6/hHyagU="
 
 branches:
   only:
@@ -13,7 +16,14 @@ git:
   depth: 3
 
 script:
+  - brew install gdrive
   - mkdir build && cd build
   - cmake -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 -DCMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/ -DCMAKE_BUILD_TYPE=Release -DSKIP_FC_GUI=1 -DNO_TEST_EXE=1 ../
   - make -j4
+
+deploy:
+  provider: script
+  script: bash appveyor_scripts/macdeploy.sh
+  on:
+    branch: master
 
