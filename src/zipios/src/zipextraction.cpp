@@ -73,7 +73,17 @@ void ExtractZipToFolder( const fs::path &path_to_zip, const fs::path &path_to_fo
     {
         boost::scoped_ptr< std::istream > stream( zip.getInputStream( *it ) );
 
-        fs::path new_file_path = path_to_folder / (*it)->getName();
+        // for security reasons need to force any relative path
+        // to be inside the destination folder and not anyplace else
+        // do this by removing any and all upward relative path segments as
+	// epubs are not general zip archives used for backup
+	string azipfilepath = (*it)->getName();
+        size_t index = azipfilepath.find("../", 0);
+        while(index != std::string::npos) {
+	    azipfilepath.replace(index, 3,"");
+	    index = azipfilepath.find("../", 0);
+	}
+        fs::path new_file_path = path_to_folder / azipfilepath;
 
         CreateFilepath( new_file_path );
         WriteEntryToFile( *stream, new_file_path );
