@@ -118,11 +118,16 @@ fs::path GetRelativePathToNcx( const xc::DOMDocument &opf )
         std::string href       = fromX( item->getAttribute( toX( "href" )       ) );
         std::string media_type = fromX( item->getAttribute( toX( "media-type" ) ) );
 
-        if ( xc::XMLUri::isValidURI( true, toX( href ) ) &&
-             media_type == NCX_MIME )
-        {
-            return Util::Utf8PathToBoostPath( Util::UrlDecode( href ) );  
-        }
+        // prevent segfault here that would result as toX() will return null when 
+	// passed and empty string
+        if (!href.empty()) {
+
+             if ( xc::XMLUri::isValidURI( true, toX( href ) ) &&
+                  media_type == NCX_MIME )
+             {
+                 return Util::Utf8PathToBoostPath( Util::UrlDecode( href ) );  
+             }
+	}
     }
 
     return fs::path();
