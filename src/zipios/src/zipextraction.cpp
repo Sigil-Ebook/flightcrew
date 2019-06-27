@@ -88,19 +88,29 @@ void ExtractZipToFolder( const fs::path &path_to_zip, const fs::path &path_to_fo
         size_t n = azipfilepath.length();
 
         // stripping out any backslashes during copy
+        bool evil_or_corrupt_epub = false;
 	string securefilepath = "/";
 	securefilepath.reserve(n+1);
         for (size_t i=0; i < n; i++) {
-	    if (azipfilepath[i] != '\\') securefilepath.append(1, azipfilepath[i]);
+	  if (azipfilepath[i] != '\\') {
+	      securefilepath.append(1, azipfilepath[i]);
+	  } else {
+	      evil_or_corrupt_epub = true;
+	  }
 	}
         // now replace all upward path segments "/../" with "/"
         size_t index = securefilepath.find("/../", 0);
+        if (index != std::string::npos) evil_or_corrupt_epub = true;
         while(index != std::string::npos) {
 	    securefilepath.replace(index, 4,"/");
 	    index = securefilepath.find("/../", index);
 	}
         // finally remove any leading "/"
         securefilepath.erase(0,securefilepath.find_first_not_of("/"));
+
+	if (evil_or_corrupt_epub) {
+	    throw InvalidStateException( "evil or corrupt epub detected with local file path: " + azipfilepath ) ;
+	}
 
         fs::path new_file_path = path_to_folder / securefilepath;
 
