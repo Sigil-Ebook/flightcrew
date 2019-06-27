@@ -73,17 +73,36 @@ void ExtractZipToFolder( const fs::path &path_to_zip, const fs::path &path_to_fo
     {
         boost::scoped_ptr< std::istream > stream( zip.getInputStream( *it ) );
 
-        // for security reasons need to force any relative path
-        // to be inside the destination folder and not anyplace else
-        // do this by removing any and all upward relative path segments as
-	// epubs are not general zip archives used for backup
+        // for security against maliciously crafted epubs
+	// we need to force all files extracted from the epub/zip to be safely inside
+        // the destination folder and not anyplace else.
+
+        // First remove all illegal backslash characters (escapes) - see Zip spec
+        // Next remove any and all upward relative path segments "/../"
+        // Finally remove any leading "/" characters to create a safer relative path
+
+	// epubs zips are not general zip archives so symlinks and upward
+        // relative path segments need not be supported.
+
 	string azipfilepath = (*it)->getName();
-        size_t index = azipfilepath.find("../", 0);
-        while(index != std::string::npos) {
-	    azipfilepath.replace(index, 3,"");
-	    index = azipfilepath.find("../", 0);
+        size_t n = azipfilepath.length();
+
+        // stripping out any backslashes during copy
+	string securefilepath = "/";
+	securefilepath.reserve(n+1);
+        for (size_t i=0; i < n; i++) {
+	    if (azipfilepath[i] != '\\') securefilepath.append(1, azipfilepath[i]);
 	}
-        fs::path new_file_path = path_to_folder / azipfilepath;
+        // now replace all upward path segments "/../" with "/"
+        size_t index = securefilepath.find("/../", 0);
+        while(index != std::string::npos) {
+	    securefilepath.replace(index, 4,"/");
+	    index = securefilepath.find("/../", index);
+	}
+        // finally remove any leading "/"
+        securefilepath.erase(0,securefilepath.find_first_not_of("/"));
+
+        fs::path new_file_path = path_to_folder / securefilepath;
 
         CreateFilepath( new_file_path );
         WriteEntryToFile( *stream, new_file_path );
