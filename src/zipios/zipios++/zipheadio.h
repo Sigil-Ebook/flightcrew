@@ -9,6 +9,7 @@
 
 #include "zipios++/ziphead.h"
 #include "zipios++/zipios_defs.h"
+#include "zipios++/fcollexceptions.h"
 
 namespace zipios {
 
@@ -79,9 +80,15 @@ inline uint32 readUint32 ( istream &is ) {
   static const int buf_len = sizeof ( uint32 ) ;
   unsigned char buf [ buf_len ] ;
   int rsf = 0 ;
-  while ( rsf < buf_len ) {
+  std::streampos original_pos = is.tellg() ;
+  while ( rsf < buf_len && !is.eof() ) {
     is.read ( reinterpret_cast< char * >( buf ) + rsf, buf_len - rsf ) ;
     rsf += static_cast< int >( is.gcount () ) ;
+  }
+  if ( rsf != buf_len ) {
+    is.seekg( original_pos ) ;
+    throw InvalidStateException( "Reached end-of-file while trying to read a"
+                                 "Uint32; the zip archive may be corrupt." ) ;
   }
   return  ztohl ( buf ) ;
 }
@@ -95,9 +102,15 @@ inline uint16 readUint16 ( istream &is ) {
   static const int buf_len = sizeof ( uint16 ) ;
   unsigned char buf [ buf_len ] ;
   int rsf = 0 ;
-  while ( rsf < buf_len ) {
+  std::streampos original_pos = is.tellg() ;
+  while ( rsf < buf_len && !is.eof() ) {
     is.read ( reinterpret_cast< char * >( buf ) + rsf, buf_len - rsf ) ;
     rsf += static_cast< int >( is.gcount () ) ;
+  }
+  if ( rsf != buf_len ) {
+    is.seekg( original_pos ) ;
+    throw InvalidStateException( "Reached end-of-file while trying to read a"
+                                 "Uint16; the zip archive may be corrupt." ) ;
   }
   return  ztohs ( buf ) ;
 }
